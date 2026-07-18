@@ -1,0 +1,3131 @@
+<body class="font-poppins overflow-x-hidden bg-base-300" data-theme="light"><header id="top-nav" class="drawer drawer-start z-[9999] bg-base-100 flex justify-center w-full fixed top-0 shadow-md transition-transform duration-150 ease-in-out" style="transform: translateY(-100%);">
+    <input id="side-nav-drawer" type="checkbox" class="drawer-toggle" aria-label="drawer">
+
+    <div class="drawer-content w-full max-w-[1280px] bg-base-100">
+        <nav class="navbar will-change-transform z-50">
+            <div class="navbar-start">
+                <a href="https://ph.mobeecars.com/en/sell" class="hidden md:flex">
+                    <img src="https://ph.mobeecars.com/images/assets/website-3/mobee-logo.png" alt="mobee-logo" class="max-w-[140px]">
+                </a>
+                <div class="flex md:hidden flex-row items-center">
+                    <a href="https://ph.mobeecars.com/en/sell" class="p-0 flex items-center">
+                        <img src="https://ph.mobeecars.com/images/assets/website-3/mobee-logo.png" alt="mobee-logo" class="max-w-[120px] block translate-y-[2px]">
+                    </a>
+                   
+                                        
+                </div>
+            </div>
+            <div class="navbar-center">
+               
+                <div class="hidden md:flex items-center gap-10 text-sm font-normal text-gray-700">
+
+                    <a href="https://ph.mobeecars.com/en/sell" class="hover:text-primary transition">
+                       Sell My Car                    </a>
+                                        <!-- will be enabled when the module is done -->
+                    <!-- <a href="https://ph.mobeecars.com/dealer-page?country=ph" class="hover:text-primary transition">
+                        Trade-UP
+                    </a> -->
+                                        <div class="dropdown dropdown-hover">
+                        <label tabindex="0" class="cursor-pointer hover:text-primary 
+                            ">
+                           Learn                        </label>
+                        <ul tabindex="0" class="dropdown-content z-[999] menu p-2 shadow bg-base-100 rounded-box w-40">
+                            <li class="pb-2"><a href="https://ph.mobeecars.com/en/about-us" class="">About Us</a></li>
+                                                            <li class="pb-2"><a href="https://ph.mobeecars.com/ph/blogs/index" class="">Blog</a></li>
+                                                                <li class="pb-2"><a href="https://ph.mobeecars.com/en/about-us#team-info" class="">Team</a></li>
+                                                                <li class="pb-2"><a href="https://ph.mobeecars.com/en/review" class="">Reviews</a></li>
+                                                        <li class="pb-2"><a href="https://ph.mobeecars.com/en/contact-us" class="">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-end">
+                                <div class="hidden md:flex items-center gap-6 mr-6 text-sm text-gray-700">
+                   <!-- <div class="dropdown dropdown-end dropdown-hover">
+                        <label tabindex="0" class="cursor-pointer hover:text-primary uppercase">
+                            ph
+                        </label>
+                        <ul tabindex="0" class="dropdown-content z-[999] menu p-2 shadow bg-base-100 rounded-box w-32">
+                            <li><a href="https://my.mobeecars.com/en/sell?">MY</a></li>
+                            <li><a href="https://ph.mobeecars.com/en/sell?">PH</a></li>
+                            <li><a href="https://id.mobeecars.com/id/jual-mobil?">ID</a></li>
+                        </ul>
+                    </div> -->
+                    <div class="flex items-center gap-3">
+                                                                                    <a href="https://ph.mobeecars.com/en/sell?" class="text-primary font-semibold underline hover:text-primary">EN</a>
+                                <a href="https://ph.mobeecars.com/tgl/sell?" class=" hover:text-primary">TGL</a>
+                                                                        </div>
+                </div>
+                                <label for="side-nav-drawer" class="btn btn-ghost btn-circle md:hidden flex items-center justify-center w-10 h-10 p-0 relative">
+                    <svg id="icon-hamburger" class="fill-current w-7 h-7 absolute transition-opacity duration-150" viewBox="0 0 512 512">
+                        <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"></path>
+                    </svg>
+                    <svg id="icon-close" class="fill-current w-7 h-7 absolute opacity-0 scale-75 rotate-90 transition-opacity duration-150" viewBox="0 0 512 512">
+                        <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"></polygon>
+                    </svg>
+                </label>
+            </div>
+        </nav>
+    </div>
+
+    <div class="drawer-side md:hidden transition-transform duration-300 ease-in-out">
+        <label for="side-nav-drawer" class="drawer-overlay"></label>
+        <nav class="p-6 h-full w-full bg-base-100 flex flex-col justify-between items-end relative">
+            <div class="absolute top-3 right-0">
+                <label for="side-nav-drawer" class="btn btn-ghost btn-circle md:hidden flex items-center justify-center w-10 h-10 p-0 relative">
+                    <svg class="fill-current w-7 h-7 absolute opacity-100 scale-75 rotate-90 transition-opacity duration-150 z-100" viewBox="0 0 512 512">
+                        <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"></polygon>
+                    </svg>
+                </label>
+            </div>
+            <div class="w-full h-full flex items-end justify-end">
+                <ul class="items-end w-full flex flex-col gap-5 mb-10">
+                    <li onclick="window.location.href = 'https://ph.mobeecars.com/en/sell'" class="w-full px-4 py-2 flex flex-row items-center justify-end">
+                        <span class="font-normal text-4xl text-right "> 
+                            Sell My Car                        </span>
+                        
+                    </li>
+                                        <!-- will be enabled when the module is done -->
+                    <!-- <li class="w-full px-4 py-2 flex flex-row items-center justify-end">
+                        <span class="font-normal text-4xl transition ">Trade-UP</span>
+                    </li> -->
+                                        <li class="w-full">
+                        <div id="learn-dropdown">
+                            <button class="w-full flex flex-row justify-end items-center px-4 py-2 font-normal text-4xl " onclick="toggleLearn()">                                
+                                <span>Learn</span>
+                            </button>
+                            <ul class="mt-5 mr-5 items-start font-normal text-md hidden flex flex-col gap-5 duration-200 ease-in-out transition-transform border-r-10 border-solid border-primary">
+                                <li class="w-full flex flex-row items-center">
+                                    <a href="https://ph.mobeecars.com/en/about-us" class="flex flex-row justify-end items-center w-full px-4 py-2 ">
+                                        <span class="text-2xl">About Us</span>
+                                    </a>
+                                </li>
+                                                                <li class="w-full flex flex-row items-center">
+                                    <a href="https://ph.mobeecars.com/ph/blogs/index" class="flex flex-row justify-end items-center w-full px-4 py-2 ">
+                                        <span class="text-2xl">Blog</span>
+                                    </a>
+                                </li>
+                                                                <li class="w-full flex flex-row items-center">
+                                    <a href="https://ph.mobeecars.com/en/about-us#team-info" class="flex flex-row justify-end items-center w-full px-4 py-2 ">
+                                        <span class="text-2xl">Team</span>
+                                    </a>
+                                </li>
+                                                                                                
+                                                                <li class="w-full flex flex-row items-center">
+                                    <a href="https://ph.mobeecars.com/en/review" class="flex flex-row justify-end items-center w-full px-4 py-2 ">
+                                        <span class="text-2xl">Reviews</span>
+                                    </a>
+                                </li>
+                                                                <li class="w-full flex flex-row items-center">
+                                    <a href="https://ph.mobeecars.com/en/contact-us" class="flex flex-row justify-end items-center w-full px-4 py-2 ">
+                                        <span class="text-2xl">Contact</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </li>
+                </ul>
+            </div>
+                        <div class="w-full flex flex-col items-end text-right gap-3 pr-3">
+                <!-- <div class="w-full flex flex-col items-end text-right" id="country-dropdown">
+                    <button
+                        type="button"
+                        class="font-normal cursor-pointer flex justify-end items-center gap-2 p-2 pr-0 rounded-lg"
+                        onclick="toggleCountry()"
+                    >
+                        
+                        <span>Country:</span>
+                        <img src="https://ph.mobeecars.com/images/assets/website-4/ph-flag.png" alt="ph flag" class="w-[40px] h-[40px] p-1 rounded-lg bg-base-200 border border-solid border-neutral-300">
+                    </button>
+
+                    <div class="mt-3 pr-2 hidden flex-row gap-4 justify-end items-center text-right" data-dropdown-options>
+                        <a href="https://my.mobeecars.com/en/sell" class="p-2 rounded-lg flex flex-row gap-2 cursor-pointer border border-solid border-neutral-300 "><img src="https://ph.mobeecars.com/images/assets/website-4/my-flag.png" alt="my flag" class="w-[25px] h-[25px]"/><span>MY</span></a>
+                        <a href="https://ph.mobeecars.com/en/sell" class="p-2 rounded-lg flex flex-row gap-2 cursor-pointer border border-solid border-neutral-300 text-primary font-semibold bg-base-200"><img src="https://ph.mobeecars.com/images/assets/website-4/ph-flag.png" alt="ph flag" class="w-[25px] h-[25px]"/><span>PH</span></a>
+                        <a href="https://id.mobeecars.com/id/jual-mobil" class="p-2 rounded-lg flex flex-row gap-2 cursor-pointer border border-solid border-neutral-300 "><img src="https://ph.mobeecars.com/images/assets/website-4/id-flag.png" alt="id flag" class="w-[25px] h-[25px]"/><span>ID</span></a>
+                    </div>
+                </div> -->
+
+                <div class="w-full flex flex-col items-end text-right" id="language-dropdown">
+                    <button type="button" class="font-normal cursor-pointer flex justify-end items-center gap-2 bg-transparent" onclick="toggleLanguage()">
+                                                <span>Language:</span> <span class="p-2 rounded-lg bg-base-200 border border-solid border-neutral-300">EN</span>
+                                                
+                    </button>
+
+                    <div class="mt-3 pr-2 hidden flex-row gap-4 justify-end items-center text-right" data-dropdown-options="">
+                                                                                    <a href="https://ph.mobeecars.com/en/sell?" class="p-2 rounded-lg block cursor-pointer border border-solid border-neutral-300 text-primary font-semibold bg-base-200">EN</a>
+                                <a href="https://ph.mobeecars.com/tgl/sell?" class="p-2 rounded-lg block cursor-pointer border border-solid border-neutral-300 ">TGL</a>
+                                                                        </div>
+                </div>
+            </div>
+                    </nav>
+    </div>
+</header>
+<script>
+    const learnDropdown = document.querySelector('#learn-dropdown ul');
+    const countryDropdown = document.querySelector('#country-dropdown [data-dropdown-options]');
+    const languageDropdown = document.querySelector('#language-dropdown [data-dropdown-options]');
+
+    function toggleLearn() {
+        learnDropdown?.classList.toggle('hidden');
+
+        countryDropdown?.classList.add('hidden');
+        countryDropdown?.classList.remove('flex');
+
+        languageDropdown?.classList.add('hidden');
+        languageDropdown?.classList.remove('flex');
+    }
+
+    function toggleCountry() {
+        if (!countryDropdown) return;
+        countryDropdown.classList.toggle('hidden');
+        countryDropdown.classList.toggle('flex');
+
+        learnDropdown?.classList.add('hidden');
+        languageDropdown?.classList.add('hidden');
+        languageDropdown?.classList.remove('flex');
+    }
+
+    function toggleLanguage() {
+        if (!languageDropdown) return;
+        languageDropdown.classList.toggle('hidden');
+        languageDropdown.classList.toggle('flex');
+
+        learnDropdown?.classList.add('hidden');
+        countryDropdown?.classList.add('hidden');
+        countryDropdown?.classList.remove('flex');
+    }
+    document.querySelectorAll('.drawer-side a').forEach((link) => {
+        link.addEventListener('click', () => {
+            const drawerToggle = document.getElementById('side-nav-drawer');
+
+            if (drawerToggle) {
+                drawerToggle.checked = false;
+            }
+
+            learnDropdown?.classList.add('hidden');
+
+            countryDropdown?.classList.add('hidden');
+            countryDropdown?.classList.remove('flex');
+
+            languageDropdown?.classList.add('hidden');
+            languageDropdown?.classList.remove('flex');
+        });
+    });
+
+    let lastScrollTop = 0;
+    const nav = document.getElementById('top-nav');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Hide when scrolling down
+        if (currentScroll > lastScrollTop && currentScroll > 100) {
+            nav.style.transform = 'translateY(-100%)';
+        }
+        // Show when scrolling up
+        else {
+            nav.style.transform = 'translateY(0)';
+        }
+
+        lastScrollTop = Math.max(currentScroll, 0);
+    });
+</script>
+<dialog id="lang_disabled_modal" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Alert</h3>
+        <p class="py-4">Language switching is unavailable on this page to protect your submitted information.</p>
+        <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">OK</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+<script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
+
+
+    <main style="display: flex; flex-direction: column; margin-top: 48px;">
+      <div class="hidden md:block lg:hidden" style="width: 100vw; height: 50px; background-color: #b73031;"></div>
+      <div class="aspect-[414/681] md:aspect-[250/100] lg:aspect-[2730/1063]" style="position: relative; width: 100dvw; height: 100%; min-height: 500px;">
+        <img src="/images/assets/website-4/country-hero-mobile.webp" alt="Mobee hero" class="block md:hidden" style="aspect-ratio: 414/681; position: absolute; bottom: 0; left: 0; right: 0; top: 0; object-fit: cover;" fetchpriority="high" loading="eager">
+        <img src="/images/assets/website-4/mobee-hero.webp" alt="Mobee hero" class="hidden md:block md:aspect-250/100 lg:aspect-2730/1063" style="position: absolute; bottom: 0; left: 0; right: 0; top: 0; object-fit: cover;" fetchpriority="high" loading="eager">
+        <div class="bottom-12 md:bottom-32" style="position: absolute; color: #fff; left: 0; right:0; display: flex; justify-content: center; width: 100%; z-index: 10;">
+            <div class="flex-col md:flex-row px-5 md:px-10 lg:px-5 pb-5 md:pb-0" style="max-width: 1280px; width: 100%; display: flex; gap: 20px; justify-content: space-between; align-items: center; height: 100%; padding-top: 40px;">
+                <div style="display: flex; flex-direction: column; gap: 20px; justify-content: center;">
+                    <div class="text-center md:text-start items-center md:items-start" style="display: flex; flex-direction: column;">
+                                              <h1 class="font-bold">Sell Your Used Car <br>Car At The Right <span id="element" class="bg-white/30 rounded-4xl" style="padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px; color: #fff;">Place</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true">|</span><br> in the Philippines</h1>
+                                            
+                    </div>
+                    <div class="text-center md:text-start" style="display: flex; flex-direction: column; max-width: 400px;">
+                        <h4>Get your instant quote with your car, book a free inspection, and receive on-the-spot payment.</h4>
+                    </div>
+                    
+                                        <script>
+                        const text = ["Place","Time","Price"];
+                        var typed = new Typed('#element', {
+                          strings: text,
+                          typeSpeed: 100,
+                          backSpeed: 100,
+                          loop: true,
+                          smartBackspace: true,
+                          backDelay: 1000,
+                        });
+                    </script>
+                    <button onclick="openDrawerParent()" class="btn btn-block md:btn-wide btn-lg mt-5 md:mt-10">Start Selling Your Car</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="-mt-8 md:-mt-24 pb-10 md:px-10 md:pb-10" style="position: relative; z-index: 10; display: flex; justify-content: center">
+            <div class="rounded-4xl px-4 md:px-8 shadow-lg" style="max-width: 1280px; margin-left: 20px; margin-right: 20px; background-color: #fff; padding-top: 40px; padding-bottom: 20px; display: flex; flex-direction: column; align-items:center;">
+                <div class="mb-7 md:mb-10" style="display: flex; flex-direction: column;  text-align: center; align-items: center;">
+                  <div class=" rounded-full hover:bg-primary hover:text-white transition-colors duration-75 ease-linear" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 8px; padding-left: 8px; padding-right: 8px; margin-bottom: 20px; border-width: 1px; border-style: solid; width: fit-content color: #000;">
+                    <span style="text-align: center; text-transform: uppercase; font-size: 12px;">Our Process</span>
+                  </div>
+                    <h2 class="text-[22px] md:text-[38px] leading-tight" style="font-weight:800; color: #000;">
+                        How It Works?                    </h2>
+                    <h5 class=" leading-snug" style="color: #000;">
+                        <!-- How to Sell Your Car with Mobee Cars -->
+                        500+ verified buyers. The right market price. A seamless process.                    </h5>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <div class="hover:[&amp;_h3]:text-[#EB1B0E] hover:[&amp;&gt;*:nth-child(2)]:shadow-md hover:[&amp;_p]:text-black hover:[&amp;_h5]:text-black bg-base-200 hover:shadow-lg shadow-sm duration-300 ease-in-out transition-shadow rounded-4xl p-5 flex items-center gap-3 min-h-[120px] md:min-h-[200px] flex-col text-center">
+                      <h5 class="font-bold text-neutral-400 transition-colors duration-300 ease-in-out">Step 1</h5>
+                      <div class="flex items-center justify-center p-3 rounded-full bg-white duration-300 ease-in-out transition-all">
+                          <img src="https://ph.mobeecars.com/images/assets/website-4/wmb-step-1.webp" alt="Mobee Cars: Step 1- Get your initial quotation icon" class="w-[50px] aspect-square object-contain shrink-0 duration-300 ease-in-out transition-all">
+                      </div>
+                        
+                      <div class="flex flex-col gap-1">
+                          <h3 class="font-bold text-[#191970] text-[17px] md:text-[24px] leading-tight duration-300 ease-in-out transition-colors">
+                              Get Your Initial Quotation                          </h3>
+
+                          <p class="text-black md:text-neutral-400 text-[14px] md:text-[16px] leading-snug duration-300 ease-in-out transition-colors">
+                              Enter your car details or upload a photo to receive your initial market quotation.                          </p>
+                      </div>
+                    </div>
+                    <div class="hover:[&amp;_h3]:text-[#EB1B0E] hover:[&amp;&gt;*:nth-child(2)]:shadow-md hover:[&amp;_p]:text-black hover:[&amp;_h5]:text-black bg-base-200 hover:shadow-lg shadow-sm duration-300 ease-in-out transition-shadow rounded-4xl p-5 flex items-center gap-3 min-h-[120px] md:min-h-[200px] flex-col text-center">
+                      <h5 class="font-bold text-neutral-400 transition-colors duration-300 ease-in-out">Step 2</h5>  
+                      <div class="flex items-center justify-center p-3 rounded-full bg-white duration-300 ease-in-out transition-all">
+                          <img src="https://ph.mobeecars.com/images/assets/website-4/wmb-step-2.webp" alt="Mobee Cars: Step 2- Schedule A Free Car Inspection icon" class="w-[50px] aspect-square object-contain shrink-0 duration-300 ease-in-out transition-all">
+                      </div>
+                        
+                      <div class="flex flex-col gap-1">
+                          <h3 class="font-bold text-[#191970] text-[17px] md:text-[24px] leading-tight duration-300 ease-in-out transition-colors">
+                            Schedule a Free Inspection                          </h3>
+
+                          <p class="text-black md:text-neutral-400 text-[14px] md:text-[16px] leading-snug duration-300 ease-in-out transition-colors">
+                            Choose a time and location that works for you.                          </p>
+                      </div>
+                    </div>
+                    <div class="hover:[&amp;_h3]:text-[#EB1B0E] hover:[&amp;&gt;*:nth-child(2)]:shadow-md hover:[&amp;_p]:text-black hover:[&amp;_h5]:text-black bg-base-200 hover:shadow-lg shadow-sm duration-300 ease-in-out transition-shadow rounded-4xl p-5 flex items-center gap-3 min-h-[120px] md:min-h-[200px] flex-col text-center">
+                      <h5 class="font-bold text-neutral-400 transition-colors duration-300 ease-in-out">Step 3</h5>  
+                      <div class="flex items-center justify-center p-3 rounded-full bg-white duration-300 ease-in-out transition-all">
+                          <img src="https://ph.mobeecars.com/images/assets/website-4/wmb-step-3.webp" alt="Mobee Cars: Step 3-Car Condition Verification icon" class="w-[50px] aspect-square object-contain shrink-0 duration-300 ease-in-out transition-all">
+                      </div>
+                        
+                      <div class="flex flex-col gap-1">
+                          <h3 class="font-bold text-[#191970] text-[17px] md:text-[24px] leading-tight duration-300 ease-in-out transition-colors">
+                            Condition Verification                          </h3>
+
+                          <p class="text-black md:text-neutral-400 text-[14px] md:text-[16px] leading-snug duration-300 ease-in-out transition-colors">
+                            Our team verifies your car’s condition based on defined inspection standards.                          </p>
+                      </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-6">
+                      <div class="hidden md:block"></div>
+                      <div class="col-span-2 hover:[&amp;_h3]:text-[#EB1B0E] hover:[&amp;&gt;*:nth-child(2)]:shadow-md hover:[&amp;_p]:text-black hover:[&amp;_h5]:text-black bg-base-200 hover:shadow-lg shadow-sm duration-300 ease-in-out transition-shadow rounded-4xl p-5 flex items-center gap-3 min-h-[120px] md:min-h-[200px] flex-col text-center">
+                        <h5 class="font-bold text-neutral-400 transition-colors duration-300 ease-in-out">Step 4</h5>  
+                        <div class="flex items-center justify-center p-3 rounded-full bg-white duration-300 ease-in-out transition-all">
+                            <img src="https://ph.mobeecars.com/images/assets/website-4/wmb-step-4.webp" alt="Mobee Cars: Step 4 - Receive Buyer Offer icon" class="w-[50px] aspect-square object-contain shrink-0 duration-300 ease-in-out transition-all">
+                        </div>
+                          
+                        <div class="flex flex-col gap-1">
+                            <h3 class="font-bold text-[#191970] text-[17px] md:text-[24px] leading-tight duration-300 ease-in-out transition-colors">
+                              Receive Buyer Offers                            </h3>
+
+                            <p class="text-black md:text-neutral-400 text-[14px] md:text-[16px] leading-snug duration-300 ease-in-out transition-colors">
+                              We connect your car to 500+ verified buyers to secure the right market price.                            </p>
+                        </div>
+                      </div>
+                      <div class="col-span-2 hover:[&amp;_h3]:text-[#EB1B0E] hover:[&amp;&gt;*:nth-child(2)]:shadow-md hover:[&amp;_p]:text-black hover:[&amp;_h5]:text-black bg-base-200 hover:shadow-lg shadow-sm duration-300 ease-in-out transition-shadow rounded-4xl p-5 flex items-center gap-3 min-h-[120px] md:min-h-[200px] flex-col text-center">
+                        <h5 class="font-bold text-neutral-400 transition-colors duration-300 ease-in-out">Step 5</h5>  
+                        <div class="flex items-center justify-center p-3 rounded-full bg-white duration-300 ease-in-out transition-all">
+                            <img src="https://ph.mobeecars.com/images/assets/website-4/wmb-step-5.webp" alt="Mobee Cars: Step 5- Handover &amp; Get Paid Icon" class="w-[50px] aspect-square object-contain shrink-0 duration-300 ease-in-out transition-all">
+                        </div>
+                          
+                        <div class="flex flex-col gap-1">
+                            <h3 class="font-bold text-[#191970] text-[17px] md:text-[24px] leading-tight duration-300 ease-in-out transition-colors">
+                              Handover &amp; Get Paid                            </h3>
+
+                            <p class="text-black md:text-neutral-400 text-[14px] md:text-[16px] leading-snug duration-300 ease-in-out transition-colors">
+                              We handle documentation and ownership transfer. You get paid securely.                            </p>
+                        </div>
+                      </div>
+                      <div class="hidden md:block"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main><style data-typed-js-cursor-css="true">
+        .typed-cursor{
+          opacity: 1;
+        }
+        .typed-cursor.typed-cursor--blink{
+          animation: typedjsBlink 0.7s infinite;
+          -webkit-animation: typedjsBlink 0.7s infinite;
+                  animation: typedjsBlink 0.7s infinite;
+        }
+        @keyframes typedjsBlink{
+          50% { opacity: 0.0; }
+        }
+        @-webkit-keyframes typedjsBlink{
+          0% { opacity: 1; }
+          50% { opacity: 0.0; }
+          100% { opacity: 1; }
+        }
+      </style>
+
+    <section class="flex flex-col gap-2 bg-white pt-10">
+        <div class="flex flex-col gap-2 pb-10 px-5 items-center justify-center">
+          <div class="flex flex-row justify-center items-center gap-2 px-2 mb-5 rounded-full border-1 border-neutral-300 border-solid w-fit text-black hover:bg-primary hover:text-white transition-colors duration-75 ease-linear">
+            <span class="text-center uppercase text-[12px]">Differences</span>
+          </div>
+            <h2 class="font-bold text-center"> Why Choose Mobee Cars to Sell Your Car in the Philippines </h2>
+            <h5 class="text-center">See the difference before you decide.</h5>
+        </div>
+        
+        <div class="relative w-full h-full pt-5 py-10">
+          <table class="table table-fixed text-center table-zebra">
+            <!-- head -->
+            <thead>
+              <tr class="bg-[#191970] text-white">
+                <th class="hidden md:table-cell"></th>
+                <th class="font-bold">Feature</th>
+                <th class="relative">
+                  <div class="bg-white shadow-upwards absolute bottom-0 left-0 right-0 h-[70px] rounded-t-xl flex justify-center items-end">
+                    <img src="https://ph.mobeecars.com/images/assets/website-3/mobee-logo.png" alt="" class="max-h-[50px] max-w-[130px]">
+                  </div>
+                </th>
+                <th class="font-normal">Others</th>
+                <th class="hidden md:table-cell"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- row 1 -->
+              <tr>
+                <td class="hidden md:table-cell"></td>
+                <td class="font-bold text-[#191970]">Buyer Reach</td>
+                <td class="relative">
+                  <div class="bg-white shadow-md/30 absolute bottom-0 top-0 left-0 right-0 flex pl-2 md:pl-0 justify-start md:justify-center items-center">
+                    <div class="flex flex-row gap-2 min-w-[100px] w-full md:w-4/5">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/check.svg" alt="">
+                      <h6 class="font-bold text-start md:text-center">Nationwide</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>1-2</td>
+                <td class="hidden md:table-cell"></td>
+              </tr>
+              <!-- row 2 -->
+              <tr>
+                <td class="hidden md:table-cell"></td>
+                <td class="font-bold text-[#191970]">Pricing</td>
+                <td class="relative">
+                  <div class="bg-white shadow-md/30 absolute bottom-0 top-0 left-0 right-0 flex pl-2 md:pl-0 justify-start md:justify-center items-center">
+                    <div class="flex flex-row gap-2 min-w-[100px] w-full md:w-4/5">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/check.svg" alt="">
+                      <h6 class="font-bold text-start md:text-center">Right Price</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>Guesswork</td>
+                <td class="hidden md:table-cell"></td>
+              </tr>
+              <!-- row 3 -->
+              <tr>
+                <td class="hidden md:table-cell"></td>
+                <td class="font-bold text-[#191970]">Inspection</td>
+                <td class="relative">
+                  <div class="bg-white shadow-md/30 absolute bottom-0 top-0 left-0 right-0 flex pl-2 md:pl-0 justify-start md:justify-center items-center">
+                    <div class="flex flex-row gap-2 min-w-[100px] w-full md:w-4/5">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/check.svg" alt="">
+                      <h6 class="font-bold text-start md:text-center">Defined</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>Inconsistent</td>
+                <td class="hidden md:table-cell"></td>
+              </tr>
+              <!-- row 4 -->
+              <tr>
+                <td class="hidden md:table-cell"></td>
+                <td class="font-bold text-[#191970]">Paperwork</td>
+                <td class="relative">
+                  <div class="bg-white shadow-md/30 absolute bottom-0 top-0 left-0 right-0 flex pl-2 md:pl-0 justify-start md:justify-center items-center">
+                    <div class="flex flex-row gap-2 min-w-[100px] w-full md:w-4/5">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/check.svg" alt="">
+                      <h6 class="font-bold text-start md:text-center">Managed</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>DIY</td>
+                <td class="hidden md:table-cell"></td>
+              </tr>
+              <!-- row 5 -->
+              <tr>
+                <td class="hidden md:table-cell"></td>
+                <td class="font-bold text-[#191970]">Security</td>
+                <td class="relative">
+                  <div class="bg-white shadow-md/30 absolute bottom-0 top-0 left-0 right-0 flex pl-2 md:pl-0 justify-start md:justify-center items-center">
+                    <div class="flex flex-row gap-2 min-w-[100px] w-full md:w-4/5">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/check.svg" alt="">
+                      <h6 class="font-bold text-start md:text-center">Secure</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>High Risk</td>
+                <td class="hidden md:table-cell"></td>
+              </tr>
+              <!-- row 6 -->
+              <tr>
+                <td class="hidden md:table-cell"></td>
+                <td class="font-bold text-[#191970]">Fees</td>
+                <td class="relative">
+                  <div class="bg-white shadow-md/30 absolute bottom-0 top-0 left-0 right-0 flex pl-2 md:pl-0 justify-start md:justify-center items-center">
+                    <div class="flex flex-row gap-2 min-w-[100px] w-full md:w-4/5">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/check.svg" alt="">
+                      <h6 class="font-bold text-start md:text-center">Transparent</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>Surprises</td>
+                <td class="hidden md:table-cell"></td>
+              </tr>
+              <!-- row 7 -->
+              <tr>
+                <td class="hidden md:table-cell"></td>
+                <td class="font-bold text-[#191970]">Time</td>
+                <td class="relative">
+                  Placeholder Long
+                  <div class="bg-white shadow-md/30 absolute h-[60px] top-0 left-0 right-0 flex pl-2 md:pl-0 justify-start md:justify-center items-start pt-2 rounded-b-lg">
+                    <div class="flex flex-row gap-2 min-w-[100px] w-full md:w-4/5">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/check.svg" alt="">
+                      <h6 class="font-bold text-start md:text-center">&lt;1 day</h6>
+                    </div>
+                  </div>
+                </td>
+                
+                <td>5-7 days</td>
+                <td class="hidden md:table-cell"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          
+        </div>
+        
+
+    </section>
+
+    <section class="bg-base-200 px-5 py-10 md:px-10">
+      <div class="max-w-[1280px] mx-auto">
+          <div class="flex flex-col items-center text-center mb-10 gap-2">
+              <div class="flex flex-row justify-center items-center gap-2 px-2 mb-5 rounded-full border-1 border-neutral-300 border-solid w-fit text-black hover:bg-primary hover:text-white transition-colors duration-75 ease-linear">
+                  <span class="text-center uppercase text-[12px]">Our Pricing</span>
+              </div>
+              <h2 class="font-bold text-black text-[22px] md:text-[38px] leading-tight">
+                How We Determine Your Car’s Market Price              </h2>
+
+              <h5 class="text-black leading-snug max-w-[520px]">
+                Built on data. Powered by real demand.              </h5>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">
+              <div class="bg-white active:[&amp;_img]:opacity-90 hover:[&amp;_img]:opacity-90 hover:[&amp;_img]:scale-100 relative hover:shadow-[#EB1B0E]/30 hover:shadow-xl duration-100 ease-in-out transition-all rounded-4xl md:rounded-4xl p-5 min-h-[130px] flex flex-col items-start justify-start gap-2 md:gap-3 shadow-lg overflow-hidden">
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/car-database.webp" alt="Mobee used car database icon" class="absolute -right-20 top-2 bottom-0 object-cover opacity-30 scale-75 shrink-0 transition-all duration-300 ease-in-out"> 
+                  
+                  <div class="leading-tight min-w-0 text-center min-[390px]:text-left md:text-left flex flex-col justify-center h-full  w-[calc(100%-100px)]">
+                      
+                      <div class="flex flex-col text-start">
+                          <h4 class="text-black font-semibold">
+                            Mobee Cars Used Car Database                          </h4>
+                          <h6 class="text-neutral-500 leading-tight">
+                            Historical pricing records nationwide.                          </h6>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="bg-white active:[&amp;_img]:opacity-90 hover:[&amp;_img]:opacity-90 relative hover:shadow-[#EB1B0E]/30 hover:[&amp;_img]:scale-75 hover:shadow-xl duration-100 ease-in-out transition-shadow rounded-4xl md:rounded-4xl p-5 min-h-[130px] flex flex-col min-[390px]:flex-row items-start justify-start gap-2 md:gap-3 shadow-lg overflow-hidden">
+                  
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/transaction-data.webp" alt="Market and transaction data icon" class="absolute -right-10 -top-5 md:-top-2 bottom-0 object-cover opacity-30 shrink-0 scale-50 transition-all duration-300 ease-in-out">
+                  
+                  <div class="leading-tight min-w-0 text-center min-[390px]:text-left md:text-left flex flex-col justify-center h-full w-[calc(100%-100px)]">
+                      <div class="flex flex-col text-start">
+                          <h4 class="text-black text-sm md:text-lg leading-tight font-semibold">
+                            Market &amp; Transaction Data                          </h4>
+                          <h6 class="text-neutral-500 text-xs leading-tight">
+                            Real market movement trends.                          </h6>
+                      </div>
+                      
+                  </div>
+              </div>
+
+              <div class="bg-white active:[&amp;_img]:opacity-90 hover:[&amp;_img]:opacity-90 relative hover:shadow-[#EB1B0E]/30 hover:shadow-xl duration-100 hover:[&amp;_img]:scale-90 ease-in-out transition-shadow rounded-4xl md:rounded-4xl p-5 min-h-[130px] flex flex-col min-[390px]:flex-row items-start justify-start gap-2 md:gap-3 shadow-lg overflow-hidden">
+                  
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/buyer-signal.webp" alt="Buyer demand signal icons" class="absolute -right-10 -top-2 md:top-0 bottom-0 object-cover opacity-30 shrink-0 scale-75 transition-all duration-300 ease-in-out">
+                  
+                  <div class="leading-tight min-w-0 text-center min-[390px]:text-left flex flex-col justify-center h-full  w-[calc(100%-100px)]">
+                      
+                      <div class="flex flex-col text-start">
+                          <h4 class="text-black text-sm md:text-lg leading-tight font-semibold">
+                            Buyer Demand Signals                          </h4>
+                          <h6 class="text-neutral-500 text-xs leading-tight">
+                            Matched with 500+ verified buyers.                          </h6>
+                      </div>
+                      
+                  </div>
+              </div>
+
+              <div class="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-6">
+                <div class="hidden md:block"></div>
+                <div class="col-span-2 bg-white active:[&amp;_img]:opacity-90 hover:[&amp;_img]:opacity-90 relative hover:shadow-[#EB1B0E]/30 hover:[&amp;_img]:scale-75 hover:shadow-xl duration-100 ease-in-out transition-shadow rounded-4xl md:rounded-4xl p-5 min-h-[130px] flex flex-col min-[390px]:flex-row items-start justify-start gap-2 md:gap-3 shadow-lg overflow-hidden">
+                  
+                      <img src="https://ph.mobeecars.com/images/assets/website-4/condition-assessment.webp" alt="Condition and mileage assessment" class="absolute -right-10 -top-5 bottom-0 object-cover opacity-30 shrink-0 scale-50 transition-all duration-300 ease-in-out">
+                    
+                    <div class="leading-tight min-w-0 text-center min-[390px]:text-left md:text-left flex flex-col h-full justify-center w-[calc(100%-70px)]">
+                        <div class="flex flex-col text-start">
+                            <h4 class="text-black text-sm md:text-lg leading-tight font-semibold">
+                              Condition &amp; Mileage Assessment                            </h4>
+                            <h6 class="text-neutral-500 text-xs leading-tight">
+                              Inspection-based adjustments.                            </h6>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="col-span-2 bg-white active:[&amp;_img]:opacity-90 hover:[&amp;_img]:opacity-90 relative hover:shadow-[#EB1B0E]/30 hover:[&amp;_img]:scale-75 hover:shadow-xl duration-100 ease-in-out transition-shadow rounded-4xl md:rounded-4xl p-5 min-h-[130px] flex flex-col min-[390px]:flex-row items-start justify-start gap-2 md:gap-3 shadow-lg overflow-hidden">
+                  
+                                            <img src="https://ph.mobeecars.com/images/assets/website-4/right-market-price-ph.webp" alt="Right market price icon" class="absolute -right-10 -top-5 object-cover opacity-30 shrink-0 scale-50 transition-all duration-300 ease-in-out">
+                                        
+                  <div class="leading-tight min-w-0 text-center min-[390px]:text-left md:text-left flex flex-col h-full justify-center w-[calc(100%-70px)]">
+                      <div class="flex flex-col text-start">
+                          <h4 class="text-black text-sm md:text-lg leading-tight font-semibold">
+                            Right Market Price                          </h4>
+                          <h6 class="text-neutral-500 text-xs leading-tight">
+                            Data-driven. Transparent. No guesswork.                          </h6>
+                      </div>
+                      
+                  </div>
+                </div>
+                <div class="hidden md:block"></div>
+              </div>
+              
+          </div>
+      </div>
+  </section>
+
+        <section id="daily-transaction-section" class="bg-base-200 w-full flex justify-center items-center py-10 px-5">
+      <div class="max-w-[100%] flex flex-col gap-5" data-aos="fade-up">
+          <div class="flex flex-col gap-2 text-center items-center">
+            <div class="flex flex-row justify-center items-center gap-2 px-2 mb-5 rounded-full border-1 border-neutral-300 border-solid w-fit text-black hover:bg-primary hover:text-white transition-colors duration-75 ease-linear">
+              <span class="text-center uppercase text-[12px]">Daily Transactions</span>
+            </div>  
+
+            <div class="w-full flex flex-row items-center justify-center gap-1">
+              <h2 class="font-bold text-[var(--default-text)] pt-2 text-center flex flex-col md:flex-row gap-0 md:gap-2 justify-center items-center">Cars Sold With  <span><img src="/images/assets/website-4/mobee-logo.png" class="w-[150px] h-[50px] md:w-[180px] md:h-[60px]" alt="Mobee logo"></span></h2>
+              
+            </div>
+              
+            <h5 class="text-[var(--default-text)]">Come and join thousands of our happy car sellers that sold with Mobee Cars</h5>
+          </div>
+
+          <div class="cars-sold">
+        <!-- Swiper 1 -->
+        <div class="swiper mySwiper relative">
+            <div class="swiper-wrapper p-1">
+                
+                <div class="flex justify-center items-center w-full h-[426px] md:h-[132px] text-[var(--default-text)] bg-[var(--bg-gray)] rounded-lg">
+                    <p><i class="fa-solid fa-spinner fa-spin-pulse" aria-hidden="true"></i> Loading data ...</p>
+                </div>
+            </div>
+
+            <div class="block md:hidden absolute top-0 left-0 right-0 w-full h-[150px] gradient-top z-10"></div>
+            <div class="block md:hidden absolute bottom-0 left-0 right-0 w-full h-[150px] gradient-bottom z-10"></div>
+        </div>
+    </div>
+    <!-- Swiper JS -->
+    
+    <script>
+        const carSoldObserver = new IntersectionObserver((entries, observer) => {
+            if (!entries[0].isIntersecting) return;
+
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+            script.async = true;
+
+            document.body.appendChild(script);
+
+            $.ajax({
+                url: 'https://ph.mobeecars.com/website/ph/get-listing?country=ph',
+                method: 'GET',
+                success: function (data) {
+                    $data_cars = data;
+                    $html = "";
+                    if($data_cars.length == 0){
+                        $html += `<div class="w-full h-[425px] md:h-fit md:min-h-[150px] flex justify-center items-center"><p class="text-black">No data available</p></div>` 
+                    } else {
+                        $data_cars.forEach((item, index) => {
+                            $html += `
+                                <div class="swiper-slide" aria-label="${index + 1} of ${$data_cars.length}">
+                                    <div class="flex flex-row gap-2 min-w-[370px] w-full">
+                                        <div class="flex w-1/2 gap-2 text-white text-[12px] py-3 h-[132px] items-center">
+                                            <span class="font-bold text-lg">${item.car_title}</span>
+                                        </div>
+                                        <div class="trapezium scale-x-[-1] bg-cover bg-no-repeat bg-left rounded-l-lg">
+                                            <img src="${item.thumbnail_img}" class="w-full min-h-[132px] h-full rounded-l-xl"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                        })
+                    }
+                        
+                    $('.swiper-wrapper').html($html);
+
+                    var swiper = new Swiper(".mySwiper", {
+                        spaceBetween: 15,
+                        grabCursor: true,
+                        loop: true,
+                        direction: window.innerWidth > 640 ? 'horizontal' : 'vertical',
+                        autoplay: {
+                            delay: 0,
+                            disableOnInteraction: false,
+                        },
+                        speed: 5000,
+                        pagination: {
+                            el: ".swiper-pagination",
+                            clickable: true,
+                        },
+                        breakpoints: {
+                            0: { // Mobile
+                                direction: "vertical", // Force vertical for mobile
+                                slidesPerView: 3,
+                                slidesPerGroup: 1, // Move one slide at a time
+                                spaceBetween: 15,
+                            },
+                            640: { // Tablet/Desktop
+                                direction: "horizontal", // Force horizontal for desktop
+                                slidesPerView: 1,
+                                slidesPerGroup: 1,
+                                spaceBetween: 20,
+                            },
+                            768:{
+                                slidesPerView: 2,
+                                slidesPerGroup: 1,
+                                spaceBetween: 30,
+                            },
+                            1024: {
+                                slidesPerView: 2,
+                                slidesPerGroup: 1,
+                                spaceBetween: 30,
+                            },
+                            1280: {
+                                slidesPerView: 3,
+                                slidesPerGroup: 1,
+                                spaceBetween: 20,
+                            }
+                        },
+                    });
+                }
+            })
+            observer.unobserve(entries[0].target);
+
+            observer.disconnect();
+        }, {
+            threshold: 0.1
+        });
+
+        carSoldObserver.observe(document.getElementById('daily-transaction-section'));
+    </script> 
+      </div>
+    </section>
+    
+    <section id="review-section" class="flex flex-col gap-2 bg-white p-5 py-10 font-poppins">
+      <div class="flex flex-col justify-center items-center text-center mb-10">
+        <div class="flex flex-row justify-center items-center gap-2 px-2 mb-5 rounded-full border-1 border-neutral-300 border-solid w-fit text-black hover:bg-primary hover:text-white transition-colors duration-75 ease-linear">
+          <span class="text-center uppercase text-[12px]">Reviews</span>
+        </div>  
+        <h2 class="font-bold">Trusted by Thousands of Car Sellers Nationwide</h2>
+        <h5>Real experiences from car sellers who chose Mobee Cars.</h5>
+      </div>
+
+            <!-- Elfsight Google Reviews | PH index review -->
+      <div class="elfsight-app-c0731733-a1e6-4d55-9139-b641088379e3" data-elfsight-app-lazy=""></div>
+            <div class="flex w-full items-center justify-center">
+        <a href="https://ph.mobeecars.com/en/review?country=ph" class="btn">Load More</a>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const reviewSection = document.getElementById('review-section');
+
+        let loaded = false;
+
+        const observer = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting || loaded) return;
+
+            loaded = true;
+
+            const script = document.createElement('script');
+            script.src = 'https://elfsightcdn.com/platform.js';
+            script.async = true;
+
+            document.body.appendChild(script);
+
+            observer.disconnect();
+        }, {
+            root: null,
+            rootMargin: '300px 0px',
+            threshold: 0
+        });
+
+        observer.observe(reviewSection);
+      });
+    </script>
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 z-50 w-full flex items-end justify-center transition-transform duration-300 ease-in-out translate-y-0">
+    <div class="flex flex-col gap-2 p-4 md:p-6 items-center justify-center w-full rounded-t-4xl md:w-[60dvw] md:max-w-[1260px] bg-white shadow-xl/30 shadow-upwards">
+        <h5 class="font-bold">
+            Ready to Sell?        </h5>
+        <button class="btn btn-primary btn-block w-full max-w-[400px] text-sm" onclick="document.getElementById('my_modal_1').showModal();">Start Selling Your Car Here!</button>
+    </div>
+
+    <div class="block md:hidden z-30 absolute -top-20 right-5 mb-26 md:mb-0">
+                    <a href="https://m.me/mobee.ph" target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-circle bg-blue-700 text-white" aria-label="Contact Mobee Philippines on Messenger">
+                <i class="fa-brands fa-facebook-messenger fa-xl" aria-hidden="true"></i>
+            </a>
+            </div>
+</div>
+
+
+<div class="hidden md:block z-[100] fixed bottom-5 right-5 mb-26 md:mb-0">
+            <a href="https://m.me/mobee.ph" target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-circle bg-blue-700 text-white" aria-label="Contact Mobee Philippines on Messenger">
+            <i class="fa-brands fa-facebook-messenger fa-xl" aria-hidden="true"></i>
+        </a>
+    </div>
+<form action="https://ph.mobeecars.com/en/calculator/condition" method="post" enctype="multipart/form-data" id="calculator-form">
+    <input type="hidden" name="_token" value="ys0JEVgHtbIbiRphkUi49ebZPuMkcloySF8fB7Mb">
+    <input type="hidden" name="country" id="country" value="ph">
+    <input type="hidden" name="contact_name" id="contact_name" value="">
+    <input type="hidden" name="contact_phone" id="contact_phone" value="">
+    <input type="hidden" name="country_code" id="country_code" value="+63">
+    <input type="hidden" name="lead_id" id="lead_id" value="">
+    <input type="hidden" name="source" id="lead_source" value="">
+    <input type="hidden" name="campaign" id="lead_campaign" value="">
+    <input type="hidden" name="content" id="utm_content" value="">
+    <input type="hidden" name="medium" id="utm_medium" value="">
+    <input type="hidden" name="language" value="en">
+    <input type="hidden" id="img_url" name="img_url" value="">
+
+    <input type="hidden" id="car_plate" name="car_plate" value="">
+    <input type="hidden" id="owner_name" name="owner_name" value="">
+    <input type="hidden" id="address" name="address" value="">
+    <input type="hidden" id="chassis_no" name="chassis_no" value="">
+    <input type="hidden" id="engine_no" name="engine_no" value="">
+
+    <input type="hidden" id="make_value_form" name="make" value="">
+    <input type="hidden" id="year_value_form" name="year" value="">
+    <input type="hidden" id="model_value_form" name="model" value="">
+    <input type="hidden" id="transmission_value_form" name="transmission" value="">
+    <input type="hidden" id="variant_value_form" name="variant" value="">
+    <input type="hidden" id="mileage_value_form" name="mileage" value="">
+
+    <input type="hidden" id="location_value" name="location" value="">
+</form>
+
+<dialog id="my_modal_1" class="modal modal-bottom md:modal-middle md:items-end md:justify-center">
+   <div class="modal-box bg-base-200 relative rounded-t-4xl md:w-[60dvw] md:max-w-[1260px] overflow-y-auto pb-18 md:pb-0 h-[95vh] md:h-[80vh]">
+        <div id="step-1" class="pb-20" style="height: 224px;">
+            
+            <div class="flex flex-col gap-3 md:gap-4 justify-center items-center h-fit">
+                <!-- <div class="flex flex-col gap-4 justify-center items-center sticky top-0 z-2 bg-base-200"> -->
+                    <div class="flex flex-col text-center">
+                        <h4 class="font-bold">Start Here To Sell Your Car</h4>
+                        <span class="text-xs md:text-sm">Get an instant quotation online, schedule for an inspection and get a final offer from Mobee Cars!</span>
+                    </div>
+                    
+                    <div class="rounded-3xl bg-white w-fit ring-1 ring-gray-200 grid grid-cols-2 min-w-[300px] max-w-[500px]">
+                        <button id="tab-form" class="btn-bar btn-bar-active flex items-center justify-center p-1 text-center" aria-selected="true">
+                            <p>Enter Details</p>
+                        </button>
+                        <button id="tab-photo" class="btn-bar btn-bar-inactive flex items-center justify-center p-1 text-center" aria-selected="false">
+                            <p>Upload Photo (AI)</p>
+                        </button>
+                    </div>
+                <!-- </div> -->
+                
+    
+                <!-- slide transition -->
+                <div class="relative overflow-hidden max-w-[500px]">
+                    <div id="panes-viewport" class="relative overflow-hidden transition-[height] duration-300 ease-out min-h-0" style="height: 652px;">
+                        <div id="panes-track" class="flex transition-transform duration-300 ease-out" style="width: 200%; transform: translateX(0%);">
+                            <section id="panel-form" role="tabpanel" aria-labelledby="tab-form" class="w-1/2 flex flex-col gap-2 md:gap-4 md:max-w-[500px] px-2">
+                                <div class="flex flex-col gap-1 w-full">
+                                    <label for="make_value" class="font-semibold text-xs md:text-sm" id="make_label">Car Brand</label>
+                                    <select class="select w-full select-sm" name="make" id="make_value" required=""><option selected="" disabled="" hidden="">Brand</option><optgroup label="Popular Brands"><option>Ford</option><option>Honda</option><option>Hyundai</option><option>Isuzu</option><option>Mitsubishi</option><option>Nissan</option><option>Toyota</option></optgroup><optgroup label="All Brands"><option>Audi</option><option>Baic</option><option>BMW</option><option>BYD</option><option>Chana</option><option>Changan</option><option>Changhe</option><option>Chery</option><option>Chevrolet</option><option>Chrysler</option><option>Dodge</option><option>Faw</option><option>Foton</option><option>GAC</option><option>Gaz</option><option>Geely</option><option>Great Wall</option><option>Haima</option><option>Jac</option><option>Jaguar</option><option>Jasguar</option><option>Jeep</option><option>Jetour</option><option>JMC</option><option>Joylong</option><option>Kaicene</option><option>Keyton</option><option>Kia</option><option>King Long</option><option>Land Rover</option><option>Lexus</option><option>Mahindra</option><option>Maxus</option><option>Mazda</option><option>Mercedes Benz</option><option>MG</option><option>Mini</option><option>Peugeot</option><option>Ram</option><option>Range Rover</option><option>Ssangyong</option><option>Subaru</option><option>Suzuki</option><option>Tata</option><option>Volkswagen</option><option>Volvo</option></optgroup></select>
+                                </div>
+                                <div class="flex flex-col gap-1 w-full">
+                                    <label for="year_value" class="font-semibold text-xs md:text-sm" id="year_label">Year</label>
+                                    <select class="select w-full select-sm" name="year" id="year_value" required="" disabled="">
+                                        <option value="">Please fill up previous details</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-1 w-full">
+                                    <label for="model_value" class="font-semibold text-xs md:text-sm" id="model_label">Model</label>
+                                    <select class="select w-full select-sm" name="model" id="model_value" required="" disabled="">
+                                        <option value="">Please fill up previous details</option>
+                                    </select>
+                                </div>
+                
+                                <div class="flex flex-col gap-1 w-full">
+                                    <label for="transmission_value" class="font-semibold text-xs md:text-sm" id="transmission_label">Transmission</label>
+                                    <select class="select w-full select-sm" name="transmission" id="transmission_value" required="" disabled="">
+                                        <option value="">Please fill up previous details</option>
+                                    </select>
+                                </div>
+                
+                                <div class="flex flex-col gap-1 w-full">
+                                    <label for="variant_value" class="font-semibold text-xs md:text-sm" id="variant_label">Variant</label>
+                                    <select class="select w-full select-sm" name="variant" id="variant_value" required="" disabled="">
+                                        <option value="">Please fill up previous details</option>
+                                    </select>
+                                </div>
+                
+                                <div class="flex flex-col gap-1 w-full">
+                                    <label for="mileage_value" class="font-semibold text-xs md:text-sm" id="mileage_label">Mileage (KM)</label>
+                                    <select class="select w-full select-sm" name="mileage" id="mileage_value" required="" disabled="">
+                                        <option value="">Please fill up previous details</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col gap-2 md:gap-3 mt-3 pb-14">
+                                    <button id="proceed-btn" class="btn btn-primary btn-disabled price-button">Get Market Price</button>
+                                    <span class="text-xs text-neutral-500 text-center">By proceeding, I agree to the Privacy Policy, Terms &amp; Conditions of use.</span>
+
+                                    <span id="manual-form-link" class="text-xs text-neutral-500 text-center cursor-pointer">Couldn't find your car? <span class="underline text-blue-500">Click here</span></span>
+                                </div>
+                                <div class="w-full h-[200px] block md:hidden"></div>
+                            </section>
+
+                            <section id="panel-photo" role="tabpanel" aria-labelledby="tab-photo" class="w-1/2 flex pl-2 flex-col items-center">
+                                <!-- Header -->
+                                <div class="flex flex-col text-center pb-4">
+                                    <p class=" text-base md:text-lg font-semibold leading-tight">
+                                    Upload a photo and get a quote online!                                    </p>
+                                    <p class="text-sm md:text-[15px] mt-1">
+                                    Let our AI get the car's make, model and year from your photo!                                    </p>
+                                </div>
+                                <div class="flex flex-col w-full px-2 pb-4 flex-1 gap-2">
+                                    <div class="flex items-center justify-center relative overflow-hidden">
+                                        <div class="w-full h-full">
+                                            <!-- Upload Box -->
+                                            <label id="uploadBox" for="uploadImage" class="w-full h-full aspect-square flex flex-col items-center justify-center
+                                                        border-2 border-dashed border-red-500/50 rounded-2xl cursor-pointer
+                                                        hover:border-red-500/100 hover:bg-neutral-300/50 transition-all duration-300
+                                                        p-6 bg-neutral-300/70 backdrop-blur-sm">
+                                                <div class="flex flex-col items-center gap-3 text-center">
+                                                    <i class="fa-solid fa-car-side text-4xl text-primary" aria-hidden="true"></i>
+                                                    <p class="text-primary text-base font-medium">Click to upload or drag &amp; drop</p>
+                                                    <p class="text-primary/80 text-sm">JPEG, JPG, PNG — up to 10MB</p>
+                                                </div>
+                                                <input id="uploadImage" type="file" class="hidden">
+                                            </label>
+                                            <!-- Preview Box -->
+                                            <div id="previewCard" class="hidden relative w-full h-fit flex flex-col
+                                                        border-2 border-dashed border-white/30 rounded-2xl 
+                                                        p-4 bg-white/5 backdrop-blur-sm overflow-hidden">
+                                                <button id="changeImage" class="absolute top-5 right-5 w-7 h-7 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white text-lg font-bold shadow-sm z-30">
+                                                    ×
+                                                </button>
+                                                <div class="w-full flex items-center justify-center">
+                                                    <img id="imagePreview" class="w-4/5 shadow-md rounded-xl border border-white/30 aspect-square object-cover" alt="Car preview">
+                                                </div>
+                                                <p id="fileName" class=" text-sm mt-3 truncate max-w-full min-w-0 z-40 text-center"></p>
+                                                <p id="imageAnalyzeError" class="hidden mt-2 text-xs text-red-200 text-center font-bold"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-end justify-center pt-4">
+                                        <button id="submitUpload" class="hidden btn btn-primary transition">
+                                            Analyze My Car                                        </button>
+                                    </div>
+                                </div>
+                                <div class="h-10 w-full"></div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="step-2" class="hidden h-[95vh] flex justify-center" style="height: 224px;">
+            <div class="flex flex-col justify-between items-center h-fit px-2">
+
+                <div class="flex flex-col gap-2">
+                    <button onclick="backToStep1()" class="btn btn-ghost self-start"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Back</button>
+                    <div class="flex flex-col text-center md:pb-5">
+                        <h4 class="text-lg font-bold">Verify Your Details</h4>
+                        <span class="text-xs md:text-sm">Enter your name and mobile number to receive a secure verification code.</span>
+                    </div>
+
+                    <div id="manual-form-car-details-section"></div>
+
+                    <div class="flex flex-col gap-4 w-full">
+                        <div class="flex flex-col w-full gap-2">
+                            <p class="font-bold" id="make_label">Enter Your Name</p>
+                            <input type="text" name="name" id="name" placeholder="John Doe" class="input w-full disabled:bg-white input-sm" required="">
+                        </div>
+
+                        <div class="flex flex-col w-full gap-2">
+                            <p class="font-bold" id="make_label">Enter Your Number</p>
+                            <div class="grid grid-cols-6 w-full">
+                                <select class="select select-sm w-full col-span-2" id="country_code_select" required="">
+                                    <option value="+1"><img src="https://ph.mobeecars.com/svg/us.svg" alt="us Flag" width="25" height="25">+1 (US)</option>
+                                    <option value="+44"><img src="https://ph.mobeecars.com/svg/uk.svg" alt="uk Flag" width="25" height="25">+44 (UK)</option>
+                                    <option value="+60"><img src="https://ph.mobeecars.com/svg/malaysia.svg" alt="Malaysia Flag" width="25" height="25">+60 (MY)</option>
+                                    <option value="+61"><img src="https://ph.mobeecars.com/svg/australia.svg" alt="australia Flag" width="25" height="25">+61 (AU)</option>
+                                    <option value="+62"><img src="https://ph.mobeecars.com/svg/indonesia.svg" alt="Indonesia Flag" width="25" height="25">+62 (ID)</option>
+                                    <option value="+63" selected=""><img src="https://ph.mobeecars.com/svg/philippines.svg" alt="Philippines Flag" width="25" height="25">+63 (PH)</option>
+                                    <option value="+65"><img src="https://ph.mobeecars.com/svg/singapore.svg" alt="singapore Flag" width="25" height="25">+65 (SG)</option>
+                                    <option value="+66"><img src="https://ph.mobeecars.com/svg/thailand.svg" alt="thailand Flag" width="25" height="25">+66 (TH)</option>
+                                    <option value="+84"><img src="https://ph.mobeecars.com/svg/vietnam.svg" alt="vietnam Flag" width="25" height="25">+84 (VN)</option>
+                                    <option value="+95"><img src="https://ph.mobeecars.com/svg/myanmar.svg" alt="myanmar Flag" width="25" height="25">+95 (MM)</option>
+                                    <option value="+670"><img src="https://ph.mobeecars.com/svg/east_timor.svg" alt="East Timor Flag" width="25" height="25">+670 (TL)</option>
+                                    <option value="+673"><img src="https://ph.mobeecars.com/svg/brunei.svg" alt="Brunei Flag" width="25" height="25">+673 (BN)</option>
+                                    <option value="+855"><img src="https://ph.mobeecars.com/svg/cambodia.svg" alt="Cambodia Flag" width="25" height="25">+855 (CM)</option>
+                                    <option value="+856"><img src="https://ph.mobeecars.com/svg/laos.svg" alt="laos Flag" width="25" height="25">+856 (LA)</option>
+                                </select>
+                                <input type="tel" name="phone" id="phone" pattern="^\d+$" inputmode="numeric" placeholder=" E.g. 9603999990 " class="input w-full col-span-4 disabled:bg-white input-sm" required="">
+                            </div>
+                            <span id="phone-warning" style="display:none;" class="text-sm text-yellow-500 text-center"></span>
+                            <span id="phone-error" style="display:none;" class="text-sm text-red-500 text-center"></span>
+                        </div>
+
+                        <div class="flex flex-col w-full gap-2">
+                            <p class="font-bold" id="make_label">Where is your car located?</p>
+                            <select name="location" id="location" class="select w-full select-sm">
+                                <option value="">Please select location</option>
+                                                                <option value="Batangas">Batangas</option>
+                                <option value="Bulacan">Bulacan</option>
+                                <option value="Cavite">Cavite</option>
+                                <option value="Laguna">Laguna</option>
+                                <option value="Rizal">Rizal</option>
+                                <option value="NCR">NCR</option>
+                                <option value="Pampanga">Pampanga</option>
+                                <option value="Nueva Ecija">Nueva Ecija</option>
+                                <option value="Others">Others</option>
+                                                            </select>
+
+                            <input type="text" placeholder="Please state your location" class="hidden mt-3 input w-full" name="other-location" id="other-location">
+                        </div>
+
+                        <div id="step-3" class="opacity-0 flex flex-col gap-2 items-center justify-center h-full w-full pt-0 lg:pt-5">
+                            <div class="flex flex-col items-center justify-between text-center">
+                                <h4 class="text-lg font-bold">Enter Your OTP</h4>
+                                <span class="text-xs md:text-sm">We’ve sent a 6-digit code to <text id="otp_phone_channel">+6012-345 6789</text></span>
+                            </div>
+
+                            <div class="flex items-center justify-center gap-1 md:gap-3">
+                                <input type="text" inputmode="numeric" class="otp-input w-12 h-12 text-center text-2xl font-extrabold text-slate-900 bg-slate-200 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" pattern="\d*" maxlength="1">
+                                <input type="text" inputmode="numeric" class="otp-input w-12 h-12 text-center text-2xl font-extrabold text-slate-900 bg-slate-200 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" pattern="\d*" maxlength="1">
+                                <input type="text" inputmode="numeric" class="otp-input w-12 h-12 text-center text-2xl font-extrabold text-slate-900 bg-slate-200 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" pattern="\d*" maxlength="1">
+                                <input type="text" inputmode="numeric" class="otp-input w-12 h-12 text-center text-2xl font-extrabold text-slate-900 bg-slate-200 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" pattern="\d*" maxlength="1">
+                                <input type="text" inputmode="numeric" class="otp-input w-12 h-12 text-center text-2xl font-extrabold text-slate-900 bg-slate-200 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" pattern="\d*" maxlength="1">
+                                <input type="text" inputmode="numeric" class="otp-input w-12 h-12 text-center text-2xl font-extrabold text-slate-900 bg-slate-200 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" pattern="\d*" maxlength="1">
+                            </div>
+                            <div id="otp-error-section" class="hidden flex flex-col items-center justify-between text-center">
+                                <p class="text-red-500"><b>Incorrect OTP, please try again</b></p>
+                            </div>
+                            <div class="max-w-[260px] mx-auto mt-2">
+                                <button id="resend-otp-btn" type="button" class="flex flex-row gap-2 items-center cursor-pointer">
+                                    <i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i>
+                                    <p id="resend-text">Processing...</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div id="request-verification-section" class="w-full flex items-center justify-center mb-20 md:mb-0">
+                    <button id="request-verification-btn" class="btn btn-primary btn-disabled price-button btn-block" style="margin-bottom: 100px !important">Request Verification Code</button>
+                </div>
+                <div id="submit-verification-section" class="hidden w-full flex items-center justify-center mb-20 md:mb-0">
+                    <button id="submit-verification-btn" class="btn btn-primary btn-disabled price-button btn-block" style="margin-bottom: 100px !important">Submit</button>
+                </div>
+                <div class="block md:hidden w-full h-[100px]"></div>
+            </div>
+        </div>
+
+        <div id="step-end-message" class="hidden flex-col gap-2 justify-between items-center h-fit" style="height: 224px;">
+            <div class="flex flex-col gap-2">
+                <div class="flex flex-col text-center md:pb-5">
+                    <h4 id="step-end-message-title" class="text-lg font-bold">Thank You!</h4>
+                    <span class="text-xs md:text-sm" id="step-end-message-text">We have received your car details, our team will reach out to you soon.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <form method="dialog" class="modal-backdrop w-screen h-screen">
+      <button>close</button>
+    </form>
+</dialog>
+
+<script>
+    $language = "en";
+    $locale = "en";
+    $(document).ready(function(){
+        $('#make_label').html('Car Brand <i class="fa-solid fa-spinner-scale fa-spin-pulse text-red-500"></i>');
+        $.ajax({
+            url: "https://ph.mobeecars.com/calculator?locale=en",
+            method: 'GET',
+            success: function (data) {
+                $('#make_label').html('Car Brand');
+                $("#make_value").html(data.makeData);
+            }
+        });
+    });
+    
+    $('#make_value').change(function () {
+        $('#make_value_form').val($(this).val());
+    });
+    $('#year_value').change(function () {
+        $('#year_value_form').val($(this).val());
+    });
+    $('#model_value').change(function () {
+        $('#model_value_form').val($(this).val());
+    });
+    $('#transmission_value').change(function () {
+        $('#transmission_value_form').val($(this).val());
+    });
+    $('#variant_value').change(function () {
+        $('#variant_value_form').val($(this).val());
+    });
+    $('#mileage_value').change(function () {
+        $('#mileage_value_form').val($(this).val());
+    });
+        //to fetch the year lists
+        $("#make_value").change(function () {
+            if($('#submitButtonInactive').hasClass('hidden')){
+                $('#submitButtonInactive').removeClass('hidden');
+                $('#submitButton').addClass('hidden');
+            }
+            $('#year_label').html('Year <i class="fa-solid fa-spinner-scale fa-spin-pulse text-red-500"></i>');
+            $.ajax({
+                url: "https://ph.mobeecars.com/calculator/ph/year?&make_data=" + $(this).val() + "&locale=en",
+                method: 'GET',
+                success: function (data) {
+                    $('#year_label').html('Year');
+                    $("#year_value").removeAttr('disabled');
+                    $("#year_value_icon").removeClass('opacity-70');
+                    $("#year_value").html(data.yearData);
+                    $("#model_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#transmission_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#variant_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#mileage_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#model_value").prop('disabled', true);
+                    $("#transmission_value").prop('disabled', true);
+                    $("#variant_value").prop('disabled', true);
+                    $("#mileage_value").prop('disabled', true);
+                    $("#model_value_icon").addClass('opacity-70');
+                    $("#transmission_value_icon").addClass('opacity-70');
+                    $("#variant_value_icon").addClass('opacity-70');
+                    $("#mileage_value_icon").addClass('opacity-70');
+                }
+            });
+        });
+
+        // to fetch the model lists
+        $("#year_value").change(function () {
+            $('#model_label').html('Model <i class="fa-solid fa-spinner-scale fa-spin-pulse text-red-500"></i>');
+            if($('#submitButtonInactive').hasClass('hidden')){
+                $('#submitButtonInactive').removeClass('hidden');
+                $('#submitButton').addClass('hidden');
+            }
+            $.ajax({
+                url: "https://ph.mobeecars.com/calculator/ph/model?&make_data=" + $("#make_value").val() + '&year_data=' + $(this).val() + "&locale=en",
+                method: 'GET',
+                success: function (data) {
+                    $('#model_label').html('Model');
+                    $("#model_value").removeAttr('disabled');
+                    $("#model_value_icon").removeClass('opacity-70');
+                    $("#model_value").html(data.modelData);
+                    $("#transmission_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#variant_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#mileage_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#transmission_value").prop('disabled', true);
+                    $("#variant_value").prop('disabled', true);
+                    $("#mileage_value").prop('disabled', true);
+                    $("#transmission_value_icon").addClass('opacity-70');
+                    $("#variant_value_icon").addClass('opacity-70');
+                    $("#mileage_value_icon").addClass('opacity-70');
+                }
+            });
+        });
+
+        // to fetch the transmission lists
+        $("#model_value").change(function () {
+            $('#transmission_label').html('Transmission <i class="fa-solid fa-spinner-scale fa-spin-pulse text-red-500"></i>');
+            if($('#submitButtonInactive').hasClass('hidden')){
+                $('#submitButtonInactive').removeClass('hidden');
+                $('#submitButton').addClass('hidden');
+            }
+            $.ajax({
+                url: "https://ph.mobeecars.com/calculator/ph/transmission?&make_data=" + $("#make_value").val() + '&year_data=' + $("#year_value").val() + '&model_data=' + $(this).val() + "&locale=en",
+                method: 'GET',
+                success: function (data) {
+                    $('#transmission_label').html('Transmission');
+                    $("#transmission_value").removeAttr('disabled');
+                    $("#transmission_value_icon").removeClass('opacity-70');
+                    $("#transmission_value").html(data.transmissionData);
+                    $("#variant_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#mileage_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#variant_value").prop('disabled', true);
+                    $("#mileage_value").prop('disabled', true);
+                    $("#variant_value_icon").addClass('opacity-70');
+                    $("#mileage_value_icon").addClass('opacity-70');
+                }
+            });
+        });
+
+        // to fetch the variant lists
+        $("#transmission_value").change(function () {
+            $('#variant_label').html('Variant <i class="fa-solid fa-spinner-scale fa-spin-pulse text-red-500"></i>');
+            if($('#submitButtonInactive').hasClass('hidden')){
+                $('#submitButtonInactive').removeClass('hidden');
+                $('#submitButton').addClass('hidden');
+            }
+            $.ajax({
+                url: 'https://ph.mobeecars.com/calculator/ph/variant?&make_data=' + $("#make_value").val() + '&year_data=' + $("#year_value").val() + '&model_data=' + $("#model_value").val() + '&transmission_data=' + $(this).val() + "&locale=en",  
+                method: 'GET',
+                success: function (data) {
+                    $('#variant_label').html('Variant');
+                    $("#variant_value").removeAttr('disabled');
+                    $("#variant_value_icon").removeClass('opacity-70');
+                    $("#variant_value").html(data.variantData);
+                    $("#mileage_value").html("<option value=''>Please fill up previous details</option>");
+                    $("#mileage_value").prop('disabled', true);
+                    $("#mileage_value_icon").addClass('opacity-70');
+                }
+            });
+        });
+
+        // to fetch the mileage lists
+        $("#variant_value").change(function () {
+            // if($('#submitButtonInactive').hasClass('hidden')){
+            //     $('#submitButtonInactive').removeClass('hidden');
+            //     $('#submitButton').addClass('hidden');
+            // }
+            if($('#proceed-btn').hasClass('btn-disabled')){
+                $('#proceed-btn').removeClass('btn-disabled');
+                // $('#proceed-btn').addClass('btn-active');
+            }
+            if ($(this).val() === '1') {
+                $('#mileage_value').html("<option value=''>Please fill up previous details</option>");
+            } else {
+                $('#mileage_value').html('<option selected disabled>Select estimated mileage range</option>'
+                + '<option value="0">0 - 25,000km</option>'
+                + '<option value="50000">25,000km - 50,000km</option>'
+                + '<option value="75000">50,000km - 75,000km</option>'
+                + '<option value="100000">75,000km - 100,000km</option>'
+                + '<option value="125000">100,000km - 125,000km</option>'
+                + '<option value="200000">125,000km - 200,000km</option>'
+                + '<option value="300000">200,000km - 300,000km</option>'
+                + '<option value="300001">&gt;300,000km</option>'
+                );
+                }
+                // $('#submitButtonActive').removeClass("btn-hide");
+                // $('#submitButtonInactive').addClass("btn-hide");
+                $("#mileage_value").removeAttr('disabled');
+                $("#mileage_value_icon").removeClass('opacity-70');
+            });
+
+            $('#mileage_value').change(function () {
+                $('#submitButtonActive').removeClass("btn-hide");
+                $('#submitButtonInactive').addClass("btn-hide");
+        });
+
+        let isPhoneValid = false;
+        // example 1: 128847921
+        // example 2: 28847921 
+        // first thing, it will check for first digit
+        // when first digit is right, then proceed to next checker. else, always error
+        // length of my - [9, 10]
+        // length of ph - [8, 10]
+        // length of id - [7, 12]
+        function validatePhone(phone, countryCode) {
+
+            var valid = /^\d+$/.test(phone);
+            let minLength = true;
+            if(countryCode == '+60') {
+                var firstDigit = /^1/.test(phone); // Ensure the first digit is 1
+                if(phone.length >= 9){
+                    minLength = false;
+                }
+            }else if(countryCode == '+62') {
+                var firstDigit = /^8/.test(phone); // Ensure the first digit is 8
+                if(phone.length >= 7){
+                    minLength = false;
+                }
+            }else if(countryCode == '+63'){
+                var firstDigit = /^9/.test(phone); // Ensure the first digit is 9
+                if(phone.length >= 8){
+                    minLength = false;
+                }
+            }else{
+                var firstDigit = true;
+                minLength = false;
+            }
+            
+            if(!firstDigit){
+                isPhoneValid = false;
+                if(phone.length > 0){
+                    $('#phone').addClass('input-error');
+                    $('#phone-error').text("Invalid phone number.").show();
+                    $('#sell-submit-form').prop('disabled', true).removeClass('bg-blue-500').addClass('bg-gray-400 cursor-not-allowed');
+                }else{
+                    $('#phone').addClass('input-error');
+                    $('#phone-error').text("Phone number should not be empty.").show();
+                    $('#phone-warning').text('').hide();
+                    return;
+                }
+                
+            }else{
+                if(!valid){
+                    isPhoneValid = false;
+                    $('#phone').addClass('input-error');
+                    $('#phone-error').text("Please enter a valid phone number (digits only).").show();
+                    $('#sell-submit-form').prop('disabled', true).removeClass('bg-blue-500').addClass('bg-gray-400 cursor-not-allowed');
+                }else{
+                    if(minLength){
+                        isPhoneValid = false;
+                        $('#phone-warning').text("Invalid number (Too short).").show();
+                    }else{
+                        isPhoneValid = true;
+                        $('#phone-warning').text('').hide();
+                    }
+                    $('#phone').removeClass('input-error');
+                    $('#phone-error').text('').hide();
+                    $('#sell-submit-form').prop('disabled', false).removeClass('bg-gray-400 cursor-not-allowed').addClass('bg-blue-500');
+                }
+            }
+        }
+
+        $('#country_code_select').change(function () {
+            console.log("change triggered");
+            $('#country_code').val($(this).val());
+
+            if($(this).val() == '+60'){
+                $('#phone').attr('placeholder', 'Eg. 199992638');
+            }else if($(this).val() == '+62'){
+                $('#phone').attr('placeholder', 'Eg. 81390514848');
+            }else if($(this).val() == '+63'){
+                $('#phone').attr('placeholder', 'Eg. 9603999990');
+            }
+
+            validatePhone($('#phone').val(), $('#country_code_select').val());
+        });
+
+        const maxLengths = {
+            '+60': 10,
+            '+63': 10,
+            '+62': 12
+        };
+        $('#phone').on('input', function () {
+            this.value = this.value.replace(/\D/g, '');
+
+            const max = maxLengths[$('#country_code').val()] || 10;
+
+            this.value = this.value.slice(0, max);
+            validatePhone($(this).val(), $('#country_code').val());
+        });
+
+        $('.btn-bar').on('click', function (){
+            if($(this).hasClass('btn-bar-active')) {
+                
+            }else{
+                $(this).addClass('btn-bar-active').removeClass('btn-bar-inactive').siblings().removeClass('btn-bar-active').addClass('btn-bar-inactive');
+            }
+        })
+
+        $('#tab-form').click(function(){
+            if($('#car-details').hasClass('hidden')){
+                $('#car-details').removeClass('hidden').addClass('flex');
+                $('#upload-image').addClass('hidden').removeClass('flex');
+                $('#tab-form').removeClass('btn-bar-inactive').addClass('btn-bar-active');
+                $('#tab-photo').removeClass('btn-bar-active').addClass('btn-bar-inactive');
+            }
+        })
+
+        $('#tab-photo').click(function(){
+            if($('#upload-image').hasClass('hidden')){
+                $('#upload-image').removeClass('hidden').addClass('flex');
+                $('#car-details').addClass('hidden').removeClass('flex');
+                $('#tab-photo').removeClass('btn-bar-inactive').addClass('btn-bar-active');
+                $('#tab-form').removeClass('btn-bar-active').addClass('btn-bar-inactive');
+            }
+        })
+
+        $('#proceed-btn').on('click', function (){
+            $('#step-1').addClass('hidden');
+            $('#step-2').removeClass('hidden').addClass('flex');
+        });
+
+        $('#location').on('change', function(){
+            if($(this).val() == 'Others'){
+                $('#other-location').removeClass('hidden');
+
+                $('#other-location').on('input', function(){ 
+                    $('#location_value').val($(this).val());
+
+                });
+            }else{
+                $('#other-location').addClass('hidden');
+                $('#location_value').val($(this).val())
+            }
+        });
+
+        const name = document.getElementById('name');
+        const phone = document.getElementById('phone');
+        const locationInput = document.getElementById('location');
+        const otherLocation = document.getElementById('other-location');
+        const requestVerificationBtb = document.getElementById('request-verification-btn');
+
+        function checkStep2(){
+            const hasOtherLocation = locationInput.value === 'Others';
+            const enabled = 
+                name.value.trim() !== '' &&
+                phone.value.trim() !== '' &&
+                isPhoneValid &&
+                locationInput.value !== '' &&
+                (!hasOtherLocation || otherLocation.value.trim() !== '');
+
+            requestVerificationBtb.classList.toggle('btn-disabled', !enabled);
+            // if(name.value && phone.value && valid && location.value){
+            //     if(location.value == 'Others'){
+            //         if(otherLocation.value){
+            //             $('#request-verification-btn').removeClass('btn-disabled');
+            //         }
+            //     }else{
+            //         $('#request-verification-btn').removeClass('btn-disabled');
+            //     }
+            // }else{
+            //     $('#request-verification-btn').addClass('btn-disabled');
+            // }
+        }
+
+        $('#name, #phone, #location, #other-location').on('input', function(){
+            checkStep2();
+        })
+
+        
+        let country = "ph";
+        let manualForm = 0;
+
+        $('#manual-form-link').on('click', function() {
+
+            $('#manual-form-car-details-section').html(
+                '<div class="flex flex-col w-full gap-2">'
+            +    '<p class="font-bold" id="make_label">Enter Your Car Details</p>'
+            +    '<input type="text" name="manual_car_detail" id="manual_car_detail" placeholder="2020 Honda Civic TC-P 1.5 Auto" class="input w-full" required>'
+            + '</div>');
+
+            $('#step-1').addClass('hidden');
+            $('#step-2').removeClass('hidden').addClass('flex');
+            manualForm = 1;
+
+
+        });
+
+        function backToStep1(){
+            $('#step-2').addClass('hidden');
+            $('#step-1').removeClass('hidden');
+            $('#manual-form-car-details-section').html('');
+            manualForm = 0;
+        }
+
+        $('#request-verification-btn').on('click', function() {
+            $(this).addClass('btn-disabled').html('Sending OTP...');
+            let variantData = $("#variant_value").val();
+            let [variant, ...engine_capacity] = variantData.split("_");
+
+            if (manualForm == 1) {
+                carDetails = $('#manual_car_detail').val();
+                verificationUrl = "https://ph.mobeecars.com/sell/verify-otp?phone_number=" + $("#phone").val() + "&name=" + $("#name").val()
+                    + "&country=" + country + "&car_detail=" + carDetails + "&make=" + carDetails + "&manual_form=1" + "&phone_prefix=" + $("#country_code_select").val();
+            } else {
+                carDetails = $("#year_value").val() + " " + $("#make_value").val() + " " + $("#model_value").val() + " " + $("#transmission_value").val() + " " + variant + " " + engine_capacity;
+                verificationUrl = "https://ph.mobeecars.com/sell/verify-otp?phone_number=" 
+                + $("#phone").val() + "&name=" + $("#name").val() + "&country=" + country + "&car_detail=" + carDetails 
+                + "&mileage=" + $("#mileage_value").val() + "&year=" + $("#year_value").val() + "&make=" + $("#make_value").val() 
+                + "&model=" + $("#model_value").val() + "&transmission=" + $("#transmission_value").val() + "&variant=" + variant 
+                + "&engine_capacity=" + engine_capacity  + "&phone_prefix=" + $("#country_code_select").val() + "&location_value=" + $("#location_value").val()
+                + "&source=" + $("#lead_source").val() + "&campaign=" + $("#lead_campaign").val() + "&content=" + $("#utm_content").val() + "&medium=" + $("#utm_medium").val();
+            }
+
+            if (country == 'ph') {
+                messageChannel = 'SMS';
+            } else {
+                messageChannel = 'Whatsapp';
+            }
+
+            $.ajax({
+                url: verificationUrl,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'POST',
+                success: function (response) {
+                    $('#sell-submit-form').prop('disabled', true).html("Verify with WhatsApp");
+                    if (response.success == 1) { // success - first time submut
+                        $('#lead_id').val(response.leadId);
+                        returnedPhoneNo = response.phone;
+                        otpChannelMessage = returnedPhoneNo + " via " + messageChannel;
+                        $('#otp_phone_channel').html(otpChannelMessage);
+                        $('#country_code_select').prop('disabled', true);
+                        $('#name').prop('disabled', true);
+                        $('#phone').prop('disabled', true);
+                        $('#location').prop('disabled', true);
+                        $('#other-location').prop('disabled', true);
+                        $('#request-verification-section').addClass('hidden');
+                        $('#submit-verification-section').removeClass('hidden');
+                        requestAnimationFrame(() => {
+                            $('#step-3').removeClass('opacity-0').addClass('opacity-100');
+                        });
+                        setTimeout(() => {
+                            $(this).removeClass('btn-disabled').html('Continue');
+                        }, 3000);
+                        let seconds = 60;
+                        $('#resend-otp-btn').addClass('disabled opacity-50 cursor-not-allowed');
+                        const otpInterval = setInterval(() => {
+                            $('#resend-text').text(`${seconds}s`);
+                            seconds--;
+
+                            if (seconds < 0) {
+                                clearInterval(otpInterval);
+                                $('#resend-otp-btn').removeClass('disabled opacity-50 cursor-not-allowed');
+                                $('#resend-text').text("Resend code");
+                            }
+                        }, 1000);
+                    } else if (response.success == 2) { //- have submitted before
+                        if (manualForm == 1) {
+                            $('#step-2').addClass('hidden');
+                            $('#step-end-message').removeClass('hidden');
+                        } else {
+                            $('#lead_id').val(response.leadId);
+                            $('#calculator-form').submit();
+                        }
+                    } else { // wrong otp
+                        $('#step-end-message-text').text("Hi, we noticed that you're trying to get a quote for a different car. Please contact us and let our customer service team to assist you.");
+                        $('#step-2').addClass('hidden');
+                         $('#step-end-message').removeClass('hidden');
+                        $('#step-end-message-title').text('');
+                        
+                    }
+                }
+            });
+            
+            
+        });
+
+ 
+        let otpInput = '';
+        $('.otp-input').on('input', function () {
+            const value = $(this).val();
+
+            // allow only 1 character
+            if (value.length > 1) {
+                $(this).val(value.charAt(0));
+            }
+
+            // move to next input
+            if (value !== '') {
+                $(this).next('.otp-input').focus();
+            }
+
+            let allFilled = true;
+            otpInput = ''; 
+
+            $('.otp-input').each(function () {
+                if ($(this).val() == '') {
+                    allFilled = false;
+                    return false;  
+                }
+                otpInput += $(this).val();
+            });
+
+            if (allFilled) {
+                $('#submit-verification-btn').removeClass('btn-disabled');
+                $('#otp-error-section').addClass('hidden');
+                // alert(otpInput);
+            } else {
+                $('#submit-verification-btn').addClass('btn-disabled');
+            }
+            
+        });
+
+        $('#submit-verification-btn').on('click', function() {
+            verifiedUrl = `https://ph.mobeecars.com/sell/verify?verification_code=${otpInput}&phone_number=${returnedPhoneNo}&country=${country}&car_detail=${carDetails}&lead_id=${$("#lead_id").val()}&source=${$("#lead_source").val()}&campaign=${$("#lead_campaign").val()}`;
+
+            $.ajax({
+                url: verifiedUrl,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'POST',
+                success: function (response) {
+                    if (response.success == 1) {
+                        if (manualForm == 1) {
+                            $('#step-2').addClass('hidden');
+                            $('#step-end-message').removeClass('hidden');
+                        } else {
+             
+                            console.log("Phone verified!!");
+                            $('#contact_phone').val($("#phone").val());
+                            $('#country_code').val($("#country_code_select").val());
+                            $('#calculator-form').submit();
+                        }
+                    } else {
+                        $('#otp-error-section').removeClass('hidden');
+                    }
+                }
+            });            
+        });
+
+        $('#resend-otp-btn').on('click', function() {
+            if ($(this).hasClass('disabled')) return;
+
+            let seconds = 60;
+
+            $(this).addClass('disabled opacity-50 cursor-not-allowed');
+            
+            const otpInterval = setInterval(() => {
+                $('#resend-text').text(`Resend in ${seconds}s`);
+                seconds--;
+
+                if (seconds < 0) {
+                    clearInterval(otpInterval);
+                    $(this).removeClass('disabled opacity-50 cursor-not-allowed');
+                    $('#resend-text').text('Resend Code');
+                }
+            }, 1000);
+
+            // ph and id sell-resend-otp doesnt exist yet
+            resendOTP = "https://my.mobeecars.com/web-resend-otp?phone_number=" 
+            + $("#phone").val() + "&country=" + country + "&phone_prefix=" + $("#country_code_select").val();
+            $.ajax({
+                url: resendOTP,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'POST',
+                success: function (response) {
+                    console.log(response);
+                }
+            });    
+
+        });
+
+    function syncStepHeight() {
+        // const step1Height = $('#step-1').outerHeight();
+        // const modalHeight = $('.modal-box').height();
+        const modalHeight = $('.modal-box').outerHeight();
+        $('#step-1, #step-2, #step-end-message').css('height', modalHeight + 'px');
+    }
+
+    $(document).ready(function () {
+        syncStepHeight();
+
+        // re-sync on resize
+        $(window).on('resize', syncStepHeight);
+    });
+
+
+
+
+
+</script>
+<script>
+    (() => {
+        // Run on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else init();
+
+        function init() {
+
+            // Elements
+            const tabs = {
+            form:  document.getElementById('tab-form'),
+            photo: document.getElementById('tab-photo'),
+            };
+            const track      = document.getElementById('panes-track');
+            const viewport   = document.getElementById('panes-viewport');
+            const panelForm  = document.getElementById('panel-form');
+            const panelPhoto = document.getElementById('panel-photo');
+            const card       = document.getElementById('car-finder');
+
+            // Upload / preview elements
+            const uploadInput  = document.getElementById('uploadImage');
+            const uploadBox    = document.getElementById('uploadBox');
+            const previewCard  = document.getElementById('previewCard');
+            const imagePreview = document.getElementById('imagePreview');
+            const fileName     = document.getElementById('fileName');
+            const changeBtn    = document.getElementById('changeImage');
+            const analyzeBtn   = document.getElementById('submitUpload');
+            const errorEl      = document.getElementById('imageAnalyzeError');
+            const uploadToggle = document.getElementById('uploadToggle');
+            const uploadToggleThumb = document.getElementById('uploadToggleThumb');
+            const uploadToggleLabel = document.getElementById('uploadToggleLabel');
+
+            // Form elements
+            const form          = document.getElementById('calculator-form');
+            const makeSel       = document.getElementById('make_value');
+            const yearSel       = document.getElementById('year_value');
+            const modelSel      = document.getElementById('model_value');
+            const transSel      = document.getElementById('transmission_value');
+            const variantSel    = document.getElementById('variant_value');
+            const mileageSel    = document.getElementById('mileage_value');
+            // const submitInactive= document.getElementById('submitButtonInactive');
+            const submitActive  = document.getElementById('proceed-btn');
+
+            // if (!tabs.form || !tabs.photo || !track || !viewport || !panelForm || !panelPhoto) {
+            // console.warn('Finder: missing essential DOM nodes — aborting init.');
+            // return;
+            // }
+
+            // Constants
+            const VALID_TYPES = ['image/jpeg','image/jpg','image/png'];
+            const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+            const ACCEPT_PHOTO = '.jpg,.jpeg,.png';
+            const ACCEPT_GRANT = '.jpg,.jpeg,.png,.pdf';
+
+            const VALID_PHOTO_TYPES = ['image/jpeg','image/jpg','image/png'];
+            const VALID_GRANT_TYPES = ['image/jpeg','image/jpg','image/png','application/pdf'];
+
+            // CSRF token
+            const csrfFromMeta = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            const csrfFromInput = form?.querySelector('input[name="_token"]')?.value;
+            const CSRF_TOKEN = csrfFromMeta || csrfFromInput || '';
+
+            // Set mode between photo & grant
+            function currentMode() {
+                // return uploadToggle?.checked ? 'photo' : 'grant';
+                return "photo"
+            }
+
+            // Helpers for height
+            function setViewportHeight(panelEl) {
+            if (!panelEl || !viewport) return;
+            const h = panelEl.offsetHeight || 0;
+            viewport.style.height = `${h}px`;
+            }
+
+            function activePanel() {
+                return tabs.form.getAttribute('aria-selected') === 'true' ? panelForm : panelPhoto;
+            }
+
+            function applyModeToInput() {
+                const mode = currentMode();
+                if (!uploadInput || !uploadBox || !uploadToggleThumb || !uploadToggleLabel) return;
+
+                uploadInput.setAttribute('accept', mode === 'grant' ? ACCEPT_GRANT : ACCEPT_PHOTO);
+
+                uploadToggleLabel.textContent = mode === 'grant' ? 'Use Registration Card' : 'Use Car Photo';
+                if (mode === 'photo') {
+                    uploadToggleThumb.style.transform = 'translateX(0)';        // left
+                } else {
+                    uploadToggleThumb.style.transform = 'translateX(26px)';     // move right (adjust if sizes change)
+                }
+
+                const text = uploadBox.querySelector('p');
+                if (text) {
+                    text.textContent = mode === 'grant'
+                    ? 'Click to upload grant (PDF or image) — up to 10MB'
+                    : 'Click to upload or drag & drop — JPEG, JPG, PNG — up to 10MB';
+                }
+            }
+
+            // Set active tab
+            function setActive(which = 'form') {
+                const isForm = which === 'form';
+                tabs.form.setAttribute('aria-selected', String(isForm));
+                tabs.photo.setAttribute('aria-selected', String(!isForm));
+
+                // tabs.form.classList.add('folder-tab');
+                // tabs.photo.classList.add('folder-tab');
+                // tabs.form.classList.toggle('folder-tab--active', isForm);
+                // tabs.photo.classList.toggle('folder-tab--active', !isForm);
+                if(isForm){
+                    tabs.form.classList.add('btn-bar-active')
+                    tabs.form.classList.remove('btn-bar-inactive');
+                    tabs.photo.classList.remove('btn-bar-active')
+                    tabs.photo.classList.add('btn-bar-inactive');
+                }else{
+                    tabs.photo.classList.add('btn-bar-active')
+                    tabs.photo.classList.remove('btn-bar-inactive');
+                    tabs.form.classList.remove('btn-bar-active')
+                    tabs.form.classList.add('btn-bar-inactive');
+                }
+
+                // slide transition
+                track.style.transform = isForm ? 'translateX(0%)' : 'translateX(-50%)';
+
+                // card UI
+                if (card) {
+                    card.classList.remove('active-form', 'active-photo');
+                    card.classList.add(isForm ? 'active-form' : 'active-photo');
+                }
+
+                // update height
+                requestAnimationFrame(() => setViewportHeight(isForm ? panelForm : panelPhoto));
+            }
+
+            // set active tab
+            tabs.form.addEventListener('click', () => setActive('form'));
+            tabs.photo.addEventListener('click', () => setActive('photo'));
+
+            // content change for height
+            const ro = new ResizeObserver(() => setViewportHeight(activePanel()));
+            ro.observe(panelForm);
+            ro.observe(panelPhoto);
+            window.addEventListener('resize', () => setViewportHeight(activePanel()));
+
+            // react to image element load (if imagePreview is used directly)
+            imagePreview?.addEventListener('load', () => {
+                if (tabs.photo.getAttribute('aria-selected') === 'true') setViewportHeight(panelPhoto);
+            });
+
+            // initial mount
+            setActive('form');
+
+            // init toggle
+            uploadToggle?.addEventListener('change', () => {
+                applyModeToInput();
+                //reset ui
+                resetModalState();
+                });
+                applyModeToInput();
+
+                //disable toggle on analyze
+                const resetToggle = setAnalyzing;
+                setAnalyzing = (on) => {
+                // call original behavior
+                resetToggle(on);
+                if (uploadToggle) uploadToggle.disabled = on;
+                if (uploadToggle) uploadToggle.setAttribute('aria-checked', String(!uploadToggle.disabled && uploadToggle.checked));
+            };
+
+            uploadInput?.addEventListener('change', (e) => {
+                clearError();
+                const file = e.target.files?.[0];
+                if (!file) return;
+
+                const mode = currentMode();
+                const validTypes = mode === 'grant' ? VALID_GRANT_TYPES : VALID_PHOTO_TYPES;
+
+                if (!validTypes.includes(file.type)) {
+                    alert(mode === 'grant' ? 'Only JPEG, JPG, PNG or PDF allowed for grants.' : 'Only JPEG, JPG, or PNG allowed.');
+                    uploadInput.value = '';
+                    return;
+                }
+                if (file.size > MAX_SIZE) {
+                    alert('File must be under 10MB.');
+                    uploadInput.value = '';
+                    return;
+                }
+                if (file.type.startsWith('image/')) {
+                    imagePreview.src = URL.createObjectURL(file);
+                    imagePreview.classList.remove('hidden');
+                } else {
+                    imagePreview.src = '';
+                    imagePreview.classList.add('hidden');
+                }
+
+                fileName.textContent = file.name;
+
+                uploadBox?.classList.add('hidden');
+                previewCard?.classList.remove('hidden');
+                requestAnimationFrame(() => window.__panesBump?.());
+                analyzeBtn?.classList.remove('hidden');
+            });
+
+
+            // drag and drop
+            if (uploadBox) {
+            ['dragenter','dragover'].forEach(e => uploadBox.addEventListener(e, ev => {
+                ev.preventDefault();
+                uploadBox.classList.add('is-dragover');
+            }));
+            ['dragleave','drop'].forEach(e => uploadBox.addEventListener(e, ev => {
+                if (ev && ev.preventDefault) ev.preventDefault();
+                uploadBox.classList.remove('is-dragover');
+            }));
+            }
+
+            // UI helpers
+            function showToast(msg, type = 'success') {
+                const toast = document.getElementById('globalToast');
+                const text  = document.getElementById('globalToastMsg');
+                if (!toast || !text) return;
+                toast.classList.remove('bg-green-600','bg-red-600');
+                toast.classList.add(type === 'error' ? 'bg-red-600' : 'bg-green-600');
+                text.textContent = msg;
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 2500);
+            }
+            function showError(msg='') {
+                if (!errorEl) return;
+                errorEl.textContent = msg;
+                errorEl.classList.remove('hidden');
+            }
+            function clearError() {
+                if (!errorEl) return;
+                errorEl.textContent = '';
+                errorEl.classList.add('hidden');
+            }
+
+            // UI for analyzing
+            function setAnalyzing(on) {
+            if (!previewCard || !changeBtn || !analyzeBtn) return;
+            if (on) {
+                previewCard.classList.add('opacity-60', 'pointer-events-none');
+                changeBtn.disabled = true;
+                analyzeBtn.disabled = true;
+                analyzeBtn.classList.add('opacity-80', 'cursor-not-allowed');
+                analyzeBtn.innerHTML = `
+                <svg class="animate-spin inline-block h-5 w-5 mr-2 align-[-3px]" viewBox="0 0 24 24" fill="none">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+                    <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"></path>
+                </svg>Analysing`;
+            } else {
+                previewCard.classList.remove('opacity-60', 'pointer-events-none');
+                requestAnimationFrame(() => window.__panesBump?.());
+                changeBtn.disabled = false;
+                analyzeBtn.disabled = false;
+                analyzeBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                analyzeBtn.textContent = 'Analyze My Car';
+            }
+            }
+
+            async function blipSuccessOnButton(label = 'Identified') {
+            if (!analyzeBtn) return;
+            analyzeBtn.innerHTML = `
+                <svg class="inline-block h-5 w-5 mr-2 align-[-3px] text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>${label}`;
+            await new Promise(r => setTimeout(r, 1000));
+            analyzeBtn.textContent = 'Analyze My Car';
+            }
+
+            function resetModalState() {
+            if (uploadInput) uploadInput.value = '';
+            if (imagePreview) imagePreview.src = '';
+            if (fileName) fileName.textContent = '';
+            clearError();
+            previewCard?.classList.add('hidden');
+            analyzeBtn?.classList.add('hidden');
+            uploadBox?.classList.remove('hidden');
+            }
+
+            // select helpers
+            const requiredSelects = [makeSel, yearSel, modelSel, transSel, variantSel, mileageSel].filter(Boolean);
+
+            const hasAnyValue = () => requiredSelects.some(sel => sel && sel.value && sel.value !== '' && !sel.disabled);
+            const hasAllValues = () => requiredSelects.every(sel => sel && !sel.disabled && sel.value && sel.value !== '' && sel.value !== "undefined");
+            
+
+            function updateSubmitButtons() {
+                if (!submitActive) return;
+                if (hasAllValues()) {
+                    // submitInactive.classList.add('hidden');
+                    submitActive.classList.remove('btn-disabled');
+                } else {
+                    submitActive.classList.add('btn-disabled');
+                    // submitInactive.classList.remove('hidden');
+                }
+            }
+
+            // attach change listeners to selects
+            ['change','input'].forEach(evt => {
+            requiredSelects.forEach(sel => sel.addEventListener(evt, updateSubmitButtons));
+            });
+
+            function setOptions(selectEl, items, selected) {
+            if (!selectEl) return;
+            selectEl.innerHTML = '';
+            console.log("selected", selected);
+            const arr = Array.isArray(items) ? items : [];
+            if (arr.length) {
+                arr.forEach(it => {
+                const value = typeof it === 'object' ? (it.value ?? it.label ?? it) : it;
+                const label = typeof it === 'object' ? (it.label ?? it.value ?? it) : it;
+                const opt = document.createElement('option');
+                if(it != 'Please select'){
+                    opt.value = value;
+                }
+                opt.textContent = label;
+                if (selected && (selected === value || selected === label || (selected?.value === value))) {
+                    opt.selected = true;
+                }
+                selectEl.appendChild(opt);
+                });
+            } else if (selected) { // single selected fallback
+                const opt = document.createElement('option');
+                opt.value = selected.value ?? selected;
+                opt.textContent = selected.label ?? selected;
+                opt.selected = true;
+                selectEl.appendChild(opt);
+            }
+            // enable select UI and its icon
+            selectEl.removeAttribute('disabled');
+            const icon = document.querySelector(`#${selectEl.id}_icon`);
+            if (icon) icon.classList.remove('opacity-70');
+            }
+
+            // FILE input change -> show preview
+            uploadInput?.addEventListener('change', (e) => {
+            clearError();
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            if (!VALID_TYPES.includes(file.type)) {
+                alert('Only JPEG, JPG, or PNG allowed.');
+                uploadInput.value = '';
+                return;
+            }
+            if (file.size > MAX_SIZE) {
+                alert('File must be under 10MB.');
+                uploadInput.value = '';
+                return;
+            }
+
+            imagePreview.src = URL.createObjectURL(file);
+            fileName.textContent = file.name;
+
+            uploadBox?.classList.add('hidden');
+            previewCard?.classList.remove('hidden');
+            requestAnimationFrame(() => window.__panesBump?.());
+            analyzeBtn?.classList.remove('hidden');
+            });
+
+            // change/remove image
+            changeBtn?.addEventListener('click', () => {
+            if (changeBtn.disabled) return;
+            resetModalState();
+            });
+
+            // handle upload & analyzing (got mock data)
+            analyzeBtn?.addEventListener('click', async () => {
+            const file = uploadInput?.files?.[0];
+            const mode = currentMode();
+            if (!file && !window.__ALLOW_MOCK__) return;
+
+            setAnalyzing(true);
+
+            const fd = new FormData();
+            fd.append('file', file);
+            fd.append('mode', mode);
+            fd.append('_token', CSRF_TOKEN);
+
+            console.log('mode', mode);
+
+            try {
+                const data = await runAnalyze(fd, mode);
+                console.log("data", data)
+                await onAnalyzeSuccess(data, mode);
+            } catch (err) {
+                console.error('analyze fail:', err);
+                const message = err?.status === 422 ? "Your car is rare! Please fill up the Insert Car Details form" : "Something went wrong. Please try again.";
+                onAnalyzeFail(message);
+            } finally {
+                setAnalyzing(false);
+            }
+            });
+
+            // api
+            async function runAnalyze(formData, mode = 'photo') {
+                const url = (mode === 'grant')
+                    ? 'https://ph.mobeecars.com/openai/imgUpload' //grant url
+                    : 'https://ph.mobeecars.com/openai/imgUpload'
+
+                console.log("url", url);
+
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                    url,
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: CSRF_TOKEN ? { 'X-CSRF-TOKEN': CSRF_TOKEN, 'X-Requested-With': 'XMLHttpRequest' } : { 'X-Requested-With': 'XMLHttpRequest' },
+                    success(response) {
+                        console.log("response", response)
+                        resolve(response);
+                    },
+                    error(jqXHR, textStatus, errorThrown) {  
+                        const errInfo = {
+                        status: jqXHR.status,
+                        textStatus,
+                        errorThrown,
+                        responseText: jqXHR.responseText,
+                        responseJSON: jqXHR.responseJSON
+                        };
+                        reject(errInfo);
+                    },
+                    timeout: 30000 // 30s timeout
+                    });
+                });
+            }
+
+            document.getElementById('make_value').addEventListener('change', function () {
+                document.getElementById('make_value_form').value = this.value;
+            });
+            document.getElementById('year_value').addEventListener('change', function () {
+                document.getElementById('year_value_form').value = this.value;
+            });
+            document.getElementById('model_value').addEventListener('change', function () {
+                document.getElementById('model_value_form').value = this.value;
+            });
+            document.getElementById('transmission_value').addEventListener('change', function () {
+                document.getElementById('transmission_value_form').value = this.value;
+            });
+            document.getElementById('variant_value').addEventListener('change', function () {
+                document.getElementById('variant_value_form').value = this.value;
+            });
+
+            // Success/fail handlers
+            async function onAnalyzeSuccess(data) {
+                console.log("Data", data);
+            try {
+                const options  = data.options || {};
+                const selected = data.selected || {};
+                if('year' in options){
+                    options.year.unshift("Please select");
+                }
+                if('transmission' in options){
+                    options.transmission.unshift("Please select");
+                }
+                if('variant' in options){
+                    options.variant.unshift({
+                        label: "Please Select",
+                        value: ""
+                    });
+                }
+                
+
+                setOptions(makeSel,    options.make,         selected.make ?? data.make);
+                setOptions(yearSel,    options.year,         selected.year ?? data.year);
+                setOptions(modelSel,   options.model,        selected.model ?? data.model);
+                setOptions(transSel,   options.transmission, selected.transmission ?? data.transmission);
+                setOptions(variantSel, options.variant,      selected.variant ?? data.variant);
+
+                document.getElementById('make_value_form').value = selected.make ?? data.make;
+                document.getElementById('year_value_form').value = selected.year ?? data.year;
+                document.getElementById('model_value_form').value = selected.model ?? data.model;
+                document.getElementById('transmission_value_form').value = selected.transmission ?? data.transmission;
+                document.getElementById('variant_value_form').value = selected.variant ?? data.variant;
+
+                if (mileageSel) {
+                mileageSel.removeAttribute('disabled');
+                document.getElementById('mileage_value_icon')?.classList.remove('opacity-70');
+                mileageSel.innerHTML = `
+                    <option selected disabled>Select mileage</option>
+                    <option value="0">0 - 25,000km</option>
+                    <option value="50000">25,000km - 50,000km</option>
+                    <option value="75000">50,000km - 75,000km</option>
+                    <option value="100000">75,000km - 100,000km</option>
+                    <option value="125000">100,000km - 125,000km</option>
+                    <option value="200000">125,000km - 200,000km</option>
+                    <option value="300000">200,000km - 300,000km</option>
+                    <option value="300001">&gt;300,000km</option>
+                `;
+                }
+
+
+                $('#make_value').off('change');
+                $('#year_value').off('change');
+                $('#model_value').off('change');
+                $('#transmission_value').off('change');
+                $('#variant_value').off('change');
+
+                // set hidden img_url if exists
+                document.getElementById('img_url')?.setAttribute('value', data.img_url ?? '');
+
+                document.getElementById('car_plate')?.setAttribute('value', data.car_plate ?? '');
+                document.getElementById('owner_name')?.setAttribute('value', data.owner_name ?? '');
+                document.getElementById('address')?.setAttribute('value', data.address ?? '');
+                document.getElementById('chassis_no')?.setAttribute('value', data.chassis_no ?? '');
+                document.getElementById('engine_no')?.setAttribute('value', data.engine_no ?? '');
+
+
+                $('#year_value, #transmission_value').on('change', function() {
+                    $.ajax({
+                        url: "https://ph.mobeecars.com/calculator/ph/variant?language=en&make_data=" + $("#make_value").val() + '&year_data=' + $("#year_value").val() + '&model_data=' + $("#model_value").val() + '&transmission_data=' + $("#transmission_value").val(),  
+                        method: 'GET',
+                        success: function (data) {
+                            $("#variant_value").html(data.variantData);
+                        }
+                    });
+                });
+
+
+                updateSubmitButtons();
+                await blipSuccessOnButton('Identified');
+
+                if (hasAnyValue()) setActive('form');
+
+                showToast('Car identified.');
+
+                resetModalState();
+            } catch (err) {
+                console.error(err);
+                onAnalyzeFail('Something went wrong filling the form. Please try another photo.');
+            }
+            }
+
+            function onAnalyzeFail(message) {
+            showError(message);
+            previewCard?.classList.add('ring-1','ring-red-400');
+            setTimeout(() => previewCard?.classList.remove('ring-1','ring-red-400'), 1000);
+            requestAnimationFrame(() => window.__panesBump?.());
+            changeBtn?.focus();
+            }
+
+            // window.__ALLOW_MOCK__ = true for mock testing
+        }
+    })();
+</script>
+    <section class="bg-base-300" id="faq">
+      
+      <div class="flex flex-col px-5 pt-10 pb-0 md:px-10 md:pt-10 md:pb-5 bg-(--bg-color-2) items-center">
+        <div class="max-w-[1300px]">            
+            <div class="flex flex-row md:gap-10 mb-5 overflow-hidden">
+                <!-- FAQ Section -->
+<div class="w-full flex flex-col md:grid md:grid-cols-2 gap-5 items-center md:items-start text-center md:text-left">
+    <div class="pb-5 flex flex-col gap-2 items-center md:items-start justify-center">
+        <div class="flex flex-row justify-center items-center gap-2 px-2 mb-5 rounded-full border-1 border-neutral-300 border-solid w-fit text-black hover:bg-primary hover:text-white transition-colors duration-75 ease-linear">
+            <span class="text-center uppercase text-[12px]">FAQs</span>
+          </div> 
+        <h2 class="font-bold">
+            Frequently Asked Questions About Selling Your Car with Mobee Cars        </h2>
+        <h5>Everything you need to know before selling your car online with Mobee Cars in the Philippines.</h5>
+
+        <div class="grid grid-cols-1 gap-2 mt-10">
+            <div id="selling-guide-btn" class="faq-cat faq-cat-btn-active" onclick="switchCategory(this, 'selling-guide')">
+                <p>Selling Guide</p>
+            </div>
+            <div id="finance-btn" class="faq-cat " onclick="switchCategory(this, 'finance')">
+                <p>Finance &amp; Loan Settlement</p>
+            </div>
+            <div id="car-valuation-btn" class="faq-cat " onclick="switchCategory(this, 'car-valuation')">
+                <p>Car Valuation</p>
+            </div>
+            <div id="buyer-dealer-btn" class="faq-cat " onclick="switchCategory(this, 'buyer-dealer')">
+                <p>Buyer &amp; Dealer Network</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- selling guide  -->
+    <div id="selling-guide-category" class="faq-category flex"> 
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How can I sell my car fast?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Submit your car details, get your estimated value, complete the free inspection, and Mobee Cars will collect offers from its dealer network. The process can be completed quickly when documents are ready.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How much does it cost to sell my car?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            There is no seller fee for car owners. Mobee Cars' inspection is free.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Does Mobee Cars charge sellers a fee?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            No. Mobee Cars does not charge car owners a seller fee.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What is the best way to sell my car?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            The best way is to compare real dealer offers, complete a proper inspection, and avoid risky direct-buyer negotiations. Mobee Cars helps make this process simple and safe.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What documents do I need to sell my car?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            You may need your OR/CR, valid ID, deed of sale, loan clearance or chattel release if financed, service records if available, and authorisation documents if the car is company-owned.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Why do I need to take photos of my car?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            We usually ask for photos to confirm your car’s generation and assess its overall exterior condition. This helps us provide a more accurate valuation before inspection.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How does service history affect my selling price?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Complete service history can improve buyer confidence and may support a stronger offer. Missing service history does not stop the sale, but it may affect the final price.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Can I sell any make or model with Mobee Cars?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Most makes and models can be submitted. Mobee Cars will check your car’s eligibility based on buyer demand, condition, documents, and marketability.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Are there any cars Mobee Cars cannot value or buy?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars may not be able to value or proceed with cars that have unclear ownership, missing OR/CR, severe damage, or very limited buyer demand.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What if the dealer tries to haggle or drop the price?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars helps reduce unnecessary haggling by checking the car condition through inspection before finalising the offer. Any price adjustment must be based on valid inspection findings, not random negotiation.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What happens if I reject an offer?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            You are not forced to sell. You can reject the offer and decide whether to try again later.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How long does the whole process take?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            The inspection usually takes around 30–45 minutes. Same-day sale may be possible when the documents, inspection result, and buyer offer are ready.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What happens on the day of handover or collection?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars will help check the car condition and documents, arrange payment or settlement, complete the required sale documents, and hand over the car to the buyer.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Is Mobee Cars safe?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Yes. Mobee Cars works with verified dealers, supports the documentation process, and reduces the risk of dealing with unknown private buyers.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Is it better to trade in my car or sell it online?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Trade-in is convenient, but the offer can be lower because the dealer needs to manage resale risk and margin. Mobee Cars helps you compare real dealer offers and can also support trade-in or upgrade journeys.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Why are trade-in offers often lower?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Dealers need to factor in reconditioning cost, transfer cost, holding cost, resale risk, and profit margin.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Will listing my car on multiple platforms get me a better price?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Not always. It may bring more enquiries, but it can also attract lowball offers, time-wasters, and risky buyers. Mobee Cars focuses on real offers from verified dealers.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Can Mobee Cars help arrange car collection?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars can help arrange handover or collection support depending on your location, buyer arrangement, and document readiness.
+        </div>
+    </div>
+    
+</div>
+    </div>
+
+    <!-- finance -->
+    <div id="finance-category" class="hidden faq-category flex">
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Can I sell my car if it is still under finance?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Yes. You can sell a financed car through Mobee Cars. You will need an updated loan settlement statement from your bank or financing company. Mobee Cars can assist with the loan clearance steps before handover.
+        </div>
+    </div>
+    
+</div>    </div>
+
+     <!-- car-valuation -->
+    <div id="car-valuation-category" class="hidden faq-category flex">
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How much is my car worth?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Your car’s value depends on its make, model, year, variant, mileage, condition, service history, registration status, financing status, and dealer demand.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How can I get a free car valuation?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Submit your car details online to get an estimated market value, or message Mobee Cars and our customer service team will assist during working hours.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What information do I need for a car valuation?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Make, model, year, variant, mileage, plate number, loan status, photos, OR/CR details, accident or repair history, and service history if available.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How does Mobee Cars value my car?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars uses your car details, market demand, inspection findings, and real dealer offers. The initial valuation is an estimate, while the final offer is confirmed after inspection.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">How accurate is Mobee Cars' valuation?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars' valuation is designed to reflect real dealer demand, not just an online estimate. The final price may still change after inspection if the car condition or documents differ from the submitted details.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What is the most reliable car valuation?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            A reliable valuation should be backed by actual buyer demand. Mobee Cars helps by connecting your car to verified dealers who are actively looking to buy.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What affects my car’s value?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mileage, year, variant, condition, accident history, repaint history, service history, ownership status, financing status, documents, and market demand.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Do specifications affect my car valuation?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Yes. Variant, transmission, trim level, colour, and key features can affect the value.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">When is the best time to value my car?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            The best time is when you are ready to sell soon, before your registration, financing, or ownership documents become more complicated.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What happens if my valuation changes?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Your valuation may change if the car condition, mileage, accident history, document status, or dealer demand changes.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Are my previous valuations saved?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars can refer to your previous submission using your contact details.
+        </div>
+    </div>
+    
+</div>    </div>
+
+     <!-- buyer-dealer -->
+    <div id="buyer-dealer-category" class="hidden faq-category flex">
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Who will buy my car?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Your car will be bought by a verified dealer from Mobee Cars' dealer network, not a random private buyer. Mobee Cars manages the offer process, handover, and transaction support.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">Where can I sell my car for the best price?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Mobee Cars helps you get real offers from multiple dealers, so you do not have to rely on one direct dealer offer or negotiate with private buyers yourself.
+        </div>
+    </div>
+    
+</div>        <div class="w-[95%] h-[1px] bg-gray-500"></div>
+        <div class="accordion-item">
+    <button class="accordion">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row gap-2 items-center">
+                <h6 class="font-semibold">What do car buyers look for?</h6>
+            </div>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        
+    </button>
+    
+    <div class="panel">
+        <div class="content">
+            Buyers usually look at condition, mileage, accident history, repaint history, service records, ownership status, documents, and resale demand.
+        </div>
+    </div>
+    
+</div>    </div>
+</div>
+
+<script>
+    function switchCategory(button, category){
+        if($(`#${category}-category`).hasClass('hidden')){
+            $('.faq-cat').removeClass('faq-cat-btn-active');
+            $(button).addClass('faq-cat-btn-active');
+            // $('#selling-guide-btn').removeClass('faq-cat-btn-active');
+
+            $('.faq-category').addClass('hidden');
+            $(`#${category}-category`).removeClass('hidden');
+            // $('#selling-guide-category').addClass('hidden');
+            // $('#finance-category').removeClass('hidden');
+            // $('#car-valuation-category').addClass('hidden');
+            // $('#buyer-dealer-category').addClass('hidden');
+        }
+    }
+    // $('#finance-btn').on('click', function(){
+    //     if($('#finance-category').hasClass('hidden')){
+    //         $('#finance-btn').addClass('faq-cat-btn-active');
+    //         $('#selling-guide-btn').removeClass('faq-cat-btn-active');
+
+    //         $('#finance-category').removeClass('hidden');
+    //         $('#selling-guide-category').addClass('hidden');
+    //         $('#car-valuation-category').addClass('hidden');
+    //         $('#buyer-dealer-category').addClass('hidden');
+    //     }
+    // })
+</script>            </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="bg-base-200 px-0 py-5 md:py-10">
+      <div class="w-full mx-auto bg-[url('/images/assets/website-4/test-about-us-index.webp')] bg-[#a2302e] bg-no-repeat bg-right bg-cover p-5 text-white flex items-center justify-center">
+          <div class="max-w-[1280px] w-full flex justify-center md:justify-start">
+              <div class="flex flex-col gap-2 glass-card-1 p-5 ">
+                  <div class="flex flex-row justify-center items-center gap-2 px-2 mb-5 rounded-full border-1 border-neutral-300 border-solid w-fit text-white transition-colors duration-75 ease-linear">
+                      <span class="text-center uppercase text-[12px]">About Us</span>
+                  </div>
+                  <h2 class="font-bold">About Mobee Cars</h2>
+                  <p>Mobee Cars is an automotive technology platform built to bring transparency, structure, <br>
+and trust to used car transactions across Southeast Asia.</p>
+                  <a href="https://ph.mobeecars.com/en/about-us?country=ph" class="btn btn-block md:btn-wide mt-10">
+                    Learn More About Mobee Cars                  </a>
+              </div> 
+          </div>
+          
+      </div>
+  </section>
+    
+
+
+<script>
+  var acc = document.getElementsByClassName("accordion");
+
+  for (var i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+          // Close all other accordions
+          for (var j = 0; j < acc.length; j++) {
+              if (acc[j] !== this) {
+                  acc[j].classList.remove("active");
+                  var siblingPanel = acc[j].nextElementSibling;
+                  var siblingChevron = acc[j].children[0].children[1];
+                  if (siblingPanel && siblingPanel.style.maxHeight) {
+                      siblingPanel.style.maxHeight = null;
+                      siblingChevron.style.transform = "rotate(0deg)";
+                  }
+              }
+          }
+
+          // Toggle the clicked accordion
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          var chevron = this.children[0].children[1];
+          if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+              chevron.style.transform = "rotate(0deg)";
+          } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+              chevron.style.transform = "rotate(180deg)";
+          }
+      });
+  }
+
+  function loadMore() {
+      if($('#load-more').hasClass('hidden')) {
+          $('#load-more').removeClass('hidden');
+          $('#load-btn').html('Hide FAQ');
+      }else{
+          $('#load-more').addClass('hidden');
+          $('#load-btn').html('Load more');
+      }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const footer = document.getElementById("page-footer");
+    const cta = document.getElementById("sticky-cta");
+    // const fab = document.getElementById("fab");
+
+    if (!footer || !cta ) return;
+
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                cta.classList.add("translate-y-full");
+                // fab.classList.add("translate-y-30");
+                   // slide down (hide)
+            } else {
+                cta.classList.remove("translate-y-full"); // slide up (show)
+                // fab.classList.remove("translate-y-30");
+            }
+        },
+        {
+            root: null,
+            threshold: 0.1
+        }
+    );
+
+    observer.observe(footer);
+  });
+
+  function setActiveDot(index) {
+    $('.dot').each(function () {
+      const slide = $(this).data('slide');
+
+      if (slide == index) {
+          $(this)
+              .removeClass('border border-gray-300')
+              .addClass('bg-gray-700');
+      } else {
+          $(this)
+              .removeClass('bg-gray-700')
+              .addClass('border border-gray-300');
+      }
+    });
+  }
+  $('.dot').on('click', function (e) {
+    e.preventDefault();
+
+    const index = $(this).data('slide');
+    const target = document.getElementById(index);
+    const container = document.querySelector('.carousel');
+
+    const containerWidth = container.offsetWidth;
+    const targetLeft = target.offsetLeft;
+    const targetWidth = target.offsetWidth;
+
+    const scrollPosition =
+        targetLeft - (containerWidth / 2) + (targetWidth / 2);
+
+    container.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+    });
+
+    setActiveDot(index);
+  });
+
+  function openDrawerParent(){
+    // const drawer = document.getElementById('sticky-cta');
+    document.getElementById('my_modal_1').showModal();
+  }
+
+
+</script>
+
+<footer id="page-footer" class="w-full bg-base-200 pt-8 pb-4 px-5 md:px-4 flex items-center text-center justify-center " data-theme="light">
+    <div class="w-full max-w-[1280px] flex flex-col gap-16 items-center">
+                <div class="bg-white p-5 rounded-4xl shadow-lg w-full flex md:hidden flex-col gap-3">
+            <!-- title -->
+            <h3 class="text-lg md:text-xl font-semibold">
+                Ready to Sell Your Car?            </h3>
+
+            <!-- cta -->
+                            <!-- country cta -->
+                <button class="btn w-full max-w-md btn-primary text-white" onclick="document.getElementById('my_modal_1').showModal();">
+                    Get Your Market Price                </button>
+                    </div>
+                    
+        <div class="flex flex-col w-full">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="flex flex-col gap-2 w-full md:w-1/2 items-center justify-between">
+                    <div class="flex flex-col gap-2">
+                        <a href="https://ph.mobeecars.com/en/sell"><img src="/images/assets/website-3/mobee-logo.png" alt="mobee-logo" class="w-[200px] aspect-auto"></a>
+                        <p class="text-xs text-base-content/60 leading-relaxed text-start">
+                            Started in 2023, Mobee Cars has brought better value to 98% of car sellers, and 75% of our dealers have grown together with us since day one                        </p>
+
+                                                <button class="hidden md:block btn btn-wide btn-primary text-white mt-5" onclick="document.getElementById('my_modal_1').showModal();">
+                            Get Your Market Price                        </button>
+                                            </div>
+
+                    <div class="flex md:hidden flex-row gap-2 w-full md:w-1/3 justify-start md:justify-center">
+                                                                                <a href="https://www.facebook.com/mobee.ph/" aria-label="Mobee Philippines Facebook" class="w-[48px] h-[48px] flex justify-center items-center rounded-full bg-white text-[var(--vivid-red)] shadow-sm"><i class="fa-brands fa-facebook-f text-center" aria-hidden="true"></i></a>
+                            <a href="https://www.linkedin.com/company/mobee-cars-group" aria-label="Mobee LinkedIn" class="w-[48px] h-[48px] flex justify-center items-center rounded-full bg-white text-[var(--vivid-red)] shadow-sm"><i class="fa-brands fa-linkedin-in text-center" aria-hidden="true"></i></a>
+                            <a href="https://www.instagram.com/mobeecars.ph/" aria-label="Mobee Philippines Instagram" class="w-[48px] h-[48px] flex justify-center items-center rounded-full bg-white text-[var(--vivid-red)] shadow-sm"><i class="fa-brands fa-instagram text-center" aria-hidden="true"></i></a>
+                                                                        </div>
+                    
+                </div>
+                
+                <div class="flex flex-row gap-5 md:gap-10 w-full md:w-1/2 justify-between md:justify-end mt-10 md:mt-20 md:mr-5">
+                    
+                    <div class="flex flex-col gap-2 items-start text-sm [&amp;&gt;a]:text-neutral-500">
+                            <p class="font-semibold">Company<span class="text-primary">.</span></p>
+                            <a href="https://ph.mobeecars.com/en/about-us" class="">About us</a>
+                                                        <a href="https://ph.mobeecars.com/en/about-us#team-info" class="">Team</a>
+                            <a href="https://ph.mobeecars.com/en/review" class="">Review</a>
+                                                        <a href="https://ph.mobeecars.com/en/contact-us" class="">Contact Us</a>
+                            <a href="https://ph.mobeecars.com/ph/blogs/index?locale=en" class="">Articles</a>
+                                                        <!-- will be enabled when the module is done -->
+                            <!-- <a href="https://ph.mobeecars.com/dealer-page?country=ph" class="">Trade-Up</a> -->
+                                                </div>
+
+                    <div class="flex flex-col gap-2 items-start text-sm [&amp;&gt;a]:text-neutral-500">
+                        <p class="font-semibold">Navigation<span class="text-primary">.</span></p>
+                        <a href="https://www.mobeecars.com" class="">Mobee Cars Group</a>
+                        <a href="https://my.mobeecars.com/en/sell" class="">Mobee Cars Malaysia</a>
+                        <a href="https://id.mobeecars.com/en/jual-mobil" class="">Mobee Cars Indonesia</a>
+                        <a href="https://ph.mobeecars.com/en/sell" class="">Mobee Cars Philippines</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="divider"></div>
+            <!-- footer -->
+            <div class="flex flex-row justify-between items-center gap-2 text-sm text-base-content/70 w-full">
+                <div class="w-full md:w-1/3 flex justify-start">
+                    <p class="font-medium">Mobee Cars © 2026</p>
+                </div>
+                
+
+                
+                
+                <div class="hidden md:flex flex-row gap-2 w-full md:w-1/3 justify-center">
+                                                                        <a href="https://www.facebook.com/mobee.ph/" aria-label="Mobee Philippines Facebook" class="w-[48px] h-[48px] flex justify-center items-center rounded-full bg-white text-[var(--vivid-red)] shadow-sm"><i class="fa-brands fa-facebook-f text-center" aria-hidden="true"></i></a>
+                            <a href="https://www.linkedin.com/company/mobee-cars-group" aria-label="Mobee LinkedIn" class="w-[48px] h-[48px] flex justify-center items-center rounded-full bg-white text-[var(--vivid-red)] shadow-sm"><i class="fa-brands fa-linkedin-in text-center" aria-hidden="true"></i></a>
+                            <a href="https://www.instagram.com/mobeecars.ph/" aria-label="Mobee Philippines Instagram" class="w-[48px] h-[48px] flex justify-center items-center rounded-full bg-white text-[var(--vivid-red)] shadow-sm"><i class="fa-brands fa-instagram text-center" aria-hidden="true"></i></a>
+                                                            </div>
+
+                <div class="flex flex-row gap-1 md:gap-4 w-full md:w-1/3 justify-end">
+                                            <a class="link link-hover btn btn-ghost" href="https://ph.mobeecars.com/privacy-policy">Privacy and Terms</a>
+                                    </div>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+
+
+<script>
+    function navigateMY() {
+        const theme = localStorage.getItem('theme') || 'light'; 
+        const baseUrl = "https://my.mobeecars.com/en/sell"; 
+        const url = `${baseUrl}?theme=${theme}`; 
+        window.location.href = url;
+    };
+
+    function navigatePH() {
+        const theme = localStorage.getItem('theme') || 'light'; 
+        const baseUrl = "https://ph.mobeecars.com/en/sell"; 
+        const url = `${baseUrl}?theme=${theme}`; 
+        window.location.href = url;
+    };
+
+    function navigateID() {
+        const theme = localStorage.getItem('theme') || 'light'; 
+        const baseUrl = "https://id.mobeecars.com/id/jual-mobil"; 
+        const url = `${baseUrl}?theme=${theme}`; 
+        window.location.href = url;
+    };
+
+        document.getElementById('my_modal_1').addEventListener('click', (e) => {
+        const langs = "en";
+    });
+    </script>
+<script type="text/javascript" id="" charset="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1013922523658458");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1013922523658458&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<script type="text/javascript" id="" charset="">!function(d,h,e){d.TiktokAnalyticsObject=e;var a=d[e]=d[e]||[];a.methods="page track identify instances debug on off once ready alias group enableCookie disableCookie holdConsent revokeConsent grantConsent".split(" ");a.setAndDefer=function(b,c){b[c]=function(){b.push([c].concat(Array.prototype.slice.call(arguments,0)))}};for(d=0;d<a.methods.length;d++)a.setAndDefer(a,a.methods[d]);a.instance=function(b){b=a._i[b]||[];for(var c=0;c<a.methods.length;c++)a.setAndDefer(b,a.methods[c]);return b};a.load=
+function(b,c){var f="https://analytics.tiktok.com/i18n/pixel/events.js",g=c&&c.partner;a._i=a._i||{};a._i[b]=[];a._i[b]._u=f;a._i[b]._partner=g||"GoogleTagManagerClient";a._t=a._t||{};a._t[b]=+new Date;a._o=a._o||{};a._o[b]=c||{};a._partner=a._partner||"GoogleTagManagerClient";c=document.createElement("script");c.type="text/javascript";c.async=!0;c.src=f+"?sdkid\x3d"+b+"\x26lib\x3d"+e;b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(c,b)};a.load("D54HJKRC77U15BU5TK90");a.page()}(window,
+document,"ttq");</script>
+</body>
