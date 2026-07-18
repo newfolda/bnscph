@@ -14,7 +14,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const classes = [
-    "inline-flex items-center justify-center bg-[var(--primary)] px-5 py-3 font-medium text-white transition-colors hover:bg-[#c8160b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[var(--primary)]",
+    "inline-flex items-center justify-center bg-[var(--primary)] px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-[#c8160b] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[var(--primary)]",
     className,
   ]
     .filter(Boolean)

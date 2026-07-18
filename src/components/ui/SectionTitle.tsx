@@ -21,8 +21,8 @@ export default function SectionTitle({
 
   return (
     <div className={classes}>
-      <h2 className="text-3xl font-bold leading-tight md:text-5xl">{title}</h2>
-      {subtitle ? <p className="text-base text-[var(--muted)] md:text-lg">{subtitle}</p> : null}
+      <h2 className="text-3xl font-bold leading-tight text-[var(--text-primary)] md:text-5xl">{title}</h2>
+      {subtitle ? <p className="text-base text-[var(--text-secondary)] md:text-lg">{subtitle}</p> : null}
     </div>
   )
 }

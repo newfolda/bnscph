@@ -1,12 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f7f5;
-  --foreground: #191970;
-  --primary: #eb1b0e;
-  --secondary: #191970;
-  --muted: #6b7280;
-  --border: #d1d5db;
+  --primary: #c8a044;
+  --primary-hover: #b68e33;
+  --primary-light: #f7f1e3;
+  --text-primary: #1f1f1f;
+  --text-secondary: #5f6368;
+  --background: #ffffff;
+  --background-alt: #f8f8f8;
+  --foreground: var(--text-primary);
+  --secondary: var(--text-primary);
+  --muted: var(--text-secondary);
+  --border: #e8e8e8;
   --radius: 1.5rem;
   --container-width: 80rem;
   --section-spacing: clamp(3rem, 7vw, 6rem);
