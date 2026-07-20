@@ -71,7 +71,9 @@ export default function Header() {
   const isLearnActive = pathname === "/" ? activeHomeSectionIndex > 0 : learnLinks.some((link) => link.href === pathname)
 
   const activeLinkClass = (isActive: boolean) =>
-    `transition-colors hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${isActive ? "font-semibold text-[var(--primary)]" : ""}`
+    `relative transition-colors hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 after:pointer-events-none after:absolute after:-bottom-1 after:left-1/2 after:h-0.5 after:w-full after:-translate-x-1/2 after:scale-x-0 after:rounded-full after:bg-[var(--primary)] after:opacity-0 after:transition-[transform,opacity] after:duration-[220ms] after:ease-out hover:after:scale-x-100 hover:after:opacity-100 motion-reduce:after:transition-none ${
+      isActive ? "font-semibold text-[var(--primary)] hover:text-[var(--primary)] after:scale-x-100 after:opacity-100" : ""
+    }`
 
   return (
     <header
