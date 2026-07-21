@@ -32,7 +32,7 @@ function formatPurchasedAt(purchasedAt?: string) {
 
 export default function DailyTransactionsSection() {
   return (
-    <section className="overflow-hidden bg-[var(--background-alt)] py-16 md:py-20">
+    <section id="latest-transactions" className="overflow-hidden bg-[var(--background-alt)] py-16 md:py-20">
       <Container>
         <div className="flex flex-col items-center text-center">
           <p className="w-fit rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">

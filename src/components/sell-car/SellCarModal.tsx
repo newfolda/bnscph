@@ -199,8 +199,6 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     if (restoredDraft) {
       setCarDetails(restoredDraft.carDetails)
       setVehicleFieldModes(restoredDraft.vehicleFieldModes)
-      setContactDetails(restoredDraft.contactDetails)
-      setPrivacyConsent(restoredDraft.privacyConsent)
     }
 
     setIsSellCarModalOpen(true)
@@ -291,7 +289,10 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     } else {
       setSubmitStatus("submitting")
       try {
-        const result = await submitSellCarLead(buildSellCarPayload(carDetails, contactDetails, vehicleFieldModes, vehiclePhotos.length))
+        const result = await submitSellCarLead(
+          buildSellCarPayload(carDetails, contactDetails, vehicleFieldModes, vehiclePhotos.length),
+          vehiclePhotos.map((photo) => photo.file),
+        )
         clearSellCarDraft(sellCarDraftKey)
         setSubmissionReferenceId(result.referenceId)
         setSubmitStatus("success")
@@ -311,8 +312,8 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
 
     if (!hasSellCarFormData) return
 
-    saveSellCarDraft(sellCarDraftKey, carDetails, contactDetails, privacyConsent, vehicleFieldModes)
-  }, [carDetails, contactDetails, hasSellCarFormData, isSellCarModalOpen, privacyConsent, submitStatus, vehicleFieldModes])
+    saveSellCarDraft(sellCarDraftKey, carDetails, vehicleFieldModes)
+  }, [carDetails, hasSellCarFormData, isSellCarModalOpen, submitStatus, vehicleFieldModes])
 
   useEffect(() => {
     if (!isSellCarModalOpen) return

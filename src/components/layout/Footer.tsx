@@ -4,16 +4,9 @@ import Container from "../ui/Container"
 
 const quickLinks = [
   { label: "Sell My Car", href: "/" },
-  { label: "How It Works" },
-  { label: "Latest Transactions" },
-  { label: "Frequently Asked Questions" },
-]
-
-const companyLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Privacy Policy" },
-  { label: "Terms and Conditions" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Latest Transactions", href: "/#latest-transactions" },
+  { label: "Frequently Asked Questions", href: "/#faq" },
 ]
 
 const footerLinkClass =
@@ -29,7 +22,7 @@ export default function Footer() {
 
       <Container className="relative z-10">
         <div className="py-14 md:py-16">
-          <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-[1.5fr_1fr_1fr_1fr] xl:gap-12">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] md:gap-12">
             <div className="max-w-sm">
               <Link
                 href="/"
@@ -47,51 +40,17 @@ export default function Footer() {
               <ul className="mt-5 space-y-3">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
-                    {link.href ? (
-                      <Link href={link.href} className={footerLinkClass}>
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <span className="text-sm text-white/50">{link.label}</span>
-                    )}
+                    <Link href={link.href} className={footerLinkClass}>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </nav>
-
-            <nav aria-label="Company links">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--primary)]">Company</h2>
-              <ul className="mt-5 space-y-3">
-                {companyLinks.map((link) => (
-                  <li key={link.label}>
-                    {link.href ? (
-                      <Link href={link.href} className={footerLinkClass}>
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <span className="text-sm text-white/50">{link.label}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div>
-              <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--primary)]">Contact</h2>
-              <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">Questions about selling your car?</p>
-              <Link href="/contact" className={`mt-4 font-medium ${footerLinkClass}`}>
-                Contact Us
-              </Link>
-              <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">Our team is ready to guide you through the process.</p>
-            </div>
           </div>
 
-          <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-12 border-t border-white/10 pt-6 text-sm text-white/50">
             <p>© 2026 Buy and Sell Cars Philippines. All rights reserved.</p>
-            <div className="flex flex-wrap gap-x-5 gap-y-2">
-              <span>Privacy Policy</span>
-              <span>Terms and Conditions</span>
-            </div>
           </div>
         </div>
       </Container>

@@ -25,7 +25,7 @@ export default function ProcessSection() {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([])
 
   return (
-    <section className="relative z-20 bg-[var(--background)] pb-16 md:pb-20">
+    <section id="how-it-works" className="relative z-20 bg-[var(--background)] pb-10 md:pb-12">
       <Container className="relative -mt-14 sm:-mt-16 md:-mt-24 lg:-mt-32">
         <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] bg-white px-7 py-7 shadow-[0_24px_60px_rgba(31,31,31,0.14)] transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(31,31,31,0.18)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
           <div className="mb-10 flex flex-col items-center text-center">
@@ -39,7 +39,7 @@ export default function ProcessSection() {
           </div>
           <div
             ref={gridRef}
-            className="relative grid gap-6 md:grid-cols-3"
+            className="group/process relative grid gap-6 md:grid-cols-3"
             onPointerMove={(event) => {
               if (!gridRef.current) return
 
@@ -79,12 +79,12 @@ export default function ProcessSection() {
                 ref={(element) => {
                   cardRefs.current[index] = element
                 }}
-                className="group relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] bg-[#F7F7F7] px-6 pb-7 pt-5 text-center shadow-[0_8px_22px_rgba(31,31,31,0.04)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(31,31,31,0.10)] motion-reduce:transform-none motion-reduce:transition-none"
+                className="group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] bg-[#F7F7F7] px-6 pb-7 pt-5 text-center shadow-[0_8px_22px_rgba(31,31,31,0.04)] transition-[transform,box-shadow,filter] duration-300 ease-out group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] group-hover/process:shadow-[0_6px_16px_rgba(31,31,31,0.035)] hover:z-20 hover:-translate-y-1 hover:brightness-100 hover:saturate-100 hover:shadow-[0_18px_34px_rgba(31,31,31,0.13)] focus-within:z-20 focus-within:brightness-100 focus-within:saturate-100 focus-within:shadow-[0_18px_34px_rgba(31,31,31,0.13)] motion-reduce:transform-none motion-reduce:transition-none"
               >
                 <span
-                  className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-200 ease-out group-hover:scale-130 group-hover:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
+                  className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
                 >
-                  <span className="inline-block transition-transform duration-200 ease-out group-hover:scale-200 motion-reduce:transform-none">
+                  <span className="inline-block transition-transform duration-300 ease-out group-hover/card:scale-125 motion-reduce:transform-none">
                     {index + 1}
                   </span>
                 </span>
@@ -95,7 +95,7 @@ export default function ProcessSection() {
                       alt="Upload car details and photos"
                       width={120}
                       height={120}
-                      className="object-contain"
+                      className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                   {index === 1 && (
@@ -104,7 +104,7 @@ export default function ProcessSection() {
                       alt="Schedule a car inspection"
                       width={120}
                       height={120}
-                      className="object-contain"
+                      className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                   {index === 2 && (
@@ -113,15 +113,15 @@ export default function ProcessSection() {
                       alt="Receive payment for your car"
                       width={120}
                       height={120}
-                      className="object-contain"
+                      className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                 </div>
                 <div className="mt-3 flex w-full flex-col items-center text-center">
-                  <h3 className="flex min-h-12 items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-200 ease-out group-hover:text-[var(--primary)] motion-reduce:transition-none">
+                  <h3 className="flex min-h-12 items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none">
                     {step.title}
                   </h3>
-                  <p className="mt-2 min-h-10 max-w-[16rem] text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-200 ease-out group-hover:text-[var(--text-primary)] motion-reduce:transition-none">
+                  <p className="mt-2 min-h-10 max-w-[16rem] text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
                     {step.description}
                   </p>
                 </div>

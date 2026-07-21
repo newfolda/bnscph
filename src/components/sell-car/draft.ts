@@ -1,14 +1,39 @@
 import { getBrands, getModels, getVariants } from "../../data/vehicleCatalog"
 import type { VehicleFieldMode, VehicleFieldModes } from "../../types/sellCar"
 import { restoreStringFields } from "./helpers"
-import { initialCarDetails, initialContactDetails, type CarDetails, type ContactDetails } from "./types"
+import { initialCarDetails, type CarDetails } from "./types"
+
+type SafeVehicleDraftDetails = Pick<
+  CarDetails,
+  "year" | "make" | "model" | "variant" | "mileage" | "transmission" | "fuelType" | "condition"
+>
 
 type SellCarDraft = {
-  carDetails: CarDetails
-  contactDetails: ContactDetails
+  carDetails: SafeVehicleDraftDetails
   vehicleFieldModes: VehicleFieldModes
-  privacyConsent: boolean
 }
+
+const createSafeVehicleDraft = (
+  carDetails: CarDetails,
+  vehicleFieldModes: VehicleFieldModes,
+): SellCarDraft => ({
+  // This allowlist is the browser-storage privacy boundary for Sell My Car drafts.
+  carDetails: {
+    year: carDetails.year,
+    make: carDetails.make,
+    model: carDetails.model,
+    variant: carDetails.variant,
+    mileage: carDetails.mileage,
+    transmission: carDetails.transmission,
+    fuelType: carDetails.fuelType,
+    condition: carDetails.condition,
+  },
+  vehicleFieldModes: {
+    make: vehicleFieldModes.make,
+    model: vehicleFieldModes.model,
+    variant: vehicleFieldModes.variant,
+  },
+})
 
 export const clearSellCarDraft = (draftKey: string): void => {
   try {
@@ -65,16 +90,26 @@ export const restoreSellCarDraft = (draftKey: string, currentYear: number): Sell
       variant: savedModes?.variant === "manual" || savedModes?.variant === "unsure" || savedModes?.variant === "catalog" ? savedModes.variant : inferMode(carDetails.variant, getVariants(carDetails.make, carDetails.model, restoredYear)),
     }
 
-    return { carDetails, contactDetails: restoreStringFields(initialContactDetails, draft.contactDetails), vehicleFieldModes, privacyConsent: draft.privacyConsent === true }
+    const safeDraft = createSafeVehicleDraft(carDetails, vehicleFieldModes)
+
+    // Rewrite legacy drafts without their former sensitive fields after safely restoring vehicle data.
+    window.sessionStorage.setItem(draftKey, JSON.stringify(safeDraft))
+
+    return safeDraft
   } catch {
     clearSellCarDraft(draftKey)
     return null
   }
 }
 
-export const saveSellCarDraft = (draftKey: string, carDetails: CarDetails, contactDetails: ContactDetails, privacyConsent: boolean, vehicleFieldModes: VehicleFieldModes): void => {
+export const saveSellCarDraft = (
+  draftKey: string,
+  carDetails: CarDetails,
+  vehicleFieldModes: VehicleFieldModes,
+): void => {
   try {
-    window.sessionStorage.setItem(draftKey, JSON.stringify({ carDetails, contactDetails, privacyConsent, vehicleFieldModes }))
+    const safeDraft = createSafeVehicleDraft(carDetails, vehicleFieldModes)
+    window.sessionStorage.setItem(draftKey, JSON.stringify(safeDraft))
   } catch {
     // sessionStorage may be unavailable in restricted browser contexts.
   }

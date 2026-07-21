@@ -49,7 +49,7 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="bg-[var(--background-alt)] py-16 md:py-20">
+    <section id="faq" className="bg-[var(--background-alt)] py-16 md:py-20">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <header className="lg:sticky lg:top-28 lg:self-start">

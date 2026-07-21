@@ -243,13 +243,23 @@ export default function HeroSection() {
   return (
     <>
       <section
-      className="relative isolate overflow-hidden bg-[var(--primary-light)]"
+      className="mobee-hero-showroom relative isolate overflow-hidden bg-[var(--primary-light)]"
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute -right-24 top-2 h-80 w-80 rounded-full border border-[color:var(--primary)] opacity-20 md:h-[30rem] md:w-[30rem]" />
-        <div className="absolute right-[16%] top-20 hidden h-48 w-48 rounded-full border-2 border-[color:var(--primary-hover)] opacity-10 md:block" />
+      <video
+        aria-hidden="true"
+        autoPlay
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover [filter:brightness(0.9)_saturate(0.9)] motion-reduce:hidden"
+        loop
+        muted
+        playsInline
+        preload="metadata"
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+      <div aria-hidden="true" className="mobee-hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
         <div className="absolute bottom-12 right-[5%] h-64 w-64 rounded-full bg-[var(--primary)] opacity-[0.07] blur-3xl md:h-96 md:w-96" />
       </div>
       <div
@@ -342,15 +352,6 @@ export default function HeroSection() {
             )} />
           </div>
           <div className="relative flex h-[440px] flex-1 items-center justify-end">
-            <div aria-hidden="true" className="pointer-events-none absolute right-[4%] top-1/2 z-0 h-64 w-[72%] -translate-y-1/2 rounded-full bg-[var(--primary)] opacity-[0.12] blur-3xl" />
-            <Image
-              src="/images/hero/hero.png"
-              alt=""
-              width={3840}
-              height={1140}
-              className="mobee-hero-vehicle relative z-10 h-auto w-[760px] max-w-none drop-shadow-2xl"
-              sizes="(min-width: 768px) 50vw, 100vw"
-            />
           </div>
         </div>
       </Container>
@@ -375,13 +376,27 @@ export default function HeroSection() {
           animation-timing-function: ease-in-out;
         }
 
-        @keyframes mobee-hero-vehicle-float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
+        .mobee-hero-showroom {
+          background-image: url("/images/hero/hero-showroom.png");
+          background-position: 64% center;
+          background-repeat: no-repeat;
+          background-size: cover;
         }
 
-        .mobee-hero-vehicle {
-          animation: mobee-hero-vehicle-float 9s ease-in-out infinite;
+        .mobee-hero-showroom-overlay {
+          background: linear-gradient(90deg, rgba(247, 241, 227, 0.94) 0%, rgba(247, 241, 227, 0.82) 30%, rgba(247, 241, 227, 0.56) 56%, rgba(247, 241, 227, 0.16) 100%);
+        }
+
+        @media (min-width: 768px) {
+          .mobee-hero-showroom {
+            background-position: 70% center;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .mobee-hero-showroom {
+            background-position: center right;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -417,10 +432,6 @@ export default function HeroSection() {
 
         @media (prefers-reduced-motion: reduce) {
           .mobee-hero-particle {
-            animation: none;
-          }
-
-          .mobee-hero-vehicle {
             animation: none;
           }
 
