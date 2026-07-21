@@ -4,6 +4,7 @@ import DailyTransactionsSection from "@/src/components/sections/DailyTransaction
 import FaqSection from "@/src/components/sections/FaqSection"
 import HeroSection from "@/src/components/sections/HeroSection"
 import ProcessSection from "@/src/components/sections/ProcessSection"
+import WhyChooseUsSection from "@/src/components/sections/WhyChooseUsSection"
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <ProcessSection />
+      <WhyChooseUsSection />
       <DailyTransactionsSection />
       <FaqSection />
       <Footer />

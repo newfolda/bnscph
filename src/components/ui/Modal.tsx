@@ -1,6 +1,7 @@
 "use client"
 
 import { type ReactNode, useEffect, useRef } from "react"
+import { createPortal } from "react-dom"
 
 type ModalProps = {
   children: ReactNode
@@ -80,9 +81,9 @@ export default function Modal({ children, isOpen, labelledBy, onClose }: ModalPr
 
   if (!isOpen) return null
 
-  return (
+  const modal = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-4 backdrop-blur-sm sm:p-6"
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/55 p-4 backdrop-blur-sm sm:p-6"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onCloseRef.current()
       }}
@@ -93,10 +94,12 @@ export default function Modal({ children, isOpen, labelledBy, onClose }: ModalPr
         aria-modal="true"
         role="dialog"
         tabIndex={-1}
-        className="max-h-[calc(100dvh-2rem)] w-full max-w-2xl overflow-y-auto rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:max-h-[calc(100dvh-3rem)] sm:p-8"
+        className="max-h-[calc(100dvh-2rem)] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:max-h-[calc(100dvh-3rem)] sm:p-8"
       >
         {children}
       </div>
     </div>
   )
+
+  return typeof document === "undefined" ? modal : createPortal(modal, document.body)
 }
