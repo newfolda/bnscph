@@ -6,9 +6,9 @@ import { usePathname } from "next/navigation"
 const sidebarItems = [
   { label: "Dashboard", href: "/admin" },
   { label: "Leads", href: "/admin/leads" },
-  { label: "Inspections" },
-  { label: "Purchased Cars" },
-  { label: "Settings" },
+  { label: "Inspections", href: "/admin/inspections" },
+  { label: "Purchased Cars", href: "/admin/purchased-cars" },
+  { label: "Settings", href: "/admin/settings" },
 ]
 
 export default function AdminSidebar() {
