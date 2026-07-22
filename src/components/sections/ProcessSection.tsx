@@ -30,11 +30,11 @@ export default function ProcessSection() {
         <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] bg-white px-7 py-7 shadow-[0_24px_60px_rgba(31,31,31,0.14)] transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(31,31,31,0.18)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
           <div className="mb-10 flex flex-col items-center text-center">
             <p className="mb-3 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
-              3 Simple Steps
+              Process
             </p>
             <h2 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">How It Works?</h2>
             <p className="mt-2 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
-              500+ verified buyers. The right market price. A seamless process.
+              3 SIMPLE STEPS.
             </p>
           </div>
           <div
