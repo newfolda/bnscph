@@ -30,7 +30,13 @@ export default function ProcessSection() {
       className="relative z-20 bg-white pb-10 md:pb-12"
     >
       <Container className="relative -mt-5 sm:-mt-7 md:-mt-8 lg:-mt-12">
-        <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
+        <div
+          className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14"
+          style={{
+            background:
+              "radial-gradient(circle at 8% 8%, rgba(199, 232, 213, 0.08), transparent 30%), radial-gradient(circle at 48% 0%, rgba(255, 228, 154, 0.08), transparent 28%), radial-gradient(circle at 94% 10%, rgba(248, 208, 219, 0.07), transparent 30%), radial-gradient(circle at 8% 92%, rgba(195, 221, 248, 0.07), transparent 30%), radial-gradient(circle at 92% 92%, rgba(222, 211, 244, 0.05), transparent 28%), #ffffff",
+          }}
+        >
           <div className="mb-11 flex flex-col items-center text-center">
             <p className="mb-4 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
               Process
