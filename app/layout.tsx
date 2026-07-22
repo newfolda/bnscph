@@ -1,11 +1,14 @@
 import type { Metadata } from "next"
+import { getSiteUrl } from "@/src/lib/siteUrl"
 import "./globals.css"
 
-// TODO: Set NEXT_PUBLIC_SITE_URL to the canonical production domain before deployment.
-const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com")
+const siteUrl = new URL(getSiteUrl())
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "Buy & Sell Cars Philippines",
     template: "%s | Buy & Sell Cars Philippines",
@@ -32,6 +35,7 @@ export const metadata: Metadata = {
   },
   category: "Automotive",
   openGraph: {
+    url: "/",
     title: "Buy & Sell Cars Philippines",
     description: "Sell your car quickly, safely, and for the best possible price anywhere in the Philippines.",
     siteName: "Buy & Sell Cars Philippines",

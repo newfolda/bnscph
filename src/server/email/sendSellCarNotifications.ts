@@ -1,4 +1,5 @@
 import "server-only"
+import { getSiteUrl } from "@/src/lib/siteUrl"
 import type { SellCarSubmissionPayload } from "@/src/types/sellCar"
 import { getSellCarEmailConfiguration } from "./client"
 
@@ -20,12 +21,8 @@ const escapeHtml = (value: string) =>
 const formatMileage = (mileage: number) => new Intl.NumberFormat("en-PH").format(mileage)
 
 const getAdminLeadUrl = (leadId: string) => {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-
-  if (!siteUrl) return null
-
   try {
-    return new URL(`/admin/leads/${leadId}`, siteUrl).toString()
+    return new URL(`/admin/leads/${leadId}`, getSiteUrl()).toString()
   } catch {
     return null
   }
