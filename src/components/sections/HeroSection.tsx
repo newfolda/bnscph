@@ -288,7 +288,7 @@ export default function HeroSection() {
           <div className="flex flex-1 flex-col justify-center">
             <h1
               aria-label="The Smartest Way to Sell Your Car in the Philippines."
-              className="max-w-xl text-5xl font-bold leading-[1.1] tracking-tight text-[var(--text-primary)]"
+              className="max-w-xl text-5xl font-bold leading-[1.1] tracking-tight text-white"
             >
               <span className="block lg:whitespace-nowrap">
                 The{" "}
@@ -311,11 +311,11 @@ export default function HeroSection() {
                 Way
               </span>
               <span className="block">to Sell Your Car</span>
-              <span className="mt-2 block text-[0.72em] font-semibold text-[var(--text-primary)]">
+              <span className="mt-2 block text-[0.72em] font-semibold text-white">
                 in the Philippines.
               </span>
             </h1>
-            <p aria-label="Maximum value. Zero hassle." className="mt-10 max-w-md text-lg font-medium leading-relaxed text-[color:rgba(31,31,31,0.86)] sm:whitespace-nowrap">
+            <p aria-label="Maximum value. Zero hassle." className="mt-10 max-w-md text-lg font-medium leading-relaxed text-white/90 sm:whitespace-nowrap">
               <span aria-hidden="true">
                 Maximum value. Zero{" "}
                 <span className="relative inline-block align-baseline text-[var(--primary-hover)]">
@@ -379,7 +379,7 @@ export default function HeroSection() {
         }
 
         .mobee-hero-showroom-overlay {
-          background: linear-gradient(90deg, rgba(247, 241, 227, 0.7) 0%, rgba(247, 241, 227, 0.62) 30%, rgba(247, 241, 227, 0.42) 56%, rgba(247, 241, 227, 0.12) 100%);
+          background: linear-gradient(90deg, rgba(8, 8, 8, 0.88) 0%, rgba(8, 8, 8, 0.78) 28%, rgba(8, 8, 8, 0.42) 55%, rgba(8, 8, 8, 0) 78%);
         }
 
         @media (min-width: 768px) {
