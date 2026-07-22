@@ -25,9 +25,74 @@ export default function ProcessSection() {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([])
 
   return (
-    <section id="how-it-works" className="relative z-20 bg-[var(--background)] pb-10 md:pb-12">
+    <section
+      id="how-it-works"
+      className="relative z-20 isolate overflow-hidden bg-[#08090b] pb-10 md:pb-12"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#08090b_0%,#15171b_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.12)_0%,rgba(200,160,68,0.05)_34%,transparent_68%)] md:h-[42rem] md:w-[70rem]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.18) 0.55px, transparent 0.7px)",
+          backgroundSize: "4px 4px",
+        }}
+      />
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 1440 720"
+      >
+        <path
+          d="M-120 600C180 440 300 680 570 476C820 286 1050 370 1560 86"
+          stroke="rgba(255,255,255,0.07)"
+          strokeWidth="1.25"
+        />
+        <path
+          d="M-90 210C210 96 374 274 612 188C898 84 1080 216 1512 16"
+          stroke="rgba(200,160,68,0.16)"
+          strokeDasharray="9 13"
+          strokeWidth="1.15"
+        />
+        <path
+          d="M68 766C300 504 438 614 690 430C924 258 1118 458 1464 248"
+          stroke="rgba(255,255,255,0.06)"
+          strokeDasharray="4 12"
+          strokeWidth="1"
+        />
+        <path
+          className="hidden md:block"
+          d="M-110 492C188 336 330 408 588 370C878 328 1072 146 1544 204"
+          stroke="rgba(200,160,68,0.14)"
+          strokeWidth="1.1"
+        />
+        <path
+          className="hidden lg:block"
+          d="M150 -28C302 160 452 128 670 260C932 420 1186 214 1488 410"
+          stroke="rgba(255,255,255,0.06)"
+          strokeDasharray="14 16"
+          strokeWidth="1"
+        />
+        <circle cx="274" cy="505" fill="rgba(200,160,68,0.58)" r="3" />
+        <circle cx="616" cy="188" fill="rgba(255,255,255,0.42)" r="2.5" />
+        <circle cx="1044" cy="374" fill="rgba(200,160,68,0.52)" r="3" />
+        <circle className="hidden md:block" cx="1210" cy="278" fill="rgba(255,255,255,0.4)" r="2.5" />
+      </svg>
       <Container className="relative -mt-14 sm:-mt-16 md:-mt-24 lg:-mt-32">
-        <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] bg-white px-7 py-7 shadow-[0_24px_60px_rgba(31,31,31,0.14)] transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(31,31,31,0.18)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
+        <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/70 bg-white px-7 py-7 shadow-[0_32px_72px_rgba(0,0,0,0.42),0_10px_24px_rgba(200,160,68,0.12)] transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_38px_82px_rgba(0,0,0,0.48),0_14px_30px_rgba(200,160,68,0.15)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
           <div className="mb-10 flex flex-col items-center text-center">
             <p className="mb-3 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
               Process
