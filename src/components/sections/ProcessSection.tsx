@@ -35,70 +35,24 @@ export default function ProcessSection() {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent)]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.09)_0%,rgba(200,160,68,0.035)_34%,transparent_68%)] md:h-[42rem] md:w-[70rem]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.12)_0%,rgba(200,160,68,0.05)_34%,transparent_68%)] md:h-[42rem] md:w-[70rem]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-30"
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: "radial-gradient(rgba(255,255,255,0.18) 0.55px, transparent 0.7px)",
           backgroundSize: "4px 4px",
         }}
       />
-      <svg
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        fill="none"
-        preserveAspectRatio="none"
-        viewBox="0 0 1440 720"
-      >
-        <path
-          d="M-120 600C180 440 300 680 570 476C820 286 1050 370 1560 86"
-          stroke="rgba(255,255,255,0.07)"
-          strokeWidth="1.25"
-        />
-        <path
-          d="M-90 210C210 96 374 274 612 188C898 84 1080 216 1512 16"
-          stroke="rgba(200,160,68,0.16)"
-          strokeDasharray="9 13"
-          strokeWidth="1.15"
-        />
-        <path
-          d="M68 766C300 504 438 614 690 430C924 258 1118 458 1464 248"
-          stroke="rgba(255,255,255,0.06)"
-          strokeDasharray="4 12"
-          strokeWidth="1"
-        />
-        <path
-          className="hidden md:block"
-          d="M-110 492C188 336 330 408 588 370C878 328 1072 146 1544 204"
-          stroke="rgba(200,160,68,0.14)"
-          strokeWidth="1.1"
-        />
-        <path
-          className="hidden lg:block"
-          d="M150 -28C302 160 452 128 670 260C932 420 1186 214 1488 410"
-          stroke="rgba(255,255,255,0.06)"
-          strokeDasharray="14 16"
-          strokeWidth="1"
-        />
-        <circle cx="274" cy="505" fill="rgba(200,160,68,0.58)" r="3" />
-        <circle cx="616" cy="188" fill="rgba(255,255,255,0.42)" r="2.5" />
-        <circle cx="1044" cy="374" fill="rgba(200,160,68,0.52)" r="3" />
-        <circle className="hidden md:block" cx="1210" cy="278" fill="rgba(255,255,255,0.4)" r="2.5" />
-      </svg>
       <Container className="relative -mt-14 sm:-mt-16 md:-mt-24 lg:-mt-32">
-        <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/70 bg-white px-7 py-7 shadow-[0_32px_72px_rgba(0,0,0,0.42),0_10px_24px_rgba(200,160,68,0.12)] transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_38px_82px_rgba(0,0,0,0.48),0_14px_30px_rgba(200,160,68,0.15)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
-          <div className="mb-10 flex flex-col items-center text-center">
-            <p className="mb-3 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
+        <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
+          <div className="mb-11 flex flex-col items-center text-center">
+            <p className="mb-4 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
               Process
             </p>
             <h2 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">How It Works?</h2>
-            <p className="mt-2 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
+            <p className="mt-3 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
               3 SIMPLE STEPS.
             </p>
           </div>
@@ -144,7 +98,7 @@ export default function ProcessSection() {
                 ref={(element) => {
                   cardRefs.current[index] = element
                 }}
-                className="group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] bg-[#F7F7F7] px-6 pb-7 pt-5 text-center shadow-[0_8px_22px_rgba(31,31,31,0.04)] transition-[transform,box-shadow,filter] duration-300 ease-out group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] group-hover/process:shadow-[0_6px_16px_rgba(31,31,31,0.035)] hover:z-20 hover:-translate-y-1 hover:brightness-100 hover:saturate-100 hover:shadow-[0_18px_34px_rgba(31,31,31,0.13)] focus-within:z-20 focus-within:brightness-100 focus-within:saturate-100 focus-within:shadow-[0_18px_34px_rgba(31,31,31,0.13)] motion-reduce:transform-none motion-reduce:transition-none"
+                className="group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] bg-[#F7F7F7] px-6 pb-7 pt-5 text-center shadow-[0_8px_22px_rgba(31,31,31,0.035)] transition-[transform,box-shadow,filter] duration-300 ease-out group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] group-hover/process:shadow-[0_6px_16px_rgba(31,31,31,0.03)] hover:z-20 hover:-translate-y-1.5 hover:brightness-100 hover:saturate-100 hover:shadow-[0_22px_38px_rgba(31,31,31,0.14)] focus-within:z-20 focus-within:brightness-100 focus-within:saturate-100 focus-within:shadow-[0_22px_38px_rgba(31,31,31,0.14)] motion-reduce:transform-none motion-reduce:transition-none"
               >
                 <span
                   className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
