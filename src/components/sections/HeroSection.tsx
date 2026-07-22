@@ -285,8 +285,8 @@ export default function HeroSection() {
         ))}
       </div>
       <Container className="relative z-20">
-        <div className="flex gap-8 pb-32 pt-20">
-          <div className="flex flex-1 flex-col justify-center gap-7">
+        <div className="flex gap-8 pb-40 pt-20">
+          <div className="flex flex-1 flex-col justify-center">
             <h1
               aria-label="The Easiest Way to Sell Your Car"
               className="max-w-xl text-5xl font-bold leading-[1.1] tracking-tight text-[var(--text-primary)]"
@@ -313,7 +313,7 @@ export default function HeroSection() {
               </span>
               <span className="block">to Sell Your Car</span>
             </h1>
-            <p aria-label="Maximum value. Zero hassle." className="max-w-md text-lg leading-relaxed text-[var(--text-secondary)]">
+            <p aria-label="Maximum value. Zero hassle." className="mt-9 max-w-md text-lg leading-relaxed text-[var(--text-secondary)]">
               <span aria-hidden="true">Maximum value. Zero </span>
               <span aria-hidden="true" className="relative inline-block align-baseline text-[var(--primary-hover)]">
                 <span className="invisible">time wasted.</span>
@@ -327,7 +327,7 @@ export default function HeroSection() {
             <Button
               aria-label="Sell My Car"
               onClick={openSellCarModal}
-              className="group relative !grid h-[3.875rem] w-full max-w-[19.5rem] grid-cols-[auto_auto_minmax(0,1fr)_auto] items-center gap-2 overflow-hidden border border-[rgba(200,160,68,0.55)] !bg-white/35 px-3 !py-0 font-semibold !text-[var(--text-primary)] shadow-[0_12px_28px_rgba(31,31,31,0.1),0_8px_20px_rgba(200,160,68,0.08)] ring-1 ring-inset ring-white/55 backdrop-blur-2xl transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:!bg-white/45 hover:shadow-[0_16px_34px_rgba(31,31,31,0.12),0_12px_24px_rgba(200,160,68,0.12)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(31,31,31,0.09),0_6px_16px_rgba(200,160,68,0.07)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0 sm:gap-3 sm:px-4"
+              className="group relative mt-10 !grid h-16 w-full max-w-[19.5rem] grid-cols-[auto_auto_minmax(0,1fr)_auto] items-center gap-2 overflow-hidden border border-[var(--primary-hover)] !bg-[var(--primary)] px-3 !py-0 font-semibold !text-white shadow-[0_12px_28px_rgba(31,31,31,0.12),0_8px_20px_rgba(200,160,68,0.16)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:!bg-[var(--primary-hover)] hover:shadow-[0_16px_34px_rgba(31,31,31,0.14),0_12px_24px_rgba(200,160,68,0.22)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(31,31,31,0.1),0_6px_16px_rgba(200,160,68,0.14)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0 sm:gap-3 sm:px-4"
               style={{ borderRadius: "2rem" }}
             >
               <Image
@@ -338,12 +338,12 @@ export default function HeroSection() {
                 src="/images/brand/cta logo.png"
                 width={96}
               />
-              <span aria-hidden="true" className="relative z-10 h-5 w-px shrink-0 bg-[var(--primary)] opacity-60 sm:h-6" />
-              <span className="relative z-10 justify-self-center whitespace-nowrap text-[0.8rem] font-bold uppercase tracking-[0.1em] text-[var(--text-primary)] sm:text-[0.9rem]">
+              <span aria-hidden="true" className="relative z-10 h-5 w-px shrink-0 bg-white/65 sm:h-6" />
+              <span className="relative z-10 justify-self-center whitespace-nowrap text-[0.8rem] font-bold uppercase tracking-[0.1em] text-white sm:text-[0.9rem]">
                 Sell My Car
               </span>
-              <span aria-hidden="true" className="relative z-10 mr-1 flex size-[2.375rem] items-center justify-center rounded-full bg-[var(--primary)] text-white transition-[background-color,transform] duration-200 ease-out group-hover:translate-x-1 group-hover:bg-[var(--primary-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:size-10">
-                <svg fill="none" height="20" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="20">
+              <span aria-hidden="true" className="relative z-10 mr-1 flex size-10 items-center justify-center rounded-full bg-white/20 text-white transition-[background-color,transform] duration-200 ease-out group-hover:translate-x-1 group-hover:bg-white/30 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
+                <svg fill="none" height="22" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="22">
                   <path d="M4 12h15M13 6l6 6-6 6" />
                 </svg>
               </span>
@@ -384,7 +384,7 @@ export default function HeroSection() {
         }
 
         .mobee-hero-showroom-overlay {
-          background: linear-gradient(90deg, rgba(247, 241, 227, 0.94) 0%, rgba(247, 241, 227, 0.82) 30%, rgba(247, 241, 227, 0.56) 56%, rgba(247, 241, 227, 0.16) 100%);
+          background: linear-gradient(90deg, rgba(247, 241, 227, 0.7) 0%, rgba(247, 241, 227, 0.62) 30%, rgba(247, 241, 227, 0.42) 56%, rgba(247, 241, 227, 0.12) 100%);
         }
 
         @media (min-width: 768px) {
