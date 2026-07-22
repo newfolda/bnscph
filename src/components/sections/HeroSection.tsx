@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { type PointerEvent, useEffect, useLayoutEffect, useRef, useState } from "react"
 import Container from "../ui/Container"
 import Button from "../ui/Button"
@@ -325,24 +324,15 @@ export default function HeroSection() {
             </p>
             <SellCarModal trigger={(openSellCarModal) => (
             <Button
-              aria-label="Sell My Car"
+              aria-label="See My Car's Value"
               onClick={openSellCarModal}
-              className="group relative mt-10 !grid h-16 w-full max-w-[19.5rem] grid-cols-[auto_auto_minmax(0,1fr)_auto] items-center gap-2 overflow-hidden border border-[var(--primary-hover)] !bg-[var(--primary)] px-3 !py-0 font-semibold !text-white shadow-[0_12px_28px_rgba(31,31,31,0.12),0_8px_20px_rgba(200,160,68,0.16)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:!bg-[var(--primary-hover)] hover:shadow-[0_16px_34px_rgba(31,31,31,0.14),0_12px_24px_rgba(200,160,68,0.22)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(31,31,31,0.1),0_6px_16px_rgba(200,160,68,0.14)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0 sm:gap-3 sm:px-4"
+              className="group relative mt-10 !flex h-16 w-full max-w-[19.5rem] items-center justify-center overflow-hidden border border-[var(--primary-hover)] !bg-[var(--primary)] px-5 !py-0 font-semibold !text-white shadow-[0_12px_28px_rgba(31,31,31,0.12),0_8px_20px_rgba(200,160,68,0.16)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:!bg-[var(--primary-hover)] hover:shadow-[0_16px_34px_rgba(31,31,31,0.14),0_12px_24px_rgba(200,160,68,0.22)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(31,31,31,0.1),0_6px_16px_rgba(200,160,68,0.14)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0 sm:px-6"
               style={{ borderRadius: "2rem" }}
             >
-              <Image
-                aria-hidden="true"
-                alt=""
-                className="relative z-10 h-auto w-16 shrink-0 object-contain transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:w-20"
-                height={60}
-                src="/images/brand/cta logo.png"
-                width={96}
-              />
-              <span aria-hidden="true" className="relative z-10 h-5 w-px shrink-0 bg-white/65 sm:h-6" />
-              <span className="relative z-10 justify-self-center whitespace-nowrap text-[0.8rem] font-bold uppercase tracking-[0.1em] text-white sm:text-[0.9rem]">
-                Sell My Car
+              <span className="relative z-10 whitespace-nowrap text-[0.8rem] font-bold uppercase tracking-[0.1em] text-white sm:text-[0.9rem]">
+                See My Car&apos;s Value
               </span>
-              <span aria-hidden="true" className="relative z-10 mr-1 flex size-10 items-center justify-center rounded-full bg-white/20 text-white transition-[background-color,transform] duration-200 ease-out group-hover:translate-x-1 group-hover:bg-white/30 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
+              <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full bg-white/20 text-white transition-[background-color,transform] duration-200 ease-out group-hover:translate-x-1 group-hover:bg-white/30 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
                 <svg fill="none" height="22" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="22">
                   <path d="M4 12h15M13 6l6 6-6 6" />
                 </svg>
