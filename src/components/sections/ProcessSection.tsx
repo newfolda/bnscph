@@ -27,12 +27,8 @@ export default function ProcessSection() {
   return (
     <section
       id="how-it-works"
-      className="relative z-20 isolate overflow-visible [overflow-x:clip] bg-[#08090b] pb-10 pt-10 sm:pt-12 md:pb-12 md:pt-16 lg:pt-20"
+      className="process-wave-surface relative z-20 isolate overflow-hidden pb-10 pt-24 sm:pt-28 md:pb-12 md:pt-32 lg:pt-36"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#08090b_0%,#15171b_100%)]"
-      />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.09)_0%,rgba(200,160,68,0.035)_34%,transparent_68%)] md:h-[42rem] md:w-[70rem]"
@@ -45,7 +41,7 @@ export default function ProcessSection() {
           backgroundSize: "4px 4px",
         }}
       />
-      <Container className="relative z-10 -mt-12 sm:-mt-14 md:-mt-[4.5rem] lg:-mt-24">
+      <Container className="relative z-10">
         <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
           <div className="mb-11 flex flex-col items-center text-center">
             <p className="mb-4 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
@@ -149,6 +145,24 @@ export default function ProcessSection() {
           </div>
         </div>
       </Container>
+      <style>{`
+        .process-wave-surface {
+          background: linear-gradient(180deg, #08090b 0%, #15171b 100%);
+          clip-path: polygon(0 4rem, 7% 2.5rem, 17% 3rem, 30% 4.25rem, 43% 3.25rem, 55% 1.75rem, 68% 2.5rem, 80% 4rem, 92% 3rem, 100% 2.25rem, 100% 100%, 0 100%);
+        }
+
+        @media (min-width: 640px) {
+          .process-wave-surface {
+            clip-path: polygon(0 4.5rem, 7% 2.75rem, 17% 3.25rem, 30% 4.75rem, 43% 3.5rem, 55% 2rem, 68% 2.75rem, 80% 4.5rem, 92% 3.25rem, 100% 2.5rem, 100% 100%, 0 100%);
+          }
+        }
+
+        @media (min-width: 768px) {
+          .process-wave-surface {
+            clip-path: polygon(0 5rem, 7% 3rem, 17% 3.5rem, 30% 5.25rem, 43% 3.75rem, 55% 2.25rem, 68% 3rem, 80% 5rem, 92% 3.5rem, 100% 2.75rem, 100% 100%, 0 100%);
+          }
+        }
+      `}</style>
     </section>
   )
 }
