@@ -334,7 +334,7 @@ export default function HeroSection() {
               className="group relative mt-5 h-16 w-full max-w-[16.625rem] overflow-hidden border border-[var(--primary-hover)] !bg-[var(--primary)] !p-0 font-semibold !text-white shadow-[0_12px_28px_rgba(31,31,31,0.12),0_8px_20px_rgba(200,160,68,0.16)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:!bg-[var(--primary-hover)] hover:shadow-[0_16px_34px_rgba(31,31,31,0.14),0_12px_24px_rgba(200,160,68,0.22)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(31,31,31,0.1),0_6px_16px_rgba(200,160,68,0.14)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0"
               style={{ borderRadius: "2rem" }}
             >
-              <span className="absolute inset-0 z-10 flex translate-x-2.5 items-center justify-center pr-16 whitespace-nowrap text-[0.75rem] font-bold uppercase tracking-[0.07em] text-white sm:text-[0.85rem]">
+              <span className="absolute inset-0 z-10 flex translate-x-2.5 items-center justify-center pr-16 whitespace-nowrap text-[0.84rem] font-bold uppercase tracking-[0.07em] text-white sm:text-[0.95rem]">
                 See My Car&apos;s Value
               </span>
               <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full bg-white/20 text-white transition-[background-color,transform] duration-200 ease-out group-hover:translate-x-1 group-hover:bg-white/30 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
