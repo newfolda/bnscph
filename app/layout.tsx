@@ -1,8 +1,12 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
+import Script from "next/script"
+import GoogleAnalyticsPageView from "@/src/components/analytics/GoogleAnalyticsPageView"
 import { getSiteUrl } from "@/src/lib/siteUrl"
 import "./globals.css"
 
 const siteUrl = new URL(getSiteUrl())
+const googleAnalyticsMeasurementId = "G-VRFLFRZQL6"
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -58,7 +62,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){window.dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${googleAnalyticsMeasurementId}');
+              `}
+            </Script>
+            <Suspense fallback={null}>
+              <GoogleAnalyticsPageView measurementId={googleAnalyticsMeasurementId} />
+            </Suspense>
+          </>
+        )}
+      </body>
     </html>
   )
 }
