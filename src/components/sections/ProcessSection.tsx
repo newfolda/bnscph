@@ -47,6 +47,10 @@ export default function ProcessSection() {
       />
       <div
         aria-hidden="true"
+        className="process-grid-light-sweep pointer-events-none absolute inset-x-[10%] top-[45%] hidden h-24 bg-[linear-gradient(90deg,transparent,rgba(255,248,232,0.1),rgba(200,160,68,0.08),rgba(255,248,232,0.1),transparent)] blur-2xl md:block"
+      />
+      <div
+        aria-hidden="true"
         className="process-light-streak process-light-streak-one pointer-events-none absolute left-[8%] top-[28%] hidden h-px w-[28%] bg-[linear-gradient(90deg,transparent,rgba(255,247,225,0.22),transparent)] blur-[1px] md:block"
       />
       <div
@@ -181,8 +185,14 @@ export default function ProcessSection() {
             linear-gradient(66deg, transparent 46%, rgba(200, 160, 68, 0.1) 50%, transparent 54%);
           mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.9) 23%, rgba(0, 0, 0, 0.75) 68%, transparent 100%);
           -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.9) 23%, rgba(0, 0, 0, 0.75) 68%, transparent 100%);
-          transform: perspective(780px) rotateX(58deg) scale(1.3);
           transform-origin: top center;
+          animation: process-showroom-grid-drift 20s linear infinite, process-showroom-grid-breathe 12s ease-in-out infinite;
+          will-change: transform, opacity;
+        }
+
+        .process-grid-light-sweep {
+          animation: process-showroom-grid-sweep 21s linear infinite;
+          will-change: transform, opacity;
         }
 
         .process-light-streak {
@@ -205,8 +215,30 @@ export default function ProcessSection() {
           to { transform: translate3d(10px, 0, 0); }
         }
 
+        @keyframes process-showroom-grid-drift {
+          from { transform: perspective(780px) rotateX(58deg) scale(1.3) translate3d(0, 0, 0); }
+          to { transform: perspective(780px) rotateX(58deg) scale(1.3) translate3d(0, 16px, 0); }
+        }
+
+        @keyframes process-showroom-grid-breathe {
+          0%, 100% { opacity: 0.14; }
+          50% { opacity: 0.2; }
+        }
+
+        @keyframes process-showroom-grid-sweep {
+          0% { transform: translate3d(0, -2rem, 0); opacity: 0; }
+          10% { opacity: 0.1; }
+          82% { opacity: 0.1; }
+          100% { transform: translate3d(0, 28rem, 0); opacity: 0; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .process-light-streak {
+            animation: none;
+          }
+
+          .process-showroom-grid,
+          .process-grid-light-sweep {
             animation: none;
           }
         }
