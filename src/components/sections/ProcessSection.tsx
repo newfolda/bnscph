@@ -27,7 +27,7 @@ export default function ProcessSection() {
   return (
     <section
       id="how-it-works"
-      className="process-wave-surface relative z-20 isolate overflow-hidden pb-10 pt-24 sm:pt-28 md:pb-12 md:pt-32 lg:pt-36"
+      className="relative z-20 isolate overflow-visible [overflow-x:clip] bg-[linear-gradient(180deg,#08090b_0%,#15171b_100%)] pb-10 pt-10 sm:pt-12 md:pb-12 md:pt-14"
     >
       <div
         aria-hidden="true"
@@ -145,24 +145,6 @@ export default function ProcessSection() {
           </div>
         </div>
       </Container>
-      <style>{`
-        .process-wave-surface {
-          background: linear-gradient(180deg, #08090b 0%, #15171b 100%);
-          clip-path: polygon(0 4rem, 7% 2.5rem, 17% 3rem, 30% 4.25rem, 43% 3.25rem, 55% 1.75rem, 68% 2.5rem, 80% 4rem, 92% 3rem, 100% 2.25rem, 100% 100%, 0 100%);
-        }
-
-        @media (min-width: 640px) {
-          .process-wave-surface {
-            clip-path: polygon(0 4.5rem, 7% 2.75rem, 17% 3.25rem, 30% 4.75rem, 43% 3.5rem, 55% 2rem, 68% 2.75rem, 80% 4.5rem, 92% 3.25rem, 100% 2.5rem, 100% 100%, 0 100%);
-          }
-        }
-
-        @media (min-width: 768px) {
-          .process-wave-surface {
-            clip-path: polygon(0 5rem, 7% 3rem, 17% 3.5rem, 30% 5.25rem, 43% 3.75rem, 55% 2.25rem, 68% 3rem, 80% 5rem, 92% 3.5rem, 100% 2.75rem, 100% 100%, 0 100%);
-          }
-        }
-      `}</style>
     </section>
   )
 }
