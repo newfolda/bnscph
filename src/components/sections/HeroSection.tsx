@@ -350,6 +350,17 @@ export default function HeroSection() {
           </div>
         </div>
       </Container>
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 w-full md:h-24"
+        preserveAspectRatio="none"
+        viewBox="0 0 1440 96"
+      >
+        <path
+          d="M0 46C240 92 472 20 736 54C1000 88 1204 22 1440 48V96H0Z"
+          fill="white"
+        />
+      </svg>
       <style>{`
         @keyframes mobee-hero-dust-drift {
           0%, 100% { transform: translate3d(0, 0, 0); }
