@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import Script from "next/script"
 import GoogleAnalyticsPageView from "@/src/components/analytics/GoogleAnalyticsPageView"
+import MicrosoftClarity from "@/src/components/analytics/MicrosoftClarity"
 import { getSiteUrl } from "@/src/lib/siteUrl"
 import "./globals.css"
 
@@ -64,6 +65,7 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         {children}
+        <MicrosoftClarity />
         {process.env.NODE_ENV === "production" && (
           <>
             <Script
