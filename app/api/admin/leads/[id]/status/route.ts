@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { requireAdminUser } from "@/src/server/auth/requireAdminUser"
 import { isSellCarLeadStatus } from "@/src/server/sellCar/getRecentLeads"
 import { updateLeadStatus } from "@/src/server/sellCar/updateLeadStatus"
 
@@ -8,6 +9,12 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  try {
+    await requireAdminUser()
+  } catch {
+    return NextResponse.json({ success: false }, { status: 401 })
+  }
+
   const { id } = await params
 
   if (!uuidPattern.test(id)) {

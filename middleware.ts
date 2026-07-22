@@ -1,63 +1,92 @@
+import { createServerClient } from "@supabase/ssr"
+import { createClient } from "@supabase/supabase-js"
 import { NextResponse, type NextRequest } from "next/server"
 
-const unauthorizedResponse = () =>
-  new NextResponse("Unauthorized", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": 'Basic realm="Buy & Sell Cars Philippines Admin"',
-    },
-  })
+const getSupabasePublicConfiguration = () => {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-const constantTimeEquals = (first: string, second: string) => {
-  const maxLength = Math.max(first.length, second.length)
-  let difference = first.length ^ second.length
-
-  for (let index = 0; index < maxLength; index += 1) {
-    difference |= (first.charCodeAt(index) || 0) ^ (second.charCodeAt(index) || 0)
+  if (!url || !anonKey) {
+    throw new Error("Missing Supabase public authentication configuration.")
   }
 
-  return difference === 0
+  return { url, anonKey }
 }
 
-const readBasicCredentials = (authorization: string | null) => {
-  const match = authorization?.match(/^Basic\s+(.+)$/i)
+const getSupabaseServiceConfiguration = () => {
+  const url = process.env.SUPABASE_URL
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-  if (!match) return null
+  if (!url || !serviceRoleKey) {
+    throw new Error("Missing Supabase server configuration.")
+  }
+
+  return { url, serviceRoleKey }
+}
+
+export async function middleware(request: NextRequest) {
+  const isAdminApiRequest = request.nextUrl.pathname.startsWith("/api/admin/")
+  let response = NextResponse.next({ request })
 
   try {
-    const decoded = atob(match[1])
-    const separatorIndex = decoded.indexOf(":")
+    const { url, anonKey } = getSupabasePublicConfiguration()
+    const supabase = createServerClient(url, anonKey, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+          response = NextResponse.next({ request })
+          cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options))
+        },
+      },
+    })
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
-    if (separatorIndex < 0) return null
+    if (request.nextUrl.pathname === "/admin/login") {
+      if (user) {
+        return NextResponse.redirect(new URL("/admin", request.url))
+      }
 
-    return {
-      username: decoded.slice(0, separatorIndex),
-      password: decoded.slice(separatorIndex + 1),
+      return response
     }
+
+    if (!user) {
+      return isAdminApiRequest
+        ? NextResponse.json({ success: false }, { status: 401 })
+        : NextResponse.redirect(new URL("/admin/login", request.url))
+    }
+
+    const { url: serviceUrl, serviceRoleKey } = getSupabaseServiceConfiguration()
+    const serviceClient = createClient(serviceUrl, serviceRoleKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+        detectSessionInUrl: false,
+      },
+    })
+    const { data: adminUser, error: adminUserError } = await serviceClient
+      .from("admin_users")
+      .select("user_id")
+      .eq("user_id", user.id)
+      .eq("is_active", true)
+      .maybeSingle()
+
+    if (adminUserError || !adminUser) {
+      return isAdminApiRequest
+        ? NextResponse.json({ success: false }, { status: 401 })
+        : NextResponse.redirect(new URL("/admin/login", request.url))
+    }
+
+    return response
   } catch {
-    return null
+    return isAdminApiRequest
+      ? NextResponse.json({ success: false }, { status: 401 })
+      : new NextResponse("Admin authentication unavailable.", { status: 503 })
   }
-}
-
-export function middleware(request: NextRequest) {
-  const expectedUsername = process.env.ADMIN_USERNAME
-  const expectedPassword = process.env.ADMIN_PASSWORD
-
-  if (!expectedUsername || !expectedPassword) {
-    return unauthorizedResponse()
-  }
-
-  const credentials = readBasicCredentials(request.headers.get("authorization"))
-
-  if (
-    !credentials ||
-    !constantTimeEquals(credentials.username, expectedUsername) ||
-    !constantTimeEquals(credentials.password, expectedPassword)
-  ) {
-    return unauthorizedResponse()
-  }
-
-  return NextResponse.next()
 }
 
 export const config = {
