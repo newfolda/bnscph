@@ -27,11 +27,11 @@ export default function ProcessSection() {
   return (
     <section
       id="how-it-works"
-      className="relative z-20 isolate overflow-visible [overflow-x:clip] bg-[linear-gradient(180deg,#08090b_0%,#15171b_100%)] pb-10 pt-10 sm:pt-12 md:pb-12 md:pt-14"
+      className="relative z-20 isolate bg-[linear-gradient(180deg,#08090b_0%,#15171b_100%)] pb-10 md:pb-12"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.09)_0%,rgba(200,160,68,0.035)_34%,transparent_68%)] md:h-[42rem] md:w-[70rem]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-screen max-w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.09)_0%,rgba(200,160,68,0.035)_34%,transparent_68%)] md:h-[42rem] md:max-w-[70rem]"
       />
       <div
         aria-hidden="true"
@@ -41,7 +41,7 @@ export default function ProcessSection() {
           backgroundSize: "4px 4px",
         }}
       />
-      <Container className="relative z-10">
+      <Container className="relative z-10 -mt-6 sm:-mt-9 md:-mt-10 lg:-mt-14">
         <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
           <div className="mb-11 flex flex-col items-center text-center">
             <p className="mb-4 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
