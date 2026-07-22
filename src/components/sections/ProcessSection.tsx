@@ -31,13 +31,14 @@ export default function ProcessSection() {
     >
       <Container className="relative -mt-5 sm:-mt-7 md:-mt-8 lg:-mt-12">
         <div
-          className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14"
-          style={{
-            background:
-              "radial-gradient(ellipse at 0% 20%, rgba(190, 240, 215, 0.34) 0%, rgba(190, 240, 215, 0.16) 28%, transparent 58%), radial-gradient(ellipse at 48% -8%, rgba(255, 235, 170, 0.3) 0%, rgba(255, 235, 170, 0.14) 30%, transparent 62%), radial-gradient(ellipse at 100% 12%, rgba(255, 210, 225, 0.3) 0%, rgba(255, 210, 225, 0.14) 30%, transparent 60%), radial-gradient(ellipse at 5% 100%, rgba(195, 225, 255, 0.32) 0%, rgba(195, 225, 255, 0.15) 32%, transparent 62%), radial-gradient(ellipse at 95% 100%, rgba(220, 215, 255, 0.24) 0%, rgba(220, 215, 255, 0.11) 30%, transparent 60%), radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.82) 36%, transparent 72%), #ffffff",
-          }}
+          className="relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14"
         >
-          <div className="mb-11 flex flex-col items-center text-center">
+          <div
+            aria-hidden="true"
+            className="process-panel-ambient pointer-events-none absolute -inset-[18%] z-0"
+          />
+          <div className="relative z-10">
+            <div className="mb-11 flex flex-col items-center text-center">
             <p className="mb-4 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
               Process
             </p>
@@ -46,7 +47,7 @@ export default function ProcessSection() {
               3 SIMPLE STEPS.
             </p>
           </div>
-          <div
+            <div
             ref={gridRef}
             className="group/process relative grid gap-6 md:grid-cols-3"
             onPointerMove={(event) => {
@@ -72,7 +73,7 @@ export default function ProcessSection() {
               setProgress(nearestCardIndex * 50)
             }}
             onPointerLeave={() => setProgress(0)}
-          >
+            >
             <div
               aria-hidden="true"
               className="pointer-events-none absolute left-[calc((100%-3rem)/6)] right-[calc((100%-3rem)/6)] top-[2.375rem] z-0 hidden h-1 rounded-full bg-white/70 shadow-[inset_0_1px_2px_rgba(31,31,31,0.10)] md:block"
@@ -136,9 +137,50 @@ export default function ProcessSection() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </Container>
+      <style>{`
+        .process-panel-ambient {
+          background:
+            radial-gradient(ellipse at 0% 20%, rgba(190, 240, 215, 0.34) 0%, rgba(190, 240, 215, 0.16) 28%, transparent 58%),
+            radial-gradient(ellipse at 48% -8%, rgba(255, 235, 170, 0.3) 0%, rgba(255, 235, 170, 0.14) 30%, transparent 62%),
+            radial-gradient(ellipse at 100% 12%, rgba(255, 210, 225, 0.3) 0%, rgba(255, 210, 225, 0.14) 30%, transparent 60%),
+            radial-gradient(ellipse at 5% 100%, rgba(195, 225, 255, 0.32) 0%, rgba(195, 225, 255, 0.15) 32%, transparent 62%),
+            radial-gradient(ellipse at 95% 100%, rgba(220, 215, 255, 0.24) 0%, rgba(220, 215, 255, 0.11) 30%, transparent 60%),
+            radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.82) 36%, transparent 72%),
+            #ffffff;
+          background-size: 140% 140%;
+          opacity: 0.92;
+          animation: process-panel-ambient-flow 30s ease-in-out infinite;
+          will-change: transform, opacity, background-position;
+        }
+
+        @keyframes process-panel-ambient-flow {
+          0%, 100% {
+            transform: translate3d(-2%, -1%, 0) scale(1.03);
+            background-position: 0% 0%;
+            opacity: 0.92;
+          }
+          33% {
+            transform: translate3d(2%, 1%, 0) scale(1.06);
+            background-position: 40% 20%;
+            opacity: 1;
+          }
+          66% {
+            transform: translate3d(-1%, 2%, 0) scale(1.04);
+            background-position: 70% 60%;
+            opacity: 0.95;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .process-panel-ambient {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   )
 }
