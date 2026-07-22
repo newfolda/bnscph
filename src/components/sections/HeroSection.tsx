@@ -31,7 +31,7 @@ const particles = [
   { left: 98, top: 84, size: 4, duration: 28, delay: -7, opacity: 0.19, color: "var(--primary)", blur: true },
 ]
 
-const rotatingWords = ["Easiest", "Fastest", "Simplest", "Smartest"]
+const rotatingWords = ["Smartest", "Easiest", "Fastest", "Simplest"]
 const typewriterWords = ["hassle.", "headache.", "time wasted."]
 
 
@@ -287,7 +287,7 @@ export default function HeroSection() {
         <div className="flex gap-8 pb-40 pt-20">
           <div className="flex flex-1 flex-col justify-center">
             <h1
-              aria-label="The Easiest Way to Sell Your Car"
+              aria-label="The Smartest Way to Sell Your Car in the Philippines."
               className="max-w-xl text-5xl font-bold leading-[1.1] tracking-tight text-[var(--text-primary)]"
             >
               <span className="block lg:whitespace-nowrap">
@@ -311,16 +311,13 @@ export default function HeroSection() {
                 Way
               </span>
               <span className="block">to Sell Your Car</span>
-              <span className="block text-[0.82em] font-semibold text-[color:rgba(31,31,31,0.72)]">
+              <span className="mt-2 block text-[0.72em] font-semibold text-[var(--text-primary)]">
                 in the Philippines.
               </span>
             </h1>
-            <p aria-label="Maximum value. Zero hassle." className="mt-9 max-w-md text-lg font-medium leading-relaxed text-[color:rgba(31,31,31,0.82)]">
-              <span aria-hidden="true" className="block">
-                Maximum value.
-              </span>
-              <span aria-hidden="true" className="block">
-                Zero{" "}
+            <p aria-label="Maximum value. Zero hassle." className="mt-10 max-w-md text-lg font-medium leading-relaxed text-[color:rgba(31,31,31,0.86)] sm:whitespace-nowrap">
+              <span aria-hidden="true">
+                Maximum value. Zero{" "}
                 <span className="relative inline-block align-baseline text-[var(--primary-hover)]">
                   <span className="invisible">time wasted.</span>
                   <span className="absolute left-0 top-0 inline-flex items-baseline whitespace-nowrap">
@@ -334,10 +331,10 @@ export default function HeroSection() {
             <Button
               aria-label="See My Car's Value"
               onClick={openSellCarModal}
-              className="group relative mt-10 !flex h-16 w-full max-w-[19.5rem] items-center justify-center overflow-hidden border border-[var(--primary-hover)] !bg-[var(--primary)] px-5 !py-0 font-semibold !text-white shadow-[0_12px_28px_rgba(31,31,31,0.12),0_8px_20px_rgba(200,160,68,0.16)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:!bg-[var(--primary-hover)] hover:shadow-[0_16px_34px_rgba(31,31,31,0.14),0_12px_24px_rgba(200,160,68,0.22)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(31,31,31,0.1),0_6px_16px_rgba(200,160,68,0.14)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0 sm:px-6"
+              className="group relative mt-10 h-16 w-full max-w-[19.5rem] overflow-hidden border border-[var(--primary-hover)] !bg-[var(--primary)] !p-0 font-semibold !text-white shadow-[0_12px_28px_rgba(31,31,31,0.12),0_8px_20px_rgba(200,160,68,0.16)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:!bg-[var(--primary-hover)] hover:shadow-[0_16px_34px_rgba(31,31,31,0.14),0_12px_24px_rgba(200,160,68,0.22)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(31,31,31,0.1),0_6px_16px_rgba(200,160,68,0.14)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:active:translate-y-0"
               style={{ borderRadius: "2rem" }}
             >
-              <span className="relative z-10 whitespace-nowrap text-[0.8rem] font-bold uppercase tracking-[0.1em] text-white sm:text-[0.9rem]">
+              <span className="absolute inset-0 z-10 flex items-center justify-center whitespace-nowrap text-[0.8rem] font-bold uppercase tracking-[0.1em] text-white sm:text-[0.9rem]">
                 See My Car&apos;s Value
               </span>
               <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full bg-white/20 text-white transition-[background-color,transform] duration-200 ease-out group-hover:translate-x-1 group-hover:bg-white/30 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
