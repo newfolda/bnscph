@@ -27,11 +27,35 @@ export default function ProcessSection() {
   return (
     <section
       id="how-it-works"
-      className="relative z-20 isolate bg-[linear-gradient(180deg,#08090b_0%,#15171b_100%)] pb-10 md:pb-12"
+      className="relative z-20 isolate bg-[linear-gradient(180deg,#07080a_0%,#101216_48%,#17191e_100%)] pb-10 md:pb-12"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-screen max-w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.09)_0%,rgba(200,160,68,0.035)_34%,transparent_68%)] md:h-[42rem] md:max-w-[70rem]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_28%,rgba(0,0,0,0.22)_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-[42%] h-[30rem] w-screen max-w-[52rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,160,68,0.09)_0%,rgba(200,160,68,0.035)_34%,transparent_68%)] md:h-[42rem] md:max-w-[70rem]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-28 top-6 hidden h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(214,224,232,0.07),transparent_68%)] md:block"
+      />
+      <div
+        aria-hidden="true"
+        className="process-showroom-grid pointer-events-none absolute inset-x-[-20%] bottom-[-18%] top-[45%] hidden md:block"
+      />
+      <div
+        aria-hidden="true"
+        className="process-light-streak process-light-streak-one pointer-events-none absolute left-[8%] top-[28%] hidden h-px w-[28%] bg-[linear-gradient(90deg,transparent,rgba(255,247,225,0.22),transparent)] blur-[1px] md:block"
+      />
+      <div
+        aria-hidden="true"
+        className="process-light-streak process-light-streak-two pointer-events-none absolute right-[6%] top-[51%] hidden h-px w-[24%] bg-[linear-gradient(90deg,transparent,rgba(200,160,68,0.2),transparent)] blur-[1px] md:block"
+      />
+      <div
+        aria-hidden="true"
+        className="process-light-streak process-light-streak-three pointer-events-none absolute left-[28%] top-[70%] hidden h-px w-[20%] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent)] blur-[1px] lg:block"
       />
       <div
         aria-hidden="true"
@@ -40,6 +64,10 @@ export default function ProcessSection() {
           backgroundImage: "radial-gradient(rgba(255,255,255,0.18) 0.55px, transparent 0.7px)",
           backgroundSize: "4px 4px",
         }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-[58%] h-48 w-screen max-w-[60rem] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse,rgba(255,249,235,0.07)_0%,rgba(200,160,68,0.055)_38%,transparent_72%)]"
       />
       <Container className="relative z-10 -mt-6 sm:-mt-9 md:-mt-10 lg:-mt-14">
         <div className="mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
@@ -145,6 +173,44 @@ export default function ProcessSection() {
           </div>
         </div>
       </Container>
+      <style>{`
+        .process-showroom-grid {
+          background-image:
+            repeating-linear-gradient(90deg, rgba(220, 226, 232, 0.08) 0 1px, transparent 1px 92px),
+            repeating-linear-gradient(0deg, rgba(220, 226, 232, 0.07) 0 1px, transparent 1px 58px),
+            linear-gradient(66deg, transparent 46%, rgba(200, 160, 68, 0.1) 50%, transparent 54%);
+          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.9) 23%, rgba(0, 0, 0, 0.75) 68%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.9) 23%, rgba(0, 0, 0, 0.75) 68%, transparent 100%);
+          transform: perspective(780px) rotateX(58deg) scale(1.3);
+          transform-origin: top center;
+        }
+
+        .process-light-streak {
+          animation: process-showroom-light-drift 18s ease-in-out infinite alternate;
+          will-change: transform;
+        }
+
+        .process-light-streak-two {
+          animation-duration: 22s;
+          animation-delay: -7s;
+        }
+
+        .process-light-streak-three {
+          animation-duration: 20s;
+          animation-delay: -12s;
+        }
+
+        @keyframes process-showroom-light-drift {
+          from { transform: translate3d(-10px, 0, 0); }
+          to { transform: translate3d(10px, 0, 0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .process-light-streak {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   )
 }
