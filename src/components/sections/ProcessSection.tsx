@@ -265,38 +265,39 @@ export default function ProcessSection() {
         .process-card-ripple {
           position: absolute;
           z-index: 0;
-          width: 28px;
-          height: 28px;
-          border: 1px solid rgba(255, 255, 255, 0.55);
-          border-radius: 9999px;
-          box-shadow: 0 0 0 1px rgba(180, 205, 220, 0.2), 0 0 0 2px rgba(200, 160, 68, 0.06);
+          top: 0;
+          width: calc((100% - 3rem) / 3);
+          height: 290px;
+          border: 1.5px solid rgba(255, 255, 255, 0.72);
+          border-radius: 1.625rem;
+          box-shadow:
+            0 0 24px rgba(218, 235, 245, 0.12),
+            0 0 0 1px rgba(170, 205, 220, 0.32),
+            0 0 0 2px rgba(200, 160, 68, 0.08);
           opacity: 0;
-          transform: translate3d(-50%, -50%, 0) scale(1);
+          transform: scale(1.08);
           transform-origin: center;
         }
 
         .process-card-ripple--1 {
-          left: calc((100% - 3rem) / 6);
+          left: 0;
         }
 
         .process-card-ripple--2 {
-          left: 50%;
+          left: calc((100% - 3rem) / 3 + 1.5rem);
         }
 
         .process-card-ripple--3 {
-          left: calc(100% - ((100% - 3rem) / 6));
-        }
-
-        .process-card-ripple--primary {
-          top: 84%;
+          right: 0;
         }
 
         .process-card-ripple--secondary {
-          top: 84%;
-          width: 32px;
-          height: 32px;
-          border-color: rgba(180, 205, 220, 0.3);
-          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28), 0 0 0 2px rgba(200, 160, 68, 0.04);
+          border-width: 1px;
+          border-color: rgba(170, 205, 220, 0.32);
+          box-shadow:
+            0 0 20px rgba(218, 235, 245, 0.08),
+            0 0 0 1px rgba(255, 255, 255, 0.34),
+            0 0 0 2px rgba(200, 160, 68, 0.06);
         }
 
         .process-cards-grid:has(.process-glass-card--1:hover) .process-card-ripple--1.process-card-ripple--primary,
@@ -305,7 +306,7 @@ export default function ProcessSection() {
         .process-cards-grid:has(.process-glass-card--1:focus-within) .process-card-ripple--1.process-card-ripple--primary,
         .process-cards-grid:has(.process-glass-card--2:focus-within) .process-card-ripple--2.process-card-ripple--primary,
         .process-cards-grid:has(.process-glass-card--3:focus-within) .process-card-ripple--3.process-card-ripple--primary {
-          animation: process-card-ripple-primary 1050ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+          animation: process-card-ripple-primary 1050ms cubic-bezier(0.22, 1, 0.36, 1) 60ms;
         }
 
         .process-cards-grid:has(.process-glass-card--1:hover) .process-card-ripple--1.process-card-ripple--secondary,
@@ -314,53 +315,59 @@ export default function ProcessSection() {
         .process-cards-grid:has(.process-glass-card--1:focus-within) .process-card-ripple--1.process-card-ripple--secondary,
         .process-cards-grid:has(.process-glass-card--2:focus-within) .process-card-ripple--2.process-card-ripple--secondary,
         .process-cards-grid:has(.process-glass-card--3:focus-within) .process-card-ripple--3.process-card-ripple--secondary {
-          animation: process-card-ripple-secondary 1250ms cubic-bezier(0.22, 1, 0.36, 1) 170ms both;
+          animation: process-card-ripple-secondary 1250ms cubic-bezier(0.22, 1, 0.36, 1) 170ms;
         }
 
         @keyframes process-card-ripple-primary {
-          0% { opacity: 0.45; transform: translate3d(-50%, -50%, 0) scale(1); }
-          100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(14); }
+          0% { opacity: 0.65; transform: scale(1.08); }
+          100% { opacity: 0; transform: scale(1.36); }
         }
 
         @keyframes process-card-ripple-secondary {
-          0% { opacity: 0.25; transform: translate3d(-50%, -50%, 0) scale(1); }
-          100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(13); }
+          0% { opacity: 0.42; transform: scale(1.1); }
+          100% { opacity: 0; transform: scale(1.44); }
         }
 
         @media (max-width: 767px) {
+          .process-card-ripple {
+            left: 0;
+            width: 100%;
+            height: 290px;
+            opacity: 0;
+          }
+
           .process-card-ripple--1 {
-            left: 50%;
-            top: 28%;
+            top: 0;
           }
 
           .process-card-ripple--2 {
-            left: 50%;
-            top: 61%;
+            top: 314px;
           }
 
           .process-card-ripple--3 {
-            left: 50%;
-            top: 94%;
-          }
-
-          .process-card-ripple--primary {
-            width: 24px;
-            height: 24px;
-          }
-
-          .process-card-ripple--secondary {
-            width: 28px;
-            height: 28px;
+            top: 628px;
           }
 
           @keyframes process-card-ripple-primary {
-            0% { opacity: 0.45; transform: translate3d(-50%, -50%, 0) scale(1); }
-            100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(11); }
+            0% { opacity: 0.5; transform: scale(1.06); }
+            100% { opacity: 0; transform: scale(1.22); }
           }
 
           @keyframes process-card-ripple-secondary {
-            0% { opacity: 0.25; transform: translate3d(-50%, -50%, 0) scale(1); }
-            100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(11); }
+            0% { opacity: 0.3; transform: scale(1.08); }
+            100% { opacity: 0; transform: scale(1.28); }
+          }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+          @keyframes process-card-ripple-primary {
+            0% { opacity: 0.65; transform: scale(1.08); }
+            100% { opacity: 0; transform: scale(1.3); }
+          }
+
+          @keyframes process-card-ripple-secondary {
+            0% { opacity: 0.42; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1.36); }
           }
         }
 
