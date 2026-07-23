@@ -77,27 +77,27 @@ export default function ProcessSection() {
             >
             <span
               aria-hidden="true"
-              className="process-card-ripple process-card-ripple--1 process-card-ripple--primary pointer-events-none"
+              className="process-liquid-wave process-liquid-wave--1 process-liquid-wave--primary pointer-events-none"
             />
             <span
               aria-hidden="true"
-              className="process-card-ripple process-card-ripple--1 process-card-ripple--secondary pointer-events-none"
+              className="process-liquid-wave process-liquid-wave--1 process-liquid-wave--secondary pointer-events-none"
             />
             <span
               aria-hidden="true"
-              className="process-card-ripple process-card-ripple--2 process-card-ripple--primary pointer-events-none"
+              className="process-liquid-wave process-liquid-wave--2 process-liquid-wave--primary pointer-events-none"
             />
             <span
               aria-hidden="true"
-              className="process-card-ripple process-card-ripple--2 process-card-ripple--secondary pointer-events-none"
+              className="process-liquid-wave process-liquid-wave--2 process-liquid-wave--secondary pointer-events-none"
             />
             <span
               aria-hidden="true"
-              className="process-card-ripple process-card-ripple--3 process-card-ripple--primary pointer-events-none"
+              className="process-liquid-wave process-liquid-wave--3 process-liquid-wave--primary pointer-events-none"
             />
             <span
               aria-hidden="true"
-              className="process-card-ripple process-card-ripple--3 process-card-ripple--secondary pointer-events-none"
+              className="process-liquid-wave process-liquid-wave--3 process-liquid-wave--secondary pointer-events-none"
             />
             <div
               aria-hidden="true"
@@ -272,112 +272,165 @@ export default function ProcessSection() {
           transform: translate3d(6px, 6px, 0) scale(1.02);
         }
 
-        .process-card-ripple {
+        .process-liquid-wave {
           position: absolute;
           z-index: 0;
           top: 0;
           width: calc((100% - 3rem) / 3);
           height: 290px;
-          border: 1.5px solid rgba(255, 255, 255, 0.72);
           border-radius: 1.625rem;
-          box-shadow:
-            0 0 24px rgba(218, 235, 245, 0.12),
-            0 0 0 1px rgba(170, 205, 220, 0.32),
-            0 0 0 2px rgba(200, 160, 68, 0.08);
+          background-size: 150% 150%;
           opacity: 0;
-          transform: scale(1.08);
+          transform: scale(0.98);
           transform-origin: center;
         }
 
-        .process-card-ripple--1 {
+        .process-liquid-wave--1 {
           left: 0;
+          --liquid-x: -14px;
+          --liquid-y: -8px;
+          --liquid-secondary-x: 8px;
+          --liquid-secondary-y: 10px;
+          background-image:
+            radial-gradient(ellipse at 20% 35%, rgba(190, 240, 215, 0.3) 0%, rgba(190, 240, 215, 0.1) 34%, transparent 68%),
+            radial-gradient(ellipse at 78% 28%, rgba(255, 235, 170, 0.2) 0%, transparent 62%),
+            radial-gradient(ellipse at 55% 88%, rgba(195, 225, 255, 0.18) 0%, transparent 64%);
         }
 
-        .process-card-ripple--2 {
+        .process-liquid-wave--2 {
           left: calc((100% - 3rem) / 3 + 1.5rem);
+          --liquid-x: 0px;
+          --liquid-y: -14px;
+          --liquid-secondary-x: -10px;
+          --liquid-secondary-y: 10px;
+          background-image:
+            radial-gradient(ellipse at 48% 16%, rgba(255, 235, 170, 0.28) 0%, rgba(255, 235, 170, 0.1) 34%, transparent 68%),
+            radial-gradient(ellipse at 18% 66%, rgba(190, 240, 215, 0.18) 0%, transparent 62%),
+            radial-gradient(ellipse at 82% 78%, rgba(220, 215, 255, 0.16) 0%, transparent 64%);
         }
 
-        .process-card-ripple--3 {
+        .process-liquid-wave--3 {
           right: 0;
+          --liquid-x: 14px;
+          --liquid-y: -8px;
+          --liquid-secondary-x: -8px;
+          --liquid-secondary-y: 12px;
+          background-image:
+            radial-gradient(ellipse at 80% 30%, rgba(255, 210, 225, 0.28) 0%, rgba(255, 210, 225, 0.1) 34%, transparent 68%),
+            radial-gradient(ellipse at 28% 74%, rgba(220, 215, 255, 0.18) 0%, transparent 62%),
+            radial-gradient(ellipse at 62% 90%, rgba(195, 225, 255, 0.16) 0%, transparent 64%);
         }
 
-        .process-card-ripple--secondary {
-          border-width: 1px;
-          border-color: rgba(170, 205, 220, 0.32);
-          box-shadow:
-            0 0 20px rgba(218, 235, 245, 0.08),
-            0 0 0 1px rgba(255, 255, 255, 0.34),
-            0 0 0 2px rgba(200, 160, 68, 0.06);
+        .process-cards-grid:has(.process-glass-card--1:hover) .process-liquid-wave--1.process-liquid-wave--primary,
+        .process-cards-grid:has(.process-glass-card--2:hover) .process-liquid-wave--2.process-liquid-wave--primary,
+        .process-cards-grid:has(.process-glass-card--3:hover) .process-liquid-wave--3.process-liquid-wave--primary,
+        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-liquid-wave--1.process-liquid-wave--primary,
+        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-liquid-wave--2.process-liquid-wave--primary,
+        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-liquid-wave--3.process-liquid-wave--primary {
+          animation: process-liquid-wave-primary 680ms cubic-bezier(0.22, 1, 0.36, 1) 60ms;
         }
 
-        .process-cards-grid:has(.process-glass-card--1:hover) .process-card-ripple--1.process-card-ripple--primary,
-        .process-cards-grid:has(.process-glass-card--2:hover) .process-card-ripple--2.process-card-ripple--primary,
-        .process-cards-grid:has(.process-glass-card--3:hover) .process-card-ripple--3.process-card-ripple--primary,
-        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-card-ripple--1.process-card-ripple--primary,
-        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-card-ripple--2.process-card-ripple--primary,
-        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-card-ripple--3.process-card-ripple--primary {
-          animation: process-card-ripple-primary 1050ms cubic-bezier(0.22, 1, 0.36, 1) 60ms;
+        .process-cards-grid:has(.process-glass-card--1:hover) .process-liquid-wave--1.process-liquid-wave--secondary,
+        .process-cards-grid:has(.process-glass-card--2:hover) .process-liquid-wave--2.process-liquid-wave--secondary,
+        .process-cards-grid:has(.process-glass-card--3:hover) .process-liquid-wave--3.process-liquid-wave--secondary,
+        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-liquid-wave--1.process-liquid-wave--secondary,
+        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-liquid-wave--2.process-liquid-wave--secondary,
+        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-liquid-wave--3.process-liquid-wave--secondary {
+          animation: process-liquid-wave-secondary 1100ms cubic-bezier(0.22, 1, 0.36, 1) 170ms;
         }
 
-        .process-cards-grid:has(.process-glass-card--1:hover) .process-card-ripple--1.process-card-ripple--secondary,
-        .process-cards-grid:has(.process-glass-card--2:hover) .process-card-ripple--2.process-card-ripple--secondary,
-        .process-cards-grid:has(.process-glass-card--3:hover) .process-card-ripple--3.process-card-ripple--secondary,
-        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-card-ripple--1.process-card-ripple--secondary,
-        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-card-ripple--2.process-card-ripple--secondary,
-        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-card-ripple--3.process-card-ripple--secondary {
-          animation: process-card-ripple-secondary 1250ms cubic-bezier(0.22, 1, 0.36, 1) 170ms;
+        @keyframes process-liquid-wave-primary {
+          0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.98); }
+          45% { opacity: 0.14; transform: translate3d(var(--liquid-x), var(--liquid-y), 0) scale(1.07); }
+          100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.02); }
         }
 
-        @keyframes process-card-ripple-primary {
-          0% { filter: blur(0); opacity: 0.65; transform: scale(1.08); }
-          100% { filter: blur(0.65px); opacity: 0; transform: scale(1.36); }
-        }
-
-        @keyframes process-card-ripple-secondary {
-          0% { filter: blur(0); opacity: 0.42; transform: scale(1.1); }
-          100% { filter: blur(0.65px); opacity: 0; transform: scale(1.44); }
+        @keyframes process-liquid-wave-secondary {
+          0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.98); }
+          40% { opacity: 0.09; transform: translate3d(var(--liquid-secondary-x), var(--liquid-secondary-y), 0) scale(1.05); }
+          100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
         }
 
         @media (max-width: 767px) {
-          .process-card-ripple {
+          .process-panel-ambient {
+            animation: none;
+          }
+
+          .process-liquid-wave {
             left: 0;
             width: 100%;
             height: 290px;
-            opacity: 0;
           }
 
-          .process-card-ripple--1 {
+          .process-liquid-wave--1 {
             top: 0;
+            --liquid-x: -9px;
+            --liquid-y: -5px;
+            --liquid-secondary-x: 5px;
+            --liquid-secondary-y: 6px;
           }
 
-          .process-card-ripple--2 {
+          .process-liquid-wave--2 {
             top: 314px;
+            --liquid-x: 0px;
+            --liquid-y: -9px;
+            --liquid-secondary-x: -6px;
+            --liquid-secondary-y: 6px;
           }
 
-          .process-card-ripple--3 {
+          .process-liquid-wave--3 {
             top: 628px;
+            --liquid-x: 9px;
+            --liquid-y: -5px;
+            --liquid-secondary-x: -5px;
+            --liquid-secondary-y: 8px;
           }
 
-          @keyframes process-card-ripple-primary {
-            0% { filter: blur(0); opacity: 0.5; transform: scale(1.06); }
-            100% { filter: blur(0.55px); opacity: 0; transform: scale(1.22); }
+          @keyframes process-liquid-wave-primary {
+            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
+            45% { opacity: 0.1; transform: translate3d(var(--liquid-x), var(--liquid-y), 0) scale(1.04); }
+            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
           }
 
-          @keyframes process-card-ripple-secondary {
-            0% { filter: blur(0); opacity: 0.3; transform: scale(1.08); }
-            100% { filter: blur(0.55px); opacity: 0; transform: scale(1.28); }
+          @keyframes process-liquid-wave-secondary {
+            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
+            40% { opacity: 0.06; transform: translate3d(var(--liquid-secondary-x), var(--liquid-secondary-y), 0) scale(1.03); }
+            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
           }
         }
 
         @media (min-width: 768px) and (max-width: 1023px) {
-          @keyframes process-card-ripple-primary {
-            0% { filter: blur(0); opacity: 0.65; transform: scale(1.08); }
-            100% { filter: blur(0.6px); opacity: 0; transform: scale(1.3); }
+          .process-liquid-wave--1 {
+            --liquid-x: -11px;
+            --liquid-y: -6px;
+            --liquid-secondary-x: 6px;
+            --liquid-secondary-y: 8px;
           }
 
-          @keyframes process-card-ripple-secondary {
-            0% { filter: blur(0); opacity: 0.42; transform: scale(1.1); }
-            100% { filter: blur(0.6px); opacity: 0; transform: scale(1.36); }
+          .process-liquid-wave--2 {
+            --liquid-x: 0px;
+            --liquid-y: -11px;
+            --liquid-secondary-x: -8px;
+            --liquid-secondary-y: 8px;
+          }
+
+          .process-liquid-wave--3 {
+            --liquid-x: 11px;
+            --liquid-y: -6px;
+            --liquid-secondary-x: -6px;
+            --liquid-secondary-y: 10px;
+          }
+
+          @keyframes process-liquid-wave-primary {
+            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
+            45% { opacity: 0.12; transform: translate3d(var(--liquid-x), var(--liquid-y), 0) scale(1.05); }
+            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.02); }
+          }
+
+          @keyframes process-liquid-wave-secondary {
+            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
+            40% { opacity: 0.08; transform: translate3d(var(--liquid-secondary-x), var(--liquid-secondary-y), 0) scale(1.04); }
+            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
           }
         }
 
@@ -413,7 +466,7 @@ export default function ProcessSection() {
             transform: none;
           }
 
-          .process-card-ripple {
+          .process-liquid-wave {
             animation: none !important;
           }
         }
