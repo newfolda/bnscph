@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import Image from "next/image"
 import Container from "../ui/Container"
+import SectionPill from "../ui/SectionPill"
 
 const processSteps = [
   {
@@ -39,9 +40,9 @@ export default function ProcessSection() {
           />
           <div className="relative z-10">
             <div className="mb-11 flex flex-col items-center text-center">
-            <p className="mb-4 w-fit rounded-full border border-[var(--border)] bg-[var(--primary-light)] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
+            <SectionPill className="mb-4">
               Process
-            </p>
+            </SectionPill>
             <h2 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">How It Works?</h2>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
               3 SIMPLE STEPS.

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Container from "../ui/Container"
+import SectionPill from "../ui/SectionPill"
 
 const faqs = [
   {
@@ -53,9 +54,9 @@ export default function FaqSection() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <header className="lg:sticky lg:top-28 lg:self-start">
-            <p className="w-fit rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
+            <SectionPill>
               FAQ
-            </p>
+            </SectionPill>
             <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">Frequently Asked Questions</h2>
             <p className="mt-3 max-w-xl leading-relaxed text-[var(--text-secondary)]">
               Answers to the most common questions about selling your car with Buy and Sell Cars Philippines.

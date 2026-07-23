@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Container from "../ui/Container"
+import SectionPill from "../ui/SectionPill"
 
 const PAIR_COUNT = 6
 const PAIR_DURATION_MS = 2400
@@ -274,9 +275,9 @@ export default function WhyChooseUsSection() {
 
       <Container>
         <header className="relative max-w-3xl">
-          <p className="w-fit rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
+          <SectionPill>
             WHY CHOOSE US
-          </p>
+          </SectionPill>
           <h2 className="mt-3 text-4xl font-bold leading-[1.06] tracking-[-.04em] text-[var(--text-primary)] md:text-5xl lg:max-w-2xl lg:text-[3.35rem]">
             The simpler, safer way to sell your car—for a fair market price.
           </h2>

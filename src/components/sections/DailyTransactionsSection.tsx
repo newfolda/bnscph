@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { latestTransactions } from "@/src/data/latestTransactions"
 import Container from "../ui/Container"
+import SectionPill from "../ui/SectionPill"
 
 const purchasedAtFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -35,9 +36,9 @@ export default function DailyTransactionsSection() {
     <section id="latest-transactions" className="overflow-hidden bg-[var(--background-alt)] py-16 md:py-20">
       <Container>
         <div className="flex flex-col items-center text-center">
-          <p className="w-fit rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--primary)]">
+          <SectionPill>
             Latest Transactions
-          </p>
+          </SectionPill>
           <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">
             Cars Recently Purchased by Buy and Sell Cars Philippines
           </h2>
