@@ -360,14 +360,10 @@ export default function BenefitsSection() {
         <header className="benefits-dark-header mx-auto max-w-[42rem] text-center">
               <SectionPill className="benefits-dark-pill mb-4">WHY CHOOSE US</SectionPill>
               <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-[#0A0A0A] sm:text-5xl">
-                The simpler, safer way to
-                <br />
-                <span className="text-[var(--primary)]">sell your car</span> for a fair price.
+                Sell your car. Not your time.
               </h2>
               <p className="mx-auto mt-5 max-w-[34rem] text-base leading-relaxed text-[var(--text-secondary)]">
-                We remove the uncertainty, handle the process,
-                <br className="hidden sm:block" />
-                and get you paid securely.
+                From valuation to payment, we handle every step so you can sell with confidence.
               </p>
         </header>
 
