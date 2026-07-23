@@ -598,9 +598,30 @@ export default function BenefitsSection() {
           color: rgba(245, 245, 243, 0.68);
         }
 
-        .benefits-dark-pill.benefits-dark-pill,
-        .benefits-dark-pill.benefits-dark-pill:is(:hover, :focus-visible, :focus-within) {
+        .benefits-dark-pill.benefits-dark-pill {
+          border-color: rgba(208, 160, 45, 0.75);
+          outline-color: rgba(208, 160, 45, 0.44);
+          background: linear-gradient(135deg, rgba(255, 236, 180, 0.92), rgba(233, 190, 74, 0.82), rgba(247, 220, 150, 0.88));
+          box-shadow: 0 8px 22px rgba(195, 150, 35, 0.18), 0 2px 6px rgba(20, 24, 32, 0.07), inset 0 1px 0 rgba(255, 250, 225, 0.95), inset 0 -1px 0 rgba(164, 119, 23, 0.22);
           color: #0a0a0a;
+        }
+
+        .benefits-dark-pill.benefits-dark-pill:is(:hover, :focus-visible, :focus-within) {
+          border-color: rgba(208, 160, 45, 0.75);
+          outline-color: rgba(208, 160, 45, 0.44);
+          background: linear-gradient(135deg, rgba(255, 236, 180, 0.92), rgba(233, 190, 74, 0.82), rgba(247, 220, 150, 0.88));
+          box-shadow: 0 10px 28px rgba(195, 150, 35, 0.22), 0 3px 8px rgba(20, 24, 32, 0.08), inset 0 1px 0 rgba(255, 250, 225, 0.95), inset 0 -1px 0 rgba(164, 119, 23, 0.22);
+          color: #0a0a0a;
+        }
+
+        .benefits-dark-pill.benefits-dark-pill::before,
+        .benefits-dark-pill.benefits-dark-pill:is(:hover, :focus-visible, :focus-within)::before {
+          background: radial-gradient(ellipse at 18% 12%, rgba(255, 253, 239, 0.98) 0%, rgba(255, 239, 187, 0.62) 12%, transparent 36%);
+        }
+
+        .benefits-dark-pill.benefits-dark-pill::after,
+        .benefits-dark-pill.benefits-dark-pill:is(:hover, :focus-visible, :focus-within)::after {
+          background: linear-gradient(135deg, transparent 48%, rgba(175, 123, 20, 0.2) 76%, rgba(255, 247, 211, 0.68) 100%);
         }
 
         .scorecard-panel--traditional h3 {
