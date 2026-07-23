@@ -217,6 +217,7 @@ export default function ProcessSection() {
           pointer-events: none;
           content: "";
           border-radius: inherit;
+          transition: transform 500ms ease, opacity 500ms ease;
         }
 
         .process-glass-card::before {
@@ -231,12 +232,13 @@ export default function ProcessSection() {
 
         .process-glass-card::after {
           inset: 1px;
-          background: linear-gradient(
-            135deg,
-            transparent 48%,
-            rgba(168, 191, 204, 0.13) 76%,
-            rgba(255, 255, 255, 0.48) 100%
-          );
+          background:
+            radial-gradient(ellipse at 0% 20%, rgba(190, 240, 215, 0.1) 0%, transparent 58%),
+            radial-gradient(ellipse at 100% 12%, rgba(255, 210, 225, 0.08) 0%, transparent 60%),
+            radial-gradient(ellipse at 5% 100%, rgba(195, 225, 255, 0.1) 0%, transparent 62%),
+            linear-gradient(135deg, transparent 48%, rgba(168, 191, 204, 0.13) 76%, rgba(255, 255, 255, 0.48) 100%);
+          background-size: 140% 140%;
+          background-position: 50% 50%;
         }
 
         .process-glass-card > * {
@@ -254,12 +256,20 @@ export default function ProcessSection() {
             rgba(255, 255, 255, 0.58) 100%
           );
           box-shadow:
-            0 20px 40px rgba(20, 24, 32, 0.14),
-            0 6px 14px rgba(20, 24, 32, 0.07),
+            0 24px 48px rgba(20, 24, 32, 0.11),
+            0 10px 20px rgba(20, 24, 32, 0.05),
             inset 0 1px 0 rgba(255, 255, 255, 0.98),
             inset 0 -1px 0 rgba(120, 135, 150, 0.16);
           filter: brightness(1.03) saturate(1.05);
           transform: translateY(-5px);
+        }
+
+        .process-glass-card:is(:hover, :focus-within)::before {
+          transform: translate3d(8px, 8px, 0);
+        }
+
+        .process-glass-card:is(:hover, :focus-within)::after {
+          transform: translate3d(6px, 6px, 0) scale(1.02);
         }
 
         .process-card-ripple {
@@ -319,13 +329,13 @@ export default function ProcessSection() {
         }
 
         @keyframes process-card-ripple-primary {
-          0% { opacity: 0.65; transform: scale(1.08); }
-          100% { opacity: 0; transform: scale(1.36); }
+          0% { filter: blur(0); opacity: 0.65; transform: scale(1.08); }
+          100% { filter: blur(0.65px); opacity: 0; transform: scale(1.36); }
         }
 
         @keyframes process-card-ripple-secondary {
-          0% { opacity: 0.42; transform: scale(1.1); }
-          100% { opacity: 0; transform: scale(1.44); }
+          0% { filter: blur(0); opacity: 0.42; transform: scale(1.1); }
+          100% { filter: blur(0.65px); opacity: 0; transform: scale(1.44); }
         }
 
         @media (max-width: 767px) {
@@ -349,25 +359,25 @@ export default function ProcessSection() {
           }
 
           @keyframes process-card-ripple-primary {
-            0% { opacity: 0.5; transform: scale(1.06); }
-            100% { opacity: 0; transform: scale(1.22); }
+            0% { filter: blur(0); opacity: 0.5; transform: scale(1.06); }
+            100% { filter: blur(0.55px); opacity: 0; transform: scale(1.22); }
           }
 
           @keyframes process-card-ripple-secondary {
-            0% { opacity: 0.3; transform: scale(1.08); }
-            100% { opacity: 0; transform: scale(1.28); }
+            0% { filter: blur(0); opacity: 0.3; transform: scale(1.08); }
+            100% { filter: blur(0.55px); opacity: 0; transform: scale(1.28); }
           }
         }
 
         @media (min-width: 768px) and (max-width: 1023px) {
           @keyframes process-card-ripple-primary {
-            0% { opacity: 0.65; transform: scale(1.08); }
-            100% { opacity: 0; transform: scale(1.3); }
+            0% { filter: blur(0); opacity: 0.65; transform: scale(1.08); }
+            100% { filter: blur(0.6px); opacity: 0; transform: scale(1.3); }
           }
 
           @keyframes process-card-ripple-secondary {
-            0% { opacity: 0.42; transform: scale(1.1); }
-            100% { opacity: 0; transform: scale(1.36); }
+            0% { filter: blur(0); opacity: 0.42; transform: scale(1.1); }
+            100% { filter: blur(0.6px); opacity: 0; transform: scale(1.36); }
           }
         }
 
@@ -395,6 +405,11 @@ export default function ProcessSection() {
           }
 
           .process-glass-card:is(:hover, :focus-within) {
+            transform: none;
+          }
+
+          .process-glass-card:is(:hover, :focus-within)::before,
+          .process-glass-card:is(:hover, :focus-within)::after {
             transform: none;
           }
 
