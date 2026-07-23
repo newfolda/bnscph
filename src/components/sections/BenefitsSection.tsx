@@ -102,6 +102,31 @@ function ScorecardRow({ row, tone }: { row: ScoreRow; tone: "traditional" | "rec
   )
 }
 
+function OutcomeCarSilhouette() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="scorecard-outcome-car"
+      viewBox="0 0 220 76"
+      fill="none"
+    >
+      <path
+        d="M13 52.5h8.5l8.5-20.8c1.5-3.7 5.2-6.2 9.2-6.2h67.6c4.3 0 8.3 1.8 11.1 5l16.6 18.6h43.6c10.9 0 19.8 8.8 19.8 19.7v1.2H13V52.5Z"
+        fill="currentColor"
+      />
+      <path
+        d="M44.5 30.8h30.1v17.6H35.8l5.5-13.4c.5-1.2 1.7-2.2 3.2-2.2ZM81.5 30.8h23.4c2.1 0 4 .9 5.4 2.5l13.5 15.1H81.5V30.8Z"
+        fill="rgba(255,255,255,0.14)"
+      />
+      <circle cx="52" cy="68" r="10" fill="currentColor" />
+      <circle cx="52" cy="68" r="4.2" fill="rgba(255,255,255,0.18)" />
+      <circle cx="159" cy="68" r="10" fill="currentColor" />
+      <circle cx="159" cy="68" r="4.2" fill="rgba(255,255,255,0.18)" />
+      <path d="M21 53h177" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export default function BenefitsSection() {
   return (
     <section className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#090B0D_0%,#050607_100%)] py-14 sm:py-16 lg:py-24">
@@ -149,6 +174,7 @@ export default function BenefitsSection() {
                 </ul>
 
                 <footer className="scorecard-outcome scorecard-outcome--traditional mt-6 rounded-2xl p-4">
+                    <OutcomeCarSilhouette />
                     <span aria-hidden="true" className="scorecard-outcome-icon">{"\u2639"}</span>
                     <div>
                       <h4>Unpredictable outcome.</h4>
@@ -181,6 +207,7 @@ export default function BenefitsSection() {
                 </ul>
 
                 <footer className="scorecard-outcome scorecard-outcome--recommended mt-6 rounded-2xl p-4">
+                    <OutcomeCarSilhouette />
                     <span aria-hidden="true" className="scorecard-outcome-icon">{"\u263A"}</span>
                     <div>
                       <h4>Predictable outcome.</h4>
@@ -531,11 +558,37 @@ export default function BenefitsSection() {
         }
 
         .scorecard-outcome {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
           display: flex;
           align-items: center;
           gap: 0.8rem;
           margin-top: 1.8rem;
           transition: background 360ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .scorecard-outcome-car {
+          position: absolute;
+          right: -1rem;
+          bottom: -0.8rem;
+          z-index: 0;
+          width: 10.5rem;
+          height: auto;
+          pointer-events: none;
+          mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 18%, black 52%, black 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 18%, black 52%, black 100%);
+          transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 360ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .scorecard-outcome > :not(.scorecard-outcome-car) {
+          position: relative;
+          z-index: 1;
+        }
+
+        .scorecard-outcome > div {
+          min-width: 0;
+          max-width: calc(100% - 5rem);
         }
 
         .scorecard-outcome-icon {
@@ -572,6 +625,11 @@ export default function BenefitsSection() {
           color: #e26357;
         }
 
+        .scorecard-outcome--traditional .scorecard-outcome-car {
+          color: #151d24;
+          opacity: 0.22;
+        }
+
         .scorecard-outcome--recommended {
           background: linear-gradient(135deg, rgba(232, 183, 63, 0.94), rgba(202, 150, 42, 0.88));
           box-shadow: inset 0 1px 0 rgba(255, 244, 201, 0.5), inset 0 -1px 0 rgba(104, 66, 7, 0.22);
@@ -580,6 +638,11 @@ export default function BenefitsSection() {
         .scorecard-outcome--recommended .scorecard-outcome-icon {
           background: rgba(30, 25, 15, 0.16);
           color: #11100d;
+        }
+
+        .scorecard-outcome--recommended .scorecard-outcome-car {
+          color: #2a1c0d;
+          opacity: 0.2;
         }
 
         .scorecard-outcome--recommended h4,
@@ -592,9 +655,19 @@ export default function BenefitsSection() {
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.22);
         }
 
+        .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible) .scorecard-outcome--traditional .scorecard-outcome-car {
+          transform: translateX(-5px);
+          opacity: 0.25;
+        }
+
         .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) .scorecard-outcome--recommended {
           background: linear-gradient(135deg, rgba(239, 192, 73, 0.96), rgba(211, 158, 47, 0.91));
           box-shadow: inset 0 1px 0 rgba(255, 248, 211, 0.58), inset 0 -1px 0 rgba(104, 66, 7, 0.24);
+        }
+
+        .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) .scorecard-outcome--recommended .scorecard-outcome-car {
+          transform: translateX(-5px);
+          opacity: 0.23;
         }
 
         .scorecard-vs-badge {
@@ -628,6 +701,13 @@ export default function BenefitsSection() {
             grid-column: 2;
             justify-self: start;
           }
+
+          .scorecard-outcome-car {
+            right: -0.75rem;
+            bottom: -0.55rem;
+            width: 7.85rem;
+            opacity: 0.18 !important;
+          }
         }
 
         @media (min-width: 640px) {
@@ -644,7 +724,8 @@ export default function BenefitsSection() {
           .scorecard-icon,
           .scorecard-segment--traditional,
           .scorecard-segment--recommended,
-          .scorecard-outcome {
+          .scorecard-outcome,
+          .scorecard-outcome-car {
             transition: none;
           }
 
@@ -652,6 +733,10 @@ export default function BenefitsSection() {
           .scorecard-panel:is(:hover, :focus-within, :focus-visible)::before,
           .scorecard-panel:is(:hover, :focus-within, :focus-visible)::after,
           .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-icon {
+            transform: none;
+          }
+
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-outcome-car {
             transform: none;
           }
 
