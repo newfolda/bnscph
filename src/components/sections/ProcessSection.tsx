@@ -50,7 +50,7 @@ export default function ProcessSection() {
           </div>
             <div
             ref={gridRef}
-            className="group/process relative grid gap-6 md:grid-cols-3"
+            className="process-cards-grid group/process relative grid gap-6 md:grid-cols-3"
             onPointerMove={(event) => {
               if (!gridRef.current) return
 
@@ -75,6 +75,30 @@ export default function ProcessSection() {
             }}
             onPointerLeave={() => setProgress(0)}
             >
+            <span
+              aria-hidden="true"
+              className="process-card-ripple process-card-ripple--1 process-card-ripple--primary pointer-events-none"
+            />
+            <span
+              aria-hidden="true"
+              className="process-card-ripple process-card-ripple--1 process-card-ripple--secondary pointer-events-none"
+            />
+            <span
+              aria-hidden="true"
+              className="process-card-ripple process-card-ripple--2 process-card-ripple--primary pointer-events-none"
+            />
+            <span
+              aria-hidden="true"
+              className="process-card-ripple process-card-ripple--2 process-card-ripple--secondary pointer-events-none"
+            />
+            <span
+              aria-hidden="true"
+              className="process-card-ripple process-card-ripple--3 process-card-ripple--primary pointer-events-none"
+            />
+            <span
+              aria-hidden="true"
+              className="process-card-ripple process-card-ripple--3 process-card-ripple--secondary pointer-events-none"
+            />
             <div
               aria-hidden="true"
               className="pointer-events-none absolute left-[calc((100%-3rem)/6)] right-[calc((100%-3rem)/6)] top-[2.375rem] z-0 hidden h-1 rounded-full bg-white/70 shadow-[inset_0_1px_2px_rgba(31,31,31,0.10)] md:block"
@@ -90,7 +114,7 @@ export default function ProcessSection() {
                 ref={(element) => {
                   cardRefs.current[index] = element
                 }}
-                className="process-glass-card group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-5 text-center group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none"
+                className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-5 text-center group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
               >
                 <span
                   className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
@@ -238,6 +262,108 @@ export default function ProcessSection() {
           transform: translateY(-5px);
         }
 
+        .process-card-ripple {
+          position: absolute;
+          z-index: 0;
+          width: 28px;
+          height: 28px;
+          border: 1px solid rgba(255, 255, 255, 0.55);
+          border-radius: 9999px;
+          box-shadow: 0 0 0 1px rgba(180, 205, 220, 0.2), 0 0 0 2px rgba(200, 160, 68, 0.06);
+          opacity: 0;
+          transform: translate3d(-50%, -50%, 0) scale(1);
+          transform-origin: center;
+        }
+
+        .process-card-ripple--1 {
+          left: calc((100% - 3rem) / 6);
+        }
+
+        .process-card-ripple--2 {
+          left: 50%;
+        }
+
+        .process-card-ripple--3 {
+          left: calc(100% - ((100% - 3rem) / 6));
+        }
+
+        .process-card-ripple--primary {
+          top: 84%;
+        }
+
+        .process-card-ripple--secondary {
+          top: 84%;
+          width: 32px;
+          height: 32px;
+          border-color: rgba(180, 205, 220, 0.3);
+          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28), 0 0 0 2px rgba(200, 160, 68, 0.04);
+        }
+
+        .process-cards-grid:has(.process-glass-card--1:hover) .process-card-ripple--1.process-card-ripple--primary,
+        .process-cards-grid:has(.process-glass-card--2:hover) .process-card-ripple--2.process-card-ripple--primary,
+        .process-cards-grid:has(.process-glass-card--3:hover) .process-card-ripple--3.process-card-ripple--primary,
+        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-card-ripple--1.process-card-ripple--primary,
+        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-card-ripple--2.process-card-ripple--primary,
+        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-card-ripple--3.process-card-ripple--primary {
+          animation: process-card-ripple-primary 1050ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+        }
+
+        .process-cards-grid:has(.process-glass-card--1:hover) .process-card-ripple--1.process-card-ripple--secondary,
+        .process-cards-grid:has(.process-glass-card--2:hover) .process-card-ripple--2.process-card-ripple--secondary,
+        .process-cards-grid:has(.process-glass-card--3:hover) .process-card-ripple--3.process-card-ripple--secondary,
+        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-card-ripple--1.process-card-ripple--secondary,
+        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-card-ripple--2.process-card-ripple--secondary,
+        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-card-ripple--3.process-card-ripple--secondary {
+          animation: process-card-ripple-secondary 1250ms cubic-bezier(0.22, 1, 0.36, 1) 170ms both;
+        }
+
+        @keyframes process-card-ripple-primary {
+          0% { opacity: 0.45; transform: translate3d(-50%, -50%, 0) scale(1); }
+          100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(14); }
+        }
+
+        @keyframes process-card-ripple-secondary {
+          0% { opacity: 0.25; transform: translate3d(-50%, -50%, 0) scale(1); }
+          100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(13); }
+        }
+
+        @media (max-width: 767px) {
+          .process-card-ripple--1 {
+            left: 50%;
+            top: 28%;
+          }
+
+          .process-card-ripple--2 {
+            left: 50%;
+            top: 61%;
+          }
+
+          .process-card-ripple--3 {
+            left: 50%;
+            top: 94%;
+          }
+
+          .process-card-ripple--primary {
+            width: 24px;
+            height: 24px;
+          }
+
+          .process-card-ripple--secondary {
+            width: 28px;
+            height: 28px;
+          }
+
+          @keyframes process-card-ripple-primary {
+            0% { opacity: 0.45; transform: translate3d(-50%, -50%, 0) scale(1); }
+            100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(11); }
+          }
+
+          @keyframes process-card-ripple-secondary {
+            0% { opacity: 0.25; transform: translate3d(-50%, -50%, 0) scale(1); }
+            100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(11); }
+          }
+        }
+
         @keyframes process-panel-ambient-flow {
           0%, 100% {
             transform: translate3d(-2%, -1%, 0) scale(1.03);
@@ -263,6 +389,10 @@ export default function ProcessSection() {
 
           .process-glass-card:is(:hover, :focus-within) {
             transform: none;
+          }
+
+          .process-card-ripple {
+            animation: none !important;
           }
         }
       `}</style>
