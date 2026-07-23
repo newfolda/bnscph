@@ -349,11 +349,21 @@ export default function BenefitsSection() {
   return (
     <section className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#090B0D_0%,#050607_100%)] py-14 sm:py-16 lg:py-24">
       <div aria-hidden="true" className="benefits-panel-ambient pointer-events-none absolute inset-0 z-0">
+        <span className="benefits-heading-light" />
+        <span className="benefits-card-light benefits-card-light--traditional" />
+        <span className="benefits-card-light benefits-card-light--recommended" />
         <span className="benefits-ambient-light benefits-ambient-light--ivory" />
         <span className="benefits-ambient-light benefits-ambient-light--champagne" />
         <span className="benefits-ambient-light benefits-ambient-light--mint" />
         <span className="benefits-ambient-light benefits-ambient-light--cream" />
         <span className="benefits-ambient-light benefits-ambient-light--lavender" />
+        <span className="benefits-particle benefits-particle--1" />
+        <span className="benefits-particle benefits-particle--2" />
+        <span className="benefits-particle benefits-particle--3" />
+        <span className="benefits-particle benefits-particle--4" />
+        <span className="benefits-particle benefits-particle--5" />
+        <span className="benefits-particle benefits-particle--6" />
+        <span className="benefits-particle benefits-particle--7" />
       </div>
 
       <Container className="relative z-10">
@@ -372,6 +382,7 @@ export default function BenefitsSection() {
                 tabIndex={0}
                 className="scorecard-panel scorecard-panel--traditional rounded-[1.625rem] p-5 sm:p-6 lg:p-8"
               >
+                <span aria-hidden="true" className="scorecard-reflection scorecard-reflection--traditional" />
                 <header className="text-center">
                     <h3 className="text-lg font-bold tracking-tight text-[#494841] sm:text-xl">
                       TRADITIONAL PRIVATE SALE
@@ -412,6 +423,7 @@ export default function BenefitsSection() {
                 tabIndex={0}
                 className="scorecard-panel scorecard-panel--recommended rounded-[1.625rem] p-5 sm:p-6 lg:p-8"
               >
+                <span aria-hidden="true" className="scorecard-reflection scorecard-reflection--recommended" />
                 <header className="text-center">
                     <h3 className="text-lg font-bold tracking-tight text-[#0A0A0A] sm:text-xl">
                       BUY &amp; SELL CARS PHILIPPINES
@@ -450,11 +462,60 @@ export default function BenefitsSection() {
         .benefits-panel-ambient {
           overflow: hidden;
           background:
-            radial-gradient(ellipse at 50% -12%, rgba(246, 248, 250, 0.08) 0%, transparent 43%),
+            radial-gradient(ellipse at 50% -12%, rgba(246, 248, 250, 0.11) 0%, transparent 43%),
             radial-gradient(ellipse at 10% 54%, rgba(75, 94, 110, 0.09) 0%, transparent 42%),
             radial-gradient(ellipse at 92% 58%, rgba(200, 160, 68, 0.09) 0%, transparent 44%),
-            radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.26) 100%);
+            radial-gradient(ellipse at 50% 50%, transparent 43%, rgba(0, 0, 0, 0.34) 100%);
         }
+
+        .benefits-heading-light,
+        .benefits-card-light,
+        .benefits-particle {
+          position: absolute;
+          pointer-events: none;
+        }
+
+        .benefits-heading-light {
+          top: -11rem;
+          left: 50%;
+          width: min(76rem, 98vw);
+          height: 31rem;
+          transform: translateX(-50%);
+          background: radial-gradient(ellipse, rgba(255, 246, 222, 0.09) 0%, rgba(220, 186, 102, 0.035) 42%, transparent 72%);
+        }
+
+        .benefits-card-light {
+          top: 31%;
+          width: 53%;
+          height: 49%;
+          border-radius: 50%;
+        }
+
+        .benefits-card-light--traditional {
+          left: -12%;
+          background: radial-gradient(ellipse, rgba(77, 103, 130, 0.12) 0%, rgba(51, 72, 94, 0.04) 40%, transparent 72%);
+        }
+
+        .benefits-card-light--recommended {
+          right: -12%;
+          background: radial-gradient(ellipse, rgba(216, 178, 81, 0.16) 0%, rgba(200, 160, 68, 0.055) 42%, transparent 72%);
+        }
+
+        .benefits-particle {
+          width: 0.1rem;
+          height: 0.1rem;
+          border-radius: 9999px;
+          background: rgba(255, 246, 222, 0.45);
+          box-shadow: 0 0 4px rgba(225, 191, 106, 0.12);
+        }
+
+        .benefits-particle--1 { top: 14%; left: 9%; }
+        .benefits-particle--2 { top: 21%; right: 13%; width: 0.125rem; height: 0.125rem; }
+        .benefits-particle--3 { top: 39%; left: 4%; }
+        .benefits-particle--4 { top: 48%; right: 7%; }
+        .benefits-particle--5 { top: 68%; left: 16%; width: 0.125rem; height: 0.125rem; }
+        .benefits-particle--6 { top: 77%; right: 19%; }
+        .benefits-particle--7 { top: 89%; left: 47%; }
 
         .benefits-ambient-light {
           position: absolute;
@@ -507,17 +568,17 @@ export default function BenefitsSection() {
         }
 
         .scorecard-panel--traditional {
-          border: 1px solid rgba(150, 160, 168, 0.34);
-          outline: 1px solid rgba(188, 199, 209, 0.08);
-          background: linear-gradient(135deg, rgba(27, 31, 35, 0.88) 0%, rgba(13, 16, 19, 0.92) 52%, rgba(22, 25, 29, 0.86) 100%);
-          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.34), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(226, 232, 238, 0.1), inset 0 -1px 0 rgba(86, 105, 120, 0.17);
+          border: 1px solid rgba(150, 160, 168, 0.29);
+          outline: 1px solid rgba(188, 199, 209, 0.065);
+          background: linear-gradient(135deg, rgba(25, 29, 33, 0.85) 0%, rgba(12, 15, 18, 0.89) 52%, rgba(20, 23, 27, 0.83) 100%);
+          box-shadow: 0 21px 43px rgba(0, 0, 0, 0.3), 0 7px 18px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(226, 232, 238, 0.075), inset 0 -1px 0 rgba(86, 105, 120, 0.14);
         }
 
         .scorecard-panel--recommended {
-          border: 1px solid rgba(200, 160, 68, 0.72);
-          outline: 1px solid rgba(238, 214, 147, 0.1);
-          background: linear-gradient(135deg, rgba(31, 27, 18, 0.92) 0%, rgba(12, 13, 14, 0.94) 48%, rgba(26, 22, 15, 0.9) 100%);
-          box-shadow: 0 26px 52px rgba(0, 0, 0, 0.38), 0 10px 24px rgba(174, 130, 35, 0.13), inset 0 1px 0 rgba(255, 242, 204, 0.15), inset 0 -1px 0 rgba(183, 139, 44, 0.22);
+          border: 1px solid rgba(210, 174, 79, 0.78);
+          outline: 1px solid rgba(245, 222, 157, 0.13);
+          background: linear-gradient(135deg, rgba(35, 30, 19, 0.95) 0%, rgba(14, 15, 15, 0.97) 48%, rgba(30, 25, 16, 0.93) 100%);
+          box-shadow: 0 28px 56px rgba(0, 0, 0, 0.41), 0 11px 27px rgba(174, 130, 35, 0.17), inset 0 1px 0 rgba(255, 244, 211, 0.19), inset 0 -1px 0 rgba(191, 148, 50, 0.25);
         }
 
         .scorecard-panel::before,
@@ -548,6 +609,28 @@ export default function BenefitsSection() {
         .scorecard-panel > * {
           position: relative;
           z-index: 1;
+        }
+
+        .scorecard-panel > .scorecard-reflection {
+          position: absolute;
+          top: -26%;
+          left: -52%;
+          z-index: 0;
+          width: 170%;
+          height: 154%;
+          pointer-events: none;
+          transform: translate3d(-14%, -8%, 0);
+          background: linear-gradient(112deg, transparent 20%, rgba(255, 255, 255, 0.02) 38%, rgba(255, 255, 255, 0.05) 47%, rgba(255, 255, 255, 0.025) 56%, transparent 72%);
+          opacity: 0.75;
+        }
+
+        .scorecard-reflection--traditional {
+          animation: benefits-glass-sweep-traditional 11.5s ease-in-out infinite;
+        }
+
+        .scorecard-reflection--recommended {
+          background: linear-gradient(112deg, transparent 20%, rgba(255, 246, 219, 0.022) 38%, rgba(255, 235, 183, 0.055) 47%, rgba(255, 244, 210, 0.028) 56%, transparent 72%);
+          animation: benefits-glass-sweep-recommended 9.8s ease-in-out -3.4s infinite;
         }
 
         .scorecard-panel:is(:hover, :focus-within, :focus-visible) {
@@ -976,19 +1059,138 @@ export default function BenefitsSection() {
         }
 
         .scorecard-vs-badge {
+          position: relative;
+          z-index: 1;
           display: inline-flex;
-          height: 2.8rem;
-          width: 2.8rem;
+          height: 3rem;
+          width: 3rem;
           align-items: center;
           justify-content: center;
-          border: 1px solid rgba(222, 190, 110, 0.5);
+          border: 1px solid rgba(224, 192, 113, 0.62);
           border-radius: 9999px;
           background: linear-gradient(135deg, rgba(31, 34, 36, 0.96), rgba(8, 10, 12, 0.96));
           color: #f4f3ee;
-          font-size: 0.7rem;
+          font-size: 0.76rem;
           font-weight: 700;
           letter-spacing: 0.1em;
-          box-shadow: 0 10px 22px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 247, 220, 0.12), inset 0 -1px 0 rgba(200, 160, 68, 0.16);
+          box-shadow: 0 12px 26px rgba(0, 0, 0, 0.38), 0 0 20px rgba(200, 160, 68, 0.16), inset 0 1px 0 rgba(255, 247, 220, 0.17), inset 0 -1px 0 rgba(200, 160, 68, 0.2);
+        }
+
+        .scorecard-vs-column {
+          position: relative;
+          isolation: isolate;
+        }
+
+        .scorecard-vs-column::after {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          z-index: 0;
+          width: 3.2rem;
+          height: 3.2rem;
+          border: 1px solid rgba(220, 184, 92, 0.35);
+          border-radius: 9999px;
+          opacity: 0;
+          pointer-events: none;
+          content: "";
+          transform: translate3d(-50%, -50%, 0) scale(0.92);
+          animation: benefits-vs-ring 5s ease-out infinite;
+        }
+
+        @media (min-width: 1024px) {
+          .scorecard-vs-badge {
+            height: 3.35rem;
+            width: 3.35rem;
+            font-size: 0.8rem;
+          }
+
+          .scorecard-vs-column::before {
+            position: absolute;
+            top: 50%;
+            right: 0.22rem;
+            left: 0.22rem;
+            z-index: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(225, 191, 106, 0.38) 28%, rgba(225, 191, 106, 0.28) 72%, transparent 100%);
+            pointer-events: none;
+            content: "";
+          }
+
+          .scorecard-vs-column::after {
+            width: 3.58rem;
+            height: 3.58rem;
+          }
+        }
+
+        @media (min-width: 1151px) and (hover: hover) and (pointer: fine) {
+          .scorecard-panel--traditional {
+            transform: perspective(1400px) rotateY(-1deg);
+          }
+
+          .scorecard-panel--recommended {
+            transform: perspective(1400px) rotateY(1deg);
+          }
+
+          .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible) {
+            transform: perspective(1400px) translateY(-4px) rotateY(-0.35deg);
+          }
+
+          .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) {
+            transform: perspective(1400px) translateY(-4px) rotateY(0.35deg);
+          }
+        }
+
+        @keyframes benefits-vs-ring {
+          0% {
+            opacity: 0;
+            transform: translate3d(-50%, -50%, 0) scale(0.92);
+          }
+
+          12% {
+            opacity: 0.32;
+          }
+
+          35%,
+          100% {
+            opacity: 0;
+            transform: translate3d(-50%, -50%, 0) scale(1.22);
+          }
+        }
+
+        @keyframes benefits-glass-sweep-traditional {
+          0%,
+          62% {
+            opacity: 0;
+            transform: translate3d(-14%, -8%, 0);
+          }
+
+          70% {
+            opacity: 0.7;
+          }
+
+          90%,
+          100% {
+            opacity: 0;
+            transform: translate3d(17%, 9%, 0);
+          }
+        }
+
+        @keyframes benefits-glass-sweep-recommended {
+          0%,
+          57% {
+            opacity: 0;
+            transform: translate3d(-14%, -8%, 0);
+          }
+
+          66% {
+            opacity: 0.75;
+          }
+
+          87%,
+          100% {
+            opacity: 0;
+            transform: translate3d(17%, 9%, 0);
+          }
         }
 
         @media (max-width: 1150px) {
@@ -1016,6 +1218,10 @@ export default function BenefitsSection() {
         }
 
         @media (max-width: 639px) {
+          .benefits-particle {
+            display: none;
+          }
+
           .scorecard-row--traditional.scorecard-row--active,
           .scorecard-row--recommended.scorecard-row--active {
             transform: translate3d(0, -1px, 0);
@@ -1033,6 +1239,7 @@ export default function BenefitsSection() {
           .scorecard-panel,
           .scorecard-panel::before,
           .scorecard-panel::after,
+          .scorecard-reflection,
           .scorecard-row,
           .scorecard-row::before,
           .scorecard-icon,
@@ -1041,6 +1248,15 @@ export default function BenefitsSection() {
           .scorecard-outcome,
           .scorecard-outcome-car {
             transition: none;
+          }
+
+          .scorecard-reflection,
+          .scorecard-vs-column::after {
+            animation: none;
+          }
+
+          .scorecard-vs-column::after {
+            opacity: 0;
           }
 
           .scorecard-panel:is(:hover, :focus-within, :focus-visible),
@@ -1061,6 +1277,13 @@ export default function BenefitsSection() {
 
           .scorecard-panel:is(:hover, :focus-within, :focus-visible) {
             filter: none;
+          }
+
+          .scorecard-panel--traditional,
+          .scorecard-panel--recommended,
+          .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible),
+          .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) {
+            transform: none;
           }
 
           .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-segment--traditional,
