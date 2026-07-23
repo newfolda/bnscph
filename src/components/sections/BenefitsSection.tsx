@@ -364,7 +364,10 @@ export default function BenefitsSection() {
         }
 
         .scorecard-panel--traditional h3 {
-          color: #e7e8e5;
+          color: #f0f1ee;
+          font-size: 1.18rem;
+          letter-spacing: -0.025em;
+          line-height: 1.18;
         }
 
         .scorecard-panel--traditional header p {
@@ -373,6 +376,16 @@ export default function BenefitsSection() {
 
         .scorecard-panel--recommended h3 {
           color: var(--primary);
+          font-size: 1.18rem;
+          font-weight: 800;
+          letter-spacing: -0.025em;
+          line-height: 1.18;
+        }
+
+        .scorecard-panel header > p {
+          color: rgba(205, 208, 205, 0.64);
+          font-size: 0.78rem;
+          line-height: 1.4;
         }
 
         .scorecard-panel--recommended header p {
@@ -384,7 +397,7 @@ export default function BenefitsSection() {
           grid-template-columns: 3rem minmax(8rem, 1fr) minmax(8rem, 1.25fr) 5.5rem;
           gap: 0.75rem;
           align-items: center;
-          border-top: 1px solid rgba(255, 255, 255, 0.09);
+          border-top: 1px solid rgba(255, 255, 255, 0.13);
           padding: 0.95rem 0;
         }
 
@@ -436,7 +449,8 @@ export default function BenefitsSection() {
         .scorecard-category {
           display: block;
           color: #e6e7e4;
-          font-size: 0.72rem;
+          font-size: 0.78rem;
+          font-weight: 700;
           letter-spacing: 0.07em;
           line-height: 1.25;
           text-transform: uppercase;
@@ -446,6 +460,7 @@ export default function BenefitsSection() {
           display: block;
           margin-top: 0.28rem;
           color: #aeb0ae;
+          opacity: 0.84;
           font-size: 0.78rem;
           line-height: 1.42;
         }
@@ -453,24 +468,24 @@ export default function BenefitsSection() {
         .scorecard-segments {
           display: grid;
           grid-template-columns: repeat(10, minmax(0, 1fr));
-          gap: 0.22rem;
+          gap: 0.28rem;
         }
 
         .scorecard-segment {
           display: block;
-          height: 0.68rem;
+          height: 0.74rem;
           border-radius: 0.18rem;
           background: rgba(90, 96, 101, 0.32);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
         }
 
         .scorecard-segment--traditional {
-          background: linear-gradient(180deg, #ff5a45, #d93024);
+          background: linear-gradient(180deg, #ff6350, #d82d22);
           box-shadow: 0 0 9px rgba(217, 48, 36, 0.23), inset 0 1px 0 rgba(255, 212, 204, 0.22);
         }
 
         .scorecard-segment--recommended {
-          background: linear-gradient(180deg, #a9d85e, #78b83b);
+          background: linear-gradient(180deg, #b1df63, #76b93a);
           box-shadow: 0 0 9px rgba(120, 184, 59, 0.2), inset 0 1px 0 rgba(231, 255, 194, 0.24);
         }
 
@@ -492,8 +507,8 @@ export default function BenefitsSection() {
         .scorecard-status {
           justify-self: end;
           border-radius: 9999px;
-          padding: 0.32rem 0.48rem;
-          font-size: 0.57rem;
+          padding: 0.24rem 0.4rem;
+          font-size: 0.53rem;
           font-weight: 700;
           letter-spacing: 0.08em;
           line-height: 1;
@@ -519,6 +534,7 @@ export default function BenefitsSection() {
           display: flex;
           align-items: center;
           gap: 0.8rem;
+          margin-top: 1.8rem;
           transition: background 360ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
@@ -611,6 +627,13 @@ export default function BenefitsSection() {
           .scorecard-status {
             grid-column: 2;
             justify-self: start;
+          }
+        }
+
+        @media (min-width: 640px) {
+          .scorecard-panel--traditional h3,
+          .scorecard-panel--recommended h3 {
+            font-size: 1.32rem;
           }
         }
 
