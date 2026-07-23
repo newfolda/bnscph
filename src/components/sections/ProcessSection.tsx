@@ -1,6 +1,6 @@
 "use client"
 
-import { type PointerEvent, useRef, useState } from "react"
+import { type PointerEvent } from "react"
 import Image from "next/image"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
@@ -21,10 +21,6 @@ const processSteps = [
 ]
 
 export default function ProcessSection() {
-  const [progress, setProgress] = useState(0)
-  const gridRef = useRef<HTMLDivElement>(null)
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([])
-
   const resetCardPointerPhysics = (card: HTMLDivElement) => {
     card.style.setProperty("--tilt-x", "0deg")
     card.style.setProperty("--tilt-y", "0deg")
@@ -86,48 +82,10 @@ export default function ProcessSection() {
               3 SIMPLE STEPS.
             </p>
           </div>
-            <div
-            ref={gridRef}
-            className="process-cards-grid group/process relative grid gap-6 md:grid-cols-3"
-            onPointerMove={(event) => {
-              if (!gridRef.current) return
-
-              let nearestCardIndex = 0
-              let shortestDistance = Number.POSITIVE_INFINITY
-
-              cardRefs.current.forEach((card, index) => {
-                if (!card) return
-
-                const rect = card.getBoundingClientRect()
-                const dx = event.clientX < rect.left ? rect.left - event.clientX : event.clientX > rect.right ? event.clientX - rect.right : 0
-                const dy = event.clientY < rect.top ? rect.top - event.clientY : event.clientY > rect.bottom ? event.clientY - rect.bottom : 0
-                const distance = Math.hypot(dx, dy)
-
-                if (distance < shortestDistance) {
-                  shortestDistance = distance
-                  nearestCardIndex = index
-                }
-              })
-
-              setProgress(nearestCardIndex * 50)
-            }}
-            onPointerLeave={() => setProgress(0)}
-            >
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute left-[calc((100%-3rem)/6)] right-[calc((100%-3rem)/6)] top-[2.375rem] z-0 hidden h-1 rounded-full bg-white/70 shadow-[inset_0_1px_2px_rgba(31,31,31,0.10)] md:block"
-            >
-              <div
-                className="h-full rounded-full bg-[var(--primary)] shadow-[0_0_10px_rgba(200,160,68,0.35)] transition-[width] duration-150 ease-out motion-reduce:transition-none"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
+            <div className="process-cards-grid group/process relative grid gap-6 md:grid-cols-3">
             {processSteps.map((step, index) => (
               <div
                 key={step.title}
-                ref={(element) => {
-                  cardRefs.current[index] = element
-                }}
                 onPointerMove={handleCardPointerMove}
                 onPointerLeave={(event) => resetCardPointerPhysics(event.currentTarget)}
                 className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-5 text-center group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
