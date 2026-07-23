@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { type PointerEvent, useRef, useState } from "react"
 import Image from "next/image"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
@@ -24,6 +24,41 @@ export default function ProcessSection() {
   const [progress, setProgress] = useState(0)
   const gridRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<Array<HTMLDivElement | null>>([])
+
+  const resetCardPointerPhysics = (card: HTMLDivElement) => {
+    card.style.setProperty("--tilt-x", "0deg")
+    card.style.setProperty("--tilt-y", "0deg")
+    card.style.setProperty("--reflection-x", "0px")
+    card.style.setProperty("--reflection-y", "0px")
+    card.style.setProperty("--reflection-secondary-x", "0px")
+    card.style.setProperty("--reflection-secondary-y", "0px")
+    card.style.setProperty("--shadow-x", "0px")
+    card.style.setProperty("--shadow-y", "0px")
+  }
+
+  const handleCardPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (
+      event.pointerType !== "mouse" ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return
+    }
+
+    const card = event.currentTarget
+    const rect = card.getBoundingClientRect()
+    const normalizedX = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1))
+    const normalizedY = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1))
+
+    card.style.setProperty("--tilt-x", `${normalizedY * -0.7}deg`)
+    card.style.setProperty("--tilt-y", `${normalizedX * 0.9}deg`)
+    card.style.setProperty("--reflection-x", `${normalizedX * 8}px`)
+    card.style.setProperty("--reflection-y", `${normalizedY * 7}px`)
+    card.style.setProperty("--reflection-secondary-x", `${normalizedX * 4.4}px`)
+    card.style.setProperty("--reflection-secondary-y", `${normalizedY * 3.85}px`)
+    card.style.setProperty("--shadow-x", `${normalizedX * -4}px`)
+    card.style.setProperty("--shadow-y", `${normalizedY * -3}px`)
+  }
 
   return (
     <section
@@ -93,6 +128,8 @@ export default function ProcessSection() {
                 ref={(element) => {
                   cardRefs.current[index] = element
                 }}
+                onPointerMove={handleCardPointerMove}
+                onPointerLeave={(event) => resetCardPointerPhysics(event.currentTarget)}
                 className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-5 text-center group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
               >
                 <span
@@ -286,6 +323,14 @@ export default function ProcessSection() {
         }
 
         .process-glass-card {
+          --tilt-x: 0deg;
+          --tilt-y: 0deg;
+          --reflection-x: 0px;
+          --reflection-y: 0px;
+          --reflection-secondary-x: 0px;
+          --reflection-secondary-y: 0px;
+          --shadow-x: 0px;
+          --shadow-y: 0px;
           isolation: isolate;
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.82);
@@ -310,7 +355,7 @@ export default function ProcessSection() {
             outline-color 270ms ease,
             box-shadow 270ms ease,
             filter 270ms ease,
-            transform 270ms ease;
+            transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .process-glass-card::before,
@@ -376,6 +421,35 @@ export default function ProcessSection() {
           transform: translate3d(6px, 6px, 0) scale(1.02);
           opacity: 0.8;
         }
+
+        @media (hover: hover) and (pointer: fine) {
+          .process-glass-card:is(:hover, :focus-within) {
+            transform:
+              perspective(900px)
+              translateY(-5px)
+              rotateX(var(--tilt-x))
+              rotateY(var(--tilt-y));
+            box-shadow:
+              var(--shadow-x) calc(24px + var(--shadow-y)) 48px rgba(20, 24, 32, 0.11),
+              var(--shadow-x) calc(10px + var(--shadow-y)) 20px rgba(20, 24, 32, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 1),
+              inset 0 -1px 0 rgba(120, 135, 150, 0.16);
+          }
+
+          .process-glass-card:is(:hover, :focus-within)::before {
+            transform: translate3d(var(--reflection-x), var(--reflection-y), 0);
+          }
+
+          .process-glass-card:is(:hover, :focus-within)::after {
+            transform: translate3d(
+              var(--reflection-secondary-x),
+              var(--reflection-secondary-y),
+              0
+            ) scale(1.02);
+            transition-duration: 540ms;
+          }
+        }
+
         @keyframes process-ambient-mint-drift {
           from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
           to { transform: translate3d(-12px, 10px, 0) scale(1.05); opacity: 0.96; }
