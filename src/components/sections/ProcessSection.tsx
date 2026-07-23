@@ -32,12 +32,15 @@ export default function ProcessSection() {
     >
       <Container className="relative -mt-5 sm:-mt-7 md:-mt-8 lg:-mt-12">
         <div
-          className="relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14"
+          className="process-main-panel relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14"
         >
-          <div
-            aria-hidden="true"
-            className="process-panel-ambient pointer-events-none absolute -inset-[18%] z-0"
-          />
+          <div aria-hidden="true" className="process-panel-ambient pointer-events-none absolute inset-0 z-0">
+            <span className="process-ambient-blob process-ambient-blob--mint" />
+            <span className="process-ambient-blob process-ambient-blob--yellow" />
+            <span className="process-ambient-blob process-ambient-blob--pink" />
+            <span className="process-ambient-blob process-ambient-blob--blue" />
+            <span className="process-ambient-blob process-ambient-blob--lavender" />
+          </div>
           <div className="relative z-10">
             <div className="mb-11 flex flex-col items-center text-center">
             <SectionPill className="mb-4">
@@ -75,30 +78,6 @@ export default function ProcessSection() {
             }}
             onPointerLeave={() => setProgress(0)}
             >
-            <span
-              aria-hidden="true"
-              className="process-liquid-wave process-liquid-wave--1 process-liquid-wave--primary pointer-events-none"
-            />
-            <span
-              aria-hidden="true"
-              className="process-liquid-wave process-liquid-wave--1 process-liquid-wave--secondary pointer-events-none"
-            />
-            <span
-              aria-hidden="true"
-              className="process-liquid-wave process-liquid-wave--2 process-liquid-wave--primary pointer-events-none"
-            />
-            <span
-              aria-hidden="true"
-              className="process-liquid-wave process-liquid-wave--2 process-liquid-wave--secondary pointer-events-none"
-            />
-            <span
-              aria-hidden="true"
-              className="process-liquid-wave process-liquid-wave--3 process-liquid-wave--primary pointer-events-none"
-            />
-            <span
-              aria-hidden="true"
-              className="process-liquid-wave process-liquid-wave--3 process-liquid-wave--secondary pointer-events-none"
-            />
             <div
               aria-hidden="true"
               className="pointer-events-none absolute left-[calc((100%-3rem)/6)] right-[calc((100%-3rem)/6)] top-[2.375rem] z-0 hidden h-1 rounded-full bg-white/70 shadow-[inset_0_1px_2px_rgba(31,31,31,0.10)] md:block"
@@ -168,18 +147,136 @@ export default function ProcessSection() {
       </Container>
       <style>{`
         .process-panel-ambient {
-          background:
-            radial-gradient(ellipse at 0% 20%, rgba(190, 240, 215, 0.34) 0%, rgba(190, 240, 215, 0.16) 28%, transparent 58%),
-            radial-gradient(ellipse at 48% -8%, rgba(255, 235, 170, 0.3) 0%, rgba(255, 235, 170, 0.14) 30%, transparent 62%),
-            radial-gradient(ellipse at 100% 12%, rgba(255, 210, 225, 0.3) 0%, rgba(255, 210, 225, 0.14) 30%, transparent 60%),
-            radial-gradient(ellipse at 5% 100%, rgba(195, 225, 255, 0.32) 0%, rgba(195, 225, 255, 0.15) 32%, transparent 62%),
-            radial-gradient(ellipse at 95% 100%, rgba(220, 215, 255, 0.24) 0%, rgba(220, 215, 255, 0.11) 30%, transparent 60%),
-            radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.82) 36%, transparent 72%),
-            #ffffff;
-          background-size: 140% 140%;
-          opacity: 0.92;
-          animation: process-panel-ambient-flow 30s ease-in-out infinite;
-          will-change: transform, opacity, background-position;
+          overflow: hidden;
+          background: #ffffff;
+        }
+
+        .process-ambient-blob {
+          position: absolute;
+          border-radius: 50%;
+          transition: transform 780ms cubic-bezier(0.22, 1, 0.36, 1), opacity 780ms cubic-bezier(0.22, 1, 0.36, 1);
+          will-change: transform, opacity;
+        }
+
+        .process-ambient-blob::before {
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          content: "";
+          will-change: transform, opacity;
+        }
+
+        .process-ambient-blob--mint {
+          top: -20%;
+          left: -16%;
+          width: 62%;
+          height: 62%;
+        }
+
+        .process-ambient-blob--mint::before {
+          background: radial-gradient(ellipse, rgba(190, 240, 215, 0.34) 0%, rgba(190, 240, 215, 0.16) 34%, transparent 70%);
+          animation: process-ambient-mint-drift 24s ease-in-out infinite alternate;
+        }
+
+        .process-ambient-blob--yellow {
+          top: -30%;
+          left: 25%;
+          width: 58%;
+          height: 56%;
+        }
+
+        .process-ambient-blob--yellow::before {
+          background: radial-gradient(ellipse, rgba(255, 235, 170, 0.3) 0%, rgba(255, 235, 170, 0.14) 34%, transparent 70%);
+          animation: process-ambient-yellow-drift 28s ease-in-out infinite alternate;
+        }
+
+        .process-ambient-blob--pink {
+          top: -16%;
+          right: -18%;
+          width: 58%;
+          height: 60%;
+        }
+
+        .process-ambient-blob--pink::before {
+          background: radial-gradient(ellipse, rgba(255, 210, 225, 0.3) 0%, rgba(255, 210, 225, 0.14) 34%, transparent 70%);
+          animation: process-ambient-pink-drift 31s ease-in-out infinite alternate;
+        }
+
+        .process-ambient-blob--blue {
+          bottom: -28%;
+          left: -16%;
+          width: 60%;
+          height: 62%;
+        }
+
+        .process-ambient-blob--blue::before {
+          background: radial-gradient(ellipse, rgba(195, 225, 255, 0.32) 0%, rgba(195, 225, 255, 0.15) 36%, transparent 70%);
+          animation: process-ambient-blue-drift 34s ease-in-out infinite alternate;
+        }
+
+        .process-ambient-blob--lavender {
+          right: -16%;
+          bottom: -30%;
+          width: 56%;
+          height: 60%;
+        }
+
+        .process-ambient-blob--lavender::before {
+          background: radial-gradient(ellipse, rgba(220, 215, 255, 0.24) 0%, rgba(220, 215, 255, 0.11) 34%, transparent 70%);
+          animation: process-ambient-lavender-drift 38s ease-in-out infinite alternate;
+        }
+
+        .process-main-panel:has(.process-glass-card--1:hover) .process-ambient-blob--mint,
+        .process-main-panel:has(.process-glass-card--1:focus-within) .process-ambient-blob--mint {
+          transform: translate3d(-24px, 4px, 0) scaleX(1.1) scaleY(0.96);
+        }
+
+        .process-main-panel:has(.process-glass-card--1:hover) .process-ambient-blob--yellow,
+        .process-main-panel:has(.process-glass-card--1:focus-within) .process-ambient-blob--yellow {
+          transform: translate3d(14px, -16px, 0) scaleX(1.06) scaleY(0.98);
+        }
+
+        .process-main-panel:has(.process-glass-card--1:hover) .process-ambient-blob--blue,
+        .process-main-panel:has(.process-glass-card--1:focus-within) .process-ambient-blob--blue {
+          transform: translate3d(-4px, 20px, 0) scaleX(0.98) scaleY(1.08);
+          transition-delay: 140ms;
+        }
+
+        .process-main-panel:has(.process-glass-card--2:hover) .process-ambient-blob--yellow,
+        .process-main-panel:has(.process-glass-card--2:focus-within) .process-ambient-blob--yellow {
+          transform: translate3d(0, -22px, 0) scaleX(0.97) scaleY(1.1);
+        }
+
+        .process-main-panel:has(.process-glass-card--2:hover) .process-ambient-blob--mint,
+        .process-main-panel:has(.process-glass-card--2:focus-within) .process-ambient-blob--mint {
+          transform: translate3d(-16px, 4px, 0) scaleX(1.07) scaleY(0.97);
+        }
+
+        .process-main-panel:has(.process-glass-card--2:hover) .process-ambient-blob--pink,
+        .process-main-panel:has(.process-glass-card--2:focus-within) .process-ambient-blob--pink {
+          transform: translate3d(18px, 2px, 0) scaleX(1.08) scaleY(0.96);
+        }
+
+        .process-main-panel:has(.process-glass-card--2:hover) .process-ambient-blob--lavender,
+        .process-main-panel:has(.process-glass-card--2:focus-within) .process-ambient-blob--lavender {
+          transform: translate3d(2px, 20px, 0) scaleX(0.98) scaleY(1.08);
+          transition-delay: 140ms;
+        }
+
+        .process-main-panel:has(.process-glass-card--3:hover) .process-ambient-blob--pink,
+        .process-main-panel:has(.process-glass-card--3:focus-within) .process-ambient-blob--pink {
+          transform: translate3d(24px, 4px, 0) scaleX(1.1) scaleY(0.96);
+        }
+
+        .process-main-panel:has(.process-glass-card--3:hover) .process-ambient-blob--lavender,
+        .process-main-panel:has(.process-glass-card--3:focus-within) .process-ambient-blob--lavender {
+          transform: translate3d(18px, 20px, 0) scaleX(1.08) scaleY(0.98);
+          transition-delay: 140ms;
+        }
+
+        .process-main-panel:has(.process-glass-card--3:hover) .process-ambient-blob--yellow,
+        .process-main-panel:has(.process-glass-card--3:focus-within) .process-ambient-blob--yellow {
+          transform: translate3d(-18px, -4px, 0) scaleX(1.07) scaleY(0.97);
         }
 
         .process-glass-card {
@@ -271,189 +368,46 @@ export default function ProcessSection() {
         .process-glass-card:is(:hover, :focus-within)::after {
           transform: translate3d(6px, 6px, 0) scale(1.02);
         }
-
-        .process-liquid-wave {
-          position: absolute;
-          z-index: 0;
-          top: 0;
-          width: calc((100% - 3rem) / 3);
-          height: 290px;
-          border-radius: 1.625rem;
-          background-size: 150% 150%;
-          opacity: 0;
-          transform: scale(0.98);
-          transform-origin: center;
+        @keyframes process-ambient-mint-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
+          to { transform: translate3d(-12px, 10px, 0) scale(1.05); opacity: 0.96; }
         }
 
-        .process-liquid-wave--1 {
-          left: 0;
-          --liquid-x: -14px;
-          --liquid-y: -8px;
-          --liquid-secondary-x: 8px;
-          --liquid-secondary-y: 10px;
-          background-image:
-            radial-gradient(ellipse at 20% 35%, rgba(190, 240, 215, 0.3) 0%, rgba(190, 240, 215, 0.1) 34%, transparent 68%),
-            radial-gradient(ellipse at 78% 28%, rgba(255, 235, 170, 0.2) 0%, transparent 62%),
-            radial-gradient(ellipse at 55% 88%, rgba(195, 225, 255, 0.18) 0%, transparent 64%);
+        @keyframes process-ambient-yellow-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.86; }
+          to { transform: translate3d(12px, -8px, 0) scale(1.04); opacity: 0.92; }
         }
 
-        .process-liquid-wave--2 {
-          left: calc((100% - 3rem) / 3 + 1.5rem);
-          --liquid-x: 0px;
-          --liquid-y: -14px;
-          --liquid-secondary-x: -10px;
-          --liquid-secondary-y: 10px;
-          background-image:
-            radial-gradient(ellipse at 48% 16%, rgba(255, 235, 170, 0.28) 0%, rgba(255, 235, 170, 0.1) 34%, transparent 68%),
-            radial-gradient(ellipse at 18% 66%, rgba(190, 240, 215, 0.18) 0%, transparent 62%),
-            radial-gradient(ellipse at 82% 78%, rgba(220, 215, 255, 0.16) 0%, transparent 64%);
+        @keyframes process-ambient-pink-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.84; }
+          to { transform: translate3d(14px, 8px, 0) scale(1.05); opacity: 0.9; }
         }
 
-        .process-liquid-wave--3 {
-          right: 0;
-          --liquid-x: 14px;
-          --liquid-y: -8px;
-          --liquid-secondary-x: -8px;
-          --liquid-secondary-y: 12px;
-          background-image:
-            radial-gradient(ellipse at 80% 30%, rgba(255, 210, 225, 0.28) 0%, rgba(255, 210, 225, 0.1) 34%, transparent 68%),
-            radial-gradient(ellipse at 28% 74%, rgba(220, 215, 255, 0.18) 0%, transparent 62%),
-            radial-gradient(ellipse at 62% 90%, rgba(195, 225, 255, 0.16) 0%, transparent 64%);
+        @keyframes process-ambient-blue-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.82; }
+          to { transform: translate3d(-8px, -12px, 0) scale(1.04); opacity: 0.88; }
         }
 
-        .process-cards-grid:has(.process-glass-card--1:hover) .process-liquid-wave--1.process-liquid-wave--primary,
-        .process-cards-grid:has(.process-glass-card--2:hover) .process-liquid-wave--2.process-liquid-wave--primary,
-        .process-cards-grid:has(.process-glass-card--3:hover) .process-liquid-wave--3.process-liquid-wave--primary,
-        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-liquid-wave--1.process-liquid-wave--primary,
-        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-liquid-wave--2.process-liquid-wave--primary,
-        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-liquid-wave--3.process-liquid-wave--primary {
-          animation: process-liquid-wave-primary 680ms cubic-bezier(0.22, 1, 0.36, 1) 60ms;
-        }
-
-        .process-cards-grid:has(.process-glass-card--1:hover) .process-liquid-wave--1.process-liquid-wave--secondary,
-        .process-cards-grid:has(.process-glass-card--2:hover) .process-liquid-wave--2.process-liquid-wave--secondary,
-        .process-cards-grid:has(.process-glass-card--3:hover) .process-liquid-wave--3.process-liquid-wave--secondary,
-        .process-cards-grid:has(.process-glass-card--1:focus-within) .process-liquid-wave--1.process-liquid-wave--secondary,
-        .process-cards-grid:has(.process-glass-card--2:focus-within) .process-liquid-wave--2.process-liquid-wave--secondary,
-        .process-cards-grid:has(.process-glass-card--3:focus-within) .process-liquid-wave--3.process-liquid-wave--secondary {
-          animation: process-liquid-wave-secondary 1100ms cubic-bezier(0.22, 1, 0.36, 1) 170ms;
-        }
-
-        @keyframes process-liquid-wave-primary {
-          0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.98); }
-          45% { opacity: 0.14; transform: translate3d(var(--liquid-x), var(--liquid-y), 0) scale(1.07); }
-          100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.02); }
-        }
-
-        @keyframes process-liquid-wave-secondary {
-          0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.98); }
-          40% { opacity: 0.09; transform: translate3d(var(--liquid-secondary-x), var(--liquid-secondary-y), 0) scale(1.05); }
-          100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
+        @keyframes process-ambient-lavender-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.78; }
+          to { transform: translate3d(10px, 12px, 0) scale(1.06); opacity: 0.84; }
         }
 
         @media (max-width: 767px) {
-          .process-panel-ambient {
-            animation: none;
-          }
-
-          .process-liquid-wave {
-            left: 0;
-            width: 100%;
-            height: 290px;
-          }
-
-          .process-liquid-wave--1 {
-            top: 0;
-            --liquid-x: -9px;
-            --liquid-y: -5px;
-            --liquid-secondary-x: 5px;
-            --liquid-secondary-y: 6px;
-          }
-
-          .process-liquid-wave--2 {
-            top: 314px;
-            --liquid-x: 0px;
-            --liquid-y: -9px;
-            --liquid-secondary-x: -6px;
-            --liquid-secondary-y: 6px;
-          }
-
-          .process-liquid-wave--3 {
-            top: 628px;
-            --liquid-x: 9px;
-            --liquid-y: -5px;
-            --liquid-secondary-x: -5px;
-            --liquid-secondary-y: 8px;
-          }
-
-          @keyframes process-liquid-wave-primary {
-            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
-            45% { opacity: 0.1; transform: translate3d(var(--liquid-x), var(--liquid-y), 0) scale(1.04); }
-            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
-          }
-
-          @keyframes process-liquid-wave-secondary {
-            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
-            40% { opacity: 0.06; transform: translate3d(var(--liquid-secondary-x), var(--liquid-secondary-y), 0) scale(1.03); }
-            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
-          }
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .process-liquid-wave--1 {
-            --liquid-x: -11px;
-            --liquid-y: -6px;
-            --liquid-secondary-x: 6px;
-            --liquid-secondary-y: 8px;
-          }
-
-          .process-liquid-wave--2 {
-            --liquid-x: 0px;
-            --liquid-y: -11px;
-            --liquid-secondary-x: -8px;
-            --liquid-secondary-y: 8px;
-          }
-
-          .process-liquid-wave--3 {
-            --liquid-x: 11px;
-            --liquid-y: -6px;
-            --liquid-secondary-x: -6px;
-            --liquid-secondary-y: 10px;
-          }
-
-          @keyframes process-liquid-wave-primary {
-            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
-            45% { opacity: 0.12; transform: translate3d(var(--liquid-x), var(--liquid-y), 0) scale(1.05); }
-            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.02); }
-          }
-
-          @keyframes process-liquid-wave-secondary {
-            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.99); }
-            40% { opacity: 0.08; transform: translate3d(var(--liquid-secondary-x), var(--liquid-secondary-y), 0) scale(1.04); }
-            100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.01); }
-          }
-        }
-
-        @keyframes process-panel-ambient-flow {
-          0%, 100% {
-            transform: translate3d(-2%, -1%, 0) scale(1.03);
-            background-position: 0% 0%;
-            opacity: 0.92;
-          }
-          33% {
-            transform: translate3d(2%, 1%, 0) scale(1.06);
-            background-position: 40% 20%;
-            opacity: 1;
-          }
-          66% {
-            transform: translate3d(-1%, 2%, 0) scale(1.04);
-            background-position: 70% 60%;
-            opacity: 0.95;
-          }
+          .process-main-panel:has(.process-glass-card--1:is(:hover, :focus-within)) .process-ambient-blob--mint { transform: translate3d(-12px, 2px, 0) scaleX(1.05) scaleY(0.98); }
+          .process-main-panel:has(.process-glass-card--1:is(:hover, :focus-within)) .process-ambient-blob--yellow { transform: translate3d(8px, -10px, 0) scaleX(1.04) scaleY(0.99); }
+          .process-main-panel:has(.process-glass-card--1:is(:hover, :focus-within)) .process-ambient-blob--blue { transform: translate3d(-2px, 12px, 0) scaleX(0.99) scaleY(1.05); }
+          .process-main-panel:has(.process-glass-card--2:is(:hover, :focus-within)) .process-ambient-blob--yellow { transform: translate3d(0, -12px, 0) scaleX(0.99) scaleY(1.05); }
+          .process-main-panel:has(.process-glass-card--2:is(:hover, :focus-within)) .process-ambient-blob--mint { transform: translate3d(-10px, 2px, 0) scaleX(1.05) scaleY(0.99); }
+          .process-main-panel:has(.process-glass-card--2:is(:hover, :focus-within)) .process-ambient-blob--pink { transform: translate3d(12px, 2px, 0) scaleX(1.05) scaleY(0.99); }
+          .process-main-panel:has(.process-glass-card--2:is(:hover, :focus-within)) .process-ambient-blob--lavender { transform: translate3d(2px, 12px, 0) scaleX(0.99) scaleY(1.05); }
+          .process-main-panel:has(.process-glass-card--3:is(:hover, :focus-within)) .process-ambient-blob--pink { transform: translate3d(12px, 2px, 0) scaleX(1.05) scaleY(0.99); }
+          .process-main-panel:has(.process-glass-card--3:is(:hover, :focus-within)) .process-ambient-blob--lavender { transform: translate3d(10px, 12px, 0) scaleX(1.05) scaleY(0.99); }
+          .process-main-panel:has(.process-glass-card--3:is(:hover, :focus-within)) .process-ambient-blob--yellow { transform: translate3d(-10px, -2px, 0) scaleX(1.05) scaleY(0.99); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .process-panel-ambient {
+          .process-ambient-blob::before {
             animation: none;
           }
 
@@ -466,8 +420,8 @@ export default function ProcessSection() {
             transform: none;
           }
 
-          .process-liquid-wave {
-            animation: none !important;
+          .process-main-panel:has(.process-glass-card:is(:hover, :focus-within)) .process-ambient-blob {
+            transform: none;
           }
         }
       `}</style>
