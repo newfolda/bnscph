@@ -98,19 +98,17 @@ function ScorecardRow({ row, tone }: { row: ScoreRow; tone: "traditional" | "rec
 
 export default function BenefitsSection() {
   return (
-    <section className="bg-white py-12 sm:py-14 lg:py-[4.5rem]">
-      <Container>
-        <div className="benefits-main-panel relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-9 shadow-[0_34px_78px_rgba(0,0,0,0.32),0_12px_28px_rgba(200,160,68,0.1)] ring-1 ring-white/30 sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
-          <div aria-hidden="true" className="benefits-panel-ambient pointer-events-none absolute inset-0 z-0">
-            <span className="benefits-ambient-light benefits-ambient-light--ivory" />
-            <span className="benefits-ambient-light benefits-ambient-light--champagne" />
-            <span className="benefits-ambient-light benefits-ambient-light--mint" />
-            <span className="benefits-ambient-light benefits-ambient-light--cream" />
-            <span className="benefits-ambient-light benefits-ambient-light--lavender" />
-          </div>
+    <section className="relative isolate overflow-hidden bg-[#FCFBF7] py-14 sm:py-16 lg:py-24">
+      <div aria-hidden="true" className="benefits-panel-ambient pointer-events-none absolute inset-0 z-0">
+        <span className="benefits-ambient-light benefits-ambient-light--ivory" />
+        <span className="benefits-ambient-light benefits-ambient-light--champagne" />
+        <span className="benefits-ambient-light benefits-ambient-light--mint" />
+        <span className="benefits-ambient-light benefits-ambient-light--cream" />
+        <span className="benefits-ambient-light benefits-ambient-light--lavender" />
+      </div>
 
-          <div className="relative z-10">
-            <header className="mx-auto max-w-[42rem] text-center">
+      <Container className="relative z-10">
+        <header className="mx-auto max-w-[42rem] text-center">
               <SectionPill className="mb-4">WHY CHOOSE US</SectionPill>
               <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-[#0A0A0A] sm:text-5xl">
                 The simpler, safer way to
@@ -122,80 +120,75 @@ export default function BenefitsSection() {
                 <br className="hidden sm:block" />
                 and get you paid securely.
               </p>
-            </header>
+        </header>
 
             <div className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_4.5rem_minmax(0,1fr)] lg:items-stretch lg:gap-5">
-              <article className="scorecard-panel scorecard-panel--traditional rounded-[2rem] p-4 sm:p-5">
-                <div className="scorecard-surface rounded-[1.5rem] p-5 sm:p-6">
-                  <header className="text-center">
+              <article className="scorecard-panel scorecard-panel--traditional rounded-[1.625rem] p-5 sm:p-6 lg:p-8">
+                <header className="text-center">
                     <h3 className="text-lg font-bold tracking-tight text-[#494841] sm:text-xl">
                       TRADITIONAL PRIVATE SALE
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-[#71716b]">
                       High stress. High risk. Too much effort.
                     </p>
-                  </header>
+                </header>
 
-                  <ul className="mt-7 space-y-0">
+                <ul className="mt-7 space-y-0">
                     {traditionalPrivateSaleRows.map((row) => (
                       <ScorecardRow key={row.category} row={row} tone="traditional" />
                     ))}
-                  </ul>
+                </ul>
 
-                  <footer className="scorecard-outcome scorecard-outcome--traditional mt-6 rounded-2xl p-4">
+                <footer className="scorecard-outcome scorecard-outcome--traditional mt-6 rounded-2xl p-4">
                     <span aria-hidden="true" className="scorecard-outcome-icon">{"\u2639"}</span>
                     <div>
                       <h4>Unpredictable outcome.</h4>
                       <p>More hassle. More risk. Lower peace of mind.</p>
                     </div>
-                  </footer>
-                </div>
+                </footer>
               </article>
 
               <div className="scorecard-vs-column flex min-h-12 items-center justify-center lg:self-center">
                 <span className="scorecard-vs-badge">VS</span>
               </div>
 
-              <article className="scorecard-panel scorecard-panel--recommended rounded-[2rem] p-4 sm:p-5">
-                <div className="scorecard-surface rounded-[1.5rem] p-5 sm:p-6">
-                  <header className="text-center">
+              <article className="scorecard-panel scorecard-panel--recommended rounded-[1.625rem] p-5 sm:p-6 lg:p-8">
+                <header className="text-center">
                     <h3 className="text-lg font-bold tracking-tight text-[#0A0A0A] sm:text-xl">
                       BUY &amp; SELL CARS PHILIPPINES
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-[#5f5d54]">
                       Low stress. Low risk. Zero guesswork.
                     </p>
-                  </header>
+                </header>
 
-                  <ul className="mt-7 space-y-0">
+                <ul className="mt-7 space-y-0">
                     {buyAndSellCarsRows.map((row) => (
                       <ScorecardRow key={row.category} row={row} tone="recommended" />
                     ))}
-                  </ul>
+                </ul>
 
-                  <footer className="scorecard-outcome scorecard-outcome--recommended mt-6 rounded-2xl p-4">
+                <footer className="scorecard-outcome scorecard-outcome--recommended mt-6 rounded-2xl p-4">
                     <span aria-hidden="true" className="scorecard-outcome-icon">{"\u263A"}</span>
                     <div>
                       <h4>Predictable outcome.</h4>
                       <p>Less hassle. Lower risk. Total peace of mind.</p>
                     </div>
-                  </footer>
-                </div>
+                </footer>
               </article>
             </div>
-          </div>
-        </div>
       </Container>
 
       <style>{`
         .benefits-panel-ambient {
           overflow: hidden;
-          background: #ffffff;
+          background: transparent;
         }
 
         .benefits-ambient-light {
           position: absolute;
           border-radius: 50%;
+          opacity: 0.88;
           will-change: transform, opacity;
         }
 
@@ -238,23 +231,55 @@ export default function BenefitsSection() {
           animation: benefits-lavender-drift 28s ease-in-out infinite alternate;
         }
 
+        .scorecard-panel {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          outline-offset: -1px;
+          backdrop-filter: blur(16px) saturate(120%);
+          -webkit-backdrop-filter: blur(16px) saturate(120%);
+        }
+
         .scorecard-panel--traditional {
-          border: 1px solid rgba(255, 255, 255, 0.62);
-          background: rgba(231, 232, 229, 0.8);
-          box-shadow: 0 16px 34px rgba(38, 40, 39, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.74);
+          border: 1px solid rgba(255, 255, 255, 0.66);
+          outline: 1px solid rgba(95, 115, 130, 0.1);
+          background: linear-gradient(135deg, rgba(240, 241, 239, 0.8), rgba(206, 210, 207, 0.62));
+          box-shadow: 0 18px 38px rgba(38, 40, 39, 0.1), 0 5px 14px rgba(38, 40, 39, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.78), inset 0 -1px 0 rgba(104, 111, 108, 0.12);
         }
 
         .scorecard-panel--recommended {
-          border: 1px solid rgba(200, 160, 68, 0.52);
-          background: rgba(255, 253, 244, 0.84);
-          box-shadow: 0 20px 42px rgba(112, 83, 23, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(200, 160, 68, 0.54);
+          background: linear-gradient(135deg, rgba(255, 255, 252, 0.88), rgba(255, 245, 214, 0.56));
+          box-shadow: 0 24px 50px rgba(112, 83, 23, 0.14), 0 9px 22px rgba(200, 160, 68, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.92), inset 0 -1px 0 rgba(183, 139, 44, 0.14);
         }
 
-        .scorecard-surface {
-          height: 100%;
-          border: 1px solid rgba(255, 255, 255, 0.68);
-          background: rgba(255, 255, 255, 0.54);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88), inset 0 -1px 0 rgba(120, 135, 150, 0.08);
+        .scorecard-panel::before,
+        .scorecard-panel::after {
+          position: absolute;
+          z-index: 0;
+          pointer-events: none;
+          content: "";
+          border-radius: inherit;
+        }
+
+        .scorecard-panel::before {
+          inset: 0;
+          background: radial-gradient(ellipse at 16% 8%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.24) 19%, transparent 48%);
+        }
+
+        .scorecard-panel--traditional::after {
+          inset: 1px;
+          background: linear-gradient(135deg, transparent 50%, rgba(160, 182, 193, 0.1) 78%, rgba(255, 255, 255, 0.42) 100%);
+        }
+
+        .scorecard-panel--recommended::after {
+          inset: 1px;
+          background: linear-gradient(135deg, transparent 50%, rgba(211, 172, 80, 0.12) 78%, rgba(255, 255, 255, 0.48) 100%);
+        }
+
+        .scorecard-panel > * {
+          position: relative;
+          z-index: 1;
         }
 
         .scorecard-row {
@@ -388,8 +413,8 @@ export default function BenefitsSection() {
         }
 
         .scorecard-outcome--traditional {
-          border: 1px solid rgba(255, 255, 255, 0.7);
-          background: rgba(255, 255, 255, 0.58);
+          background: rgba(255, 255, 255, 0.44);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64);
         }
 
         .scorecard-outcome--traditional .scorecard-outcome-icon {
@@ -398,8 +423,8 @@ export default function BenefitsSection() {
         }
 
         .scorecard-outcome--recommended {
-          border: 1px solid rgba(200, 160, 68, 0.28);
-          background: rgba(255, 244, 207, 0.64);
+          background: rgba(255, 244, 207, 0.5);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -1px 0 rgba(190, 148, 50, 0.08);
         }
 
         .scorecard-outcome--recommended .scorecard-outcome-icon {
