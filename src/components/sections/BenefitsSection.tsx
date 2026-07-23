@@ -91,14 +91,20 @@ function ScorecardRow({ row, tone }: { row: ScoreRow; tone: "traditional" | "rec
           />
         ))}
       </span>
-      <span className={`scorecard-status scorecard-status--${tone}`}>{row.status}</span>
+      <span
+        className={`scorecard-status scorecard-status--${tone} ${
+          row.status === "EXTREME" ? "scorecard-status--extreme" : ""
+        }`}
+      >
+        {row.status}
+      </span>
     </li>
   )
 }
 
 export default function BenefitsSection() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#FCFBF7] py-14 sm:py-16 lg:py-24">
+    <section className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#090B0D_0%,#050607_100%)] py-14 sm:py-16 lg:py-24">
       <div aria-hidden="true" className="benefits-panel-ambient pointer-events-none absolute inset-0 z-0">
         <span className="benefits-ambient-light benefits-ambient-light--ivory" />
         <span className="benefits-ambient-light benefits-ambient-light--champagne" />
@@ -108,8 +114,8 @@ export default function BenefitsSection() {
       </div>
 
       <Container className="relative z-10">
-        <header className="mx-auto max-w-[42rem] text-center">
-              <SectionPill className="mb-4">WHY CHOOSE US</SectionPill>
+        <header className="benefits-dark-header mx-auto max-w-[42rem] text-center">
+              <SectionPill className="benefits-dark-pill mb-4">WHY CHOOSE US</SectionPill>
               <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-[#0A0A0A] sm:text-5xl">
                 The simpler, safer way to
                 <br />
@@ -182,14 +188,17 @@ export default function BenefitsSection() {
       <style>{`
         .benefits-panel-ambient {
           overflow: hidden;
-          background: transparent;
+          background:
+            radial-gradient(ellipse at 50% -12%, rgba(246, 248, 250, 0.08) 0%, transparent 43%),
+            radial-gradient(ellipse at 10% 54%, rgba(75, 94, 110, 0.09) 0%, transparent 42%),
+            radial-gradient(ellipse at 92% 58%, rgba(200, 160, 68, 0.09) 0%, transparent 44%),
+            radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.26) 100%);
         }
 
         .benefits-ambient-light {
           position: absolute;
           border-radius: 50%;
-          opacity: 0.88;
-          will-change: transform, opacity;
+          opacity: 0.72;
         }
 
         .benefits-ambient-light::before {
@@ -197,38 +206,32 @@ export default function BenefitsSection() {
           inset: 0;
           border-radius: inherit;
           content: "";
-          will-change: transform, opacity;
         }
 
-        .benefits-ambient-light--ivory { top: -28%; left: 18%; width: 62%; height: 58%; }
+        .benefits-ambient-light--ivory { top: -30%; left: 18%; width: 62%; height: 58%; }
         .benefits-ambient-light--champagne { top: 8%; right: -20%; width: 59%; height: 60%; }
-        .benefits-ambient-light--mint { top: -18%; left: -18%; width: 56%; height: 62%; }
+        .benefits-ambient-light--mint { top: -14%; left: -18%; width: 56%; height: 62%; }
         .benefits-ambient-light--cream { bottom: -34%; left: 12%; width: 66%; height: 62%; }
         .benefits-ambient-light--lavender { right: -16%; bottom: -30%; width: 54%; height: 58%; }
 
         .benefits-ambient-light--ivory::before {
-          background: radial-gradient(ellipse, rgba(255, 249, 226, 0.52) 0%, rgba(255, 249, 226, 0.2) 35%, transparent 72%);
-          animation: benefits-ivory-drift 30s ease-in-out infinite alternate;
+          background: radial-gradient(ellipse, rgba(244, 247, 250, 0.11) 0%, rgba(244, 247, 250, 0.03) 35%, transparent 72%);
         }
 
         .benefits-ambient-light--champagne::before {
-          background: radial-gradient(ellipse, rgba(245, 220, 157, 0.28) 0%, rgba(245, 220, 157, 0.11) 36%, transparent 72%);
-          animation: benefits-champagne-drift 36s ease-in-out infinite alternate;
+          background: radial-gradient(ellipse, rgba(218, 179, 83, 0.12) 0%, rgba(218, 179, 83, 0.03) 36%, transparent 72%);
         }
 
         .benefits-ambient-light--mint::before {
-          background: radial-gradient(ellipse, rgba(210, 239, 223, 0.28) 0%, rgba(210, 239, 223, 0.11) 34%, transparent 72%);
-          animation: benefits-mint-drift 34s ease-in-out infinite alternate;
+          background: radial-gradient(ellipse, rgba(88, 108, 126, 0.1) 0%, rgba(88, 108, 126, 0.025) 34%, transparent 72%);
         }
 
         .benefits-ambient-light--cream::before {
-          background: radial-gradient(ellipse, rgba(255, 241, 203, 0.3) 0%, rgba(255, 241, 203, 0.12) 36%, transparent 72%);
-          animation: benefits-cream-drift 40s ease-in-out infinite alternate;
+          background: radial-gradient(ellipse, rgba(255, 255, 255, 0.035) 0%, transparent 65%);
         }
 
         .benefits-ambient-light--lavender::before {
-          background: radial-gradient(ellipse, rgba(230, 223, 244, 0.2) 0%, rgba(230, 223, 244, 0.08) 34%, transparent 72%);
-          animation: benefits-lavender-drift 28s ease-in-out infinite alternate;
+          background: radial-gradient(ellipse, rgba(95, 103, 117, 0.055) 0%, transparent 65%);
         }
 
         .scorecard-panel {
@@ -236,21 +239,22 @@ export default function BenefitsSection() {
           isolation: isolate;
           overflow: hidden;
           outline-offset: -1px;
-          backdrop-filter: blur(16px) saturate(120%);
-          -webkit-backdrop-filter: blur(16px) saturate(120%);
+          backdrop-filter: blur(16px) saturate(112%);
+          -webkit-backdrop-filter: blur(16px) saturate(112%);
         }
 
         .scorecard-panel--traditional {
-          border: 1px solid rgba(255, 255, 255, 0.66);
-          outline: 1px solid rgba(95, 115, 130, 0.1);
-          background: linear-gradient(135deg, rgba(240, 241, 239, 0.8), rgba(206, 210, 207, 0.62));
-          box-shadow: 0 18px 38px rgba(38, 40, 39, 0.1), 0 5px 14px rgba(38, 40, 39, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.78), inset 0 -1px 0 rgba(104, 111, 108, 0.12);
+          border: 1px solid rgba(150, 160, 168, 0.34);
+          outline: 1px solid rgba(188, 199, 209, 0.08);
+          background: linear-gradient(135deg, rgba(27, 31, 35, 0.88) 0%, rgba(13, 16, 19, 0.92) 52%, rgba(22, 25, 29, 0.86) 100%);
+          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.34), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(226, 232, 238, 0.1), inset 0 -1px 0 rgba(86, 105, 120, 0.17);
         }
 
         .scorecard-panel--recommended {
-          border: 1px solid rgba(200, 160, 68, 0.54);
-          background: linear-gradient(135deg, rgba(255, 255, 252, 0.88), rgba(255, 245, 214, 0.56));
-          box-shadow: 0 24px 50px rgba(112, 83, 23, 0.14), 0 9px 22px rgba(200, 160, 68, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.92), inset 0 -1px 0 rgba(183, 139, 44, 0.14);
+          border: 1px solid rgba(200, 160, 68, 0.72);
+          outline: 1px solid rgba(238, 214, 147, 0.1);
+          background: linear-gradient(135deg, rgba(31, 27, 18, 0.92) 0%, rgba(12, 13, 14, 0.94) 48%, rgba(26, 22, 15, 0.9) 100%);
+          box-shadow: 0 26px 52px rgba(0, 0, 0, 0.38), 0 10px 24px rgba(174, 130, 35, 0.13), inset 0 1px 0 rgba(255, 242, 204, 0.15), inset 0 -1px 0 rgba(183, 139, 44, 0.22);
         }
 
         .scorecard-panel::before,
@@ -264,17 +268,17 @@ export default function BenefitsSection() {
 
         .scorecard-panel::before {
           inset: 0;
-          background: radial-gradient(ellipse at 16% 8%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.24) 19%, transparent 48%);
+          background: radial-gradient(ellipse at 16% 8%, rgba(239, 246, 252, 0.14) 0%, rgba(239, 246, 252, 0.035) 20%, transparent 48%);
         }
 
         .scorecard-panel--traditional::after {
           inset: 1px;
-          background: linear-gradient(135deg, transparent 50%, rgba(160, 182, 193, 0.1) 78%, rgba(255, 255, 255, 0.42) 100%);
+          background: linear-gradient(135deg, transparent 50%, rgba(82, 112, 139, 0.15) 78%, rgba(218, 230, 240, 0.07) 100%);
         }
 
         .scorecard-panel--recommended::after {
           inset: 1px;
-          background: linear-gradient(135deg, transparent 50%, rgba(211, 172, 80, 0.12) 78%, rgba(255, 255, 255, 0.48) 100%);
+          background: linear-gradient(135deg, transparent 50%, rgba(214, 170, 71, 0.2) 78%, rgba(255, 240, 196, 0.1) 100%);
         }
 
         .scorecard-panel > * {
@@ -282,12 +286,61 @@ export default function BenefitsSection() {
           z-index: 1;
         }
 
+        .benefits-dark-header h2 {
+          color: #f5f5f3;
+          text-shadow: 0 2px 18px rgba(0, 0, 0, 0.24);
+        }
+
+        .benefits-dark-header p {
+          color: rgba(245, 245, 243, 0.68);
+        }
+
+        .benefits-dark-pill {
+          border-color: rgba(200, 160, 68, 0.58) !important;
+          outline-color: rgba(240, 211, 132, 0.15) !important;
+          background: linear-gradient(135deg, rgba(35, 37, 38, 0.78), rgba(10, 12, 14, 0.72)) !important;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 245, 214, 0.13), inset 0 -1px 0 rgba(200, 160, 68, 0.14) !important;
+          color: var(--primary) !important;
+        }
+
+        .benefits-dark-pill::before {
+          background: radial-gradient(ellipse at 18% 12%, rgba(255, 244, 209, 0.15) 0%, transparent 34%) !important;
+          opacity: 0.68 !important;
+        }
+
+        .benefits-dark-pill::after {
+          background: linear-gradient(135deg, transparent 48%, rgba(200, 160, 68, 0.14) 76%, rgba(255, 245, 214, 0.16) 100%) !important;
+        }
+
+        .benefits-dark-pill:is(:hover, :focus-visible, :focus-within) {
+          border-color: rgba(220, 183, 83, 0.68) !important;
+          outline-color: rgba(240, 211, 132, 0.2) !important;
+          background: linear-gradient(135deg, rgba(42, 39, 31, 0.82), rgba(10, 12, 14, 0.76)) !important;
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 245, 214, 0.16), inset 0 -1px 0 rgba(200, 160, 68, 0.18) !important;
+        }
+
+        .scorecard-panel--traditional h3 {
+          color: #e7e8e5;
+        }
+
+        .scorecard-panel--traditional header p {
+          color: #9b9e9d;
+        }
+
+        .scorecard-panel--recommended h3 {
+          color: var(--primary);
+        }
+
+        .scorecard-panel--recommended header p {
+          color: #c9c4b5;
+        }
+
         .scorecard-row {
           display: grid;
           grid-template-columns: 3rem minmax(8rem, 1fr) minmax(8rem, 1.25fr) 5.5rem;
           gap: 0.75rem;
           align-items: center;
-          border-top: 1px solid rgba(102, 102, 96, 0.13);
+          border-top: 1px solid rgba(255, 255, 255, 0.09);
           padding: 0.95rem 0;
         }
 
@@ -302,9 +355,10 @@ export default function BenefitsSection() {
           width: 2.5rem;
           align-items: center;
           justify-content: center;
-          border: 1px solid rgba(255, 255, 255, 0.75);
+          border: 1px solid rgba(255, 255, 255, 0.16);
           border-radius: 0.8rem;
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86), 0 4px 10px rgba(35, 38, 36, 0.05);
+          background: rgba(5, 7, 9, 0.54);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.32), 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .scorecard-icon svg {
@@ -313,19 +367,20 @@ export default function BenefitsSection() {
         }
 
         .scorecard-icon--traditional {
-          background: rgba(255, 255, 255, 0.48);
-          color: #73756f;
+          border-color: rgba(204, 83, 72, 0.45);
+          color: #d95b50;
+          box-shadow: inset 0 1px 0 rgba(255, 157, 148, 0.09), inset 0 0 14px rgba(180, 48, 38, 0.11), 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .scorecard-icon--recommended {
-          border-color: rgba(224, 190, 99, 0.46);
-          background: rgba(255, 245, 210, 0.58);
+          border-color: rgba(218, 181, 79, 0.62);
           color: var(--primary);
+          box-shadow: inset 0 1px 0 rgba(255, 235, 174, 0.11), inset 0 0 14px rgba(207, 166, 68, 0.1), 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .scorecard-category {
           display: block;
-          color: #252525;
+          color: #e6e7e4;
           font-size: 0.72rem;
           letter-spacing: 0.07em;
           line-height: 1.25;
@@ -335,7 +390,7 @@ export default function BenefitsSection() {
         .scorecard-description {
           display: block;
           margin-top: 0.28rem;
-          color: #696964;
+          color: #aeb0ae;
           font-size: 0.78rem;
           line-height: 1.42;
         }
@@ -348,17 +403,20 @@ export default function BenefitsSection() {
 
         .scorecard-segment {
           display: block;
-          height: 0.42rem;
-          border-radius: 9999px;
-          background: rgba(128, 130, 124, 0.16);
+          height: 0.68rem;
+          border-radius: 0.18rem;
+          background: rgba(90, 96, 101, 0.32);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
         }
 
         .scorecard-segment--traditional {
-          background: #8b8d87;
+          background: linear-gradient(180deg, #ff5a45, #d93024);
+          box-shadow: 0 0 9px rgba(217, 48, 36, 0.23), inset 0 1px 0 rgba(255, 212, 204, 0.22);
         }
 
         .scorecard-segment--recommended {
-          background: var(--primary);
+          background: linear-gradient(180deg, #a9d85e, #78b83b);
+          box-shadow: 0 0 9px rgba(120, 184, 59, 0.2), inset 0 1px 0 rgba(231, 255, 194, 0.24);
         }
 
         .scorecard-status {
@@ -373,13 +431,18 @@ export default function BenefitsSection() {
         }
 
         .scorecard-status--traditional {
-          background: rgba(101, 104, 97, 0.13);
-          color: #656860;
+          background: rgba(126, 35, 29, 0.12);
+          color: #f07162;
+        }
+
+        .scorecard-status--extreme {
+          color: #ff897b;
+          font-weight: 800;
         }
 
         .scorecard-status--recommended {
-          background: rgba(200, 160, 68, 0.15);
-          color: #8d6a17;
+          background: rgba(80, 123, 40, 0.12);
+          color: #b8e178;
         }
 
         .scorecard-outcome {
@@ -400,36 +463,41 @@ export default function BenefitsSection() {
         }
 
         .scorecard-outcome h4 {
-          color: #272727;
+          color: #f1f2ef;
           font-size: 0.85rem;
           font-weight: 700;
         }
 
         .scorecard-outcome p {
           margin-top: 0.2rem;
-          color: #696964;
+          color: #acafad;
           font-size: 0.75rem;
           line-height: 1.42;
         }
 
         .scorecard-outcome--traditional {
-          background: rgba(255, 255, 255, 0.44);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64);
+          background: rgba(255, 255, 255, 0.055);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
         }
 
         .scorecard-outcome--traditional .scorecard-outcome-icon {
-          background: rgba(126, 130, 123, 0.13);
-          color: #74776f;
+          background: rgba(172, 57, 46, 0.13);
+          color: #e26357;
         }
 
         .scorecard-outcome--recommended {
-          background: rgba(255, 244, 207, 0.5);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -1px 0 rgba(190, 148, 50, 0.08);
+          background: linear-gradient(135deg, rgba(232, 183, 63, 0.94), rgba(202, 150, 42, 0.88));
+          box-shadow: inset 0 1px 0 rgba(255, 244, 201, 0.5), inset 0 -1px 0 rgba(104, 66, 7, 0.22);
         }
 
         .scorecard-outcome--recommended .scorecard-outcome-icon {
-          background: rgba(200, 160, 68, 0.16);
-          color: var(--primary);
+          background: rgba(30, 25, 15, 0.16);
+          color: #11100d;
+        }
+
+        .scorecard-outcome--recommended h4,
+        .scorecard-outcome--recommended p {
+          color: #17140d;
         }
 
         .scorecard-vs-badge {
@@ -438,39 +506,14 @@ export default function BenefitsSection() {
           width: 2.8rem;
           align-items: center;
           justify-content: center;
-          border: 1px solid rgba(200, 160, 68, 0.64);
+          border: 1px solid rgba(222, 190, 110, 0.5);
           border-radius: 9999px;
-          background: #ffffff;
-          color: #6f571e;
+          background: linear-gradient(135deg, rgba(31, 34, 36, 0.96), rgba(8, 10, 12, 0.96));
+          color: #f4f3ee;
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.1em;
-          box-shadow: 0 8px 18px rgba(82, 64, 19, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-        }
-
-        @keyframes benefits-ivory-drift {
-          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.84; }
-          to { transform: translate3d(10px, 8px, 0) scale(1.05); opacity: 0.94; }
-        }
-
-        @keyframes benefits-champagne-drift {
-          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.76; }
-          to { transform: translate3d(12px, -10px, 0) scale(1.04); opacity: 0.86; }
-        }
-
-        @keyframes benefits-mint-drift {
-          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.72; }
-          to { transform: translate3d(-10px, 10px, 0) scale(1.04); opacity: 0.82; }
-        }
-
-        @keyframes benefits-cream-drift {
-          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.76; }
-          to { transform: translate3d(8px, -12px, 0) scale(1.05); opacity: 0.86; }
-        }
-
-        @keyframes benefits-lavender-drift {
-          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
-          to { transform: translate3d(10px, 8px, 0) scale(1.04); opacity: 0.78; }
+          box-shadow: 0 10px 22px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 247, 220, 0.12), inset 0 -1px 0 rgba(200, 160, 68, 0.16);
         }
 
         @media (max-width: 1023px) {
@@ -490,11 +533,6 @@ export default function BenefitsSection() {
           }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          .benefits-ambient-light::before {
-            animation: none;
-          }
-        }
       `}</style>
     </section>
   )
