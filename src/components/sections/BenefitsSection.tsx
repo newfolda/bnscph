@@ -50,14 +50,14 @@ export default function BenefitsSection() {
             <br />
             market price.
           </h2>
-          <p className="mt-5 max-w-[36rem] text-base leading-relaxed text-[var(--text-secondary)]">
+          <p className="mt-6 max-w-[36rem] text-base leading-relaxed text-[var(--text-secondary)]">
             Skip the uncertainty of private selling. From valuation to payment, we
             handle the process so you can sell with confidence.
           </p>
         </div>
 
         <div className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-[minmax(0,0.38fr)_5.5rem_minmax(0,0.52fr)] lg:items-end lg:gap-5">
-          <article className="comparison-traditional-panel rounded-[2rem] p-4 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none sm:p-5">
+          <article className="comparison-traditional-panel rounded-[2rem] p-4 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none sm:p-5 lg:min-h-[33rem]">
             <div className="comparison-traditional-inset rounded-[1.5rem] p-5 sm:p-6">
               <header className="flex items-start gap-3">
                 <span
@@ -107,7 +107,7 @@ export default function BenefitsSection() {
             </div>
           </article>
 
-          <div className="comparison-spine relative flex min-h-12 items-center justify-center lg:min-h-[34rem] lg:flex-col">
+          <div className="comparison-spine relative flex min-h-12 items-center justify-center lg:min-h-[34rem] lg:self-center lg:flex-col">
             <span className="comparison-spine-label comparison-spine-label--top hidden lg:block">
               More effort
             </span>
@@ -117,7 +117,7 @@ export default function BenefitsSection() {
             </span>
           </div>
 
-          <article className="comparison-premium-panel rounded-[2rem] p-4 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[3px] motion-reduce:transform-none motion-reduce:transition-none sm:p-5">
+          <article className="comparison-premium-panel rounded-[2rem] p-4 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[3px] motion-reduce:transform-none motion-reduce:transition-none sm:p-5 lg:min-h-[35rem]">
             <div className="comparison-premium-inset rounded-[1.5rem] p-5 sm:p-6">
               <header className="flex items-start gap-3">
                 <span
@@ -297,7 +297,7 @@ export default function BenefitsSection() {
           gap: 0.65rem;
           align-items: start;
           border-top: 1px solid rgba(95, 95, 92, 0.14);
-          padding: 0.9rem 0;
+          padding: 1rem 0;
           font-size: 0.875rem;
           line-height: 1.45;
         }
@@ -316,28 +316,31 @@ export default function BenefitsSection() {
         }
 
         .comparison-traditional-row {
-          color: #555552;
+          color: #666662;
         }
 
         .comparison-traditional-row--highlighted {
           margin: 0 -0.45rem;
           border-radius: 0.85rem;
           border-top-color: transparent;
-          background: rgba(255, 255, 255, 0.56);
+          background: rgba(255, 255, 255, 0.48);
           padding-right: 0.45rem;
           padding-left: 0.45rem;
         }
 
         .comparison-premium-row {
           color: #383834;
+          padding-top: 1.05rem;
+          padding-bottom: 1.05rem;
         }
 
         .comparison-premium-row--highlighted {
           margin: 0 -0.45rem;
           border-radius: 0.85rem;
           border-top-color: transparent;
+          border: 1px solid rgba(200, 160, 68, 0.22);
           background: rgba(255, 255, 255, 0.96);
-          box-shadow: 0 8px 18px rgba(200, 160, 68, 0.1);
+          box-shadow: 0 9px 20px rgba(200, 160, 68, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.88);
           padding-right: 0.45rem;
           padding-left: 0.45rem;
         }
@@ -366,6 +369,8 @@ export default function BenefitsSection() {
 
         .comparison-negative-icon {
           background: linear-gradient(135deg, rgba(255, 255, 255, 0.66), rgba(212, 215, 213, 0.7));
+          color: #7b7e7a;
+          box-shadow: 0 3px 8px rgba(41, 44, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.76), inset 0 -1px 0 rgba(96, 108, 104, 0.08);
         }
 
         .comparison-positive-icon {
@@ -410,6 +415,38 @@ export default function BenefitsSection() {
         .comparison-spine-label--bottom {
           bottom: 2.25rem;
           color: #a58229;
+        }
+
+        .comparison-traditional-inset h3 {
+          color: #3b3a36;
+        }
+
+        .comparison-premium-inset header > div > p {
+          letter-spacing: 0.19em;
+        }
+
+        .comparison-premium-inset h3 {
+          color: #080808;
+          font-weight: 800;
+        }
+
+        .comparison-traditional-result > p:first-child,
+        .comparison-premium-result > p:first-child {
+          letter-spacing: 0.19em;
+        }
+
+        .comparison-traditional-result > p:last-child,
+        .comparison-premium-result > p:last-child {
+          font-weight: 600;
+          line-height: 1.55;
+        }
+
+        @media (max-width: 1023px) {
+          .comparison-row,
+          .comparison-premium-row {
+            padding-top: 0.85rem;
+            padding-bottom: 0.85rem;
+          }
         }
       `}</style>
     </section>
