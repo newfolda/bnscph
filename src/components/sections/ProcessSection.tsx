@@ -130,7 +130,7 @@ export default function ProcessSection() {
                   <h3 className="flex min-h-12 items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none">
                     {step.title}
                   </h3>
-                  <p className="mt-2 min-h-10 max-w-[16rem] text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
+                  <p className="relative isolate mt-2 min-h-10 max-w-[16rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
                     <span className="process-card-description-text">
                       {step.description}
                     </span>
@@ -369,9 +369,15 @@ export default function ProcessSection() {
         .process-card-description-streak {
           position: absolute;
           inset: 0;
+          width: 100%;
+          height: 100%;
           z-index: 2;
           display: block;
           pointer-events: none;
+          font: inherit;
+          line-height: inherit;
+          letter-spacing: inherit;
+          text-align: inherit;
           color: transparent;
           opacity: 0;
           background: linear-gradient(
