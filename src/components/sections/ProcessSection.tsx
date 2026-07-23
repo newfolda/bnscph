@@ -90,7 +90,7 @@ export default function ProcessSection() {
                 ref={(element) => {
                   cardRefs.current[index] = element
                 }}
-                className="group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] bg-[#F7F7F7] px-6 pb-7 pt-5 text-center shadow-[0_8px_22px_rgba(31,31,31,0.035)] transition-[transform,box-shadow,filter] duration-300 ease-out group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] group-hover/process:shadow-[0_6px_16px_rgba(31,31,31,0.03)] hover:z-20 hover:-translate-y-1.5 hover:brightness-100 hover:saturate-100 hover:shadow-[0_22px_38px_rgba(31,31,31,0.14)] focus-within:z-20 focus-within:brightness-100 focus-within:saturate-100 focus-within:shadow-[0_22px_38px_rgba(31,31,31,0.14)] motion-reduce:transform-none motion-reduce:transition-none"
+                className="process-glass-card group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-5 text-center group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none"
               >
                 <span
                   className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
@@ -158,6 +158,86 @@ export default function ProcessSection() {
           will-change: transform, opacity, background-position;
         }
 
+        .process-glass-card {
+          isolation: isolate;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.82);
+          outline: 1px solid rgba(95, 115, 130, 0.1);
+          outline-offset: -1px;
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.62) 0%,
+            rgba(255, 255, 255, 0.34) 48%,
+            rgba(255, 255, 255, 0.48) 100%
+          );
+          box-shadow:
+            0 14px 32px rgba(20, 24, 32, 0.1),
+            0 4px 10px rgba(20, 24, 32, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95),
+            inset 0 -1px 0 rgba(120, 135, 150, 0.12);
+          backdrop-filter: blur(16px) saturate(130%);
+          -webkit-backdrop-filter: blur(16px) saturate(130%);
+          transition:
+            background 270ms ease,
+            border-color 270ms ease,
+            outline-color 270ms ease,
+            box-shadow 270ms ease,
+            filter 270ms ease,
+            transform 270ms ease;
+        }
+
+        .process-glass-card::before,
+        .process-glass-card::after {
+          position: absolute;
+          z-index: 0;
+          pointer-events: none;
+          content: "";
+          border-radius: inherit;
+        }
+
+        .process-glass-card::before {
+          inset: 0;
+          background: radial-gradient(
+            ellipse at 17% 12%,
+            rgba(255, 255, 255, 0.78) 0%,
+            rgba(255, 255, 255, 0.36) 14%,
+            transparent 42%
+          );
+        }
+
+        .process-glass-card::after {
+          inset: 1px;
+          background: linear-gradient(
+            135deg,
+            transparent 48%,
+            rgba(168, 191, 204, 0.13) 76%,
+            rgba(255, 255, 255, 0.48) 100%
+          );
+        }
+
+        .process-glass-card > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .process-glass-card:is(:hover, :focus-within) {
+          border-color: rgba(255, 255, 255, 0.94);
+          outline-color: rgba(95, 115, 130, 0.16);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.72) 0%,
+            rgba(255, 255, 255, 0.44) 48%,
+            rgba(255, 255, 255, 0.58) 100%
+          );
+          box-shadow:
+            0 20px 40px rgba(20, 24, 32, 0.14),
+            0 6px 14px rgba(20, 24, 32, 0.07),
+            inset 0 1px 0 rgba(255, 255, 255, 0.98),
+            inset 0 -1px 0 rgba(120, 135, 150, 0.16);
+          filter: brightness(1.03) saturate(1.05);
+          transform: translateY(-5px);
+        }
+
         @keyframes process-panel-ambient-flow {
           0%, 100% {
             transform: translate3d(-2%, -1%, 0) scale(1.03);
@@ -179,6 +259,10 @@ export default function ProcessSection() {
         @media (prefers-reduced-motion: reduce) {
           .process-panel-ambient {
             animation: none;
+          }
+
+          .process-glass-card:is(:hover, :focus-within) {
+            transform: none;
           }
         }
       `}</style>
