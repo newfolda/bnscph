@@ -598,6 +598,11 @@ export default function BenefitsSection() {
           color: rgba(245, 245, 243, 0.68);
         }
 
+        .benefits-dark-pill.benefits-dark-pill,
+        .benefits-dark-pill.benefits-dark-pill:is(:hover, :focus-visible, :focus-within) {
+          color: #0a0a0a;
+        }
+
         .scorecard-panel--traditional h3 {
           color: #f0f1ee;
           font-size: 1.18rem;
