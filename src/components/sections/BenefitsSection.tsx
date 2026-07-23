@@ -153,7 +153,7 @@ export default function BenefitsSection() {
                     </span>
                     <span className="min-w-0">
                       <strong className="font-semibold text-[#161616]">{item.lead}</strong>
-                      <span className="text-[var(--text-secondary)]"> — {item.detail}</span>
+                      <span className="comparison-premium-detail text-[var(--text-secondary)]"> — {item.detail}</span>
                     </span>
                   </li>
                 ))}
@@ -316,7 +316,7 @@ export default function BenefitsSection() {
         }
 
         .comparison-traditional-row {
-          color: #666662;
+          color: #72726e;
         }
 
         .comparison-traditional-row--highlighted {
@@ -332,6 +332,12 @@ export default function BenefitsSection() {
           color: #383834;
           padding-top: 1.05rem;
           padding-bottom: 1.05rem;
+        }
+
+        .comparison-premium-detail {
+          display: block;
+          margin-top: 0.18rem;
+          color: #6c6c67;
         }
 
         .comparison-premium-row--highlighted {
@@ -418,16 +424,19 @@ export default function BenefitsSection() {
         }
 
         .comparison-traditional-inset h3 {
-          color: #3b3a36;
+          color: #53514b;
         }
 
         .comparison-premium-inset header > div > p {
-          letter-spacing: 0.19em;
+          margin-bottom: 0.28rem;
+          letter-spacing: 0.21em;
+          line-height: 1.2;
         }
 
         .comparison-premium-inset h3 {
           color: #080808;
           font-weight: 800;
+          margin-top: 0;
         }
 
         .comparison-traditional-result > p:first-child,
@@ -439,6 +448,10 @@ export default function BenefitsSection() {
         .comparison-premium-result > p:last-child {
           font-weight: 600;
           line-height: 1.55;
+        }
+
+        .comparison-traditional-result > p:last-child {
+          color: #5f605c;
         }
 
         @media (max-width: 1023px) {
