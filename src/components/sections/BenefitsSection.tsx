@@ -130,15 +130,22 @@ function ScorecardRow({
   row,
   tone,
   currentScore,
+  rowIndex,
+  isActive,
 }: {
   row: ScoreRow
   tone: ScorecardTone
   currentScore: number
+  rowIndex: number
+  isActive: boolean
 }) {
   const status = getStatusForScore(currentScore)
 
   return (
-    <li className="scorecard-row">
+    <li
+      className={`scorecard-row scorecard-row--${tone} ${isActive ? "scorecard-row--active" : ""}`}
+      data-row-index={rowIndex}
+    >
       <span className={`scorecard-icon scorecard-icon--${tone}`}>
         <CategoryIcon category={row.category} />
       </span>
@@ -201,8 +208,12 @@ export default function BenefitsSection() {
   const comparisonRef = useRef<HTMLDivElement>(null)
   const currentlyAnimatingRef = useRef(false)
   const hasEnteredViewportRef = useRef(false)
+  const comparisonIsVisibleRef = useRef(false)
   const animationFrameRef = useRef<number | null>(null)
+  const spotlightStartTimeoutRef = useRef<number | null>(null)
+  const spotlightIntervalRef = useRef<number | null>(null)
   const [animatedScores, setAnimatedScores] = useState<AnimatedScores>(getInitialScores)
+  const [activeRowIndex, setActiveRowIndex] = useState<number | null>(null)
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -222,6 +233,37 @@ export default function BenefitsSection() {
 
     const comparisonElement = comparisonRef.current
     if (!comparisonElement) return
+
+    const clearSpotlightTimers = () => {
+      if (spotlightStartTimeoutRef.current !== null) {
+        window.clearTimeout(spotlightStartTimeoutRef.current)
+        spotlightStartTimeoutRef.current = null
+      }
+
+      if (spotlightIntervalRef.current !== null) {
+        window.clearInterval(spotlightIntervalRef.current)
+        spotlightIntervalRef.current = null
+      }
+    }
+
+    const startSpotlight = () => {
+      clearSpotlightTimers()
+
+      spotlightStartTimeoutRef.current = window.setTimeout(() => {
+        spotlightStartTimeoutRef.current = null
+
+        if (!comparisonIsVisibleRef.current) return
+
+        setActiveRowIndex(0)
+        spotlightIntervalRef.current = window.setInterval(() => {
+          setActiveRowIndex((currentIndex) => (
+            currentIndex === null
+              ? 0
+              : (currentIndex + 1) % traditionalPrivateSaleRows.length
+          ))
+        }, 2000)
+      }, 320)
+    }
 
     const startAnimation = () => {
       if (currentlyAnimatingRef.current || hasEnteredViewportRef.current) return
@@ -257,6 +299,7 @@ export default function BenefitsSection() {
           animationFrameRef.current = null
           currentlyAnimatingRef.current = false
           setAnimatedScores(getFinalScores())
+          startSpotlight()
         }
       }
 
@@ -267,14 +310,18 @@ export default function BenefitsSection() {
       (entries) => {
         const entry = entries[0]
 
+        comparisonIsVisibleRef.current = entry.intersectionRatio >= 0.1
+
         if (entry.intersectionRatio < 0.1 && hasEnteredViewportRef.current) {
           if (animationFrameRef.current !== null) {
             window.cancelAnimationFrame(animationFrameRef.current)
             animationFrameRef.current = null
           }
 
+          clearSpotlightTimers()
           currentlyAnimatingRef.current = false
           hasEnteredViewportRef.current = false
+          setActiveRowIndex(null)
           setAnimatedScores(getInitialScores())
           return
         }
@@ -294,6 +341,8 @@ export default function BenefitsSection() {
       if (animationFrameRef.current !== null) {
         window.cancelAnimationFrame(animationFrameRef.current)
       }
+
+      clearSpotlightTimers()
     }
   }, [])
 
@@ -338,7 +387,14 @@ export default function BenefitsSection() {
 
                 <ul className="mt-7 space-y-0">
                     {traditionalPrivateSaleRows.map((row, index) => (
-                      <ScorecardRow key={row.category} row={row} tone="traditional" currentScore={animatedScores.traditional[index]} />
+                      <ScorecardRow
+                        key={row.category}
+                        row={row}
+                        tone="traditional"
+                        currentScore={animatedScores.traditional[index]}
+                        rowIndex={index}
+                        isActive={activeRowIndex === index}
+                      />
                     ))}
                 </ul>
 
@@ -371,7 +427,14 @@ export default function BenefitsSection() {
 
                 <ul className="mt-7 space-y-0">
                     {buyAndSellCarsRows.map((row, index) => (
-                      <ScorecardRow key={row.category} row={row} tone="recommended" currentScore={animatedScores.recommended[index]} />
+                      <ScorecardRow
+                        key={row.category}
+                        row={row}
+                        tone="recommended"
+                        currentScore={animatedScores.recommended[index]}
+                        rowIndex={index}
+                        isActive={activeRowIndex === index}
+                      />
                     ))}
                 </ul>
 
@@ -589,17 +652,56 @@ export default function BenefitsSection() {
         }
 
         .scorecard-row {
+          position: relative;
+          isolation: isolate;
           display: grid;
           grid-template-columns: 3rem minmax(8rem, 1fr) minmax(8rem, 1.25fr) 5.5rem;
           gap: 0.75rem;
           align-items: center;
           border-top: 1px solid rgba(255, 255, 255, 0.13);
           padding: 0.95rem 0;
+          transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .scorecard-row::before {
+          position: absolute;
+          inset: 0.35rem -0.38rem;
+          z-index: 0;
+          border-radius: 0.78rem;
+          opacity: 0;
+          pointer-events: none;
+          content: "";
+          transition: opacity 480ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 480ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .scorecard-row > * {
+          position: relative;
+          z-index: 1;
         }
 
         .scorecard-row:first-child {
           border-top: 0;
           padding-top: 0;
+        }
+
+        .scorecard-row--traditional.scorecard-row--active {
+          transform: translate3d(1px, -2px, 0);
+        }
+
+        .scorecard-row--traditional.scorecard-row--active::before {
+          background: rgba(185, 28, 28, 0.09);
+          box-shadow: inset 0 1px 0 rgba(255, 133, 122, 0.12), inset 0 -1px 0 rgba(115, 17, 17, 0.2);
+          opacity: 1;
+        }
+
+        .scorecard-row--recommended.scorecard-row--active {
+          transform: translate3d(-1px, -2px, 0);
+        }
+
+        .scorecard-row--recommended.scorecard-row--active::before {
+          background: rgba(52, 211, 153, 0.065);
+          box-shadow: inset 0 1px 0 rgba(244, 210, 126, 0.13), inset 0 -1px 0 rgba(43, 116, 81, 0.16);
+          opacity: 1;
         }
 
         .scorecard-icon {
@@ -642,6 +744,18 @@ export default function BenefitsSection() {
           box-shadow: inset 0 1px 0 rgba(255, 235, 174, 0.14), inset 0 0 16px rgba(207, 166, 68, 0.15), 0 6px 12px rgba(0, 0, 0, 0.24);
         }
 
+        .scorecard-row--active .scorecard-icon--traditional {
+          border-color: rgba(238, 107, 95, 0.62);
+          color: #f17a6e;
+          box-shadow: inset 0 1px 0 rgba(255, 170, 160, 0.14), inset 0 0 17px rgba(185, 28, 28, 0.22), 0 5px 11px rgba(0, 0, 0, 0.24);
+        }
+
+        .scorecard-row--active .scorecard-icon--recommended {
+          border-color: rgba(238, 205, 112, 0.72);
+          color: #f0cc72;
+          box-shadow: inset 0 1px 0 rgba(255, 241, 190, 0.16), inset 0 0 17px rgba(218, 181, 79, 0.2), 0 5px 11px rgba(0, 0, 0, 0.24);
+        }
+
         .scorecard-category {
           display: block;
           color: #e6e7e4;
@@ -659,6 +773,14 @@ export default function BenefitsSection() {
           opacity: 0.84;
           font-size: 0.78rem;
           line-height: 1.42;
+        }
+
+        .scorecard-row--active .scorecard-category {
+          color: #f2f3ef;
+        }
+
+        .scorecard-row--active .scorecard-description {
+          opacity: 0.96;
         }
 
         .scorecard-segments {
@@ -686,6 +808,15 @@ export default function BenefitsSection() {
         .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-segment--active {
           filter: brightness(1.08);
           box-shadow: 0 0 10px var(--score-segment-glow), inset 0 1px 0 rgba(255, 255, 255, 0.34), inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+        }
+
+        .scorecard-row--active .scorecard-segment--active {
+          filter: brightness(1.13);
+          box-shadow: 0 0 11px var(--score-segment-glow), inset 0 1px 0 rgba(255, 255, 255, 0.36), inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+        }
+
+        .scorecard-row--active .scorecard-segment:not(.scorecard-segment--active) {
+          opacity: 0.8;
         }
 
         .scorecard-status {
@@ -725,6 +856,12 @@ export default function BenefitsSection() {
         .scorecard-status--extreme {
           color: #ef4444;
           font-weight: 800;
+        }
+
+        .scorecard-row--active .scorecard-status {
+          background: rgba(255, 255, 255, 0.04);
+          font-weight: 800;
+          opacity: 1;
         }
 
         .scorecard-outcome {
@@ -880,6 +1017,13 @@ export default function BenefitsSection() {
           }
         }
 
+        @media (max-width: 639px) {
+          .scorecard-row--traditional.scorecard-row--active,
+          .scorecard-row--recommended.scorecard-row--active {
+            transform: translate3d(0, -1px, 0);
+          }
+        }
+
         @media (min-width: 640px) {
           .scorecard-panel--traditional h3,
           .scorecard-panel--recommended h3 {
@@ -891,6 +1035,8 @@ export default function BenefitsSection() {
           .scorecard-panel,
           .scorecard-panel::before,
           .scorecard-panel::after,
+          .scorecard-row,
+          .scorecard-row::before,
           .scorecard-icon,
           .scorecard-segment,
           .scorecard-status,
@@ -903,6 +1049,11 @@ export default function BenefitsSection() {
           .scorecard-panel:is(:hover, :focus-within, :focus-visible)::before,
           .scorecard-panel:is(:hover, :focus-within, :focus-visible)::after,
           .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-icon {
+            transform: none;
+          }
+
+          .scorecard-row--traditional.scorecard-row--active,
+          .scorecard-row--recommended.scorecard-row--active {
             transform: none;
           }
 
