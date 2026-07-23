@@ -39,8 +39,17 @@ const sellCarPhilippinesItems = [
 
 export default function BenefitsSection() {
   return (
-    <section className="bg-[#F8F7F3] py-14 sm:py-16 lg:py-24">
+    <section className="bg-white py-12 sm:py-14 lg:py-[4.5rem]">
       <Container>
+        <div className="benefits-main-panel relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-9 shadow-[0_34px_78px_rgba(0,0,0,0.32),0_12px_28px_rgba(200,160,68,0.1)] ring-1 ring-white/30 sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14">
+          <div aria-hidden="true" className="benefits-panel-ambient pointer-events-none absolute inset-0 z-0">
+            <span className="benefits-ambient-light benefits-ambient-light--ivory" />
+            <span className="benefits-ambient-light benefits-ambient-light--champagne" />
+            <span className="benefits-ambient-light benefits-ambient-light--mint" />
+            <span className="benefits-ambient-light benefits-ambient-light--cream" />
+            <span className="benefits-ambient-light benefits-ambient-light--lavender" />
+          </div>
+          <div className="relative z-10">
         <div className="max-w-[39rem]">
           <SectionPill className="mb-4">WHY CHOOSE US</SectionPill>
           <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-[#0A0A0A] sm:text-5xl">
@@ -170,9 +179,90 @@ export default function BenefitsSection() {
             </div>
           </article>
         </div>
+          </div>
+        </div>
       </Container>
 
       <style>{`
+        .benefits-panel-ambient {
+          overflow: hidden;
+          background: #ffffff;
+        }
+
+        .benefits-ambient-light {
+          position: absolute;
+          border-radius: 50%;
+          will-change: transform, opacity;
+        }
+
+        .benefits-ambient-light::before {
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          content: "";
+          will-change: transform, opacity;
+        }
+
+        .benefits-ambient-light--ivory {
+          top: -28%;
+          left: 18%;
+          width: 62%;
+          height: 58%;
+        }
+
+        .benefits-ambient-light--ivory::before {
+          background: radial-gradient(ellipse, rgba(255, 249, 226, 0.52) 0%, rgba(255, 249, 226, 0.2) 35%, transparent 72%);
+          animation: benefits-ivory-drift 30s ease-in-out infinite alternate;
+        }
+
+        .benefits-ambient-light--champagne {
+          top: 8%;
+          right: -20%;
+          width: 59%;
+          height: 60%;
+        }
+
+        .benefits-ambient-light--champagne::before {
+          background: radial-gradient(ellipse, rgba(245, 220, 157, 0.28) 0%, rgba(245, 220, 157, 0.11) 36%, transparent 72%);
+          animation: benefits-champagne-drift 36s ease-in-out infinite alternate;
+        }
+
+        .benefits-ambient-light--mint {
+          top: -18%;
+          left: -18%;
+          width: 56%;
+          height: 62%;
+        }
+
+        .benefits-ambient-light--mint::before {
+          background: radial-gradient(ellipse, rgba(210, 239, 223, 0.28) 0%, rgba(210, 239, 223, 0.11) 34%, transparent 72%);
+          animation: benefits-mint-drift 34s ease-in-out infinite alternate;
+        }
+
+        .benefits-ambient-light--cream {
+          bottom: -34%;
+          left: 12%;
+          width: 66%;
+          height: 62%;
+        }
+
+        .benefits-ambient-light--cream::before {
+          background: radial-gradient(ellipse, rgba(255, 241, 203, 0.3) 0%, rgba(255, 241, 203, 0.12) 36%, transparent 72%);
+          animation: benefits-cream-drift 40s ease-in-out infinite alternate;
+        }
+
+        .benefits-ambient-light--lavender {
+          right: -16%;
+          bottom: -30%;
+          width: 54%;
+          height: 58%;
+        }
+
+        .benefits-ambient-light--lavender::before {
+          background: radial-gradient(ellipse, rgba(230, 223, 244, 0.2) 0%, rgba(230, 223, 244, 0.08) 34%, transparent 72%);
+          animation: benefits-lavender-drift 28s ease-in-out infinite alternate;
+        }
+
         .comparison-traditional-panel {
           border: 1px solid rgba(255, 255, 255, 0.62);
           background: linear-gradient(
@@ -452,6 +542,37 @@ export default function BenefitsSection() {
 
         .comparison-traditional-result > p:last-child {
           color: #5f605c;
+        }
+
+        @keyframes benefits-ivory-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.84; }
+          to { transform: translate3d(10px, 8px, 0) scale(1.05); opacity: 0.94; }
+        }
+
+        @keyframes benefits-champagne-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.76; }
+          to { transform: translate3d(12px, -10px, 0) scale(1.04); opacity: 0.86; }
+        }
+
+        @keyframes benefits-mint-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.72; }
+          to { transform: translate3d(-10px, 10px, 0) scale(1.04); opacity: 0.82; }
+        }
+
+        @keyframes benefits-cream-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.76; }
+          to { transform: translate3d(8px, -12px, 0) scale(1.05); opacity: 0.86; }
+        }
+
+        @keyframes benefits-lavender-drift {
+          from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
+          to { transform: translate3d(10px, 8px, 0) scale(1.04); opacity: 0.78; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .benefits-ambient-light::before {
+            animation: none;
+          }
         }
 
         @media (max-width: 1023px) {
