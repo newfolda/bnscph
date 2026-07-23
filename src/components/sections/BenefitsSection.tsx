@@ -598,30 +598,6 @@ export default function BenefitsSection() {
           color: rgba(245, 245, 243, 0.68);
         }
 
-        .benefits-dark-pill {
-          border-color: rgba(200, 160, 68, 0.58) !important;
-          outline-color: rgba(240, 211, 132, 0.15) !important;
-          background: linear-gradient(135deg, rgba(35, 37, 38, 0.78), rgba(10, 12, 14, 0.72)) !important;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 245, 214, 0.13), inset 0 -1px 0 rgba(200, 160, 68, 0.14) !important;
-          color: var(--primary) !important;
-        }
-
-        .benefits-dark-pill::before {
-          background: radial-gradient(ellipse at 18% 12%, rgba(255, 244, 209, 0.15) 0%, transparent 34%) !important;
-          opacity: 0.68 !important;
-        }
-
-        .benefits-dark-pill::after {
-          background: linear-gradient(135deg, transparent 48%, rgba(200, 160, 68, 0.14) 76%, rgba(255, 245, 214, 0.16) 100%) !important;
-        }
-
-        .benefits-dark-pill:is(:hover, :focus-visible, :focus-within) {
-          border-color: rgba(220, 183, 83, 0.68) !important;
-          outline-color: rgba(240, 211, 132, 0.2) !important;
-          background: linear-gradient(135deg, rgba(42, 39, 31, 0.82), rgba(10, 12, 14, 0.76)) !important;
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 245, 214, 0.16), inset 0 -1px 0 rgba(200, 160, 68, 0.18) !important;
-        }
-
         .scorecard-panel--traditional h3 {
           color: #f0f1ee;
           font-size: 1.18rem;
