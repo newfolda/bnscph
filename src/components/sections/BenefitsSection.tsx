@@ -1,3 +1,7 @@
+"use client"
+
+import { useEffect, useRef, useState, type CSSProperties } from "react"
+
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
 
@@ -23,6 +27,58 @@ const buyAndSellCarsRows: ScoreRow[] = [
   { category: "Paperwork", description: "We handle everything for you.", score: 1, status: "VERY LOW" },
   { category: "Payment Security", description: "Secure payment before transfer.", score: 1, status: "VERY LOW" },
 ]
+
+type ScorecardTone = "traditional" | "recommended"
+
+type AnimatedScores = Record<ScorecardTone, number[]>
+
+const SCORE_SEGMENT_COLORS = [
+  { color: "#34D399", glow: "rgba(52, 211, 153, 0.22)" },
+  { color: "#22C55E", glow: "rgba(34, 197, 94, 0.22)" },
+  { color: "#84CC16", glow: "rgba(132, 204, 22, 0.2)" },
+  { color: "#EAB308", glow: "rgba(234, 179, 8, 0.2)" },
+  { color: "#FACC15", glow: "rgba(250, 204, 21, 0.2)" },
+  { color: "#F59E0B", glow: "rgba(245, 158, 11, 0.2)" },
+  { color: "#FB923C", glow: "rgba(251, 146, 60, 0.2)" },
+  { color: "#F97316", glow: "rgba(249, 115, 22, 0.22)" },
+  { color: "#EF4444", glow: "rgba(239, 68, 68, 0.22)" },
+  { color: "#B91C1C", glow: "rgba(185, 28, 28, 0.24)" },
+] as const
+
+const SCORE_ANIMATION_DURATION_MS = 2400
+const SCORE_ROW_STAGGER_MS = 80
+const SCORE_ROW_ANIMATION_DURATION_MS = SCORE_ANIMATION_DURATION_MS - SCORE_ROW_STAGGER_MS * (traditionalPrivateSaleRows.length - 1)
+
+function getInitialScores(): AnimatedScores {
+  return {
+    traditional: traditionalPrivateSaleRows.map(() => 0),
+    recommended: buyAndSellCarsRows.map(() => 10),
+  }
+}
+
+function getFinalScores(): AnimatedScores {
+  return {
+    traditional: traditionalPrivateSaleRows.map((row) => row.score),
+    recommended: buyAndSellCarsRows.map((row) => row.score),
+  }
+}
+
+function easeOutQuart(progress: number) {
+  return 1 - (1 - progress) ** 4
+}
+
+function getStatusForScore(score: number) {
+  if (score === 0) return null
+  if (score <= 2) return "VERY LOW"
+  if (score <= 4) return "LOW"
+  if (score <= 6) return "MEDIUM"
+  if (score <= 8) return "HIGH"
+  return "EXTREME"
+}
+
+function getStatusClassName(status: string | null) {
+  return status ? status.toLowerCase().replace(" ", "-") : "empty"
+}
 
 function CategoryIcon({ category }: { category: ScoreRow["category"] }) {
   if (category === "Stress") {
@@ -70,7 +126,17 @@ function CategoryIcon({ category }: { category: ScoreRow["category"] }) {
   )
 }
 
-function ScorecardRow({ row, tone }: { row: ScoreRow; tone: "traditional" | "recommended" }) {
+function ScorecardRow({
+  row,
+  tone,
+  currentScore,
+}: {
+  row: ScoreRow
+  tone: ScorecardTone
+  currentScore: number
+}) {
+  const status = getStatusForScore(currentScore)
+
   return (
     <li className="scorecard-row">
       <span className={`scorecard-icon scorecard-icon--${tone}`}>
@@ -80,23 +146,27 @@ function ScorecardRow({ row, tone }: { row: ScoreRow; tone: "traditional" | "rec
         <strong className="scorecard-category">{row.category}</strong>
         <span className="scorecard-description">{row.description}</span>
       </span>
-      <span className="scorecard-segments" aria-label={`${row.score} out of 10 ${row.status.toLowerCase()}`}>
+      <span
+        className="scorecard-segments"
+        aria-label={status ? `${currentScore} out of 10, ${status.toLowerCase()}` : "0 out of 10"}
+      >
         {Array.from({ length: 10 }, (_, index) => (
           <span
             key={index}
             aria-hidden="true"
-            className={`scorecard-segment ${
-              index < row.score ? `scorecard-segment--${tone}` : ""
-            }`}
+            className={`scorecard-segment ${index < currentScore ? "scorecard-segment--active" : ""}`}
+            style={{
+              "--score-segment-color": SCORE_SEGMENT_COLORS[index].color,
+              "--score-segment-glow": SCORE_SEGMENT_COLORS[index].glow,
+            } as CSSProperties}
           />
         ))}
       </span>
       <span
-        className={`scorecard-status scorecard-status--${tone} ${
-          row.status === "EXTREME" ? "scorecard-status--extreme" : ""
-        }`}
+        aria-hidden={status === null}
+        className={`scorecard-status scorecard-status--${getStatusClassName(status)}`}
       >
-        {row.status}
+        {status ?? "\u00a0"}
       </span>
     </li>
   )
@@ -128,6 +198,89 @@ function OutcomeCarSilhouette() {
 }
 
 export default function BenefitsSection() {
+  const comparisonRef = useRef<HTMLDivElement>(null)
+  const hasTriggeredAnimationRef = useRef(false)
+  const animationFrameRef = useRef<number | null>(null)
+  const [animatedScores, setAnimatedScores] = useState<AnimatedScores>(getInitialScores)
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (prefersReducedMotion) {
+      animationFrameRef.current = window.requestAnimationFrame(() => {
+        animationFrameRef.current = null
+        setAnimatedScores(getFinalScores())
+      })
+
+      return () => {
+        if (animationFrameRef.current !== null) {
+          window.cancelAnimationFrame(animationFrameRef.current)
+        }
+      }
+    }
+
+    const comparisonElement = comparisonRef.current
+    if (!comparisonElement) return
+
+    const startAnimation = () => {
+      if (hasTriggeredAnimationRef.current) return
+
+      hasTriggeredAnimationRef.current = true
+      const startTime = performance.now()
+
+      const animateScores = (currentTime: number) => {
+        const elapsed = currentTime - startTime
+        const nextScores: AnimatedScores = {
+          traditional: traditionalPrivateSaleRows.map((row, index) => {
+            const progress = Math.min(
+              Math.max((elapsed - index * SCORE_ROW_STAGGER_MS) / SCORE_ROW_ANIMATION_DURATION_MS, 0),
+              1,
+            )
+            return Math.round(row.score * easeOutQuart(progress))
+          }),
+          recommended: buyAndSellCarsRows.map((row, index) => {
+            const progress = Math.min(
+              Math.max((elapsed - index * SCORE_ROW_STAGGER_MS) / SCORE_ROW_ANIMATION_DURATION_MS, 0),
+              1,
+            )
+            return Math.round(10 + (row.score - 10) * easeOutQuart(progress))
+          }),
+        }
+
+        setAnimatedScores(nextScores)
+
+        if (elapsed < SCORE_ANIMATION_DURATION_MS) {
+          animationFrameRef.current = window.requestAnimationFrame(animateScores)
+        } else {
+          animationFrameRef.current = null
+          setAnimatedScores(getFinalScores())
+        }
+      }
+
+      animationFrameRef.current = window.requestAnimationFrame(animateScores)
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect()
+          startAnimation()
+        }
+      },
+      { threshold: 0.3 },
+    )
+
+    observer.observe(comparisonElement)
+
+    return () => {
+      observer.disconnect()
+
+      if (animationFrameRef.current !== null) {
+        window.cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [])
+
   return (
     <section className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#090B0D_0%,#050607_100%)] py-14 sm:py-16 lg:py-24">
       <div aria-hidden="true" className="benefits-panel-ambient pointer-events-none absolute inset-0 z-0">
@@ -153,7 +306,7 @@ export default function BenefitsSection() {
               </p>
         </header>
 
-            <div className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_4.5rem_minmax(0,1fr)] lg:items-stretch lg:gap-5">
+            <div ref={comparisonRef} className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_4.5rem_minmax(0,1fr)] lg:items-stretch lg:gap-5">
               <article
                 tabIndex={0}
                 className="scorecard-panel scorecard-panel--traditional rounded-[1.625rem] p-5 sm:p-6 lg:p-8"
@@ -168,8 +321,8 @@ export default function BenefitsSection() {
                 </header>
 
                 <ul className="mt-7 space-y-0">
-                    {traditionalPrivateSaleRows.map((row) => (
-                      <ScorecardRow key={row.category} row={row} tone="traditional" />
+                    {traditionalPrivateSaleRows.map((row, index) => (
+                      <ScorecardRow key={row.category} row={row} tone="traditional" currentScore={animatedScores.traditional[index]} />
                     ))}
                 </ul>
 
@@ -201,8 +354,8 @@ export default function BenefitsSection() {
                 </header>
 
                 <ul className="mt-7 space-y-0">
-                    {buyAndSellCarsRows.map((row) => (
-                      <ScorecardRow key={row.category} row={row} tone="recommended" />
+                    {buyAndSellCarsRows.map((row, index) => (
+                      <ScorecardRow key={row.category} row={row} tone="recommended" currentScore={animatedScores.recommended[index]} />
                     ))}
                 </ul>
 
@@ -504,57 +657,58 @@ export default function BenefitsSection() {
           border-radius: 0.18rem;
           background: rgba(90, 96, 101, 0.32);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+          opacity: 0.72;
+          transition: opacity 220ms ease-out, background 220ms ease-out, box-shadow 220ms ease-out, filter 220ms ease-out, transform 220ms ease-out;
         }
 
-        .scorecard-segment--traditional {
-          background: linear-gradient(180deg, #ff6350, #d82d22);
-          box-shadow: 0 0 9px rgba(217, 48, 36, 0.23), inset 0 1px 0 rgba(255, 212, 204, 0.22);
+        .scorecard-segment--active {
+          background: var(--score-segment-color);
+          box-shadow: 0 0 8px var(--score-segment-glow), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+          opacity: 1;
         }
 
-        .scorecard-segment--recommended {
-          background: linear-gradient(180deg, #b1df63, #76b93a);
-          box-shadow: 0 0 9px rgba(120, 184, 59, 0.2), inset 0 1px 0 rgba(231, 255, 194, 0.24);
-        }
-
-        .scorecard-segment--traditional,
-        .scorecard-segment--recommended {
-          transition: filter 320ms ease, box-shadow 320ms ease;
-        }
-
-        .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible) .scorecard-segment--traditional {
+        .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-segment--active {
           filter: brightness(1.08);
-          box-shadow: 0 0 11px rgba(217, 48, 36, 0.3), inset 0 1px 0 rgba(255, 220, 213, 0.26);
-        }
-
-        .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) .scorecard-segment--recommended {
-          filter: brightness(1.08);
-          box-shadow: 0 0 11px rgba(120, 184, 59, 0.27), inset 0 1px 0 rgba(234, 255, 202, 0.27);
+          box-shadow: 0 0 10px var(--score-segment-glow), inset 0 1px 0 rgba(255, 255, 255, 0.34), inset 0 -1px 0 rgba(0, 0, 0, 0.16);
         }
 
         .scorecard-status {
           justify-self: end;
+          min-width: 4.4rem;
           border-radius: 9999px;
           padding: 0.24rem 0.4rem;
+          color: #b8e178;
           font-size: 0.53rem;
           font-weight: 700;
           letter-spacing: 0.08em;
           line-height: 1;
           text-align: center;
+          transition: color 200ms ease-out, opacity 200ms ease-out;
         }
 
-        .scorecard-status--traditional {
-          background: rgba(126, 35, 29, 0.12);
-          color: #f07162;
+        .scorecard-status--empty {
+          opacity: 0;
+        }
+
+        .scorecard-status--very-low {
+          color: #34d399;
+        }
+
+        .scorecard-status--low {
+          color: #84cc16;
+        }
+
+        .scorecard-status--medium {
+          color: #eab308;
+        }
+
+        .scorecard-status--high {
+          color: #fb923c;
         }
 
         .scorecard-status--extreme {
-          color: #ff897b;
+          color: #ef4444;
           font-weight: 800;
-        }
-
-        .scorecard-status--recommended {
-          background: rgba(80, 123, 40, 0.12);
-          color: #b8e178;
         }
 
         .scorecard-outcome {
@@ -686,7 +840,7 @@ export default function BenefitsSection() {
           box-shadow: 0 10px 22px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 247, 220, 0.12), inset 0 -1px 0 rgba(200, 160, 68, 0.16);
         }
 
-        @media (max-width: 1023px) {
+        @media (max-width: 1150px) {
           .scorecard-row {
             grid-template-columns: 2.65rem minmax(0, 1fr);
             gap: 0.7rem;
@@ -722,8 +876,8 @@ export default function BenefitsSection() {
           .scorecard-panel::before,
           .scorecard-panel::after,
           .scorecard-icon,
-          .scorecard-segment--traditional,
-          .scorecard-segment--recommended,
+          .scorecard-segment,
+          .scorecard-status,
           .scorecard-outcome,
           .scorecard-outcome-car {
             transition: none;
