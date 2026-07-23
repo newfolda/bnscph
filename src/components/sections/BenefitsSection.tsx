@@ -199,7 +199,8 @@ function OutcomeCarSilhouette() {
 
 export default function BenefitsSection() {
   const comparisonRef = useRef<HTMLDivElement>(null)
-  const hasTriggeredAnimationRef = useRef(false)
+  const currentlyAnimatingRef = useRef(false)
+  const hasEnteredViewportRef = useRef(false)
   const animationFrameRef = useRef<number | null>(null)
   const [animatedScores, setAnimatedScores] = useState<AnimatedScores>(getInitialScores)
 
@@ -223,9 +224,10 @@ export default function BenefitsSection() {
     if (!comparisonElement) return
 
     const startAnimation = () => {
-      if (hasTriggeredAnimationRef.current) return
+      if (currentlyAnimatingRef.current || hasEnteredViewportRef.current) return
 
-      hasTriggeredAnimationRef.current = true
+      currentlyAnimatingRef.current = true
+      hasEnteredViewportRef.current = true
       const startTime = performance.now()
 
       const animateScores = (currentTime: number) => {
@@ -253,6 +255,7 @@ export default function BenefitsSection() {
           animationFrameRef.current = window.requestAnimationFrame(animateScores)
         } else {
           animationFrameRef.current = null
+          currentlyAnimatingRef.current = false
           setAnimatedScores(getFinalScores())
         }
       }
@@ -262,12 +265,25 @@ export default function BenefitsSection() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          observer.disconnect()
+        const entry = entries[0]
+
+        if (entry.intersectionRatio < 0.1 && hasEnteredViewportRef.current) {
+          if (animationFrameRef.current !== null) {
+            window.cancelAnimationFrame(animationFrameRef.current)
+            animationFrameRef.current = null
+          }
+
+          currentlyAnimatingRef.current = false
+          hasEnteredViewportRef.current = false
+          setAnimatedScores(getInitialScores())
+          return
+        }
+
+        if (entry.intersectionRatio >= 0.3) {
           startAnimation()
         }
       },
-      { threshold: 0.3 },
+      { threshold: [0.1, 0.3] },
     )
 
     observer.observe(comparisonElement)
