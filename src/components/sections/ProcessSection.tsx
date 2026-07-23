@@ -131,7 +131,15 @@ export default function ProcessSection() {
                     {step.title}
                   </h3>
                   <p className="mt-2 min-h-10 max-w-[16rem] text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
-                    {step.description}
+                    <span className="process-card-description-text">
+                      {step.description}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="process-card-description-streak"
+                    >
+                      {step.description}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -352,6 +360,38 @@ export default function ProcessSection() {
           z-index: 1;
         }
 
+        .process-card-description-text {
+          display: block;
+          position: relative;
+          z-index: 1;
+        }
+
+        .process-card-description-streak {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          display: block;
+          pointer-events: none;
+          color: transparent;
+          opacity: 0;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 38%,
+            rgba(255, 255, 255, 0.25) 44%,
+            rgba(255, 255, 255, 0.95) 50%,
+            rgba(255, 245, 215, 0.55) 54%,
+            transparent 62%,
+            transparent 100%
+          );
+          background-position: 110% 0;
+          background-repeat: no-repeat;
+          background-size: 250% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
         .process-glass-card:is(:hover, :focus-within) {
           border-color: rgba(255, 255, 255, 0.94);
           outline-color: rgba(95, 115, 130, 0.16);
@@ -378,6 +418,10 @@ export default function ProcessSection() {
         .process-glass-card:is(:hover, :focus-within)::after {
           transform: translate3d(6px, 6px, 0) scale(1.02);
           opacity: 0.8;
+        }
+
+        .process-glass-card:is(:hover, :focus-within) .process-card-description-streak {
+          animation: process-card-description-streak 800ms cubic-bezier(0.22, 1, 0.36, 1) 130ms both;
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -411,6 +455,26 @@ export default function ProcessSection() {
         @keyframes process-ambient-mint-drift {
           from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
           to { transform: translate3d(-12px, 10px, 0) scale(1.05); opacity: 0.96; }
+        }
+
+        @keyframes process-card-description-streak {
+          0% {
+            background-position: 110% 0;
+            opacity: 0;
+          }
+
+          14% {
+            opacity: 1;
+          }
+
+          86% {
+            opacity: 1;
+          }
+
+          100% {
+            background-position: -10% 0;
+            opacity: 0;
+          }
         }
 
         @keyframes process-ambient-yellow-drift {
@@ -459,6 +523,10 @@ export default function ProcessSection() {
           .process-glass-card:is(:hover, :focus-within)::before,
           .process-glass-card:is(:hover, :focus-within)::after {
             transform: none;
+          }
+
+          .process-card-description-streak {
+            animation: none !important;
           }
 
           .process-main-panel:has(.process-glass-card:is(:hover, :focus-within)) .process-ambient-blob {
