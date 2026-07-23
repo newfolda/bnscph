@@ -129,7 +129,10 @@ export default function BenefitsSection() {
         </header>
 
             <div className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_4.5rem_minmax(0,1fr)] lg:items-stretch lg:gap-5">
-              <article className="scorecard-panel scorecard-panel--traditional rounded-[1.625rem] p-5 sm:p-6 lg:p-8">
+              <article
+                tabIndex={0}
+                className="scorecard-panel scorecard-panel--traditional rounded-[1.625rem] p-5 sm:p-6 lg:p-8"
+              >
                 <header className="text-center">
                     <h3 className="text-lg font-bold tracking-tight text-[#494841] sm:text-xl">
                       TRADITIONAL PRIVATE SALE
@@ -158,7 +161,10 @@ export default function BenefitsSection() {
                 <span className="scorecard-vs-badge">VS</span>
               </div>
 
-              <article className="scorecard-panel scorecard-panel--recommended rounded-[1.625rem] p-5 sm:p-6 lg:p-8">
+              <article
+                tabIndex={0}
+                className="scorecard-panel scorecard-panel--recommended rounded-[1.625rem] p-5 sm:p-6 lg:p-8"
+              >
                 <header className="text-center">
                     <h3 className="text-lg font-bold tracking-tight text-[#0A0A0A] sm:text-xl">
                       BUY &amp; SELL CARS PHILIPPINES
@@ -238,9 +244,11 @@ export default function BenefitsSection() {
           position: relative;
           isolation: isolate;
           overflow: hidden;
+          outline: 1px solid transparent;
           outline-offset: -1px;
           backdrop-filter: blur(16px) saturate(112%);
           -webkit-backdrop-filter: blur(16px) saturate(112%);
+          transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), border-color 360ms cubic-bezier(0.22, 1, 0.36, 1), outline-color 360ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1), background 360ms cubic-bezier(0.22, 1, 0.36, 1), filter 360ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .scorecard-panel--traditional {
@@ -264,6 +272,7 @@ export default function BenefitsSection() {
           pointer-events: none;
           content: "";
           border-radius: inherit;
+          transition: transform 520ms ease, opacity 520ms ease;
         }
 
         .scorecard-panel::before {
@@ -284,6 +293,41 @@ export default function BenefitsSection() {
         .scorecard-panel > * {
           position: relative;
           z-index: 1;
+        }
+
+        .scorecard-panel:is(:hover, :focus-within, :focus-visible) {
+          transform: translateY(-4px);
+          filter: brightness(1.02);
+        }
+
+        .scorecard-panel:is(:hover, :focus-within, :focus-visible)::before {
+          transform: translate3d(7px, 6px, 0);
+          opacity: 1;
+        }
+
+        .scorecard-panel:is(:hover, :focus-within, :focus-visible)::after {
+          transform: translate3d(5px, 4px, 0);
+          opacity: 0.92;
+        }
+
+        .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible) {
+          border-color: rgba(181, 194, 204, 0.5);
+          box-shadow: 0 30px 58px rgba(0, 0, 0, 0.42), 0 11px 24px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(226, 232, 238, 0.14), inset 0 -1px 0 rgba(86, 105, 120, 0.2);
+        }
+
+        .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) {
+          border-color: rgba(222, 186, 88, 0.84);
+          box-shadow: 0 32px 62px rgba(0, 0, 0, 0.46), 0 13px 28px rgba(174, 130, 35, 0.18), inset 0 1px 0 rgba(255, 242, 204, 0.2), inset 0 -1px 0 rgba(183, 139, 44, 0.25);
+        }
+
+        .scorecard-panel--traditional:focus-visible {
+          outline-color: rgba(214, 228, 239, 0.68);
+          outline-offset: 3px;
+        }
+
+        .scorecard-panel--recommended:focus-visible {
+          outline-color: rgba(234, 199, 109, 0.72);
+          outline-offset: 3px;
         }
 
         .benefits-dark-header h2 {
@@ -359,6 +403,7 @@ export default function BenefitsSection() {
           border-radius: 0.8rem;
           background: rgba(5, 7, 9, 0.54);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.32), 0 4px 10px rgba(0, 0, 0, 0.2);
+          transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .scorecard-icon svg {
@@ -376,6 +421,16 @@ export default function BenefitsSection() {
           border-color: rgba(218, 181, 79, 0.62);
           color: var(--primary);
           box-shadow: inset 0 1px 0 rgba(255, 235, 174, 0.11), inset 0 0 14px rgba(207, 166, 68, 0.1), 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible) .scorecard-icon--traditional {
+          transform: translateY(-2px);
+          box-shadow: inset 0 1px 0 rgba(255, 157, 148, 0.12), inset 0 0 16px rgba(180, 48, 38, 0.16), 0 6px 12px rgba(0, 0, 0, 0.24);
+        }
+
+        .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) .scorecard-icon--recommended {
+          transform: translateY(-2px);
+          box-shadow: inset 0 1px 0 rgba(255, 235, 174, 0.14), inset 0 0 16px rgba(207, 166, 68, 0.15), 0 6px 12px rgba(0, 0, 0, 0.24);
         }
 
         .scorecard-category {
@@ -419,6 +474,21 @@ export default function BenefitsSection() {
           box-shadow: 0 0 9px rgba(120, 184, 59, 0.2), inset 0 1px 0 rgba(231, 255, 194, 0.24);
         }
 
+        .scorecard-segment--traditional,
+        .scorecard-segment--recommended {
+          transition: filter 320ms ease, box-shadow 320ms ease;
+        }
+
+        .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible) .scorecard-segment--traditional {
+          filter: brightness(1.08);
+          box-shadow: 0 0 11px rgba(217, 48, 36, 0.3), inset 0 1px 0 rgba(255, 220, 213, 0.26);
+        }
+
+        .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) .scorecard-segment--recommended {
+          filter: brightness(1.08);
+          box-shadow: 0 0 11px rgba(120, 184, 59, 0.27), inset 0 1px 0 rgba(234, 255, 202, 0.27);
+        }
+
         .scorecard-status {
           justify-self: end;
           border-radius: 9999px;
@@ -449,6 +519,7 @@ export default function BenefitsSection() {
           display: flex;
           align-items: center;
           gap: 0.8rem;
+          transition: background 360ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .scorecard-outcome-icon {
@@ -500,6 +571,16 @@ export default function BenefitsSection() {
           color: #17140d;
         }
 
+        .scorecard-panel--traditional:is(:hover, :focus-within, :focus-visible) .scorecard-outcome--traditional {
+          background: rgba(255, 255, 255, 0.075);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.22);
+        }
+
+        .scorecard-panel--recommended:is(:hover, :focus-within, :focus-visible) .scorecard-outcome--recommended {
+          background: linear-gradient(135deg, rgba(239, 192, 73, 0.96), rgba(211, 158, 47, 0.91));
+          box-shadow: inset 0 1px 0 rgba(255, 248, 211, 0.58), inset 0 -1px 0 rgba(104, 66, 7, 0.24);
+        }
+
         .scorecard-vs-badge {
           display: inline-flex;
           height: 2.8rem;
@@ -530,6 +611,34 @@ export default function BenefitsSection() {
           .scorecard-status {
             grid-column: 2;
             justify-self: start;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .scorecard-panel,
+          .scorecard-panel::before,
+          .scorecard-panel::after,
+          .scorecard-icon,
+          .scorecard-segment--traditional,
+          .scorecard-segment--recommended,
+          .scorecard-outcome {
+            transition: none;
+          }
+
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible),
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible)::before,
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible)::after,
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-icon {
+            transform: none;
+          }
+
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible) {
+            filter: none;
+          }
+
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-segment--traditional,
+          .scorecard-panel:is(:hover, :focus-within, :focus-visible) .scorecard-segment--recommended {
+            filter: none;
           }
         }
 
