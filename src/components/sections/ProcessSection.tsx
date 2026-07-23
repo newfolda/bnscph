@@ -427,7 +427,7 @@ export default function ProcessSection() {
         }
 
         .process-glass-card:is(:hover, :focus-within) .process-card-description-streak {
-          animation: process-card-description-streak 800ms cubic-bezier(0.22, 1, 0.36, 1) 130ms both;
+          animation: process-card-description-streak 1200ms cubic-bezier(0.22, 1, 0.36, 1) 130ms both;
         }
 
         @media (hover: hover) and (pointer: fine) {
