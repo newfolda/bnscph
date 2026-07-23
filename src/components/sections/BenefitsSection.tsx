@@ -87,7 +87,7 @@ export default function BenefitsSection() {
                     <span className="comparison-row-number">{String(index + 1).padStart(2, "0")}</span>
                     <span
                       aria-hidden="true"
-                      className="flex h-6 w-6 items-center justify-center rounded-lg bg-stone-200 text-base leading-none text-stone-500"
+                      className="comparison-negative-icon flex h-6 w-6 items-center justify-center rounded-lg bg-stone-200 text-base leading-none text-stone-500"
                     >
                       ×
                     </span>
@@ -147,7 +147,7 @@ export default function BenefitsSection() {
                     <span className="comparison-row-number">{String(index + 1).padStart(2, "0")}</span>
                     <span
                       aria-hidden="true"
-                      className="flex h-6 w-6 items-center justify-center rounded-lg bg-[rgba(200,160,68,0.14)] text-sm font-bold text-[var(--primary)]"
+                      className="comparison-positive-icon flex h-6 w-6 items-center justify-center rounded-lg bg-[rgba(200,160,68,0.14)] text-sm font-bold text-[var(--primary)]"
                     >
                       ✓
                     </span>
@@ -174,34 +174,121 @@ export default function BenefitsSection() {
 
       <style>{`
         .comparison-traditional-panel {
-          background: #ececea;
-          box-shadow: 0 14px 32px rgba(33, 33, 33, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.62);
+          background: linear-gradient(
+            135deg,
+            rgba(237, 238, 237, 0.92) 0%,
+            rgba(210, 212, 211, 0.72) 52%,
+            rgba(230, 231, 229, 0.84) 100%
+          );
+          box-shadow:
+            0 18px 38px rgba(38, 40, 39, 0.1),
+            0 5px 14px rgba(38, 40, 39, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 0.78),
+            inset 0 -1px 0 rgba(104, 111, 108, 0.12);
+          backdrop-filter: blur(12px) saturate(112%);
+          -webkit-backdrop-filter: blur(12px) saturate(112%);
         }
 
         .comparison-traditional-panel:hover {
-          box-shadow: 0 18px 38px rgba(33, 33, 33, 0.12);
+          box-shadow:
+            0 22px 44px rgba(38, 40, 39, 0.13),
+            0 8px 18px rgba(38, 40, 39, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.84),
+            inset 0 -1px 0 rgba(104, 111, 108, 0.13);
         }
 
         .comparison-traditional-inset {
-          background: rgba(218, 218, 215, 0.62);
-          border: 1px solid rgba(255, 255, 255, 0.48);
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.58);
+          background: linear-gradient(135deg, rgba(221, 223, 221, 0.74), rgba(198, 201, 199, 0.54));
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68), inset 0 -1px 0 rgba(100, 108, 104, 0.12);
+          backdrop-filter: blur(14px) saturate(108%);
+          -webkit-backdrop-filter: blur(14px) saturate(108%);
         }
 
         .comparison-premium-panel {
-          border: 1px solid rgba(200, 160, 68, 0.55);
-          background: #fffdfa;
-          box-shadow: 0 22px 46px rgba(112, 83, 23, 0.14), 0 8px 20px rgba(200, 160, 68, 0.1);
+          border: 1px solid rgba(200, 160, 68, 0.6);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 254, 248, 0.94) 0%,
+            rgba(255, 247, 220, 0.7) 50%,
+            rgba(255, 253, 245, 0.88) 100%
+          );
+          box-shadow:
+            0 26px 54px rgba(112, 83, 23, 0.15),
+            0 10px 24px rgba(200, 160, 68, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.92),
+            inset 0 -1px 0 rgba(183, 139, 44, 0.16);
+          backdrop-filter: blur(14px) saturate(120%);
+          -webkit-backdrop-filter: blur(14px) saturate(120%);
         }
 
         .comparison-premium-panel:hover {
-          border-color: rgba(200, 160, 68, 0.76);
-          box-shadow: 0 28px 54px rgba(112, 83, 23, 0.18), 0 12px 26px rgba(200, 160, 68, 0.13);
+          border-color: rgba(200, 160, 68, 0.8);
+          box-shadow:
+            0 31px 62px rgba(112, 83, 23, 0.19),
+            0 13px 28px rgba(200, 160, 68, 0.14),
+            inset 0 1px 0 rgba(255, 255, 255, 0.96),
+            inset 0 -1px 0 rgba(183, 139, 44, 0.19);
         }
 
         .comparison-premium-inset {
-          border: 1px solid rgba(200, 160, 68, 0.2);
-          background: rgba(255, 255, 255, 0.78);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.94);
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.78);
+          outline: 1px solid rgba(200, 160, 68, 0.18);
+          outline-offset: -1px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 252, 240, 0.6));
+          box-shadow:
+            0 10px 20px rgba(138, 103, 26, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 0.96),
+            inset 0 -1px 0 rgba(179, 154, 105, 0.11);
+          backdrop-filter: blur(16px) saturate(125%);
+          -webkit-backdrop-filter: blur(16px) saturate(125%);
+        }
+
+        .comparison-traditional-inset::before,
+        .comparison-traditional-inset::after,
+        .comparison-premium-inset::before,
+        .comparison-premium-inset::after {
+          position: absolute;
+          z-index: 0;
+          pointer-events: none;
+          content: "";
+          border-radius: inherit;
+          transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 360ms ease;
+        }
+
+        .comparison-traditional-inset::before,
+        .comparison-premium-inset::before {
+          inset: 0;
+          background: radial-gradient(ellipse at 16% 8%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.25) 19%, transparent 48%);
+        }
+
+        .comparison-traditional-inset::after,
+        .comparison-premium-inset::after {
+          inset: 1px;
+          background: linear-gradient(135deg, transparent 50%, rgba(160, 182, 193, 0.1) 78%, rgba(255, 255, 255, 0.52) 100%);
+        }
+
+        .comparison-traditional-inset > *,
+        .comparison-premium-inset > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .comparison-traditional-panel:hover .comparison-traditional-inset::before,
+        .comparison-premium-panel:hover .comparison-premium-inset::before {
+          transform: translate3d(7px, 6px, 0);
+        }
+
+        .comparison-traditional-panel:hover .comparison-traditional-inset::after,
+        .comparison-premium-panel:hover .comparison-premium-inset::after {
+          transform: translate3d(5px, 4px, 0);
         }
 
         .comparison-row {
@@ -257,13 +344,34 @@ export default function BenefitsSection() {
 
         .comparison-traditional-result {
           border: 1px solid rgba(255, 255, 255, 0.78);
-          background: rgba(255, 255, 255, 0.72);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(245, 247, 246, 0.52));
+          box-shadow: 0 8px 18px rgba(42, 45, 43, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.88), inset 0 -1px 0 rgba(118, 128, 124, 0.1);
+          backdrop-filter: blur(12px) saturate(110%);
+          -webkit-backdrop-filter: blur(12px) saturate(110%);
         }
 
         .comparison-premium-result {
           border: 1px solid rgba(200, 160, 68, 0.26);
-          background: rgba(255, 243, 205, 0.66);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+          background: linear-gradient(135deg, rgba(255, 248, 220, 0.76), rgba(255, 237, 177, 0.48));
+          box-shadow: 0 9px 20px rgba(143, 103, 20, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.76), inset 0 -1px 0 rgba(190, 148, 50, 0.12);
+          backdrop-filter: blur(12px) saturate(115%);
+          -webkit-backdrop-filter: blur(12px) saturate(115%);
+        }
+
+        .comparison-negative-icon,
+        .comparison-positive-icon {
+          border: 1px solid rgba(255, 255, 255, 0.72);
+          box-shadow: 0 4px 10px rgba(41, 44, 42, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.82), inset 0 -1px 0 rgba(96, 108, 104, 0.1);
+        }
+
+        .comparison-negative-icon {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.66), rgba(212, 215, 213, 0.7));
+        }
+
+        .comparison-positive-icon {
+          border-color: rgba(230, 196, 110, 0.5);
+          background: linear-gradient(135deg, rgba(255, 247, 213, 0.82), rgba(232, 195, 92, 0.3));
+          box-shadow: 0 5px 12px rgba(163, 121, 29, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.86), inset 0 -1px 0 rgba(176, 132, 37, 0.12);
         }
 
         .comparison-vs-badge {
