@@ -111,7 +111,7 @@ export default function ProcessSection() {
                       width={104}
                       height={104}
                       draggable={false}
-                      className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
+                      className="process-video object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                   {index === 1 && (
@@ -128,7 +128,7 @@ export default function ProcessSection() {
                       width={104}
                       height={104}
                       draggable={false}
-                      className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
+                      className="process-video object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                   {index === 2 && (
@@ -145,7 +145,7 @@ export default function ProcessSection() {
                       width={104}
                       height={104}
                       draggable={false}
-                      className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
+                      className="process-video object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                 </div>
@@ -172,6 +172,11 @@ export default function ProcessSection() {
         </div>
       </Container>
       <style>{`
+        .process-video {
+          -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, #000 93%, transparent 100%);
+          mask-image: radial-gradient(ellipse at center, #000 0%, #000 93%, transparent 100%);
+        }
+
         .process-panel-ambient {
           overflow: hidden;
           background: #ffffff;
