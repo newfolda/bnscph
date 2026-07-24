@@ -177,7 +177,7 @@ export default function ProcessSection() {
         }
 
         .process-ambient-blob--mint::before {
-          background: radial-gradient(ellipse, rgba(190, 240, 215, 0.46) 0%, rgba(190, 240, 215, 0.2) 34%, transparent 70%);
+          background: radial-gradient(ellipse, rgba(255, 247, 233, 0.38) 0%, rgba(255, 247, 233, 0.15) 34%, rgba(194, 207, 213, 0.025) 52%, transparent 70%);
           animation: process-ambient-mint-drift 24s ease-in-out infinite alternate;
         }
 
@@ -189,7 +189,7 @@ export default function ProcessSection() {
         }
 
         .process-ambient-blob--yellow::before {
-          background: radial-gradient(ellipse, rgba(255, 235, 170, 0.42) 0%, rgba(255, 235, 170, 0.18) 34%, transparent 70%);
+          background: radial-gradient(ellipse, rgba(239, 219, 173, 0.28) 0%, rgba(239, 219, 173, 0.1) 34%, transparent 70%);
           animation: process-ambient-yellow-drift 28s ease-in-out infinite alternate;
         }
 
@@ -201,7 +201,7 @@ export default function ProcessSection() {
         }
 
         .process-ambient-blob--pink::before {
-          background: radial-gradient(ellipse, rgba(255, 210, 225, 0.42) 0%, rgba(255, 210, 225, 0.18) 34%, transparent 70%);
+          background: radial-gradient(ellipse, rgba(226, 196, 122, 0.22) 0%, rgba(226, 196, 122, 0.08) 34%, transparent 70%);
           animation: process-ambient-pink-drift 31s ease-in-out infinite alternate;
         }
 
@@ -213,7 +213,7 @@ export default function ProcessSection() {
         }
 
         .process-ambient-blob--blue::before {
-          background: radial-gradient(ellipse, rgba(195, 225, 255, 0.44) 0%, rgba(195, 225, 255, 0.19) 36%, transparent 70%);
+          background: radial-gradient(ellipse, rgba(247, 225, 181, 0.22) 0%, rgba(247, 225, 181, 0.08) 36%, transparent 70%);
           animation: process-ambient-blue-drift 34s ease-in-out infinite alternate;
         }
 
@@ -225,7 +225,7 @@ export default function ProcessSection() {
         }
 
         .process-ambient-blob--lavender::before {
-          background: radial-gradient(ellipse, rgba(220, 215, 255, 0.36) 0%, rgba(220, 215, 255, 0.15) 34%, transparent 70%);
+          background: radial-gradient(ellipse, rgba(210, 185, 146, 0.18) 0%, rgba(210, 185, 146, 0.06) 34%, transparent 70%);
           animation: process-ambient-lavender-drift 38s ease-in-out infinite alternate;
         }
 
