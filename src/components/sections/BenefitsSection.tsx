@@ -58,7 +58,7 @@ export default function BenefitsSection() {
       setIsRowRotationActive(true)
       interval = window.setInterval(() => {
         setActiveRow((currentRow) => (currentRow + 1) % comparisonItems.length)
-      }, 1500)
+      }, 2500)
     }, 1000)
 
     return () => {
@@ -174,11 +174,11 @@ export default function BenefitsSection() {
           line-height: 1.35;
           text-transform: uppercase;
           white-space: nowrap;
-          text-align: center;
+          text-align: left;
         }
 
         .benefits-canvas-label--traditional { color: #666c73; }
-        .benefits-canvas-label--preferred { color: #8f6a1f; }
+        .benefits-canvas-label--preferred { padding-left: 1.2rem; color: #8f6a1f; }
 
         .benefits-transformation-rows { padding: 0.15rem 1.5rem; }
 
@@ -291,7 +291,7 @@ export default function BenefitsSection() {
           .benefits-introduction p { margin-right: auto; margin-left: auto; }
           .benefits-canvas { max-width: 46rem; }
 
-          .benefits-canvas-header { padding: 1.3rem 1.25rem 1.1rem; }
+          .benefits-canvas-header { display: none; }
           .benefits-transformation-rows { padding: 0.1rem 1.25rem; }
           .benefits-transformation-row {
             display: block;
@@ -325,8 +325,6 @@ export default function BenefitsSection() {
 
         @media (max-width: 639px) {
           .benefits-canvas { border-radius: 1.25rem; }
-          .benefits-canvas-header { grid-template-columns: 1.7rem minmax(0, 1fr) minmax(0, 1.1fr); padding: 1.1rem 1rem 0.95rem; }
-          .benefits-canvas-label { font-size: 0.68rem; letter-spacing: 0.055em; }
           .benefits-transformation-rows { padding: 0.1rem 1rem; }
           .benefits-cta { width: 100%; max-width: 22rem; }
           .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
