@@ -99,11 +99,17 @@ export default function ProcessSection() {
                 </span>
                 <div className="mt-1 flex h-[120px] w-[120px] items-center justify-center">
                   {index === 0 && (
-                    <Image
-                      src="/images/brand/process-upload.png"
-                      alt="Upload car details and photos"
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      src="/videos/process-upload.mp4"
+                      aria-label="Upload car details and photos"
                       width={120}
                       height={120}
+                      draggable={false}
                       className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
