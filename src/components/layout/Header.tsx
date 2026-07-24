@@ -60,23 +60,23 @@ export default function Header() {
           <Link
             href="/"
             className={`flex h-full items-center transition-[width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
-              isCompact ? "w-[120px]" : "w-[140px]"
+              isCompact ? "w-[144px]" : "w-[168px]"
             }`}
           >
             <Image
               src="/images/brand/logo.png"
               alt="Mobee"
-              width={140}
-              height={40}
+              width={168}
+              height={48}
               className={`h-auto transition-[width] duration-300 ${
-                isCompact ? "w-[120px]" : "w-[140px]"
+                isCompact ? "w-[144px]" : "w-[168px]"
               }`}
               priority
             />
           </Link>
 
           <ul
-            className={`flex h-full items-center text-sm font-normal text-gray-700 transition-[gap] duration-300 ${
+            className={`flex h-full items-center text-sm font-medium text-gray-700 transition-[gap] duration-300 ${
               isCompact ? "gap-8" : "gap-10"
             }`}
           >
