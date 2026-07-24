@@ -8,41 +8,47 @@ const faqs = [
   {
     question: "How do I sell my car to Buy and Sell Cars Philippines?",
     answer:
-      "Simply send us your car details. We'll evaluate your vehicle and provide an initial offer. If you accept our offer, we'll schedule a free doorstep inspection at a time that's convenient for you. Once the inspection and documents are complete, we'll pay you on the same day.",
+      "Send us your vehicle details, including its make, model, year, mileage, condition, and recent photos. We’ll review the information and provide an initial valuation. If you’re interested in proceeding, we’ll arrange a free inspection at your preferred location. Once the final offer is accepted and the documents are verified, we’ll complete the sale and arrange payment.",
   },
   {
-    question: "Is the doorstep inspection really free?",
-    answer: "Yes. Our doorstep inspection is completely free and comes with no obligation to sell your vehicle.",
-  },
-  {
-    question: "How long does the selling process take?",
+    question: "What vehicles do you buy?",
     answer:
-      "Once you accept our offer, we'll arrange a free doorstep inspection at your convenience. After the inspection and document verification, many transactions are completed and paid on the same day.",
+      "We buy most makes and models from year 2010 onward, including sedans, hatchbacks, crossovers, SUVs, vans, pickups, sports cars, and luxury vehicles. Acceptance remains subject to the vehicle’s condition, ownership documents, and our final evaluation.",
   },
   {
-    question: "What documents do I need to sell my car?",
+    question: "How is my car’s value determined?",
     answer:
-      "You'll typically need the Original OR/CR, a valid government-issued ID, and any available service records. Additional documents may be required depending on your vehicle.",
+      "We consider its make, model, year, variant, mileage, overall condition, service history, ownership documents, and current market demand. The valuation is based on the information provided and is confirmed after the physical inspection.",
   },
   {
-    question: "How do you determine my car's value?",
+    question: "Is the initial valuation the final offer?",
     answer:
-      "We evaluate your vehicle based on its year, make, model, mileage, overall condition, maintenance history, and current market demand to provide a fair and competitive offer.",
+      "Not always. The initial valuation is based on the details and photos you provide. The final offer is confirmed after we inspect the vehicle and verify its condition and documents. If we identify anything that was not included in the original information, we’ll explain how it affects the offer.",
   },
   {
-    question: "Am I required to accept your offer?",
+    question: "Do I need to bring my car to your office?",
     answer:
-      "No. Getting an offer or scheduling a free doorstep inspection does not obligate you to sell your vehicle.",
+      "No. Our team can inspect the vehicle at your home, workplace, or another agreed location. The location must be safe, accessible, and suitable for a proper vehicle inspection.",
   },
   {
-    question: "Do I need to bring my car anywhere for inspection?",
+    question: "What documents do I need?",
     answer:
-      "No. Our team comes to you. We perform the inspection at your doorstep, saving you time and making the selling process more convenient.",
+      "You’ll typically need the Original Certificate of Registration (CR), latest Official Receipt (OR), a valid government-issued ID of the registered owner, a Deed of Sale or other proof of ownership if applicable, and any available service and maintenance records. Additional documents may be requested depending on the vehicle’s ownership or registration status.",
+  },
+  {
+    question: "Can I sell a car that is not registered in my name?",
+    answer:
+      "Possibly, but you must provide documents showing the legal transfer of ownership and your authority to sell the vehicle. We’ll review the documents before proceeding. Additional verification may be required.",
   },
   {
     question: "How will I receive payment?",
     answer:
-      "Once the sale is completed and all required documents have been verified, we'll pay you on the same day. Payment can be made in cash or via bank transfer, depending on the transaction.",
+      "Payment can be made in cash or through bank transfer, depending on the transaction and the agreed payment method. Payment is released only after the sale is completed and all required documents have been verified and signed.",
+  },
+  {
+    question: "Which areas do you serve?",
+    answer:
+      "We accommodate vehicle sellers across the Philippines, subject to team availability and location. Send us your location so we can confirm whether an inspection can be arranged in your area.",
   },
 ]
 
