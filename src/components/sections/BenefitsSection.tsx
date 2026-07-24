@@ -253,7 +253,7 @@ export default function BenefitsSection() {
         .benefits-transformation-row.benefits-reveal {
           opacity: 0;
           transform: translateY(14px) scale(0.985);
-          transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1), background 420ms ease, box-shadow 420ms ease;
+          transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1), background 420ms ease, box-shadow 420ms ease, filter 420ms ease;
           transition-delay: var(--benefits-delay, 0ms);
         }
         .benefits-section--entered .benefits-reveal { opacity: 1; transform: translateY(0); }
@@ -262,18 +262,14 @@ export default function BenefitsSection() {
         .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
           z-index: 2;
           transform: translateY(-4px) scale(1.01);
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(252, 249, 240, 0.78) 48%, rgba(200, 160, 68, 0.07) 100%);
+          filter: brightness(1.015) saturate(1.08);
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.72) 0%, rgba(252, 249, 240, 0.82) 48%, rgba(200, 160, 68, 0.08) 100%);
           box-shadow: 0 10px 24px rgba(31, 31, 31, 0.055), 0 2px 8px rgba(200, 160, 68, 0.045);
         }
 
         .benefits-section--entered .benefits-transformation-row--active .benefits-traditional-outcome { color: #545a61; }
         .benefits-section--entered .benefits-transformation-row--active .benefits-preferred-outcome { color: #171612; font-weight: 650; }
         .benefits-section--entered .benefits-transformation-row--active .benefits-row-number { color: #8f6a1f; }
-
-        @media (hover: hover) and (pointer: fine) {
-          .benefits-transformation-row:hover .benefits-traditional-outcome { color: #585e65; }
-          .benefits-transformation-row:hover .benefits-preferred-outcome { color: #171612; }
-        }
 
         @media (min-width: 1024px) {
           .benefits-layout {
@@ -329,6 +325,7 @@ export default function BenefitsSection() {
           .benefits-cta { width: 100%; max-width: 22rem; }
           .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
             transform: translateY(-2px);
+            filter: brightness(1.01) saturate(1.045);
             box-shadow: 0 6px 16px rgba(31, 31, 31, 0.04);
           }
         }
@@ -344,6 +341,7 @@ export default function BenefitsSection() {
 
           .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
             transform: none;
+            filter: none;
             background: transparent;
             box-shadow: none;
           }
