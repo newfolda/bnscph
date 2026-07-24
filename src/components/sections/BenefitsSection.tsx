@@ -307,7 +307,7 @@ export default function BenefitsSection() {
         .benefits-section--entered .benefits-transformation-row--active .benefits-preferred-outcome { color: #171612; font-weight: 650; }
         .benefits-section--entered .benefits-transformation-row--active .benefits-row-number { color: #8f6a1f; }
         .benefits-transformation-row--active .benefits-preferred-text-streak {
-          animation: benefits-preferred-text-streak 1050ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+          animation: benefits-preferred-text-streak 1600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
         }
 
         @keyframes benefits-preferred-text-streak {
