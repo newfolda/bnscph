@@ -78,15 +78,13 @@ export default function FaqSection() {
                   <li key={faq.question} className="relative">
                     <span
                       aria-hidden="true"
-                      className={`absolute -left-[1.45rem] top-7 z-10 h-3 w-3 rounded-full border-2 border-[var(--background-alt)] transition-colors duration-200 motion-reduce:transition-none sm:-left-[1.7rem] ${
-                        isOpen ? "bg-[var(--primary)]" : "bg-white"
+                      className={`faq-timeline-dot absolute -left-[1.45rem] top-7 z-10 h-3 w-3 rounded-full border-2 border-[var(--background-alt)] sm:-left-[1.7rem] ${
+                        isOpen ? "faq-timeline-dot--open" : "bg-white"
                       }`}
                     />
                     <article
-                      className={`relative overflow-hidden rounded-[1.625rem] border bg-white shadow-[0_5px_16px_rgba(31,31,31,0.05)] transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(31,31,31,0.09)] motion-reduce:transform-none motion-reduce:transition-none ${
-                        isOpen
-                          ? "border-[#C8A044] bg-[#F7F1E3] shadow-[0_14px_28px_rgba(31,31,31,0.10)] before:absolute before:inset-y-4 before:left-0 before:w-0.5 before:origin-center before:scale-y-100 before:rounded-full before:bg-[#C8A044] before:transition-transform before:duration-300"
-                          : "border-[var(--border)] before:absolute before:inset-y-4 before:left-0 before:w-0.5 before:origin-center before:scale-y-0 before:rounded-full before:bg-[#C8A044] before:transition-transform before:duration-300"
+                      className={`faq-card relative overflow-hidden rounded-[1.625rem] border ${
+                        isOpen ? "faq-card--open" : ""
                       }`}
                     >
                       <h3>
@@ -99,9 +97,14 @@ export default function FaqSection() {
                           className="flex min-h-16 w-full items-center gap-3 px-5 py-4 text-left text-[var(--text-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-inset sm:px-6"
                         >
                           <span className="shrink-0 text-xs font-bold tracking-wide text-[var(--primary)]">{String(index + 1).padStart(2, "0")}</span>
-                          <span className={`flex-1 text-base leading-snug transition-[font-weight] duration-200 motion-reduce:transition-none ${isOpen ? "font-bold" : "font-semibold"}`}>
-                            {faq.question}
-                          </span>
+                          <div className="faq-question-text-wrap">
+                            <span className={`faq-question-text ${isOpen ? "faq-question-text--open" : ""}`}>
+                              {faq.question}
+                            </span>
+                            <span aria-hidden="true" className="faq-question-text-streak">
+                              {faq.question}
+                            </span>
+                          </div>
                           <span aria-hidden="true" className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/35 bg-white/70">
                             <span className="absolute h-0.5 w-3 rounded-full bg-[var(--primary)]" />
                             <span
@@ -116,8 +119,8 @@ export default function FaqSection() {
                         id={answerId}
                         role="region"
                         aria-labelledby={buttonId}
-                        className={`grid transition-[grid-template-rows,opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
-                          isOpen ? "grid-rows-[1fr] opacity-100 translate-y-0" : "grid-rows-[0fr] opacity-0 -translate-y-1"
+                        className={`faq-answer-region ${
+                          isOpen ? "faq-answer-region--open" : ""
                         }`}
                       >
                         <div className="overflow-hidden">
@@ -132,6 +135,190 @@ export default function FaqSection() {
           </div>
         </div>
       </Container>
+
+      <style>{`
+        .faq-card {
+          background: #ffffff;
+          border-color: var(--border);
+          box-shadow: 0 5px 16px rgba(31, 31, 31, 0.05);
+          filter: none;
+          transform: translateY(0);
+          transition:
+            transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 380ms ease,
+            border-color 320ms ease,
+            background-color 320ms ease,
+            filter 320ms ease;
+        }
+
+        .faq-card::before {
+          position: absolute;
+          inset-block: 1rem;
+          left: 0;
+          width: 0.125rem;
+          border-radius: 9999px;
+          background: #c8a044;
+          content: "";
+          transform: scaleY(0);
+          transform-origin: center;
+          transition: transform 300ms ease;
+        }
+
+        .faq-card--open {
+          z-index: 1;
+          transform: translateY(-3px);
+          filter: brightness(1.012) saturate(1.06);
+          border-color: #c8a044;
+          background: #f8f3e7;
+          box-shadow:
+            0 14px 30px rgba(31, 31, 31, 0.085),
+            0 3px 10px rgba(200, 160, 68, 0.045);
+        }
+
+        .faq-card--open::before {
+          transform: scaleY(1);
+        }
+
+        .faq-question-text-wrap {
+          position: relative;
+          isolation: isolate;
+          flex: 1;
+          min-width: 0;
+        }
+
+        .faq-question-text {
+          position: relative;
+          z-index: 1;
+          display: block;
+          font-size: 1rem;
+          font-weight: 600;
+          line-height: 1.4;
+          transition:
+            color 260ms ease,
+            font-weight 260ms ease;
+        }
+
+        .faq-question-text--open {
+          color: var(--text-primary);
+          font-weight: 700;
+        }
+
+        .faq-question-text-streak {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          display: block;
+          pointer-events: none;
+          color: transparent;
+          opacity: 0;
+          font: inherit;
+          font-size: 1rem;
+          font-weight: 700;
+          line-height: 1.4;
+          letter-spacing: inherit;
+          text-align: inherit;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 36%,
+            rgba(255, 255, 255, 0.18) 43%,
+            rgba(255, 255, 255, 0.96) 50%,
+            rgba(255, 241, 198, 0.58) 55%,
+            transparent 63%,
+            transparent 100%
+          );
+          background-repeat: no-repeat;
+          background-size: 250% 100%;
+          background-position: 110% 0;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .faq-card--open .faq-question-text-streak {
+          animation: faq-question-light-streak 1550ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+        }
+
+        .faq-answer-region {
+          display: grid;
+          grid-template-rows: 0fr;
+          opacity: 0;
+          transform: translateY(-0.25rem);
+          filter: blur(2px);
+          transition:
+            grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 300ms ease,
+            transform 360ms ease,
+            filter 360ms ease;
+        }
+
+        .faq-answer-region--open {
+          grid-template-rows: 1fr;
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+
+        .faq-timeline-dot {
+          transition:
+            transform 280ms ease,
+            background-color 280ms ease,
+            box-shadow 280ms ease;
+        }
+
+        .faq-timeline-dot--open {
+          transform: scale(1.12);
+          background: var(--primary);
+          box-shadow:
+            0 0 0 4px rgba(200, 160, 68, 0.08),
+            0 3px 8px rgba(143, 104, 25, 0.16);
+        }
+
+        @keyframes faq-question-light-streak {
+          0% { background-position: 110% 0; opacity: 0; }
+          14% { opacity: 1; }
+          86% { opacity: 1; }
+          100% { background-position: -10% 0; opacity: 0; }
+        }
+
+        @media (max-width: 639px) {
+          .faq-card--open {
+            transform: translateY(-2px);
+            filter: brightness(1.008) saturate(1.035);
+            box-shadow: 0 9px 20px rgba(31, 31, 31, 0.06);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .faq-card,
+          .faq-card--open,
+          .faq-question-text,
+          .faq-timeline-dot,
+          .faq-answer-region {
+            transition: none !important;
+          }
+
+          .faq-card--open {
+            transform: none;
+            filter: none;
+          }
+
+          .faq-question-text-streak,
+          .faq-card--open .faq-question-text-streak {
+            animation: none !important;
+            opacity: 0;
+          }
+
+          .faq-timeline-dot--open {
+            transform: none;
+          }
+
+          .faq-answer-region {
+            transform: none;
+            filter: none;
+          }
+        }
+      `}</style>
     </section>
   )
 }
