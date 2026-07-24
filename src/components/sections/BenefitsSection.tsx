@@ -120,9 +120,9 @@ export default function BenefitsSection() {
           <div className="benefits-canvas benefits-reveal" style={{ "--benefits-delay": "80ms" } as CSSProperties}>
             <header className="benefits-canvas-header">
               <span aria-hidden="true" />
-              <span className="benefits-canvas-label benefits-canvas-label--traditional">Private Sale</span>
+              <span className="benefits-canvas-label benefits-canvas-label--traditional">PRIVATE SALE</span>
               <span aria-hidden="true" className="benefits-canvas-header-arrow">→</span>
-              <span className="benefits-canvas-label benefits-canvas-label--preferred">Professional Car Buyer</span>
+              <span className="benefits-canvas-label benefits-canvas-label--preferred">SELL DIRECTLY TO US</span>
             </header>
 
             <div className="benefits-transformation-rows" role="list">
