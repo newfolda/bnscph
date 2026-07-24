@@ -12,8 +12,8 @@ export default function Home() {
       <Header />
       <HeroSection />
       <ProcessSection />
-      <BenefitsSection />
       <DailyTransactionsSection />
+      <BenefitsSection />
       <FaqSection />
       <Footer />
     </>
