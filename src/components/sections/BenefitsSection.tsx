@@ -13,12 +13,12 @@ type ComparisonItem = {
 }
 
 const comparisonItems: ComparisonItem[] = [
-  { traditional: "Find and screen buyers", preferred: "We buy directly" },
-  { traditional: "Schedule multiple viewings", preferred: "One professional doorstep inspection" },
-  { traditional: "Back-and-forth haggling", preferred: "Receive a clear, fair offer" },
-  { traditional: "Handle documents and follow-ups", preferred: "Professional paperwork assistance" },
-  { traditional: "Wait for uncertain payment", preferred: "Secure payment options" },
-  { traditional: "Weeks or even months to complete", preferred: "As fast as the same day" },
+  { traditional: "Find and screen potential buyers", preferred: "Sell directly to us" },
+  { traditional: "Arrange multiple viewings", preferred: "Schedule one doorstep inspection" },
+  { traditional: "Negotiate back and forth", preferred: "Receive a clear, fair offer" },
+  { traditional: "Manage paperwork and follow-ups", preferred: "Get professional paperwork assistance" },
+  { traditional: "Wait for the buyer's payment", preferred: "Receive payment securely" },
+  { traditional: "Wait weeks or even months to complete the sale", preferred: "Complete the sale in as soon as one day" },
 ]
 
 export default function BenefitsSection() {
@@ -93,7 +93,7 @@ export default function BenefitsSection() {
               {comparisonItems.map((item, index) => (
                 <article
                   key={item.traditional}
-                  className={`benefits-transformation-row benefits-reveal ${item.preferred === "Secure payment options" ? "benefits-transformation-row--featured" : ""}`}
+                  className={`benefits-transformation-row benefits-reveal ${item.preferred === "Receive payment securely" ? "benefits-transformation-row--featured" : ""}`}
                   role="listitem"
                   style={{ "--benefits-delay": `${220 + index * 130}ms` } as CSSProperties}
                 >
