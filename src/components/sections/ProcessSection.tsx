@@ -81,13 +81,13 @@ export default function ProcessSection() {
               3 SIMPLE STEPS.
             </p>
           </div>
-            <div className="process-cards-grid group/process relative grid gap-6 md:grid-cols-3">
+            <div className="process-cards-grid group/process relative grid gap-6 md:gap-7 md:grid-cols-3 xl:gap-8">
             {processSteps.map((step, index) => (
               <div
                 key={step.title}
                 onPointerMove={handleCardPointerMove}
                 onPointerLeave={(event) => resetCardPointerPhysics(event.currentTarget)}
-                className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[290px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-5 text-center group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
+                className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[300px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-7 text-center md:min-h-[322px] group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
               >
                 <span
                   className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
@@ -96,7 +96,7 @@ export default function ProcessSection() {
                     {index + 1}
                   </span>
                 </span>
-                <div className="mt-1 flex h-[120px] w-[120px] items-center justify-center">
+                <div className="mt-4 flex h-[120px] w-[120px] items-center justify-center">
                   {index === 0 && (
                     <video
                       autoPlay
@@ -108,8 +108,8 @@ export default function ProcessSection() {
                       aria-hidden="true"
                       tabIndex={-1}
                       src="/videos/step-1.mp4"
-                      width={120}
-                      height={120}
+                      width={104}
+                      height={104}
                       draggable={false}
                       className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
@@ -125,8 +125,8 @@ export default function ProcessSection() {
                       aria-hidden="true"
                       tabIndex={-1}
                       src="/videos/step-2.mp4"
-                      width={120}
-                      height={120}
+                      width={104}
+                      height={104}
                       draggable={false}
                       className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
@@ -142,15 +142,15 @@ export default function ProcessSection() {
                       aria-hidden="true"
                       tabIndex={-1}
                       src="/videos/step-3.mp4"
-                      width={120}
-                      height={120}
+                      width={104}
+                      height={104}
                       draggable={false}
                       className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                 </div>
-                <div className="mt-3 flex w-full flex-col items-center text-center">
-                  <h3 className="flex min-h-12 items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none">
+                <div className="mt-5 flex w-full flex-col items-center text-center">
+                  <h3 className="flex min-h-[3.5rem] items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none">
                     {step.title}
                   </h3>
                   <p className="relative isolate mt-2 min-h-10 max-w-[16rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
