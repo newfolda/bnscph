@@ -50,12 +50,8 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="relative isolate overflow-hidden bg-[#fffefd] py-16 md:py-20">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_84%_42%,rgba(222,215,249,0.07)_0%,rgba(222,215,249,0.025)_30%,transparent_62%)]"
-      />
-      <Container className="relative z-10">
+    <section id="faq" className="bg-[var(--background-alt)] py-16 md:py-20">
+      <Container>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <header className="lg:sticky lg:top-28 lg:self-start">
             <SectionPill>

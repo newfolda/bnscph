@@ -33,12 +33,8 @@ function formatPurchasedAt(purchasedAt?: string) {
 
 export default function DailyTransactionsSection() {
   return (
-    <section id="latest-transactions" className="relative isolate overflow-hidden bg-[#fffefd] py-16 md:py-20">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_18%_48%,rgba(197,233,216,0.09)_0%,rgba(197,233,216,0.035)_28%,transparent_62%)]"
-      />
-      <Container className="relative z-10">
+    <section id="latest-transactions" className="overflow-hidden bg-[var(--background-alt)] py-16 md:py-20">
+      <Container>
         <div className="flex flex-col items-center text-center">
           <SectionPill>
             Latest Transactions

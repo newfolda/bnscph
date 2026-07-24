@@ -52,7 +52,7 @@ export default function BenefitsSection() {
     <section
       ref={sectionRef}
       id="why-choose-us"
-      className={`benefits-section py-16 sm:py-20 lg:py-24 ${hasEntered ? "benefits-section--entered" : ""}`}
+      className={`benefits-section bg-[#fffefd] py-16 sm:py-20 lg:py-24 ${hasEntered ? "benefits-section--entered" : ""}`}
     >
       <Container>
         <div className="benefits-layout">
@@ -116,12 +116,6 @@ export default function BenefitsSection() {
       </Container>
 
       <style>{`
-        .benefits-section {
-          background:
-            radial-gradient(ellipse at 74% 52%, rgba(200, 160, 68, 0.04) 0%, rgba(200, 160, 68, 0.018) 32%, transparent 64%),
-            #fffefd;
-        }
-
         .benefits-layout {
           display: grid;
           align-items: start;
