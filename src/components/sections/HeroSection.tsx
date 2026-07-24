@@ -33,6 +33,12 @@ const particles = [
 
 const rotatingWords = ["Smartest", "Easiest", "Fastest", "Simplest"]
 const typewriterWords = ["hassle.", "headache.", "time wasted."]
+const trustIndicators = [
+  { primary: "5+", secondary: "Years in Business" },
+  { primary: "1,000+", secondary: "Cars Purchased" },
+  { primary: "Doorstep", secondary: "Inspection" },
+  { primary: "Same-Day", secondary: "Payment" },
+]
 
 
 export default function HeroSection() {
@@ -345,6 +351,29 @@ export default function HeroSection() {
               <span aria-hidden="true" className="pointer-events-none absolute inset-x-3 top-1 z-0 h-8 rounded-full bg-[radial-gradient(ellipse_at_25%_0%,rgba(255,255,255,0.78),rgba(255,245,204,0.3)_34%,transparent_72%)]" />
             </Button>
             )} />
+            <ul className="mt-5 grid w-full max-w-xl grid-cols-2 overflow-hidden rounded-2xl border border-white/20 bg-black/20 shadow-[0_12px_28px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md lg:grid-cols-4">
+              {trustIndicators.map((indicator, index) => (
+                <li
+                  key={indicator.primary}
+                  className={`flex min-h-[5.5rem] flex-col justify-center px-4 py-3 text-center sm:px-5 ${
+                    index === 1
+                      ? "border-l border-white/15"
+                      : index === 2
+                        ? "border-t border-white/15 lg:border-l lg:border-t-0"
+                        : index === 3
+                          ? "border-l border-t border-white/15 lg:border-t-0"
+                          : ""
+                  }`}
+                >
+                  <span className="text-base font-bold tracking-tight text-[var(--primary-hover)] sm:text-lg">
+                    {indicator.primary}
+                  </span>
+                  <span className="mt-1 text-[0.68rem] font-medium leading-tight text-white/72 sm:text-xs">
+                    {indicator.secondary}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="relative flex h-[440px] flex-1 items-center justify-end">
           </div>
