@@ -26,7 +26,13 @@ function DirectionConnector() {
     <span aria-hidden="true" className="benefits-direction-connector">
       <span className="benefits-direction-line" />
       <svg fill="none" viewBox="0 0 12 12">
-        <path d="M2 6h7M6.5 2.5 10 6 6.5 9.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" />
+        <path
+          d="M2 6h7M6.5 2.5 10 6 6.5 9.5"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.2"
+        />
       </svg>
     </span>
   )
@@ -35,7 +41,13 @@ function DirectionConnector() {
 function PreferredMarker() {
   return (
     <svg aria-hidden="true" className="benefits-preferred-marker" fill="none" viewBox="0 0 16 16">
-      <path d="m3.3 8.15 3 3.05 6.45-6.4" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+      <path
+        d="m3.3 8.15 3 3.05 6.45-6.4"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
     </svg>
   )
 }
@@ -77,20 +89,24 @@ export default function BenefitsSection() {
         <div className="benefits-layout">
           <div className="benefits-introduction benefits-reveal" style={{ "--benefits-delay": "0ms" } as CSSProperties}>
             <SectionPill className="mb-4">COMPARE YOUR OPTIONS</SectionPill>
-            <h2 className="max-w-[28rem] text-3xl font-bold leading-[1.02] tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[3.35rem]">
+            <h2 className="max-w-[25rem] text-3xl font-bold leading-[0.99] tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[3.35rem]">
               Sell Your Car.
               <br />
               Not Your Time.
             </h2>
-            <p className="mt-5 max-w-sm text-base leading-[1.65] text-[var(--text-secondary)]">
-              See how selling directly to a professional car buyer removes the work and uncertainty of a private sale.
+            <p className="mt-[1.4rem] max-w-[26rem] text-base leading-[1.7] text-[var(--text-secondary)]">
+              Selling privately means finding buyers, arranging viewings, negotiating, and managing paperwork. We simplify the process from inspection to payment.
             </p>
+            <div className="benefits-proof-line">
+              <span aria-hidden="true" />
+              <p>Professional vehicle evaluation. Clear offers. Secure payment options.</p>
+            </div>
 
             <div className="mt-8">
               <SellCarModal
                 trigger={(openSellCarModal) => (
                   <Button
-                    className="benefits-cta h-14 rounded-full px-7 text-sm font-semibold tracking-[0.01em] sm:px-8 sm:text-base"
+                    className="benefits-cta h-14 rounded-full px-7 text-sm font-semibold tracking-normal sm:px-8 sm:text-base"
                     onClick={openSellCarModal}
                   >
                     Get My Free Car Valuation
@@ -103,9 +119,10 @@ export default function BenefitsSection() {
 
           <div className="benefits-canvas benefits-reveal" style={{ "--benefits-delay": "80ms" } as CSSProperties}>
             <header className="benefits-canvas-header">
+              <span aria-hidden="true" />
               <span className="benefits-canvas-label benefits-canvas-label--traditional">Private Sale</span>
               <span aria-hidden="true" className="benefits-canvas-header-arrow">→</span>
-              <span className="benefits-canvas-label benefits-canvas-label--preferred">Professional Buyer</span>
+              <span className="benefits-canvas-label benefits-canvas-label--preferred">Professional Car Buyer</span>
             </header>
 
             <div className="benefits-transformation-rows" role="list">
@@ -114,7 +131,7 @@ export default function BenefitsSection() {
                   key={item.traditional}
                   className={`benefits-transformation-row benefits-reveal ${item.preferred === "Secure payment options" ? "benefits-transformation-row--featured" : ""}`}
                   role="listitem"
-                  style={{ "--benefits-delay": `${150 + index * 65}ms` } as CSSProperties}
+                  style={{ "--benefits-delay": `${140 + index * 60}ms` } as CSSProperties}
                 >
                   <span aria-hidden="true" className="benefits-row-number">
                     {String(index + 1).padStart(2, "0")}
@@ -126,7 +143,7 @@ export default function BenefitsSection() {
                   <DirectionConnector />
                   <span aria-hidden="true" className="benefits-mobile-direction">↓</span>
                   <div className="benefits-preferred-outcome">
-                    <p className="benefits-mobile-side-label">Professional Buyer</p>
+                    <p className="benefits-mobile-side-label">Professional Car Buyer</p>
                     <div className="benefits-preferred-content">
                       <PreferredMarker />
                       <p>{item.preferred}</p>
@@ -142,52 +159,74 @@ export default function BenefitsSection() {
       <style>{`
         .benefits-layout {
           display: grid;
-          align-items: center;
+          align-items: start;
+          max-width: 77rem;
+          margin: 0 auto;
           gap: 3rem;
         }
 
-        .benefits-introduction { max-width: 28rem; }
+        .benefits-introduction { max-width: 26rem; }
+
+        .benefits-proof-line {
+          display: grid;
+          gap: 0.7rem;
+          max-width: 25rem;
+          margin-top: 1.25rem;
+          color: #343434;
+          font-size: 0.875rem;
+          font-weight: 500;
+          line-height: 1.55;
+        }
+
+        .benefits-proof-line span { width: 2.5rem; height: 1px; background: var(--primary); }
 
         .benefits-canvas {
           overflow: hidden;
+          max-width: 49rem;
           border: 1px solid rgba(31, 31, 31, 0.07);
           border-radius: 1.75rem;
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.95) 46%, rgba(200, 160, 68, 0.035) 46%, rgba(200, 160, 68, 0.075) 100%);
-          box-shadow: 0 24px 60px rgba(31, 31, 31, 0.08);
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.98) 48%, rgba(250, 246, 234, 0.96) 48%, rgba(250, 246, 234, 0.96) 100%);
+          box-shadow: 0 24px 60px rgba(23, 23, 23, 0.07), 0 8px 22px rgba(23, 23, 23, 0.035), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .benefits-canvas-header,
+        .benefits-transformation-row {
+          display: grid;
+          grid-template-columns: 2.5rem minmax(0, 1fr) 3.5rem minmax(0, 1.1fr);
         }
 
         .benefits-canvas-header {
-          display: flex;
           align-items: center;
-          gap: 0.65rem;
-          padding: 1.35rem 1.5rem 1.1rem;
+          padding: 1.55rem 1.5rem 1.35rem;
           border-bottom: 1px solid rgba(31, 31, 31, 0.08);
-          font-size: 0.67rem;
+        }
+
+        .benefits-canvas-label {
+          font-size: 0.7rem;
           font-weight: 700;
-          letter-spacing: 0.12em;
-          line-height: 1.25;
+          letter-spacing: 0.08em;
+          line-height: 1.35;
           text-transform: uppercase;
         }
 
-        .benefits-canvas-label--traditional { color: #83878d; }
-        .benefits-canvas-header-arrow { color: #9a7425; font-size: 0.95rem; }
+        .benefits-canvas-label--traditional { color: #777d84; }
         .benefits-canvas-label--preferred { color: #9a7425; }
+        .benefits-canvas-header-arrow { justify-self: center; color: #a89468; font-size: 0.9rem; }
 
-        .benefits-transformation-rows { position: relative; padding: 0.2rem 1.5rem; }
+        .benefits-transformation-rows { padding: 0.15rem 1.5rem; }
 
         .benefits-transformation-row {
           position: relative;
-          display: grid;
-          grid-template-columns: 2rem minmax(0, 0.9fr) 3.5rem minmax(0, 1.1fr);
           align-items: center;
-          min-height: 5.55rem;
+          min-height: 5.2rem;
+          padding: 0.15rem 0;
         }
 
         .benefits-transformation-row::after {
           position: absolute;
           right: 0.5rem;
           bottom: 0;
-          left: 2.75rem;
+          left: 2.9rem;
           height: 1px;
           background: rgba(31, 31, 31, 0.075);
           content: "";
@@ -197,17 +236,18 @@ export default function BenefitsSection() {
 
         .benefits-row-number {
           align-self: start;
-          padding-top: 1.62rem;
+          padding-top: 1.48rem;
           color: #aa956a;
-          font-size: 0.68rem;
+          font-size: 0.7rem;
+          font-variant-numeric: tabular-nums;
           font-weight: 700;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.05em;
         }
 
         .benefits-traditional-outcome {
-          color: #72777f;
-          font-size: 0.94rem;
-          font-weight: 400;
+          color: #666b72;
+          font-size: 0.96rem;
+          font-weight: 500;
           line-height: 1.45;
         }
 
@@ -219,42 +259,28 @@ export default function BenefitsSection() {
         }
 
         .benefits-direction-line {
-          width: 2rem;
+          width: 1.9rem;
           height: 1px;
-          background: linear-gradient(90deg, rgba(120, 120, 120, 0.32), rgba(200, 160, 68, 0.72));
+          background: linear-gradient(90deg, rgba(120, 120, 120, 0.28), rgba(200, 160, 68, 0.72));
         }
 
-        .benefits-direction-connector svg { width: 0.85rem; height: 0.85rem; margin-left: -0.08rem; }
+        .benefits-direction-connector svg { width: 0.78rem; height: 0.78rem; margin-left: -0.08rem; }
         .benefits-mobile-direction { display: none; }
 
         .benefits-preferred-outcome {
-          position: relative;
-          padding: 1.35rem 0 1.35rem 1.35rem;
-          border-left: 1px solid rgba(200, 160, 68, 0.3);
+          padding: 1.25rem 0 1.25rem 1.2rem;
           color: #20201d;
-          font-size: 0.98rem;
+          font-size: 0.99rem;
           font-weight: 600;
-          line-height: 1.45;
-        }
-
-        .benefits-preferred-outcome::before {
-          position: absolute;
-          top: 50%;
-          left: -0.24rem;
-          width: 0.44rem;
-          height: 0.44rem;
-          border-radius: 9999px;
-          background: var(--primary);
-          box-shadow: 0 0 0 3px rgba(255, 250, 236, 0.9);
-          content: "";
+          line-height: 1.5;
         }
 
         .benefits-preferred-content { display: flex; align-items: center; gap: 0.65rem; }
-        .benefits-preferred-marker { flex: 0 0 auto; width: 0.95rem; height: 0.95rem; color: #b68e33; }
+        .benefits-preferred-marker { flex: 0 0 auto; width: 0.9rem; height: 0.9rem; color: #b68e33; }
         .benefits-mobile-side-label { display: none; }
 
         .benefits-transformation-row--featured .benefits-preferred-outcome {
-          background: rgba(200, 160, 68, 0.035);
+          background: rgba(200, 160, 68, 0.045);
           font-weight: 650;
         }
 
@@ -277,47 +303,46 @@ export default function BenefitsSection() {
           transition-delay: var(--benefits-delay, 0ms);
         }
 
-        .benefits-transformation-row.benefits-reveal { transform: translateX(6px); transition-duration: 480ms; }
+        .benefits-transformation-row.benefits-reveal { transform: translateX(5px); transition-duration: 480ms; }
         .benefits-section--entered .benefits-reveal { opacity: 1; transform: translateY(0); }
         .benefits-section--entered .benefits-transformation-row.benefits-reveal { transform: translateX(0); }
 
         @media (hover: hover) and (pointer: fine) {
           .benefits-transformation-row { transition: background-color 200ms ease; }
-          .benefits-transformation-row:hover { background: rgba(200, 160, 68, 0.018); }
-          .benefits-transformation-row:hover .benefits-traditional-outcome { color: #5c6269; }
-          .benefits-transformation-row:hover .benefits-direction-connector { color: #9a7425; }
-          .benefits-transformation-row:hover .benefits-direction-line { background: linear-gradient(90deg, rgba(120, 120, 120, 0.38), rgba(200, 160, 68, 0.92)); }
-          .benefits-transformation-row:hover .benefits-preferred-content { transform: translateX(2px); }
-          .benefits-transformation-row:hover .benefits-preferred-outcome::before { opacity: 1; }
-          .benefits-preferred-content { transition: transform 200ms ease; }
+          .benefits-transformation-row:hover { background: rgba(200, 160, 68, 0.016); }
+          .benefits-transformation-row:hover .benefits-traditional-outcome { color: #585e65; }
+          .benefits-transformation-row:hover .benefits-preferred-outcome { background: rgba(200, 160, 68, 0.055); color: #171612; }
+          .benefits-transformation-row:hover .benefits-direction-line { background: linear-gradient(90deg, rgba(120, 120, 120, 0.34), rgba(200, 160, 68, 0.88)); }
         }
 
         @media (min-width: 1024px) {
           .benefits-layout {
-            grid-template-columns: minmax(17rem, 0.78fr) minmax(0, 1.5fr);
-            gap: clamp(4rem, 6vw, 5.5rem);
+            grid-template-columns: minmax(18rem, 0.82fr) minmax(34rem, 1.45fr);
+            gap: clamp(4rem, 5vw, 5.5rem);
           }
+
+          .benefits-introduction { padding-top: 2.6rem; }
         }
 
         @media (max-width: 1023px) {
-          .benefits-layout { max-width: 42rem; margin: 0 auto; }
-          .benefits-introduction { max-width: 30rem; }
-          .benefits-canvas { border-radius: 1.5rem; }
+          .benefits-layout { max-width: 46rem; margin: 0 auto; }
+          .benefits-introduction { max-width: 36rem; margin: 0 auto; text-align: center; }
+          .benefits-introduction h2,
+          .benefits-introduction p,
+          .benefits-proof-line { margin-right: auto; margin-left: auto; }
+          .benefits-proof-line { justify-items: center; }
+          .benefits-canvas { max-width: 46rem; }
 
-          .benefits-canvas-header { padding: 1.2rem 1.25rem 1rem; }
+          .benefits-canvas-header { padding: 1.3rem 1.25rem 1.1rem; }
           .benefits-transformation-rows { padding: 0.1rem 1.25rem; }
           .benefits-transformation-row {
             display: block;
             min-height: 0;
-            padding: 1.2rem 0;
+            padding: 1.25rem 0;
           }
 
           .benefits-transformation-row::after { right: 0; left: 0; }
           .benefits-row-number { display: block; padding-top: 0; margin-bottom: 0.8rem; }
-
-          .benefits-traditional-outcome,
-          .benefits-preferred-outcome { font-size: 0.96rem; }
-
           .benefits-mobile-side-label {
             display: block;
             margin-bottom: 0.4rem;
@@ -330,23 +355,21 @@ export default function BenefitsSection() {
 
           .benefits-traditional-outcome .benefits-mobile-side-label { color: #858a91; }
           .benefits-preferred-outcome {
-            margin-top: 0.7rem;
+            margin-top: 0.75rem;
             padding: 0.85rem 0.9rem 0.85rem 1rem;
             border-left: 2px solid rgba(200, 160, 68, 0.6);
-            border-radius: 0.85rem;
+            border-radius: 0.75rem;
             background: rgba(200, 160, 68, 0.045);
           }
 
-          .benefits-preferred-outcome::before { display: none; }
           .benefits-preferred-outcome .benefits-mobile-side-label { color: #97732b; }
           .benefits-direction-connector { display: none; }
           .benefits-mobile-direction { display: block; margin: 0.65rem 0; color: #b68e33; font-size: 1rem; line-height: 1; }
-          .benefits-preferred-content { gap: 0.6rem; }
         }
 
         @media (max-width: 639px) {
           .benefits-canvas { border-radius: 1.25rem; }
-          .benefits-canvas-header { gap: 0.45rem; padding: 1.1rem 1rem 0.95rem; font-size: 0.62rem; letter-spacing: 0.09em; }
+          .benefits-canvas-header { grid-template-columns: 1.7rem minmax(0, 1fr) 1.8rem minmax(0, 1.1fr); padding: 1.1rem 1rem 0.95rem; font-size: 0.62rem; }
           .benefits-transformation-rows { padding: 0.1rem 1rem; }
           .benefits-cta { width: 100%; max-width: 22rem; }
         }
@@ -361,7 +384,6 @@ export default function BenefitsSection() {
           }
 
           .benefits-transformation-row,
-          .benefits-preferred-content,
           .benefits-cta { transition: none; }
           .benefits-cta:hover { transform: none; }
         }
