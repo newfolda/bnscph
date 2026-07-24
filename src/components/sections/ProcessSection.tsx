@@ -19,6 +19,12 @@ const processSteps = [
   },
 ]
 
+const processVideoSizes = [
+  "w-[150px] h-[94px]",
+  "w-[176px] h-[110px]",
+  "w-[176px] h-[110px]",
+]
+
 export default function ProcessSection() {
   const resetCardPointerPhysics = (card: HTMLDivElement) => {
     card.style.setProperty("--tilt-x", "0deg")
@@ -108,10 +114,8 @@ export default function ProcessSection() {
                       aria-hidden="true"
                       tabIndex={-1}
                       src="/videos/step-1.mp4"
-                      width={150}
-                      height={94}
                       draggable={false}
-                      className="process-video object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
+                      className={`process-video ${processVideoSizes[index]} object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none`}
                     />
                   )}
                   {index === 1 && (
@@ -125,10 +129,8 @@ export default function ProcessSection() {
                       aria-hidden="true"
                       tabIndex={-1}
                       src="/videos/step-2.mp4"
-                      width={176}
-                      height={110}
                       draggable={false}
-                      className="process-video object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
+                      className={`process-video ${processVideoSizes[index]} object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none`}
                     />
                   )}
                   {index === 2 && (
@@ -142,10 +144,8 @@ export default function ProcessSection() {
                       aria-hidden="true"
                       tabIndex={-1}
                       src="/videos/step-3.mp4"
-                      width={176}
-                      height={110}
                       draggable={false}
-                      className="process-video object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
+                      className={`process-video ${processVideoSizes[index]} object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none`}
                     />
                   )}
                 </div>
