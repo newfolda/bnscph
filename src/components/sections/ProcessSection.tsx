@@ -108,8 +108,8 @@ export default function ProcessSection() {
                       aria-hidden="true"
                       tabIndex={-1}
                       src="/videos/step-1.mp4"
-                      width={176}
-                      height={110}
+                      width={150}
+                      height={94}
                       draggable={false}
                       className="process-video object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
