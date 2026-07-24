@@ -33,12 +33,6 @@ const particles = [
 
 const rotatingWords = ["Smartest", "Easiest", "Fastest", "Simplest"]
 const typewriterWords = ["hassle.", "headache.", "time wasted."]
-const trustIndicators = [
-  { primary: "5+", secondary: "Years in Business" },
-  { primary: "1,000+", secondary: "Cars Purchased" },
-  { primary: "Doorstep", secondary: "Inspection" },
-  { primary: "Same-Day", secondary: "Payment" },
-]
 
 
 export default function HeroSection() {
