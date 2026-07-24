@@ -14,14 +14,18 @@ const footerLinkClass =
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--primary)]/65 bg-[#1F1F1F] text-white">
+    <footer className="relative overflow-hidden bg-[#1F1F1F] text-white">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-24 bg-[linear-gradient(to_bottom,#fffefd_0%,rgba(255,254,253,0.94)_12%,rgba(245,243,238,0.72)_32%,rgba(185,182,175,0.34)_55%,rgba(45,45,43,0.82)_82%,#1F1F1F_100%)] md:h-32"
+      />
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_at_top,rgba(200,160,68,0.15),transparent_70%)]" />
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-8 left-1/2 hidden w-full -translate-x-1/2 select-none whitespace-nowrap text-center text-[7rem] font-bold leading-none tracking-[-0.08em] text-white/[0.025] xl:block">
         BUY AND SELL CARS PHILIPPINES
       </div>
 
       <Container className="relative z-10">
-        <div className="py-14 md:py-16">
+        <div className="pb-14 pt-32 md:pb-16 md:pt-40">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] md:gap-12">
             <div className="max-w-sm">
               <Link

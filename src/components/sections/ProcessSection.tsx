@@ -59,7 +59,7 @@ export default function ProcessSection() {
   return (
     <section
       id="how-it-works"
-      className="relative z-20 bg-white pb-10 md:pb-12"
+      className="relative z-20 bg-[#fffefd] pb-10 md:pb-12"
     >
       <Container className="relative -mt-5 sm:-mt-7 md:-mt-8 lg:-mt-12">
         <div
