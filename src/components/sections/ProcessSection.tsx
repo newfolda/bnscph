@@ -1,7 +1,6 @@
 "use client"
 
 import { type PointerEvent } from "react"
-import Image from "next/image"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
 
@@ -105,8 +104,10 @@ export default function ProcessSection() {
                       loop
                       playsInline
                       preload="metadata"
-                      src="/videos/process-upload.mp4"
-                      aria-label="Upload car details and photos"
+                      controls={false}
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      src="/videos/step-1.mp4"
                       width={120}
                       height={120}
                       draggable={false}
@@ -114,20 +115,36 @@ export default function ProcessSection() {
                     />
                   )}
                   {index === 1 && (
-                    <Image
-                      src="/images/brand/process-inspection.png"
-                      alt="Schedule a car inspection"
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      controls={false}
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      src="/videos/step-2.mp4"
                       width={120}
                       height={120}
+                      draggable={false}
                       className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
                   {index === 2 && (
-                    <Image
-                      src="/images/brand/process-payment.png"
-                      alt="Receive payment for your car"
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      controls={false}
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      src="/videos/step-3.mp4"
                       width={120}
                       height={120}
+                      draggable={false}
                       className="object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
                     />
                   )}
