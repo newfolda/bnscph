@@ -54,29 +54,29 @@ export default function Header() {
         <nav
           aria-label="Primary navigation"
           className={`grid grid-cols-[1fr_auto_1fr] items-center transition-[height] duration-300 ${
-            isCompact ? "h-10" : "h-12"
+            isCompact ? "h-12" : "h-16"
           }`}
         >
           <Link
             href="/"
             className={`flex h-full items-center transition-[width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
-              isCompact ? "w-[144px]" : "w-[168px]"
+              isCompact ? "w-[155px]" : "w-[190px]"
             }`}
           >
             <Image
               src="/images/brand/logo.png"
               alt="Mobee"
-              width={168}
-              height={48}
+              width={190}
+              height={54}
               className={`h-auto transition-[width] duration-300 ${
-                isCompact ? "w-[144px]" : "w-[168px]"
+                isCompact ? "w-[155px]" : "w-[190px]"
               }`}
               priority
             />
           </Link>
 
           <ul
-            className={`flex h-full items-center text-sm font-medium text-gray-700 transition-[gap] duration-300 ${
+            className={`flex h-full items-center text-base font-medium text-gray-700 transition-[gap] duration-300 ${
               isCompact ? "gap-8" : "gap-10"
             }`}
           >
@@ -92,7 +92,7 @@ export default function Header() {
           </ul>
 
           <div
-            className={`flex h-full items-center justify-self-end text-sm text-gray-700 transition-[gap,margin] duration-300 ${
+            className={`flex h-full items-center justify-self-end text-base text-gray-700 transition-[gap,margin] duration-300 ${
               isCompact ? "mr-4 gap-2" : "mr-6 gap-3"
             }`}
             aria-label="Language selector"
