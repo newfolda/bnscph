@@ -17,13 +17,14 @@ const comparisonItems: ComparisonItem[] = [
   { traditional: "Arrange multiple viewings", preferred: "Schedule one doorstep inspection" },
   { traditional: "Negotiate back and forth", preferred: "Receive a clear, fair offer" },
   { traditional: "Manage paperwork and follow-ups", preferred: "Get professional paperwork assistance" },
-  { traditional: "Wait for the buyer's payment", preferred: "Receive payment securely" },
   { traditional: "Wait weeks or even months to complete the sale", preferred: "Complete the sale in as soon as one day" },
 ]
 
 export default function BenefitsSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [hasEntered, setHasEntered] = useState(false)
+  const [activeRow, setActiveRow] = useState(0)
+  const [isRowRotationActive, setIsRowRotationActive] = useState(false)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -47,6 +48,24 @@ export default function BenefitsSection() {
     observer.observe(section)
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (!hasEntered) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    let interval: number | undefined
+    const startTimeout = window.setTimeout(() => {
+      setIsRowRotationActive(true)
+      interval = window.setInterval(() => {
+        setActiveRow((currentRow) => (currentRow + 1) % comparisonItems.length)
+      }, 1500)
+    }, 1000)
+
+    return () => {
+      window.clearTimeout(startTimeout)
+      if (interval !== undefined) window.clearInterval(interval)
+    }
+  }, [hasEntered])
 
   return (
     <section
@@ -93,7 +112,7 @@ export default function BenefitsSection() {
               {comparisonItems.map((item, index) => (
                 <article
                   key={item.traditional}
-                  className={`benefits-transformation-row benefits-reveal ${item.preferred === "Receive payment securely" ? "benefits-transformation-row--featured" : ""}`}
+                  className={`benefits-transformation-row benefits-reveal ${isRowRotationActive && activeRow === index ? "benefits-transformation-row--active" : ""}`}
                   role="listitem"
                   style={{ "--benefits-delay": `${220 + index * 130}ms` } as CSSProperties}
                 >
@@ -148,12 +167,14 @@ export default function BenefitsSection() {
         }
 
         .benefits-canvas-label {
+          justify-self: stretch;
           font-size: 0.82rem;
           font-weight: 700;
           letter-spacing: 0.075em;
           line-height: 1.35;
           text-transform: uppercase;
           white-space: nowrap;
+          text-align: center;
         }
 
         .benefits-canvas-label--traditional { color: #666c73; }
@@ -163,9 +184,11 @@ export default function BenefitsSection() {
 
         .benefits-transformation-row {
           position: relative;
+          isolation: isolate;
           align-items: center;
           min-height: 5.2rem;
           padding: 0.15rem 0;
+          border-radius: 0.85rem;
         }
 
         .benefits-transformation-row::after {
@@ -207,11 +230,6 @@ export default function BenefitsSection() {
 
         .benefits-mobile-side-label { display: none; }
 
-        .benefits-transformation-row--featured .benefits-preferred-outcome {
-          background: linear-gradient(90deg, rgba(200, 160, 68, 0) 0%, rgba(200, 160, 68, 0.025) 28%, rgba(200, 160, 68, 0.06) 100%);
-          font-weight: 650;
-        }
-
         .benefits-cta {
           background: var(--primary) !important;
           box-shadow: 0 6px 15px rgba(143, 104, 25, 0.14);
@@ -235,17 +253,26 @@ export default function BenefitsSection() {
         .benefits-transformation-row.benefits-reveal {
           opacity: 0;
           transform: translateY(14px) scale(0.985);
-          transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+          transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1), background 420ms ease, box-shadow 420ms ease;
           transition-delay: var(--benefits-delay, 0ms);
         }
         .benefits-section--entered .benefits-reveal { opacity: 1; transform: translateY(0); }
         .benefits-section--entered .benefits-transformation-row.benefits-reveal { opacity: 1; transform: translateY(0) scale(1); }
 
+        .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
+          z-index: 2;
+          transform: translateY(-4px) scale(1.01);
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(252, 249, 240, 0.78) 48%, rgba(200, 160, 68, 0.07) 100%);
+          box-shadow: 0 10px 24px rgba(31, 31, 31, 0.055), 0 2px 8px rgba(200, 160, 68, 0.045);
+        }
+
+        .benefits-section--entered .benefits-transformation-row--active .benefits-traditional-outcome { color: #545a61; }
+        .benefits-section--entered .benefits-transformation-row--active .benefits-preferred-outcome { color: #171612; font-weight: 650; }
+        .benefits-section--entered .benefits-transformation-row--active .benefits-row-number { color: #8f6a1f; }
+
         @media (hover: hover) and (pointer: fine) {
-          .benefits-transformation-row { transition: background-color 200ms ease; }
-          .benefits-transformation-row:hover { background: rgba(200, 160, 68, 0.016); }
           .benefits-transformation-row:hover .benefits-traditional-outcome { color: #585e65; }
-          .benefits-transformation-row:hover .benefits-preferred-outcome { background: linear-gradient(90deg, rgba(200, 160, 68, 0) 0%, rgba(200, 160, 68, 0.022) 28%, rgba(200, 160, 68, 0.055) 100%); color: #171612; }
+          .benefits-transformation-row:hover .benefits-preferred-outcome { color: #171612; }
         }
 
         @media (min-width: 1024px) {
@@ -302,6 +329,10 @@ export default function BenefitsSection() {
           .benefits-canvas-label { font-size: 0.68rem; letter-spacing: 0.055em; }
           .benefits-transformation-rows { padding: 0.1rem 1rem; }
           .benefits-cta { width: 100%; max-width: 22rem; }
+          .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(31, 31, 31, 0.04);
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -311,6 +342,12 @@ export default function BenefitsSection() {
             opacity: 1;
             transform: none;
             transition: none;
+          }
+
+          .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
+            transform: none;
+            background: transparent;
+            box-shadow: none;
           }
 
           .benefits-transformation-row,
