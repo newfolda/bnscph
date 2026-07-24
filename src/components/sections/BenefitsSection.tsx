@@ -14,11 +14,11 @@ type ComparisonItem = {
 
 const comparisonItems: ComparisonItem[] = [
   { traditional: "Find and screen buyers", preferred: "We buy directly" },
-  { traditional: "Schedule multiple viewings", preferred: "One professional inspection" },
-  { traditional: "Manage negotiations", preferred: "Receive a clear offer" },
-  { traditional: "Handle documents and follow-ups", preferred: "Paperwork assistance" },
+  { traditional: "Schedule multiple viewings", preferred: "One professional doorstep inspection" },
+  { traditional: "Back-and-forth haggling", preferred: "Receive a clear, fair offer" },
+  { traditional: "Handle documents and follow-ups", preferred: "Professional paperwork assistance" },
   { traditional: "Wait for uncertain payment", preferred: "Secure payment options" },
-  { traditional: "Days or weeks to complete", preferred: "A faster, coordinated process" },
+  { traditional: "Weeks or even months to complete", preferred: "As fast as the same day" },
 ]
 
 export default function BenefitsSection() {
