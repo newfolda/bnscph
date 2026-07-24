@@ -11,13 +11,10 @@ export default function Home() {
     <>
       <Header />
       <HeroSection />
-      <main className="homepage-ambient">
-        <div aria-hidden="true" className="homepage-ambient-layer" />
-        <ProcessSection />
-        <DailyTransactionsSection />
-        <BenefitsSection />
-        <FaqSection />
-      </main>
+      <ProcessSection />
+      <DailyTransactionsSection />
+      <BenefitsSection />
+      <FaqSection />
       <Footer />
     </>
   )
