@@ -284,7 +284,7 @@ export default function HeroSection() {
         ))}
       </div>
       <Container className="relative z-20">
-        <div className="flex gap-8 pb-10 pt-20 lg:pb-14">
+        <div className="flex gap-8 pb-40 pt-20">
           <div className="flex flex-1 flex-col justify-center">
             <h1
               aria-label="The Smartest Way to Sell Your Car in the Philippines."
@@ -352,7 +352,7 @@ export default function HeroSection() {
       </Container>
       <svg
         aria-hidden="true"
-        className="pointer-events-none relative z-20 -mb-px block h-16 w-full md:h-24"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 w-full md:h-24"
         preserveAspectRatio="none"
         viewBox="0 0 1440 96"
       >
@@ -361,34 +361,6 @@ export default function HeroSection() {
           fill="white"
         />
       </svg>
-      <div className="relative z-20 border-t border-[rgba(208,160,45,0.62)] bg-[rgba(7,8,9,0.94)] shadow-[0_-8px_24px_rgba(0,0,0,0.14)] backdrop-blur-md">
-        <Container>
-          <ul className="grid grid-cols-2 lg:grid-cols-4">
-            {trustIndicators.map((indicator, index) => (
-              <li
-                key={indicator.primary}
-                className={`flex min-h-24 flex-col items-center justify-center px-4 py-4 text-center sm:px-6 lg:min-h-28 lg:px-8 lg:py-5 ${
-                  index === 1
-                    ? "border-l border-white/15"
-                    : index === 2
-                      ? "border-t border-white/15 lg:border-l lg:border-t-0"
-                      : index === 3
-                        ? "border-l border-t border-white/15 lg:border-t-0"
-                        : ""
-                }`}
-              >
-                <span className="text-xl font-bold tracking-tight text-[var(--primary-hover)] lg:text-2xl">
-                  {indicator.primary}
-                </span>
-                <span className="mt-1 text-xs font-medium leading-tight text-white/85 sm:text-sm">
-                  {indicator.secondary}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </div>
-      <div aria-hidden="true" className="relative z-20 h-10 bg-[#070809] sm:h-12 md:h-16" />
       <style>{`
         @keyframes mobee-hero-dust-drift {
           0%, 100% { transform: translate3d(0, 0, 0); }
