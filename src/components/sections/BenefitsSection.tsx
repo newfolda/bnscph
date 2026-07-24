@@ -125,7 +125,12 @@ export default function BenefitsSection() {
                   </div>
                   <div className="benefits-preferred-outcome">
                     <p className="benefits-mobile-side-label">Professional Car Buyer</p>
-                    <p>{item.preferred}</p>
+                    <div className="benefits-preferred-text-wrap">
+                      <p className="benefits-preferred-text">{item.preferred}</p>
+                      <p aria-hidden="true" className="benefits-preferred-text-streak">
+                        {item.preferred}
+                      </p>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -228,6 +233,37 @@ export default function BenefitsSection() {
           line-height: 1.5;
         }
 
+        .benefits-preferred-text-wrap {
+          position: relative;
+          isolation: isolate;
+          min-width: 0;
+        }
+
+        .benefits-preferred-text {
+          position: relative;
+          z-index: 1;
+        }
+
+        .benefits-preferred-text-streak {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+          margin: 0;
+          font: inherit;
+          line-height: inherit;
+          letter-spacing: inherit;
+          color: transparent;
+          opacity: 0;
+          background: linear-gradient(105deg, transparent 0%, transparent 36%, rgba(255, 255, 255, 0.2) 43%, rgba(255, 255, 255, 0.96) 50%, rgba(255, 241, 198, 0.6) 55%, transparent 63%, transparent 100%);
+          background-repeat: no-repeat;
+          background-size: 250% 100%;
+          background-position: 110% 0;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
         .benefits-mobile-side-label { display: none; }
 
         .benefits-cta {
@@ -270,6 +306,16 @@ export default function BenefitsSection() {
         .benefits-section--entered .benefits-transformation-row--active .benefits-traditional-outcome { color: #545a61; }
         .benefits-section--entered .benefits-transformation-row--active .benefits-preferred-outcome { color: #171612; font-weight: 650; }
         .benefits-section--entered .benefits-transformation-row--active .benefits-row-number { color: #8f6a1f; }
+        .benefits-transformation-row--active .benefits-preferred-text-streak {
+          animation: benefits-preferred-text-streak 1050ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+        }
+
+        @keyframes benefits-preferred-text-streak {
+          0% { background-position: 110% 0; opacity: 0; }
+          14% { opacity: 1; }
+          86% { opacity: 1; }
+          100% { background-position: -10% 0; opacity: 0; }
+        }
 
         @media (min-width: 1024px) {
           .benefits-layout {
@@ -323,6 +369,9 @@ export default function BenefitsSection() {
           .benefits-canvas { border-radius: 1.25rem; }
           .benefits-transformation-rows { padding: 0.1rem 1rem; }
           .benefits-cta { width: 100%; max-width: 22rem; }
+          .benefits-preferred-text-streak {
+            background: linear-gradient(105deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.16) 44%, rgba(255, 255, 255, 0.78) 50%, rgba(255, 241, 198, 0.42) 55%, transparent 62%, transparent 100%);
+          }
           .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
             transform: translateY(-2px);
             filter: brightness(1.01) saturate(1.045);
@@ -344,6 +393,12 @@ export default function BenefitsSection() {
             filter: none;
             background: transparent;
             box-shadow: none;
+          }
+
+          .benefits-preferred-text-streak,
+          .benefits-transformation-row--active .benefits-preferred-text-streak {
+            animation: none !important;
+            opacity: 0;
           }
 
           .benefits-transformation-row,
