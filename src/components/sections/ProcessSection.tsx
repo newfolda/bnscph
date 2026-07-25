@@ -6,16 +6,19 @@ import SectionPill from "../ui/SectionPill"
 
 const processSteps = [
   {
-    title: "Tell Us About Your Car",
-    description: "Upload your car details and a few photos.",
+    title: "Send Your Car Details",
+    description:
+      "Enter your car's model, year, mileage, and upload a few recent photos to receive an initial offer.",
   },
   {
-    title: "We’ll Inspect It at Your Doorstep",
-    description: "Schedule an inspection at a time that’s convenient for you.",
+    title: "We Inspect It at Your Location",
+    description:
+      "If you're happy with the initial offer, choose a convenient inspection time. Our team will come to your location.",
   },
   {
     title: "Get Paid the Same Day",
-    description: "Receive payment by cash, bank transfer, or bank deposit.",
+    description:
+      "Once everything checks out, complete the sale and receive payment by cash or bank transfer.",
   },
 ]
 
