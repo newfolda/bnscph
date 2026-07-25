@@ -55,15 +55,15 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
   return (
     <a
       href="tel:09162536325"
-      className={`group flex items-center rounded-full text-left transition-colors hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
+      className={`group flex items-center rounded-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
         compact ? "gap-2.5" : "gap-3"
       }`}
     >
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/70 text-[var(--primary)] transition-colors group-hover:border-[var(--primary)] group-hover:bg-[var(--primary-light)]">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/70 text-[var(--primary)] transition-colors group-hover:border-[var(--primary)]">
         <PhoneIcon />
       </span>
       <span className="flex flex-col leading-tight">
-        <span className="text-sm font-semibold text-[var(--text-primary)] transition-colors group-hover:text-[var(--primary)]">
+        <span className="inline-block text-sm font-semibold text-[var(--text-primary)] transition-[color,transform] duration-200 ease-out group-hover:-translate-y-px group-hover:text-[var(--primary)] motion-reduce:transform-none">
           0916-253-6325
         </span>
         <span className="mt-0.5 text-[11px] text-[var(--text-secondary)]">
@@ -80,14 +80,14 @@ function LanguageSelector() {
       <Link
         href="/"
         aria-current="page"
-        className="font-semibold text-[var(--primary)] underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
+        className="inline-block text-[var(--primary)] transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:transform-none"
       >
         EN
       </Link>
       <span aria-hidden="true" className="text-gray-300">|</span>
       <Link
         href="/?locale=tgl"
-        className="transition-colors hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
+        className="inline-block transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:transform-none"
       >
         TGL
       </Link>
@@ -162,10 +162,8 @@ export default function Header() {
   }, [])
 
   const activeLinkClass = (isActive: boolean) =>
-    `relative whitespace-nowrap transition-colors hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 after:pointer-events-none after:absolute after:-bottom-1 after:left-1/2 after:h-0.5 after:w-full after:-translate-x-1/2 after:scale-x-0 after:rounded-full after:bg-[var(--primary)] after:opacity-0 after:transition-[transform,opacity] after:duration-[220ms] after:ease-out hover:after:scale-x-100 hover:after:opacity-100 motion-reduce:after:transition-none ${
-      isActive
-        ? "font-semibold text-[var(--primary)] hover:text-[var(--primary)] after:scale-x-100 after:opacity-100"
-        : ""
+    `inline-block whitespace-nowrap text-gray-700 transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:transform-none ${
+      isActive ? "text-[var(--primary)]" : ""
     }`
 
   const handleNavigation = (sectionId: string) => {
@@ -255,10 +253,10 @@ export default function Header() {
                     href={item.href}
                     aria-current={activeSection === item.sectionId ? "page" : undefined}
                     onClick={() => handleNavigation(item.sectionId)}
-                    className={`block rounded-xl px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-inset ${
+                    className={`block rounded-xl px-3 py-2.5 text-sm font-medium transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-inset motion-reduce:transform-none ${
                       activeSection === item.sectionId
-                        ? "bg-[var(--primary-light)] text-[var(--primary)]"
-                        : "text-[var(--text-primary)] hover:bg-[var(--background-alt)]"
+                        ? "text-[var(--primary)]"
+                        : "text-[var(--text-primary)]"
                     }`}
                   >
                     {item.label}
