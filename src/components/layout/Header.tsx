@@ -17,7 +17,7 @@ function PhoneIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-4 w-4"
+      className="h-4 w-4 origin-center transition-transform duration-200 ease-out group-hover:rotate-[7deg] group-focus-visible:rotate-[7deg] motion-reduce:transform-none"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -59,14 +59,14 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
         compact ? "gap-2.5" : "gap-3"
       }`}
     >
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/70 text-[var(--primary)] transition-colors group-hover:border-[var(--primary)]">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/70 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.98)_0%,rgba(255,250,235,0.82)_52%,rgba(247,241,227,0.7)_100%)] text-[var(--primary)] shadow-[0_4px_12px_rgba(200,160,68,0.12),inset_0_1px_0_rgba(255,255,255,0.95)] transition-[transform,border-color,box-shadow,color] duration-200 ease-out group-hover:-translate-y-px group-hover:border-[var(--primary)] group-hover:shadow-[0_6px_16px_rgba(200,160,68,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] group-focus-visible:-translate-y-px group-focus-visible:border-[var(--primary)] group-focus-visible:shadow-[0_6px_16px_rgba(200,160,68,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] motion-reduce:transform-none">
         <PhoneIcon />
       </span>
-      <span className="flex flex-col leading-tight">
-        <span className="inline-block text-sm font-semibold text-[var(--text-primary)] transition-[color,transform] duration-200 ease-out group-hover:-translate-y-px group-hover:text-[var(--primary)] motion-reduce:transform-none">
+      <span className="flex flex-col leading-none">
+        <span className="text-sm font-semibold leading-none text-[var(--text-primary)] transition-colors duration-200 ease-out group-hover:text-[var(--primary)] group-focus-visible:text-[var(--primary)]">
           0916-253-6325
         </span>
-        <span className="mt-0.5 text-[11px] text-[var(--text-secondary)]">
+        <span className="mt-px text-[11px] leading-none text-[var(--text-secondary)]">
           Call or Text Us
         </span>
       </span>
