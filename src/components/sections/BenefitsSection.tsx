@@ -95,10 +95,12 @@ export default function BenefitsSection() {
                     >
                     <span className="benefits-cta-text flex flex-col items-center justify-center gap-0.5 leading-tight text-white">
                       <span className="text-[15px] font-semibold sm:text-base">Get My Free Car Valuation</span>
-                      <span className="benefits-cta-secondary text-[11px] font-medium text-white/75 sm:text-xs">No obligation. Free vehicle evaluation.</span>
-                    </span>
-                    <span aria-hidden="true" className="benefits-cta-streak flex items-center justify-center">
-                      <span className="benefits-cta-streak-line text-[11px] font-medium leading-tight sm:text-xs">No obligation. Free vehicle evaluation.</span>
+                      <span
+                        className="benefits-cta-secondary text-[11px] font-medium sm:text-xs"
+                        data-text="No obligation. Free vehicle evaluation."
+                      >
+                        No obligation. Free vehicle evaluation.
+                      </span>
                     </span>
                   </Button>
                 )}
@@ -285,23 +287,28 @@ export default function BenefitsSection() {
         }
 
         .benefits-cta-text { position: relative; z-index: 1; }
-        .benefits-cta-secondary { transition: color 180ms ease; }
+        .benefits-cta-secondary {
+          position: relative;
+          display: inline-block;
+          isolation: isolate;
+          color: #5a5a5a;
+          transition: color 220ms ease;
+        }
         .benefits-cta:hover .benefits-cta-secondary,
         .benefits-cta:focus-visible .benefits-cta-secondary {
-          color: #4a4a4a;
-          transition-delay: 1500ms;
+          color: #111111;
         }
-        .benefits-cta:not(:hover) .benefits-cta-secondary { transition-delay: 0ms; }
-        .benefits-cta-streak {
+        .benefits-cta-secondary::after {
+          content: attr(data-text);
           position: absolute;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          height: 50%;
-          z-index: 2;
+          inset: 0;
+          z-index: 1;
           pointer-events: none;
-        }
-        .benefits-cta-streak-line {
+          margin: 0;
+          font: inherit;
+          line-height: inherit;
+          letter-spacing: inherit;
+          white-space: nowrap;
           color: transparent;
           opacity: 0;
           background: linear-gradient(105deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.14) 44%, rgba(255, 255, 255, 0.98) 50%, rgba(255, 255, 255, 0.3) 56%, transparent 62%, transparent 100%);
@@ -312,8 +319,8 @@ export default function BenefitsSection() {
           background-clip: text;
           -webkit-text-fill-color: transparent;
         }
-        .benefits-cta:hover .benefits-cta-streak-line,
-        .benefits-cta:focus-visible .benefits-cta-streak-line {
+        .benefits-cta:hover .benefits-cta-secondary::after,
+        .benefits-cta:focus-visible .benefits-cta-secondary::after {
           animation: benefits-cta-text-streak 1500ms cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
@@ -450,11 +457,9 @@ export default function BenefitsSection() {
           .benefits-transformation-row,
           .benefits-cta { transition: none; }
           .benefits-cta:hover { transform: none; }
-          .benefits-cta:hover .benefits-cta-secondary,
-          .benefits-cta:focus-visible .benefits-cta-secondary { transition-delay: 0ms; }
-          .benefits-cta-streak-line,
-          .benefits-cta:hover .benefits-cta-streak-line,
-          .benefits-cta:focus-visible .benefits-cta-streak-line { animation: none; opacity: 0; }
+          .benefits-cta-secondary::after,
+          .benefits-cta:hover .benefits-cta-secondary::after,
+          .benefits-cta:focus-visible .benefits-cta-secondary::after { animation: none; opacity: 0; }
         }
       `}</style>
     </section>
