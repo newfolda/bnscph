@@ -26,7 +26,7 @@ export default function ReviewsSection() {
             </p>
             <h2 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">Trusted by Thousands of Car Sellers Nationwide</h2>
             <p className="mt-3 max-w-xl leading-relaxed text-[var(--text-secondary)]">
-              Real experiences from car sellers who chose Mobee Cars.
+              Real experiences from car sellers who chose Buy and Sell Cars Philippines.
             </p>
           </div>
           <div className="flex gap-6">

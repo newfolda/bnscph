@@ -4,7 +4,7 @@ export const featuredArticle = {
   title: "How to Choose the Right Used Car for Your Needs",
   excerpt:
     "Finding the right used car starts with understanding your needs, budget, and priorities. This guide walks through the essential factors to consider before making your next purchase.",
-  author: "Mobee Cars",
+  author: "Buy and Sell Cars Philippines",
   publishedAt: "2026-07-18",
   publishedAtLabel: "July 18, 2026",
 }

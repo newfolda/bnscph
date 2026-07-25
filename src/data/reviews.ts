@@ -1,14 +1,3 @@
-export const featuredReview = {
-  badge: "Success Story",
-  name: "Sarah Tan",
-  vehicle: "Purchased a Toyota Corolla Cross",
-  testimonial: [
-    "Mobee Cars made the entire buying experience feel simple and transparent. I knew exactly what to expect at every step.",
-    "The team took the time to answer my questions and helped me find a car that suited my needs and budget.",
-  ],
-  rating: "★★★★★",
-}
-
 export const customerReviews = [
   {
     name: "Daniel Lim",
@@ -43,14 +32,6 @@ export const customerReviews = [
     purchasedAtLabel: "July 3, 2026",
   },
   {
-    name: "Marcus Tan",
-    vehicle: "Purchased a Toyota Camry",
-    rating: "★★★★★",
-    testimonial: "Mobee Cars helped simplify what could have been a stressful purchase. The information was clear, and the experience was smooth.",
-    purchasedAt: "2026-06-30",
-    purchasedAtLabel: "June 30, 2026",
-  },
-  {
     name: "Amanda Chua",
     vehicle: "Purchased a Kia Sportage",
     rating: "★★★★★",
@@ -63,7 +44,7 @@ export const customerReviews = [
 export const reviewStats = {
   badge: "Overall Ratings",
   title: "Trusted by Car Buyers",
-  description: "Mobee Cars is committed to making every customer experience clear, dependable, and satisfying from start to finish.",
+  description: "Buy and Sell Cars Philippines is committed to making every customer experience clear, dependable, and satisfying from start to finish.",
   items: [
     { label: "Average Rating", value: "4.9★" },
     { label: "Happy Customers", value: "500+" },

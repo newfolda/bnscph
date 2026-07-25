@@ -257,7 +257,7 @@ export default function Header() {
             >
               <Image
                 src="/images/brand/logo.png"
-                alt="Mobee"
+                alt="Buy and Sell Cars Philippines"
                 width={190}
                 height={54}
                 className={`h-auto transition-[width] duration-300 ${
