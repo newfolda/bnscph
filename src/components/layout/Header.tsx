@@ -13,11 +13,14 @@ const navigationItems = [
   { label: "FAQ", href: "/#faq", sectionId: "faq" },
 ]
 
+const headerContactIconClass =
+  "inline-flex items-center justify-center text-gray-600 transition-[color,transform] duration-200 ease-out group-hover:scale-[1.15] group-hover:text-[var(--primary)] group-focus-visible:scale-[1.15] group-focus-visible:text-[var(--primary)] motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100"
+
 function PhoneIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-6 w-6 shrink-0 text-[var(--primary)]"
+      className="size-[18px] shrink-0"
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -27,7 +30,7 @@ function PhoneIcon() {
 }
 
 function HeaderSocialLinks({ mobile = false }: { mobile?: boolean }) {
-  const iconLinkClass = `inline-flex items-center justify-center text-gray-600 transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:hover:translate-y-0 ${
+  const iconLinkClass = `group inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
     mobile ? "size-9" : "size-6"
   }`
 
@@ -38,10 +41,12 @@ function HeaderSocialLinks({ mobile = false }: { mobile?: boolean }) {
         className={iconLinkClass}
         href="mailto:buyandsellcarph@gmail.com"
       >
-        <svg aria-hidden="true" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-          <rect height="16" rx="2" width="20" x="2" y="4" />
-          <path d="m22 7-8.15 5.18a3.5 3.5 0 0 1-3.7 0L2 7" />
-        </svg>
+        <span className={headerContactIconClass}>
+          <svg aria-hidden="true" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+            <rect height="16" rx="2" width="20" x="2" y="4" />
+            <path d="m22 7-8.15 5.18a3.5 3.5 0 0 1-3.7 0L2 7" />
+          </svg>
+        </span>
       </a>
       <a
         aria-label="Visit Buy and Sell Cars Philippines on Facebook"
@@ -50,9 +55,11 @@ function HeaderSocialLinks({ mobile = false }: { mobile?: boolean }) {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <svg aria-hidden="true" className="size-[18px]" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.87.24-1.46 1.49-1.46H16.6V3.95c-.28-.04-1.24-.12-2.36-.12-2.34 0-3.94 1.43-3.94 4.06V10H7.65v3h2.65v8h3.2Z" />
-        </svg>
+        <span className={headerContactIconClass}>
+          <svg aria-hidden="true" className="size-[18px]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.87.24-1.46 1.49-1.46H16.6V3.95c-.28-.04-1.24-.12-2.36-.12-2.34 0-3.94 1.43-3.94 4.06V10H7.65v3h2.65v8h3.2Z" />
+          </svg>
+        </span>
       </a>
       <a
         aria-label="Visit Buy and Sell Cars Philippines on Instagram"
@@ -61,11 +68,13 @@ function HeaderSocialLinks({ mobile = false }: { mobile?: boolean }) {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <svg aria-hidden="true" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-          <rect height="17" rx="4.5" width="17" x="3.5" y="3.5" />
-          <circle cx="12" cy="12" r="3.5" />
-          <circle cx="17.3" cy="6.8" fill="currentColor" r="1" stroke="none" />
-        </svg>
+        <span className={headerContactIconClass}>
+          <svg aria-hidden="true" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+            <rect height="17" rx="4.5" width="17" x="3.5" y="3.5" />
+            <circle cx="12" cy="12" r="3.5" />
+            <circle cx="17.3" cy="6.8" fill="currentColor" r="1" stroke="none" />
+          </svg>
+        </span>
       </a>
     </div>
   )
@@ -98,7 +107,9 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
         compact ? "gap-2" : "gap-2.5"
       }`}
     >
-      <PhoneIcon />
+      <span className={headerContactIconClass}>
+        <PhoneIcon />
+      </span>
       <span className="flex flex-col leading-none">
         <span className="text-sm font-semibold leading-none text-[var(--text-primary)]">
           0916-253-6325
