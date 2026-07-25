@@ -17,17 +17,11 @@ function PhoneIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-4 w-4 origin-center transition-transform duration-200 ease-out group-hover:rotate-[7deg] group-focus-visible:rotate-[7deg] motion-reduce:transform-none"
-      fill="none"
+      className="h-6 w-6 shrink-0 origin-center text-[var(--primary)] transition-[filter,transform] duration-200 ease-out group-hover:-translate-y-px group-hover:rotate-[5deg] group-hover:brightness-110 group-focus-visible:-translate-y-px group-focus-visible:rotate-[5deg] group-focus-visible:brightness-110 motion-reduce:transform-none"
+      fill="currentColor"
       viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="1.8"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M2.25 4.5A2.25 2.25 0 0 1 4.5 2.25h2.018c.967 0 1.805.657 2.034 1.595l.665 2.724a2.25 2.25 0 0 1-.821 2.329l-1.156.867a13.517 13.517 0 0 0 7.005 7.005l.867-1.156a2.25 2.25 0 0 1 2.329-.821l2.724.665a2.25 2.25 0 0 1 1.595 2.034V19.5a2.25 2.25 0 0 1-2.25 2.25h-1.5C8.76 21.75 2.25 15.24 2.25 7.5V4.5Z"
-      />
+      <path d="M2.25 3.75A2.25 2.25 0 0 1 4.5 1.5h2.018c.967 0 1.805.657 2.034 1.595l.665 2.724a2.25 2.25 0 0 1-.821 2.329l-1.156.867a13.517 13.517 0 0 0 7.005 7.005l.867-1.156a2.25 2.25 0 0 1 2.329-.821l2.724.665A2.25 2.25 0 0 1 22.5 17.482V19.5a2.25 2.25 0 0 1-2.25 2.25h-1.5C9.492 21.75 2.25 14.508 2.25 5.25V3.75Z" />
     </svg>
   )
 }
@@ -56,12 +50,10 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
     <a
       href="tel:09162536325"
       className={`group flex items-center rounded-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
-        compact ? "gap-2.5" : "gap-3"
+        compact ? "gap-2" : "gap-2.5"
       }`}
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/70 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.98)_0%,rgba(255,250,235,0.82)_52%,rgba(247,241,227,0.7)_100%)] text-[var(--primary)] shadow-[0_4px_12px_rgba(200,160,68,0.12),inset_0_1px_0_rgba(255,255,255,0.95)] transition-[transform,border-color,box-shadow,color] duration-200 ease-out group-hover:-translate-y-px group-hover:border-[var(--primary)] group-hover:shadow-[0_6px_16px_rgba(200,160,68,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] group-focus-visible:-translate-y-px group-focus-visible:border-[var(--primary)] group-focus-visible:shadow-[0_6px_16px_rgba(200,160,68,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] motion-reduce:transform-none">
-        <PhoneIcon />
-      </span>
+      <PhoneIcon />
       <span className="flex flex-col leading-none">
         <span className="text-sm font-semibold leading-none text-[var(--text-primary)] transition-colors duration-200 ease-out group-hover:text-[var(--primary)] group-focus-visible:text-[var(--primary)]">
           0916-253-6325
