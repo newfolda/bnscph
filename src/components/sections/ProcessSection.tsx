@@ -6,7 +6,7 @@ import SectionPill from "../ui/SectionPill"
 
 const processSteps = [
   {
-    title: "Send Your Car Details",
+    title: "Tell Us About Your Car",
     description:
       "Enter your car's model, year, mileage, and upload a few recent photos to receive an initial offer.",
   },
@@ -116,10 +116,12 @@ export default function ProcessSection() {
                       controls={false}
                       aria-hidden="true"
                       tabIndex={-1}
-                      src="/videos/step-1.mp4"
                       draggable={false}
                       className={`process-video ${processVideoSizes[index]} object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none`}
-                    />
+                    >
+                      <source src="/videos/step-1.webm" type="video/webm" />
+                      <source src="/videos/step-1.mp4" type="video/mp4" />
+                    </video>
                   )}
                   {index === 1 && (
                     <video
