@@ -301,7 +301,7 @@ export default function HeroSection() {
                     {rotatingWords[activeWordIndex]}
                   </span>
                   <span
-                    className={`absolute inset-0 inline-block text-[var(--primary)] transition-[transform,opacity] duration-[400ms] ease-out ${
+                    className={`absolute inset-0 inline-block text-[#D7A93F] transition-[transform,opacity] duration-[400ms] ease-out ${
                       wordPhase === "exit" ? "-translate-y-1 opacity-0" : wordPhase === "enter" ? "translate-y-1 opacity-0" : "translate-y-0 opacity-100"
                     }`}
                   >
@@ -318,7 +318,7 @@ export default function HeroSection() {
             <p aria-label="Maximum value. Zero hassle." className="mt-5 max-w-md text-lg font-medium leading-relaxed text-white/90 sm:whitespace-nowrap">
               <span aria-hidden="true">
                 Maximum value. Zero{" "}
-                <span className="relative inline-block align-baseline text-[var(--primary-hover)]">
+                <span className="relative inline-block align-baseline text-[#D7A93F]">
                   <span className="invisible">time wasted.</span>
                   <span className="absolute left-0 top-0 inline-flex items-baseline whitespace-nowrap">
                     {typedWord}
@@ -331,18 +331,18 @@ export default function HeroSection() {
             <Button
               aria-label="See My Car's Value"
               onClick={openSellCarModal}
-              className="group relative mt-5 h-16 w-full max-w-[16.625rem] overflow-hidden border border-[rgba(208,160,45,0.62)] !bg-[linear-gradient(135deg,rgba(255,236,180,0.95),rgba(232,188,70,0.88),rgba(247,220,150,0.94))] !p-0 font-semibold !text-white shadow-[0_12px_28px_rgba(116,78,15,0.2),0_5px_14px_rgba(200,160,68,0.18),inset_0_1px_0_rgba(255,249,224,0.85),inset_0_-1px_0_rgba(146,100,20,0.2)] backdrop-blur-sm transition-[transform,box-shadow,background,color,border-color] duration-[240ms] ease-out hover:-translate-y-px hover:border-[rgba(208,160,45,0.82)] hover:!bg-[linear-gradient(135deg,rgba(255,244,202,0.98),rgba(243,204,96,0.92),rgba(255,230,170,0.97))] hover:!text-[#0A0A0A] hover:shadow-[0_16px_34px_rgba(195,150,35,0.28),0_6px_16px_rgba(20,24,32,0.1),inset_0_1px_0_rgba(255,255,245,0.95),inset_0_-1px_0_rgba(164,119,23,0.24)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(116,78,15,0.18)] focus-visible:-translate-y-px focus-visible:border-[rgba(208,160,45,0.82)] focus-visible:!bg-[linear-gradient(135deg,rgba(255,244,202,0.98),rgba(243,204,96,0.92),rgba(255,230,170,0.97))] focus-visible:!text-[#0A0A0A] focus-visible:shadow-[0_16px_34px_rgba(195,150,35,0.28),0_6px_16px_rgba(20,24,32,0.1),inset_0_1px_0_rgba(255,255,245,0.95),inset_0_-1px_0_rgba(164,119,23,0.24)] focus-visible:ring-2 focus-visible:ring-[rgba(208,160,45,0.68)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 motion-reduce:active:translate-y-0"
+              className="group relative mt-5 h-16 w-full max-w-[16.625rem] overflow-hidden border border-[rgba(181,132,31,0.62)] !bg-[linear-gradient(135deg,rgba(224,183,86,0.96),rgba(198,150,45,0.94),rgba(218,174,72,0.95))] !p-0 font-semibold !text-white shadow-[0_10px_24px_rgba(92,62,14,0.22),0_4px_10px_rgba(20,24,32,0.14),inset_0_1px_0_rgba(255,244,204,0.5)] backdrop-blur-sm transition-[transform,box-shadow,background,color,border-color] duration-[240ms] ease-out hover:-translate-y-px hover:border-[rgba(181,132,31,0.78)] hover:!bg-[linear-gradient(135deg,rgba(231,192,101,0.97),rgba(206,158,52,0.95),rgba(224,181,80,0.96))] hover:!text-white hover:shadow-[0_13px_28px_rgba(92,62,14,0.25),0_5px_12px_rgba(20,24,32,0.16),inset_0_1px_0_rgba(255,244,204,0.58)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(92,62,14,0.18)] focus-visible:-translate-y-px focus-visible:border-[rgba(181,132,31,0.78)] focus-visible:!bg-[linear-gradient(135deg,rgba(231,192,101,0.97),rgba(206,158,52,0.95),rgba(224,181,80,0.96))] focus-visible:!text-white focus-visible:shadow-[0_13px_28px_rgba(92,62,14,0.25),0_5px_12px_rgba(20,24,32,0.16),inset_0_1px_0_rgba(255,244,204,0.58)] focus-visible:ring-2 focus-visible:ring-[rgba(181,132,31,0.68)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 motion-reduce:active:translate-y-0"
               style={{ borderRadius: "2rem" }}
             >
-              <span className="absolute inset-0 z-10 flex translate-x-2.5 items-center justify-center pr-16 whitespace-nowrap text-[0.84rem] font-bold uppercase tracking-[0.07em] text-white transition-colors duration-[240ms] group-hover:text-[#0A0A0A] group-focus-visible:text-[#0A0A0A] sm:text-[0.95rem]">
+              <span className="absolute inset-0 z-10 flex translate-x-2.5 items-center justify-center pr-16 whitespace-nowrap text-[0.84rem] font-bold uppercase tracking-[0.07em] text-white transition-colors duration-[240ms] sm:text-[0.95rem]">
                 See My Car&apos;s Value
               </span>
-              <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full border border-white/25 bg-white/16 text-white transition-[background-color,border-color,color,transform] duration-[240ms] ease-out group-hover:translate-x-1 group-hover:border-[rgba(164,119,23,0.3)] group-hover:bg-white/42 group-hover:text-[#0A0A0A] group-focus-visible:border-[rgba(164,119,23,0.3)] group-focus-visible:bg-white/42 group-focus-visible:text-[#0A0A0A] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
+              <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full border border-white/25 bg-white/16 text-white transition-[background-color,border-color,transform] duration-[240ms] ease-out group-hover:translate-x-1 group-hover:border-white/34 group-hover:bg-white/20 group-focus-visible:border-white/34 group-focus-visible:bg-white/20 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
                 <svg fill="none" height="22" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="22">
                   <path d="M4 12h15M13 6l6 6-6 6" />
                 </svg>
               </span>
-              <span aria-hidden="true" className="pointer-events-none absolute inset-x-3 top-1 z-0 h-8 rounded-full bg-[radial-gradient(ellipse_at_25%_0%,rgba(255,255,255,0.78),rgba(255,245,204,0.3)_34%,transparent_72%)]" />
+              <span aria-hidden="true" className="pointer-events-none absolute inset-x-3 top-1 z-0 h-8 rounded-full bg-[radial-gradient(ellipse_at_25%_0%,rgba(255,255,255,0.38),rgba(255,245,204,0.14)_34%,transparent_72%)]" />
             </Button>
             )} />
           </div>
