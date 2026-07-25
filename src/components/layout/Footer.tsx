@@ -68,7 +68,7 @@ export default function Footer() {
                 <Image src="/images/brand/logo.png" alt="Buy and Sell Cars Philippines" width={180} height={52} className="h-auto w-[180px]" />
               </Link>
               <p className="mt-5 text-sm leading-relaxed text-white/65">
-                We make selling your car simple, convenient, and secure with fair offers, free doorstep inspection, and same-day payment.
+                We make selling your car simple, convenient, and secure with fair offers, doorstep inspection, and same-day payment.
               </p>
             </div>
 
@@ -125,7 +125,7 @@ export default function Footer() {
               <div className="mt-5 flex items-start gap-3 text-sm leading-tight">
                 <ClockIcon />
                 <span className="-mt-0.5 flex flex-col">
-                  <span className="text-white/65">Daily</span>
+                  <span className="text-white/65">Monday – Saturday</span>
                   <span className="mt-1 font-medium text-white/90">9:00 AM – 10:00 PM</span>
                 </span>
               </div>
