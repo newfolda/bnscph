@@ -17,7 +17,7 @@ function PhoneIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-6 w-6 shrink-0 origin-center text-[var(--primary)] transition-[filter,transform] duration-200 ease-out group-hover:-translate-y-px group-hover:rotate-[5deg] group-hover:brightness-110 group-focus-visible:-translate-y-px group-focus-visible:rotate-[5deg] group-focus-visible:brightness-110 motion-reduce:transform-none"
+      className="h-6 w-6 shrink-0 text-[var(--primary)]"
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -55,7 +55,7 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
     >
       <PhoneIcon />
       <span className="flex flex-col leading-none">
-        <span className="text-sm font-semibold leading-none text-[var(--text-primary)] transition-colors duration-200 ease-out group-hover:text-[var(--primary)] group-focus-visible:text-[var(--primary)]">
+        <span className="text-sm font-semibold leading-none text-[var(--text-primary)]">
           0916-253-6325
         </span>
         <span className="mt-px text-[11px] leading-none text-[var(--text-secondary)]">
@@ -72,14 +72,14 @@ function LanguageSelector() {
       <Link
         href="/"
         aria-current="page"
-        className="inline-block text-[var(--primary)] transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:transform-none"
+        className="inline-block text-[var(--primary)] transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
       >
         EN
       </Link>
       <span aria-hidden="true" className="text-gray-300">|</span>
       <Link
         href="/?locale=tgl"
-        className="inline-block transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:transform-none"
+        className="inline-block transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
       >
         TGL
       </Link>
@@ -154,8 +154,8 @@ export default function Header() {
   }, [])
 
   const activeLinkClass = (isActive: boolean) =>
-    `inline-block whitespace-nowrap text-gray-700 transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:transform-none ${
-      isActive ? "text-[var(--primary)]" : ""
+    `navbar-nav-link relative whitespace-nowrap text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
+      isActive ? "navbar-nav-link--active text-[var(--primary)]" : ""
     }`
 
   const handleNavigation = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -218,6 +218,7 @@ export default function Header() {
                     aria-current={activeSection === item.sectionId ? "page" : undefined}
                     className={activeLinkClass(activeSection === item.sectionId)}
                     onClick={(event) => handleNavigation(event, item.sectionId)}
+                    data-label={item.label}
                   >
                     {item.label}
                   </Link>
@@ -258,11 +259,8 @@ export default function Header() {
                     href={item.href}
                     aria-current={activeSection === item.sectionId ? "page" : undefined}
                     onClick={(event) => handleNavigation(event, item.sectionId)}
-                    className={`block rounded-xl px-3 py-2.5 text-sm font-medium transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-inset motion-reduce:transform-none ${
-                      activeSection === item.sectionId
-                        ? "text-[var(--primary)]"
-                        : "text-[var(--text-primary)]"
-                    }`}
+                    className={`${activeLinkClass(activeSection === item.sectionId)} block rounded-xl px-3 py-2.5 text-sm font-semibold focus-visible:ring-inset`}
+                    data-label={item.label}
                   >
                     {item.label}
                   </Link>
@@ -276,6 +274,61 @@ export default function Header() {
           </div>
         </nav>
       </Container>
+      <style>{`
+        .navbar-nav-link {
+          font-weight: 600;
+        }
+
+        .navbar-nav-link::after {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          color: transparent;
+          content: attr(data-label);
+          font: inherit;
+          letter-spacing: inherit;
+          line-height: inherit;
+          text-align: inherit;
+          white-space: inherit;
+          opacity: 0;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 37%,
+            rgba(255, 255, 255, 0.25) 44%,
+            rgba(255, 248, 220, 0.96) 50%,
+            rgba(200, 160, 68, 0.5) 55%,
+            transparent 63%,
+            transparent 100%
+          );
+          background-repeat: no-repeat;
+          background-position: 110% 0;
+          background-size: 250% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-nav-link:hover::after {
+          animation: navbar-text-light-streak 1050ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes navbar-text-light-streak {
+          0% { background-position: 110% 0; opacity: 0; }
+          14% { opacity: 1; }
+          86% { opacity: 1; }
+          100% { background-position: -10% 0; opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .navbar-nav-link::after,
+          .navbar-nav-link:hover::after {
+            animation: none;
+            opacity: 0;
+          }
+        }
+      `}</style>
     </header>
   )
 }
