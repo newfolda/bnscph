@@ -295,11 +295,11 @@ export default function Header() {
           background: linear-gradient(
             105deg,
             transparent 0%,
-            transparent 36%,
-            rgba(255, 255, 255, 0.2) 43%,
-            rgba(255, 255, 255, 0.96) 50%,
-            rgba(255, 241, 198, 0.6) 55%,
-            transparent 63%,
+            transparent 38%,
+            rgba(255, 255, 255, 0.15) 44%,
+            rgba(255, 255, 255, 0.98) 50%,
+            rgba(255, 255, 255, 0.32) 56%,
+            transparent 62%,
             transparent 100%
           );
           background-repeat: no-repeat;
