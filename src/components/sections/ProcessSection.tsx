@@ -128,10 +128,12 @@ export default function ProcessSection() {
                       controls={false}
                       aria-hidden="true"
                       tabIndex={-1}
-                      src="/videos/step-2.mp4"
                       draggable={false}
                       className={`process-video ${processVideoSizes[index]} object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none`}
-                    />
+                    >
+                      <source src="/videos/step-2.webm" type="video/webm" />
+                      <source src="/videos/step-2.mp4" type="video/mp4" />
+                    </video>
                   )}
                   {index === 2 && (
                     <video
@@ -143,10 +145,12 @@ export default function ProcessSection() {
                       controls={false}
                       aria-hidden="true"
                       tabIndex={-1}
-                      src="/videos/step-3.mp4"
                       draggable={false}
                       className={`process-video ${processVideoSizes[index]} object-contain transition-transform duration-300 ease-out group-hover/card:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none`}
-                    />
+                    >
+                      <source src="/videos/step-3.webm" type="video/webm" />
+                      <source src="/videos/step-3.mp4" type="video/mp4" />
+                    </video>
                   )}
                 </div>
                 <div className="mt-1 flex w-full flex-col items-center text-center">
