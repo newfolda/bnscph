@@ -92,14 +92,13 @@ export default function BenefitsSection() {
                   <Button
                     className="benefits-cta relative flex h-[70px] items-center justify-center overflow-hidden rounded-full px-7 tracking-normal sm:px-8"
                     onClick={openSellCarModal}
-                  >
+                    >
                     <span className="benefits-cta-text flex flex-col items-center justify-center gap-0.5 leading-tight text-white">
                       <span className="text-[15px] font-semibold sm:text-base">Get My Free Car Valuation</span>
-                      <span className="text-[11px] font-medium text-white/75 sm:text-xs">No obligation. Free vehicle evaluation.</span>
+                      <span className="benefits-cta-secondary text-[11px] font-medium text-white/75 sm:text-xs">No obligation. Free vehicle evaluation.</span>
                     </span>
-                    <span aria-hidden="true" className="benefits-cta-streak flex flex-col items-center justify-center gap-0.5 leading-tight">
-                      <span className="benefits-cta-streak-line text-[15px] font-semibold sm:text-base">Get My Free Car Valuation</span>
-                      <span className="benefits-cta-streak-line text-[11px] font-medium sm:text-xs">No obligation. Free vehicle evaluation.</span>
+                    <span aria-hidden="true" className="benefits-cta-streak flex items-center justify-center">
+                      <span className="benefits-cta-streak-line text-[11px] font-medium leading-tight sm:text-xs">No obligation. Free vehicle evaluation.</span>
                     </span>
                   </Button>
                 )}
@@ -274,21 +273,31 @@ export default function BenefitsSection() {
 
         .benefits-cta {
           border: 1px solid rgba(255, 255, 255, 0.08) !important;
-          background: #1f1f1f !important;
-          box-shadow: 0 8px 20px rgba(20, 20, 20, 0.16);
+          background: var(--primary) !important;
+          box-shadow: 0 8px 20px rgba(143, 104, 25, 0.14);
           transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
         }
 
         .benefits-cta:hover {
-          background: #1f1f1f !important;
-          box-shadow: 0 10px 24px rgba(20, 20, 20, 0.2);
+          background: var(--primary) !important;
+          box-shadow: 0 10px 24px rgba(143, 104, 25, 0.18);
           transform: translateY(-1px);
         }
 
         .benefits-cta-text { position: relative; z-index: 1; }
+        .benefits-cta-secondary { transition: color 180ms ease; }
+        .benefits-cta:hover .benefits-cta-secondary,
+        .benefits-cta:focus-visible .benefits-cta-secondary {
+          color: #2a2418;
+          transition-delay: 1500ms;
+        }
+        .benefits-cta:not(:hover) .benefits-cta-secondary { transition-delay: 0ms; }
         .benefits-cta-streak {
           position: absolute;
-          inset: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: 50%;
           z-index: 2;
           pointer-events: none;
         }
@@ -441,6 +450,8 @@ export default function BenefitsSection() {
           .benefits-transformation-row,
           .benefits-cta { transition: none; }
           .benefits-cta:hover { transform: none; }
+          .benefits-cta:hover .benefits-cta-secondary,
+          .benefits-cta:focus-visible .benefits-cta-secondary { transition-delay: 0ms; }
           .benefits-cta-streak-line,
           .benefits-cta:hover .benefits-cta-streak-line,
           .benefits-cta:focus-visible .benefits-cta-streak-line { animation: none; opacity: 0; }
