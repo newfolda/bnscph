@@ -242,7 +242,7 @@ export default function HeroSection() {
   return (
     <>
       <section
-      className="mobee-hero-showroom relative isolate overflow-hidden bg-[var(--primary-light)]"
+      className="hero-showroom relative isolate overflow-hidden bg-[var(--primary-light)]"
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
     >
@@ -257,7 +257,7 @@ export default function HeroSection() {
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
-      <div aria-hidden="true" className="mobee-hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
+      <div aria-hidden="true" className="hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
         <div className="absolute bottom-12 right-[5%] h-64 w-64 rounded-full bg-[var(--primary)] opacity-[0.07] blur-3xl md:h-96 md:w-96" />
       </div>
@@ -269,7 +269,7 @@ export default function HeroSection() {
         {particles.map((particle) => (
           <span
             key={`${particle.left}-${particle.top}`}
-            className={`mobee-hero-particle absolute rounded-full transform-gpu ${particle.blur ? "blur-[1px]" : ""}`}
+            className={`hero-particle absolute rounded-full transform-gpu ${particle.blur ? "blur-[1px]" : ""}`}
             style={{
               left: `${particle.left}%`,
               top: `${particle.top}%`,
@@ -294,7 +294,7 @@ export default function HeroSection() {
                 {t.hero.prefix}{" "}
                 <span
                   aria-hidden="true"
-                  className="mobee-hero-rotating-word relative inline-block align-baseline leading-[1.1] transition-[width] duration-[350ms] ease-out"
+                  className="hero-rotating-word relative inline-block align-baseline leading-[1.1] transition-[width] duration-[350ms] ease-out"
                   style={rotatingWordWidth ? { width: `${rotatingWordWidth}px` } : undefined}
                 >
                   <span ref={rotatingWordMeasureRef} className="invisible whitespace-nowrap">
@@ -322,7 +322,7 @@ export default function HeroSection() {
                   <span className="invisible">{typewriterWords.reduce((longestWord, word) => word.length > longestWord.length ? word : longestWord)}</span>
                   <span className="absolute left-0 top-0 inline-flex items-baseline whitespace-nowrap">
                     {typedWord}
-                    {!isTypewriterReducedMotion && <span className="mobee-hero-typewriter-caret" />}
+                    {!isTypewriterReducedMotion && <span className="hero-typewriter-caret" />}
                   </span>
                 </span>
               </span>
@@ -362,78 +362,78 @@ export default function HeroSection() {
         />
       </svg>
       <style>{`
-        @keyframes mobee-hero-dust-drift {
+        @keyframes hero-dust-drift {
           0%, 100% { transform: translate3d(0, 0, 0); }
           50% { transform: translate3d(8px, -12px, 0); }
         }
 
-        .mobee-hero-particle {
-          animation-name: mobee-hero-dust-drift;
+        .hero-particle {
+          animation-name: hero-dust-drift;
           animation-direction: alternate;
           animation-iteration-count: infinite;
           animation-timing-function: ease-in-out;
         }
 
-        .mobee-hero-showroom {
+        .hero-showroom {
           background-image: url("/images/hero/hero-showroom.png");
           background-position: 64% center;
           background-repeat: no-repeat;
           background-size: cover;
         }
 
-        .mobee-hero-showroom-overlay {
+        .hero-showroom-overlay {
           background: linear-gradient(90deg, rgba(8, 8, 8, 0.88) 0%, rgba(8, 8, 8, 0.78) 28%, rgba(8, 8, 8, 0.42) 55%, rgba(8, 8, 8, 0) 78%);
         }
 
         @media (min-width: 768px) {
-          .mobee-hero-showroom {
+          .hero-showroom {
             background-position: 70% center;
           }
         }
 
         @media (min-width: 1024px) {
-          .mobee-hero-showroom {
+          .hero-showroom {
             background-position: center right;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .mobee-hero-rotating-word {
+          .hero-rotating-word {
             transition: none;
           }
         }
 
-        @keyframes mobee-hero-typewriter-caret {
+        @keyframes hero-typewriter-caret {
           0%, 45% { opacity: 1; }
           55%, 100% { opacity: 0; }
         }
 
-        .mobee-hero-typewriter-caret {
+        .hero-typewriter-caret {
           display: inline-block;
           width: 1px;
           height: 1.1em;
           margin-left: 2px;
           vertical-align: -0.15em;
           background: currentColor;
-          animation: mobee-hero-typewriter-caret 900ms steps(1, end) infinite;
+          animation: hero-typewriter-caret 900ms steps(1, end) infinite;
         }
 
-        .mobee-hero-particle:nth-child(n + 13) {
+        .hero-particle:nth-child(n + 13) {
           display: none;
         }
 
         @media (min-width: 768px) {
-          .mobee-hero-particle:nth-child(n + 13) {
+          .hero-particle:nth-child(n + 13) {
             display: block;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .mobee-hero-particle {
+          .hero-particle {
             animation: none;
           }
 
-          .mobee-hero-typewriter-caret {
+          .hero-typewriter-caret {
             animation: none;
           }
         }

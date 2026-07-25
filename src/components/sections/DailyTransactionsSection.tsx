@@ -48,9 +48,9 @@ export default function DailyTransactionsSection() {
         </div>
 
         <div className="relative mx-[-1rem] mt-14 pb-10 sm:mx-[-1.5rem] md:pb-12 lg:mx-[-2.5rem]">
-          <div aria-hidden="true" className="mobee-transactions-backdrop pointer-events-none absolute inset-x-0 bottom-5 top-5 rounded-[2rem]" />
-          <div className="mobee-transactions-marquee relative z-10 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden">
-            <div className="mobee-transactions-track flex w-max snap-x snap-mandatory gap-5 pr-5 md:snap-none">
+          <div aria-hidden="true" className="transactions-backdrop pointer-events-none absolute inset-x-0 bottom-5 top-5 rounded-[2rem]" />
+          <div className="transactions-marquee relative z-10 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden">
+            <div className="transactions-track flex w-max snap-x snap-mandatory gap-5 pr-5 md:snap-none">
               {[...latestTransactions, ...latestTransactions].map((transaction, index) => {
                 const transactionIndex = index % latestTransactions.length
                 const isDuplicate = index >= latestTransactions.length
@@ -97,12 +97,12 @@ export default function DailyTransactionsSection() {
               })}
             </div>
           </div>
-          <div aria-hidden="true" className="mobee-transactions-fade-left pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-16 md:block lg:w-24" />
-          <div aria-hidden="true" className="mobee-transactions-fade-right pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-16 md:block lg:w-24" />
+          <div aria-hidden="true" className="transactions-fade-left pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-16 md:block lg:w-24" />
+          <div aria-hidden="true" className="transactions-fade-right pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-16 md:block lg:w-24" />
         </div>
       </Container>
       <style>{`
-        .mobee-transactions-backdrop {
+        .transactions-backdrop {
           background:
             radial-gradient(circle at 18% 48%, rgba(200, 160, 68, 0.09), transparent 31%),
             radial-gradient(circle at 84% 38%, rgba(200, 160, 68, 0.07), transparent 28%),
@@ -110,33 +110,33 @@ export default function DailyTransactionsSection() {
         }
 
         @media (min-width: 768px) {
-          .mobee-transactions-track {
-            animation: mobee-transactions-marquee 36s linear infinite;
+          .transactions-track {
+            animation: transactions-marquee 36s linear infinite;
           }
 
-          .mobee-transactions-marquee:hover .mobee-transactions-track,
-          .mobee-transactions-marquee:focus-within .mobee-transactions-track,
-          .mobee-transactions-marquee:active .mobee-transactions-track {
+          .transactions-marquee:hover .transactions-track,
+          .transactions-marquee:focus-within .transactions-track,
+          .transactions-marquee:active .transactions-track {
             animation-play-state: paused;
           }
 
-          .mobee-transactions-fade-left {
+          .transactions-fade-left {
             background: linear-gradient(90deg, var(--background-alt), rgba(248, 248, 248, 0));
           }
 
-          .mobee-transactions-fade-right {
+          .transactions-fade-right {
             background: linear-gradient(270deg, var(--background-alt), rgba(248, 248, 248, 0));
           }
         }
 
-        @keyframes mobee-transactions-marquee {
+        @keyframes transactions-marquee {
           to {
             transform: translateX(-50%);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .mobee-transactions-track {
+          .transactions-track {
             animation: none;
           }
         }
