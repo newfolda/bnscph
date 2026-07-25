@@ -48,7 +48,7 @@ export default function SearchableCombobox({
   const listboxId = useId()
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
-  const [query, setQuery] = useState(selectedValue)
+  const [searchQuery, setSearchQuery] = useState("")
 
   const catalogOptions = useMemo(() => {
     const optionsByKey = new Map<string, string>()
@@ -64,32 +64,22 @@ export default function SearchableCombobox({
 
   const filteredCatalogOptions = useMemo(
     () => catalogOptions
-      .filter((option) => normalizeSearchValue(option).includes(normalizeSearchValue(query)))
+      .filter((option) => normalizeSearchValue(option).includes(normalizeSearchValue(searchQuery)))
       .slice(0, 50),
-    [catalogOptions, query],
+    [catalogOptions, searchQuery],
   )
   const choices = useMemo(() => [...filteredCatalogOptions, ...fallbackOptions], [filteredCatalogOptions])
   const exactMatchIndex = useMemo(
-    () => filteredCatalogOptions.findIndex((option) => normalizeSearchValue(option) === normalizeSearchValue(query)),
-    [filteredCatalogOptions, query],
+    () => filteredCatalogOptions.findIndex((option) => normalizeSearchValue(option) === normalizeSearchValue(searchQuery)),
+    [filteredCatalogOptions, searchQuery],
   )
   const activeChoice = activeIndex >= 0 && activeIndex < choices.length ? choices[activeIndex] : undefined
-
-  useEffect(() => {
-    if (!isOpen || isLoading) {
-      const timeout = window.setTimeout(() => {
-        setQuery(selectedValue)
-        setActiveIndex(-1)
-      }, 0)
-      return () => window.clearTimeout(timeout)
-    }
-  }, [isLoading, isOpen, selectedValue])
 
   useEffect(() => {
     if (!isOpen || isLoading) return
     const timeout = window.setTimeout(() => setActiveIndex(exactMatchIndex), 0)
     return () => window.clearTimeout(timeout)
-  }, [exactMatchIndex, isLoading, isOpen, query])
+  }, [exactMatchIndex, isLoading, isOpen, searchQuery])
 
   useEffect(() => {
     Object.keys(optionRefs.current).forEach((optionId) => {
@@ -107,7 +97,7 @@ export default function SearchableCombobox({
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
       if (!containerRef.current?.contains(event.target as Node)) {
-        setQuery(selectedValue)
+        setSearchQuery("")
         setIsOpen(false)
         setActiveIndex(-1)
       }
@@ -117,14 +107,21 @@ export default function SearchableCombobox({
   }, [selectedValue])
 
   const closeList = () => {
-    setQuery(selectedValue)
+    setSearchQuery("")
     setIsOpen(false)
+    setActiveIndex(-1)
+  }
+
+  const openList = () => {
+    setSearchQuery("")
+    setIsOpen(true)
     setActiveIndex(-1)
   }
 
   const choose = (choice: string) => {
     if (choice === "Other / Not Listed") onManualSelect()
     else onSelect(choice, choice === "Not Sure" ? "unsure" : "catalog")
+    setSearchQuery("")
     setIsOpen(false)
     setActiveIndex(-1)
   }
@@ -133,12 +130,16 @@ export default function SearchableCombobox({
     if (disabled || isLoading) return
     if (event.key === "ArrowDown") {
       event.preventDefault()
-      setIsOpen(true)
+      if (!isOpen) openList()
       setActiveIndex((currentIndex) => currentIndex < 0 ? 0 : Math.min(currentIndex + 1, choices.length - 1))
     } else if (event.key === "ArrowUp") {
       event.preventDefault()
-      setIsOpen(true)
-      setActiveIndex((currentIndex) => currentIndex < 0 ? choices.length - 1 : Math.max(currentIndex - 1, 0))
+      if (!isOpen) {
+        openList()
+        setActiveIndex(catalogOptions.length + fallbackOptions.length - 1)
+      } else {
+        setActiveIndex((currentIndex) => currentIndex < 0 ? choices.length - 1 : Math.max(currentIndex - 1, 0))
+      }
     } else if (event.key === "Enter" && isOpen) {
       event.preventDefault()
       if (activeChoice) choose(activeChoice)
@@ -169,14 +170,13 @@ export default function SearchableCombobox({
           aria-describedby={error ? `${id}-error` : undefined}
           disabled={disabled || isLoading}
           placeholder={isLoading ? "Loading options…" : placeholder}
-          value={isOpen ? query : selectedValue}
+          value={isOpen ? searchQuery : selectedValue}
           onChange={(event) => {
-            setQuery(event.target.value)
+            setSearchQuery(event.target.value)
             setIsOpen(true)
           }}
           onFocus={() => {
-            setQuery(selectedValue)
-            setIsOpen(true)
+            if (!isOpen) openList()
           }}
           onBlur={() => window.setTimeout(() => {
             if (!containerRef.current?.contains(document.activeElement)) closeList()
@@ -192,9 +192,8 @@ export default function SearchableCombobox({
           disabled={disabled || isLoading}
           onMouseDown={(event) => event.preventDefault()}
           onClick={() => {
-            setQuery(selectedValue)
-            setIsOpen((open) => !open)
-            setActiveIndex(-1)
+            if (isOpen) closeList()
+            else openList()
           }}
           className="absolute inset-y-0 right-0 flex min-w-11 items-center justify-center rounded-r-xl text-[var(--text-secondary)] transition-transform disabled:cursor-not-allowed"
         >

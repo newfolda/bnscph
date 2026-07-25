@@ -90,7 +90,10 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
   }
 
   const handleMakeSelection = (value: string, mode: ComboboxSelection) => {
+    const makeChanged = carDetails.make.trim().toLocaleLowerCase() !== value.trim().toLocaleLowerCase()
     handleCarDetailsChange("make", value)
+    if (!makeChanged) return
+
     clearModelAndVariant()
     setVehicleFieldModes((currentModes) => ({ ...currentModes, make: mode, model: mode === "catalog" ? "catalog" : "manual", variant: mode === "catalog" ? "catalog" : "manual" }))
     cancelCatalogLoading("variant")
@@ -120,7 +123,10 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
   }
 
   const handleModelSelection = (value: string, mode: ComboboxSelection) => {
+    const modelChanged = carDetails.model.trim().toLocaleLowerCase() !== value.trim().toLocaleLowerCase()
     handleCarDetailsChange("model", value)
+    if (!modelChanged) return
+
     setCarDetails((currentDetails) => ({ ...currentDetails, variant: "" }))
     setCarDetailsErrors((currentErrors) => ({ ...currentErrors, variant: undefined }))
     setVehicleFieldModes((currentModes) => ({ ...currentModes, model: mode, variant: mode === "catalog" ? "catalog" : "manual" }))
