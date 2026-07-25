@@ -14,13 +14,13 @@ const navigationItems = [
 ]
 
 const headerContactIconClass =
-  "inline-flex items-center justify-center text-gray-600 transition-[color,transform] duration-200 ease-out group-hover:scale-[1.15] group-hover:text-[var(--primary)] group-focus-visible:scale-[1.15] group-focus-visible:text-[var(--primary)] motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100"
+  "inline-flex origin-center items-center justify-center text-gray-600 transition-[color,transform] duration-300 ease-out group-hover:scale-[2] group-hover:text-[var(--primary)] group-focus-visible:scale-[2] group-focus-visible:text-[var(--primary)] motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100"
 
 function PhoneIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="size-[18px] shrink-0"
+      className="size-[16px] shrink-0"
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -35,19 +35,7 @@ function HeaderSocialLinks({ mobile = false }: { mobile?: boolean }) {
   }`
 
   return (
-    <div className={`flex items-center gap-3 ${mobile ? "gap-2" : ""}`} aria-label="Contact and social links">
-      <a
-        aria-label="Email Buy and Sell Cars Philippines"
-        className={iconLinkClass}
-        href="mailto:buyandsellcarph@gmail.com"
-      >
-        <span className={headerContactIconClass}>
-          <svg aria-hidden="true" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-            <rect height="16" rx="2" width="20" x="2" y="4" />
-            <path d="m22 7-8.15 5.18a3.5 3.5 0 0 1-3.7 0L2 7" />
-          </svg>
-        </span>
-      </a>
+    <div className={`flex items-center ${mobile ? "gap-3" : "gap-4"}`} aria-label="Social links">
       <a
         aria-label="Visit Buy and Sell Cars Philippines on Facebook"
         className={iconLinkClass}
