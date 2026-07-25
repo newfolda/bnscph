@@ -76,7 +76,7 @@ export default function BenefitsSection() {
       <Container>
         <div className="benefits-layout">
           <div className="benefits-introduction benefits-reveal" style={{ "--benefits-delay": "0ms" } as CSSProperties}>
-            <SectionPill className="mb-4">COMPARE YOUR OPTIONS</SectionPill>
+            <SectionPill className="mb-4">WHY CHOOSE US</SectionPill>
             <h2 className="max-w-[25rem] text-3xl font-bold leading-[0.99] tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[3.35rem]">
               Sell Your Car.
               <br />
@@ -90,14 +90,16 @@ export default function BenefitsSection() {
               <SellCarModal
                 trigger={(openSellCarModal) => (
                   <Button
-                    className="benefits-cta h-14 rounded-full px-7 text-sm font-semibold tracking-normal sm:px-8 sm:text-base"
+                    className="benefits-cta flex h-[70px] items-center justify-center rounded-full px-7 tracking-normal sm:px-8"
                     onClick={openSellCarModal}
                   >
-                    Get My Free Car Valuation
+                    <span className="flex flex-col items-center justify-center gap-0.5 leading-tight text-white">
+                      <span className="text-[15px] font-semibold sm:text-base">Get My Free Car Valuation</span>
+                      <span className="text-[11px] font-medium text-white/85 sm:text-xs">No obligation. Free vehicle evaluation.</span>
+                    </span>
                   </Button>
                 )}
               />
-              <p className="mt-3 text-sm text-[var(--text-secondary)]">No obligation. Free vehicle evaluation.</p>
             </div>
           </div>
 
@@ -105,7 +107,7 @@ export default function BenefitsSection() {
             <header className="benefits-canvas-header">
               <span aria-hidden="true" />
               <span className="benefits-canvas-label benefits-canvas-label--traditional">PRIVATE SALE</span>
-              <span className="benefits-canvas-label benefits-canvas-label--preferred">SELL DIRECTLY TO US</span>
+              <span className="benefits-canvas-label benefits-canvas-label--preferred">BUY AND SELL CARS PH</span>
             </header>
 
             <div className="benefits-transformation-rows" role="list">
