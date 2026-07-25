@@ -2,15 +2,15 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import { type MouseEvent, useEffect, useRef, useState } from "react"
 import Container from "../ui/Container"
 
 const navigationItems = [
   { label: "Home", href: "/", sectionId: "home" },
-  { label: "How It Works", href: "#how-it-works", sectionId: "how-it-works" },
-  { label: "Transactions", href: "#latest-transactions", sectionId: "latest-transactions" },
-  { label: "Why Choose Us", href: "#why-choose-us", sectionId: "why-choose-us" },
-  { label: "FAQ", href: "#faq", sectionId: "faq" },
+  { label: "How It Works", href: "/#how-it-works", sectionId: "how-it-works" },
+  { label: "Transactions", href: "/#latest-transactions", sectionId: "latest-transactions" },
+  { label: "Why Choose Us", href: "/#why-choose-us", sectionId: "why-choose-us" },
+  { label: "FAQ", href: "/#faq", sectionId: "faq" },
 ]
 
 function PhoneIcon() {
@@ -166,9 +166,22 @@ export default function Header() {
       isActive ? "text-[var(--primary)]" : ""
     }`
 
-  const handleNavigation = (sectionId: string) => {
+  const handleNavigation = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    event.preventDefault()
     setActiveSection(sectionId)
     setIsMobileMenuOpen(false)
+
+    if (sectionId === "home") {
+      window.history.replaceState(null, "", "/")
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      return
+    }
+
+    window.history.replaceState(null, "", `/#${sectionId}`)
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
   }
 
   return (
@@ -186,7 +199,7 @@ export default function Header() {
           >
             <Link
               href="/"
-              onClick={() => handleNavigation("home")}
+              onClick={(event) => handleNavigation(event, "home")}
               className={`flex h-full items-center transition-[width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
                 isCompact ? "w-[155px]" : "w-[190px]"
               }`}
@@ -212,7 +225,7 @@ export default function Header() {
                     href={item.href}
                     aria-current={activeSection === item.sectionId ? "page" : undefined}
                     className={activeLinkClass(activeSection === item.sectionId)}
-                    onClick={() => handleNavigation(item.sectionId)}
+                    onClick={(event) => handleNavigation(event, item.sectionId)}
                   >
                     {item.label}
                   </Link>
@@ -252,7 +265,7 @@ export default function Header() {
                     key={item.sectionId}
                     href={item.href}
                     aria-current={activeSection === item.sectionId ? "page" : undefined}
-                    onClick={() => handleNavigation(item.sectionId)}
+                    onClick={(event) => handleNavigation(event, item.sectionId)}
                     className={`block rounded-xl px-3 py-2.5 text-sm font-medium transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-inset motion-reduce:transform-none ${
                       activeSection === item.sectionId
                         ? "text-[var(--primary)]"
