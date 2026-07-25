@@ -2,12 +2,13 @@
 
 import type { ChangeEvent, ReactNode } from "react"
 import { useEffect, useRef, useState } from "react"
+import { getCatalogYears, OLDER_THAN_2010_VALUE } from "../../data/vehicleCatalog"
 import Modal from "../ui/Modal"
 import { type ComboboxSelection } from "../ui/SearchableCombobox"
 import { buildSellCarPayload } from "../../lib/sellCar/buildSellCarPayload"
 import { submitSellCarLead } from "../../lib/sellCar/submitSellCarLead"
 import type { VehicleFieldModes } from "../../types/sellCar"
-import { initialCarDetails, initialContactDetails, initialVehicleFieldModes, sellCarDraftKey, type CarDetails, type CarDetailsField, type ContactDetails, type ContactDetailsField, type SubmitStatus, type VehiclePhoto } from "./types"
+import { initialCarDetails, initialContactDetails, initialVehicleFieldModes, sellCarDraftKey, type CarDetails, type CarDetailsField, type ContactDetails, type ContactDetailsField, type SellCarFormStep, type SubmitStatus, type VehiclePhoto } from "./types"
 import { validateCarDetailsField, validateContactDetailsField } from "./helpers"
 import { clearSellCarDraft, restoreSellCarDraft, saveSellCarDraft } from "./draft"
 import { createVehiclePhoto, revokePhotoPreviews, validateVehiclePhoto } from "./photoUtils"
@@ -36,6 +37,8 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
   const [submissionReferenceId, setSubmissionReferenceId] = useState("")
   const [submissionError, setSubmissionError] = useState("")
   const [showDiscardConfirmation, setShowDiscardConfirmation] = useState(false)
+  const [currentStep, setCurrentStep] = useState<SellCarFormStep>(1)
+  const [usesManualYear, setUsesManualYear] = useState(false)
   const photoInputRef = useRef<HTMLInputElement>(null)
   const latestPhotosRef = useRef<VehiclePhoto[]>([])
   const privacyConsentRef = useRef<HTMLInputElement>(null)
@@ -44,10 +47,11 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
   const manualVariantRef = useRef<HTMLInputElement>(null)
   const successHeadingRef = useRef<HTMLHeadingElement>(null)
   const submissionErrorRef = useRef<HTMLParagraphElement>(null)
+  const stepHeadingRef = useRef<HTMLHeadingElement>(null)
   const catalogLoadingTimersRef = useRef<Record<"brand" | "model" | "variant", number | null>>({ brand: null, model: null, variant: null })
 
   const currentYear = new Date().getFullYear()
-  const yearOptions = Array.from({ length: currentYear - 1990 + 1 }, (_, index) => String(currentYear - index))
+  const yearOptions = getCatalogYears()
 
   const handleCarDetailsChange = (field: CarDetailsField, value: string) => {
     setCarDetails((currentDetails) => ({ ...currentDetails, [field]: value }))
@@ -87,36 +91,39 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
 
   const handleMakeSelection = (value: string, mode: ComboboxSelection) => {
     handleCarDetailsChange("make", value)
-    setVehicleFieldModes((currentModes) => ({ ...currentModes, make: mode, model: "catalog", variant: "catalog" }))
     clearModelAndVariant()
+    setVehicleFieldModes((currentModes) => ({ ...currentModes, make: mode, model: mode === "catalog" ? "catalog" : "manual", variant: mode === "catalog" ? "catalog" : "manual" }))
     cancelCatalogLoading("variant")
     if (mode === "catalog") showCatalogLoading("model")
   }
 
   const handleMakeManual = () => {
     handleCarDetailsChange("make", "")
-    setVehicleFieldModes((currentModes) => ({ ...currentModes, make: "manual", model: "catalog", variant: "catalog" }))
     clearModelAndVariant()
+    setVehicleFieldModes({ make: "manual", model: "manual", variant: "manual" })
     cancelCatalogLoading("model")
     cancelCatalogLoading("variant")
     window.requestAnimationFrame(() => manualMakeRef.current?.focus())
   }
 
   const handleYearChange = (value: string) => {
-    handleCarDetailsChange("year", value)
-    setCarDetails((currentDetails) => ({ ...currentDetails, make: "", model: "", variant: "" }))
-    setCarDetailsErrors((currentErrors) => ({ ...currentErrors, make: undefined, model: undefined, variant: undefined }))
-    setVehicleFieldModes(initialVehicleFieldModes)
+    const manualYear = value === OLDER_THAN_2010_VALUE
+    setUsesManualYear(manualYear)
+    setCarDetails((currentDetails) => ({ ...currentDetails, year: manualYear ? "" : value, make: "", model: "", variant: "" }))
+    setCarDetailsErrors((currentErrors) => ({ ...currentErrors, year: undefined, make: undefined, model: undefined, variant: undefined }))
+    setSubmitStatus("idle")
+    setSubmissionError("")
+    setVehicleFieldModes(manualYear ? { make: "manual", model: "manual", variant: "manual" } : initialVehicleFieldModes)
     cancelCatalogLoading("model")
     cancelCatalogLoading("variant")
-    showCatalogLoading("brand")
+    if (!manualYear && value) showCatalogLoading("brand")
   }
 
   const handleModelSelection = (value: string, mode: ComboboxSelection) => {
     handleCarDetailsChange("model", value)
     setCarDetails((currentDetails) => ({ ...currentDetails, variant: "" }))
     setCarDetailsErrors((currentErrors) => ({ ...currentErrors, variant: undefined }))
-    setVehicleFieldModes((currentModes) => ({ ...currentModes, model: mode, variant: "catalog" }))
+    setVehicleFieldModes((currentModes) => ({ ...currentModes, model: mode, variant: mode === "catalog" ? "catalog" : "manual" }))
     if (mode === "catalog") showCatalogLoading("variant")
   }
 
@@ -124,7 +131,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     handleCarDetailsChange("model", "")
     setCarDetails((currentDetails) => ({ ...currentDetails, variant: "" }))
     setCarDetailsErrors((currentErrors) => ({ ...currentErrors, variant: undefined }))
-    setVehicleFieldModes((currentModes) => ({ ...currentModes, model: "manual", variant: "catalog" }))
+    setVehicleFieldModes((currentModes) => ({ ...currentModes, model: "manual", variant: "manual" }))
     cancelCatalogLoading("variant")
     window.requestAnimationFrame(() => manualModelRef.current?.focus())
   }
@@ -164,6 +171,8 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     setSubmissionReferenceId("")
     setSubmissionError("")
     setShowDiscardConfirmation(false)
+    setCurrentStep(1)
+    setUsesManualYear(false)
   }
 
   const hasSellCarFormData =
@@ -193,12 +202,16 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     setSubmissionReferenceId("")
     setSubmissionError("")
     setShowDiscardConfirmation(false)
+    setCurrentStep(1)
+    setUsesManualYear(false)
 
     const restoredDraft = restoreSellCarDraft(sellCarDraftKey, currentYear)
 
     if (restoredDraft) {
       setCarDetails(restoredDraft.carDetails)
       setVehicleFieldModes(restoredDraft.vehicleFieldModes)
+      setCurrentStep(restoredDraft.currentStep === 4 ? 3 : restoredDraft.currentStep)
+      setUsesManualYear(restoredDraft.usesManualYear)
     }
 
     setIsSellCarModalOpen(true)
@@ -254,36 +267,53 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     window.requestAnimationFrame(() => (isManual ? manualFieldRef?.current : carFieldRefs.current[field])?.focus())
   }
 
-  const handleSinglePageSubmit = async () => {
-    if (submitStatus === "submitting") return
-    const nextCarErrors: Partial<Record<CarDetailsField, string>> = {}
-    const nextContactErrors: Partial<Record<ContactDetailsField, string>> = {}
-
+  const validateVehicleStep = () => {
+    const nextErrors: Partial<Record<CarDetailsField, string>> = {}
     ;(Object.keys(carDetails) as CarDetailsField[]).forEach((field) => {
       const error = validateCarDetailsField(field, carDetails[field], currentYear)
-      if (error) nextCarErrors[field] = error
+      if (error) nextErrors[field] = error
     })
+    setCarDetailsErrors(nextErrors)
+    const firstInvalidField = Object.keys(nextErrors)[0] as CarDetailsField | undefined
+    if (firstInvalidField) focusInvalidCarField(firstInvalidField)
+    return !firstInvalidField
+  }
 
+  const validateContactStep = () => {
+    const nextErrors: Partial<Record<ContactDetailsField, string>> = {}
     ;(Object.keys(contactDetails) as ContactDetailsField[]).forEach((field) => {
       const error = validateContactDetailsField(field, contactDetails[field])
-      if (error) nextContactErrors[field] = error
+      if (error) nextErrors[field] = error
     })
+    setContactDetailsErrors(nextErrors)
+    const firstInvalidField = Object.keys(nextErrors)[0] as ContactDetailsField | undefined
+    if (firstInvalidField) window.requestAnimationFrame(() => contactFieldRefs.current[firstInvalidField]?.focus())
+    return !firstInvalidField
+  }
 
+  const moveToStep = (step: SellCarFormStep) => {
+    setCurrentStep(step)
+    setSubmitStatus("idle")
+    setSubmissionError("")
+  }
+
+  const handleNextStep = () => {
+    if (currentStep === 1 && !validateVehicleStep()) return
+    if (currentStep === 3 && !validateContactStep()) return
+    moveToStep(Math.min(4, currentStep + 1) as SellCarFormStep)
+  }
+
+  const handleSinglePageSubmit = async () => {
+    if (submitStatus === "submitting") return
     const consentError = privacyConsent ? "" : "Please agree to the Privacy Policy to continue."
-
-    setCarDetailsErrors(nextCarErrors)
-    setContactDetailsErrors(nextContactErrors)
     setPrivacyConsentError(consentError)
     setSubmitStatus("idle")
     setSubmissionError("")
 
-    const firstInvalidCarField = Object.keys(nextCarErrors)[0] as CarDetailsField | undefined
-    const firstInvalidContactField = Object.keys(nextContactErrors)[0] as ContactDetailsField | undefined
-
-    if (firstInvalidCarField) {
-      focusInvalidCarField(firstInvalidCarField)
-    } else if (firstInvalidContactField) {
-      window.requestAnimationFrame(() => contactFieldRefs.current[firstInvalidContactField]?.focus())
+    if (!validateVehicleStep()) {
+      moveToStep(1)
+    } else if (!validateContactStep()) {
+      moveToStep(3)
     } else if (consentError) {
       window.requestAnimationFrame(() => privacyConsentRef.current?.focus())
     } else {
@@ -312,8 +342,8 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
 
     if (!hasSellCarFormData) return
 
-    saveSellCarDraft(sellCarDraftKey, carDetails, vehicleFieldModes)
-  }, [carDetails, hasSellCarFormData, isSellCarModalOpen, submitStatus, vehicleFieldModes])
+    saveSellCarDraft(sellCarDraftKey, carDetails, vehicleFieldModes, currentStep, usesManualYear)
+  }, [carDetails, currentStep, hasSellCarFormData, isSellCarModalOpen, submitStatus, usesManualYear, vehicleFieldModes])
 
   useEffect(() => {
     if (!isSellCarModalOpen) return
@@ -322,12 +352,12 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
       if (showDiscardConfirmation) {
         keepEditingRef.current?.focus()
       } else {
-        carFieldRefs.current.year?.focus()
+        stepHeadingRef.current?.focus()
       }
     })
 
     return () => window.cancelAnimationFrame(focusFrame)
-  }, [isSellCarModalOpen, showDiscardConfirmation])
+  }, [currentStep, isSellCarModalOpen, showDiscardConfirmation])
 
   useEffect(() => {
     latestPhotosRef.current = vehiclePhotos
@@ -354,6 +384,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
         isOpen={isSellCarModalOpen}
         labelledBy={showDiscardConfirmation ? "sell-car-discard-title" : "sell-car-modal-title"}
         onClose={requestSellCarModalClose}
+        size="wide"
       >
         {showDiscardConfirmation ? (
           <SellCarDiscardConfirmation keepEditingRef={keepEditingRef} onKeepEditing={() => setShowDiscardConfirmation(false)} onDiscard={discardSellCarModal} />
@@ -375,6 +406,9 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
             submitStatus={submitStatus}
             submissionError={submissionError}
             yearOptions={yearOptions}
+            currentStep={currentStep}
+            usesManualYear={usesManualYear}
+            stepHeadingRef={stepHeadingRef}
             carFieldRefs={carFieldRefs}
             contactFieldRefs={contactFieldRefs}
             photoInputRef={photoInputRef}
@@ -385,7 +419,11 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
             submissionErrorRef={submissionErrorRef}
             onClose={requestSellCarModalClose}
             onSubmit={(event) => { event.preventDefault(); handleSinglePageSubmit() }}
+            onNext={handleNextStep}
+            onBack={() => moveToStep(Math.max(1, currentStep - 1) as SellCarFormStep)}
+            onEditStep={moveToStep}
             onYearChange={handleYearChange}
+            onManualYearChange={(value) => handleCarDetailsChange("year", value.replace(/\D/g, "").slice(0, 4))}
             onCarDetailsChange={handleCarDetailsChange}
             onContactDetailsChange={handleContactDetailsChange}
             onMakeSelection={handleMakeSelection}
@@ -397,8 +435,8 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
             onPhotoSelection={handlePhotoSelection}
             onRemovePhoto={removeVehiclePhoto}
             onPrivacyConsentChange={(checked) => { setPrivacyConsent(checked); setPrivacyConsentError(""); setSubmitStatus("idle"); setSubmissionError("") }}
-            onManualMakeChange={(value) => { if (value !== carDetails.make) { handleCarDetailsChange("make", value); clearModelAndVariant() } }}
-            onManualModelChange={(value) => { if (value !== carDetails.model) { handleCarDetailsChange("model", value); setCarDetails((details) => ({ ...details, variant: "" })); setVehicleFieldModes((modes) => ({ ...modes, variant: "catalog" })) } }}
+            onManualMakeChange={(value) => { if (value !== carDetails.make) { handleCarDetailsChange("make", value); clearModelAndVariant(); setVehicleFieldModes({ make: "manual", model: "manual", variant: "manual" }) } }}
+            onManualModelChange={(value) => { if (value !== carDetails.model) { handleCarDetailsChange("model", value); setCarDetails((details) => ({ ...details, variant: "" })); setVehicleFieldModes((modes) => ({ ...modes, model: "manual", variant: "manual" })) } }}
           />}
         </>
         )}

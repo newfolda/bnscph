@@ -63,7 +63,9 @@ export default function SearchableCombobox({
   }, [options])
 
   const filteredCatalogOptions = useMemo(
-    () => catalogOptions.filter((option) => normalizeSearchValue(option).includes(normalizeSearchValue(query))),
+    () => catalogOptions
+      .filter((option) => normalizeSearchValue(option).includes(normalizeSearchValue(query)))
+      .slice(0, 50),
     [catalogOptions, query],
   )
   const choices = useMemo(() => [...filteredCatalogOptions, ...fallbackOptions], [filteredCatalogOptions])

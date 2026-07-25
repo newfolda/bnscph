@@ -24,6 +24,7 @@ export type ContactDetailsField = keyof ContactDetails
 export type VehiclePhoto = { file: File; id: string; previewUrl: string }
 
 export type SubmitStatus = "idle" | "submitting" | "success" | "error"
+export type SellCarFormStep = 1 | 2 | 3 | 4
 
 export const initialCarDetails: CarDetails = { year: "", make: "", model: "", variant: "", mileage: "", transmission: "", fuelType: "", condition: "" }
 

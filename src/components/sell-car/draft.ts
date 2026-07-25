@@ -1,7 +1,7 @@
-import { getBrands, getModels, getVariants } from "../../data/vehicleCatalog"
+import { getBrands, getModels, getVariants, isCatalogYear } from "../../data/vehicleCatalog"
 import type { VehicleFieldMode, VehicleFieldModes } from "../../types/sellCar"
 import { restoreStringFields } from "./helpers"
-import { initialCarDetails, type CarDetails } from "./types"
+import { initialCarDetails, type CarDetails, type SellCarFormStep } from "./types"
 
 type SafeVehicleDraftDetails = Pick<
   CarDetails,
@@ -11,11 +11,15 @@ type SafeVehicleDraftDetails = Pick<
 type SellCarDraft = {
   carDetails: SafeVehicleDraftDetails
   vehicleFieldModes: VehicleFieldModes
+  currentStep: SellCarFormStep
+  usesManualYear: boolean
 }
 
 const createSafeVehicleDraft = (
   carDetails: CarDetails,
   vehicleFieldModes: VehicleFieldModes,
+  currentStep: SellCarFormStep,
+  usesManualYear: boolean,
 ): SellCarDraft => ({
   // This allowlist is the browser-storage privacy boundary for Sell My Car drafts.
   carDetails: {
@@ -33,6 +37,8 @@ const createSafeVehicleDraft = (
     model: vehicleFieldModes.model,
     variant: vehicleFieldModes.variant,
   },
+  currentStep,
+  usesManualYear,
 })
 
 export const clearSellCarDraft = (draftKey: string): void => {
@@ -56,41 +62,47 @@ export const restoreSellCarDraft = (draftKey: string, currentYear: number): Sell
     const draft = parsedDraft as Record<string, unknown>
     const carDetails = restoreStringFields(initialCarDetails, draft.carDetails)
     const restoredYear = Number(carDetails.year)
-    const hasRestoredYear = /^\d{4}$/.test(carDetails.year) && restoredYear >= 1990 && restoredYear <= currentYear
+    const hasRestoredYear = /^\d{4}$/.test(carDetails.year) && restoredYear >= 1900 && restoredYear <= currentYear
+    const savedUsesManualYear = draft.usesManualYear === true || (hasRestoredYear && !isCatalogYear(restoredYear))
+    const savedModes = draft.vehicleFieldModes as Partial<VehicleFieldModes> | undefined
+    const isMode = (mode: unknown): mode is VehicleFieldMode => mode === "manual" || mode === "unsure" || mode === "catalog"
     const normalizedMake = carDetails.make.trim().toLowerCase()
-    const knownMake = getBrands().some((brand) => brand.toLowerCase() === normalizedMake)
     const makeAvailable = getBrands(restoredYear).some((brand) => brand.toLowerCase() === normalizedMake)
 
-    if (!hasRestoredYear || (knownMake && !makeAvailable)) {
+    if (!hasRestoredYear) {
+      carDetails.year = ""
       carDetails.make = ""
       carDetails.model = ""
       carDetails.variant = ""
-    } else if (carDetails.make) {
+    } else if (!savedUsesManualYear && savedModes?.make === "catalog" && carDetails.make && !makeAvailable) {
+      carDetails.make = ""
+      carDetails.model = ""
+      carDetails.variant = ""
+    } else if (!savedUsesManualYear && carDetails.make) {
       const normalizedModel = carDetails.model.trim().toLowerCase()
-      const knownModel = getModels(carDetails.make).some((model) => model.toLowerCase() === normalizedModel)
       const modelAvailable = getModels(carDetails.make, restoredYear).some((model) => model.toLowerCase() === normalizedModel)
 
-      if (knownModel && !modelAvailable) {
+      if (savedModes?.model === "catalog" && carDetails.model && !modelAvailable) {
         carDetails.model = ""
         carDetails.variant = ""
       } else if (carDetails.model) {
         const normalizedVariant = carDetails.variant.trim().toLowerCase()
-        const knownVariant = getVariants(carDetails.make, carDetails.model).some((variant) => variant.toLowerCase() === normalizedVariant)
         const variantAvailable = getVariants(carDetails.make, carDetails.model, restoredYear).some((variant) => variant.toLowerCase() === normalizedVariant)
 
-        if (knownVariant && !variantAvailable) carDetails.variant = ""
+        if (savedModes?.variant === "catalog" && carDetails.variant && !variantAvailable) carDetails.variant = ""
       }
     }
 
-    const savedModes = draft.vehicleFieldModes as Partial<VehicleFieldModes> | undefined
     const inferMode = (value: string, options: string[]): VehicleFieldMode => value === "Not Sure" ? "unsure" : value && !options.some((option) => option.toLowerCase() === value.trim().toLowerCase()) ? "manual" : "catalog"
     const vehicleFieldModes: VehicleFieldModes = {
-      make: savedModes?.make === "manual" || savedModes?.make === "unsure" || savedModes?.make === "catalog" ? savedModes.make : inferMode(carDetails.make, getBrands(restoredYear)),
-      model: savedModes?.model === "manual" || savedModes?.model === "unsure" || savedModes?.model === "catalog" ? savedModes.model : inferMode(carDetails.model, getModels(carDetails.make, restoredYear)),
-      variant: savedModes?.variant === "manual" || savedModes?.variant === "unsure" || savedModes?.variant === "catalog" ? savedModes.variant : inferMode(carDetails.variant, getVariants(carDetails.make, carDetails.model, restoredYear)),
+      make: isMode(savedModes?.make) ? savedModes.make : inferMode(carDetails.make, getBrands(restoredYear)),
+      model: isMode(savedModes?.model) ? savedModes.model : inferMode(carDetails.model, getModels(carDetails.make, restoredYear)),
+      variant: isMode(savedModes?.variant) ? savedModes.variant : inferMode(carDetails.variant, getVariants(carDetails.make, carDetails.model, restoredYear)),
     }
 
-    const safeDraft = createSafeVehicleDraft(carDetails, vehicleFieldModes)
+    const requestedStep = draft.currentStep
+    const currentStep: SellCarFormStep = requestedStep === 2 || requestedStep === 3 || requestedStep === 4 ? requestedStep : 1
+    const safeDraft = createSafeVehicleDraft(carDetails, vehicleFieldModes, currentStep, savedUsesManualYear)
 
     // Rewrite legacy drafts without their former sensitive fields after safely restoring vehicle data.
     window.sessionStorage.setItem(draftKey, JSON.stringify(safeDraft))
@@ -106,9 +118,11 @@ export const saveSellCarDraft = (
   draftKey: string,
   carDetails: CarDetails,
   vehicleFieldModes: VehicleFieldModes,
+  currentStep: SellCarFormStep,
+  usesManualYear: boolean,
 ): void => {
   try {
-    const safeDraft = createSafeVehicleDraft(carDetails, vehicleFieldModes)
+    const safeDraft = createSafeVehicleDraft(carDetails, vehicleFieldModes, currentStep, usesManualYear)
     window.sessionStorage.setItem(draftKey, JSON.stringify(safeDraft))
   } catch {
     // sessionStorage may be unavailable in restricted browser contexts.

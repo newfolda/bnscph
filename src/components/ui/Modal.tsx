@@ -8,11 +8,12 @@ type ModalProps = {
   isOpen: boolean
   labelledBy: string
   onClose: () => void
+  size?: "default" | "wide"
 }
 
 const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
-export default function Modal({ children, isOpen, labelledBy, onClose }: ModalProps) {
+export default function Modal({ children, isOpen, labelledBy, onClose, size = "default" }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
   const onCloseRef = useRef(onClose)
 
@@ -94,7 +95,7 @@ export default function Modal({ children, isOpen, labelledBy, onClose }: ModalPr
         aria-modal="true"
         role="dialog"
         tabIndex={-1}
-        className="max-h-[calc(100dvh-2rem)] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:max-h-[calc(100dvh-3rem)] sm:p-8"
+        className={`max-h-[calc(100dvh-2rem)] w-full overflow-x-hidden overflow-y-auto overscroll-contain rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:max-h-[calc(100dvh-3rem)] sm:p-8 ${size === "wide" ? "max-w-3xl" : "max-w-2xl"}`}
       >
         {children}
       </div>
