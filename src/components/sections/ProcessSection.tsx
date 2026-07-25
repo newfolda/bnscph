@@ -20,9 +20,9 @@ const processSteps = [
 ]
 
 const processVideoSizes = [
-  "w-[150px] h-[94px]",
-  "w-[190px] h-[130px]",
-  "w-[190px] h-[130px]",
+  "w-[225px] h-[141px]",
+  "w-[285px] h-[195px]",
+  "w-[285px] h-[195px]",
 ]
 
 export default function ProcessSection() {
