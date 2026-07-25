@@ -2,25 +2,15 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react"
 
+import { useLanguage } from "../language/LanguageProvider"
 import SellCarModal from "../sell-car/SellCarModal"
 import Button from "../ui/Button"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
 
-type ComparisonItem = {
-  traditional: string
-  preferred: string
-}
-
-const comparisonItems: ComparisonItem[] = [
-  { traditional: "Find and screen potential buyers", preferred: "Sell directly to us" },
-  { traditional: "Negotiate back and forth", preferred: "Receive a clear, fair offer" },
-  { traditional: "Arrange multiple viewings", preferred: "Schedule one doorstep inspection" },
-  { traditional: "Manage paperwork and follow-ups", preferred: "Get professional paperwork assistance" },
-  { traditional: "Wait weeks or even months to complete the sale", preferred: "Complete the sale in as soon as one day" },
-]
-
 export default function BenefitsSection() {
+  const { t } = useLanguage()
+  const comparisonItems = t.benefits.comparisonItems
   const sectionRef = useRef<HTMLElement>(null)
   const [hasEntered, setHasEntered] = useState(false)
   const [activeRow, setActiveRow] = useState(0)
@@ -65,7 +55,7 @@ export default function BenefitsSection() {
       window.clearTimeout(startTimeout)
       if (interval !== undefined) window.clearInterval(interval)
     }
-  }, [hasEntered])
+  }, [hasEntered, comparisonItems.length])
 
   return (
     <section
@@ -76,14 +66,14 @@ export default function BenefitsSection() {
       <Container>
         <div className="benefits-layout">
           <div className="benefits-introduction benefits-reveal" style={{ "--benefits-delay": "0ms" } as CSSProperties}>
-            <SectionPill className="mb-4">WHY CHOOSE US</SectionPill>
+            <SectionPill className="mb-4">{t.benefits.pill}</SectionPill>
             <h2 className="max-w-[25rem] text-3xl font-bold leading-[0.99] tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[3.35rem]">
-              Sell Your Car.
+              {t.benefits.titleLineOne}
               <br />
-              Not Your Time.
+              {t.benefits.titleLineTwo}
             </h2>
             <p className="mt-[1.4rem] max-w-[26rem] text-base leading-[1.7] text-[var(--text-secondary)]">
-              From valuation to payment, we handle every step so you can sell with confidence.
+              {t.benefits.description}
             </p>
 
             <div className="mt-8">
@@ -94,12 +84,12 @@ export default function BenefitsSection() {
                     onClick={openSellCarModal}
                     >
                     <span className="benefits-cta-text flex flex-col items-center justify-center gap-0.5 leading-tight text-white">
-                      <span className="text-[15px] font-semibold sm:text-base">Get My Free Car Valuation</span>
+                      <span className="text-[15px] font-semibold sm:text-base">{t.benefits.cta}</span>
                       <span
                         className="benefits-cta-secondary text-[11px] font-medium sm:text-xs"
-                        data-text="No obligation. Free vehicle evaluation."
+                        data-text={t.benefits.ctaSupporting}
                       >
-                        No obligation. Free vehicle evaluation.
+                        {t.benefits.ctaSupporting}
                       </span>
                     </span>
                   </Button>
@@ -111,8 +101,8 @@ export default function BenefitsSection() {
           <div className="benefits-canvas benefits-reveal" style={{ "--benefits-delay": "80ms" } as CSSProperties}>
             <header className="benefits-canvas-header">
               <span aria-hidden="true" />
-              <span className="benefits-canvas-label benefits-canvas-label--traditional">PRIVATE SALE</span>
-              <span className="benefits-canvas-label benefits-canvas-label--preferred">BUY AND SELL CARS PHILIPPINES</span>
+              <span className="benefits-canvas-label benefits-canvas-label--traditional">{t.benefits.privateSale}</span>
+              <span className="benefits-canvas-label benefits-canvas-label--preferred">{t.benefits.preferredHeading}</span>
             </header>
 
             <div className="benefits-transformation-rows" role="list">
@@ -127,11 +117,11 @@ export default function BenefitsSection() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div className="benefits-traditional-outcome">
-                    <p className="benefits-mobile-side-label">Private Sale</p>
+                    <p className="benefits-mobile-side-label">{t.benefits.privateSale}</p>
                     <p>{item.traditional}</p>
                   </div>
                   <div className="benefits-preferred-outcome">
-                    <p className="benefits-mobile-side-label">Professional Car Buyer</p>
+                    <p className="benefits-mobile-side-label">{t.benefits.professionalBuyer}</p>
                     <div className="benefits-preferred-text-wrap">
                       <p className="benefits-preferred-text">{item.preferred}</p>
                       <p aria-hidden="true" className="benefits-preferred-text-streak">

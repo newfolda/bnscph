@@ -1,20 +1,17 @@
+"use client"
+
 import Image from "next/image"
 import { latestTransactions } from "@/src/data/latestTransactions"
+import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
 
-const purchasedAtFormatter = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-})
-
-function formatPurchasedAt(purchasedAt?: string) {
-  if (!purchasedAt) return "Recently Purchased"
+function formatPurchasedAt(purchasedAt: string | undefined, recentlyPurchased: string, purchasedOn: string, locale: string) {
+  if (!purchasedAt) return recentlyPurchased
 
   const dateParts = purchasedAt.match(/^(\d{4})-(\d{2})-(\d{2})$/)
 
-  if (!dateParts) return "Recently Purchased"
+  if (!dateParts) return recentlyPurchased
 
   const [, year, month, day] = dateParts
   const date = new Date(Number(year), Number(month) - 1, Number(day))
@@ -25,25 +22,28 @@ function formatPurchasedAt(purchasedAt?: string) {
     date.getMonth() !== Number(month) - 1 ||
     date.getDate() !== Number(day)
   ) {
-    return "Recently Purchased"
+    return recentlyPurchased
   }
 
-  return `Purchased on ${purchasedAtFormatter.format(date)}`
+  const formatter = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", year: "numeric" })
+  return `${purchasedOn} ${formatter.format(date)}`
 }
 
 export default function DailyTransactionsSection() {
+  const { t } = useLanguage()
+
   return (
     <section id="latest-transactions" className="overflow-hidden bg-[var(--background-alt)] py-16 md:py-20">
       <Container>
         <div className="flex flex-col items-center text-center">
           <SectionPill>
-            Latest Transactions
+            {t.transactions.pill}
           </SectionPill>
           <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">
-            Cars Recently Purchased by Buy and Sell Cars Philippines
+            {t.transactions.title}
           </h2>
           <p className="mt-2 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
-            Helping car owners across the Philippines sell their vehicles with ease.
+            {t.transactions.description}
           </p>
         </div>
 
@@ -83,14 +83,14 @@ export default function DailyTransactionsSection() {
                       />
                       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/15 to-transparent" />
                       <span className="absolute left-3 top-3 rounded-full border border-white/75 bg-white/80 px-3 py-1.5 text-[0.625rem] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_3px_10px_rgba(31,31,31,0.10)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/95 motion-reduce:transition-none">
-                        {formatPurchasedAt(transaction.purchasedAt)}
+                        {formatPurchasedAt(transaction.purchasedAt, t.transactions.recentlyPurchased, t.transactions.purchasedOn, t.transactions.dateLocale)}
                       </span>
                     </div>
                     <div className="p-5 md:p-5">
                       <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--text-primary)]">
                         {transaction.year} {transaction.brand} {transaction.model}
                       </h3>
-                      <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Seller from {transaction.location}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">{t.transactions.sellerFrom} {transaction.location}</p>
                     </div>
                   </article>
                 )

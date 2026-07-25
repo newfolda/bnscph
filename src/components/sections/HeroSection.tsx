@@ -4,6 +4,7 @@ import { type PointerEvent, useEffect, useLayoutEffect, useRef, useState } from 
 import Container from "../ui/Container"
 import Button from "../ui/Button"
 import SellCarModal from "../sell-car/SellCarModal"
+import { useLanguage } from "../language/LanguageProvider"
 const particles = [
   { left: 5, top: 17, size: 3, duration: 19, delay: -5, opacity: 0.34, color: "var(--primary)", blur: false },
   { left: 11, top: 68, size: 2, duration: 23, delay: -11, opacity: 0.28, color: "var(--primary-hover)", blur: false },
@@ -31,11 +32,10 @@ const particles = [
   { left: 98, top: 84, size: 4, duration: 28, delay: -7, opacity: 0.19, color: "var(--primary)", blur: true },
 ]
 
-const rotatingWords = ["Smartest", "Easiest", "Fastest", "Simplest"]
-const typewriterWords = ["hassle.", "headache.", "time wasted."]
-
-
 export default function HeroSection() {
+  const { t } = useLanguage()
+  const rotatingWords = t.hero.rotatingWords
+  const typewriterWords = t.hero.typewriterWords
   const particleLayerRef = useRef<HTMLDivElement>(null)
   const rotatingWordMeasureRef = useRef<HTMLSpanElement>(null)
   const animationFrameRef = useRef<number | null>(null)
@@ -85,7 +85,7 @@ export default function HeroSection() {
     if (measuredWidth) {
       setRotatingWordWidth(measuredWidth)
     }
-  }, [activeWordIndex])
+  }, [activeWordIndex, rotatingWords])
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -171,7 +171,7 @@ export default function HeroSection() {
       setIsTypewriterReducedMotion(reducedMotionQuery.matches)
 
       if (reducedMotionQuery.matches || document.hidden) {
-        setTypedWord("hassle.")
+        setTypedWord(typewriterWords[0])
         return
       }
 
@@ -188,7 +188,7 @@ export default function HeroSection() {
       reducedMotionQuery.removeEventListener("change", updateTypewriter)
       document.removeEventListener("visibilitychange", updateTypewriter)
     }
-  }, [])
+  }, [typewriterWords])
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -237,7 +237,7 @@ export default function HeroSection() {
       reducedMotionQuery.removeEventListener("change", updateRotation)
       document.removeEventListener("visibilitychange", updateRotation)
     }
-  }, [])
+  }, [rotatingWords])
 
   return (
     <>
@@ -287,11 +287,11 @@ export default function HeroSection() {
         <div className="flex gap-8 pb-40 pt-20">
           <div className="flex flex-1 flex-col justify-center">
             <h1
-              aria-label="The Smartest Way to Sell Your Car in the Philippines."
+              aria-label={t.hero.ariaLabel}
               className="max-w-xl text-5xl font-bold leading-[1.1] tracking-tight text-white"
             >
               <span className="block lg:whitespace-nowrap">
-                The{" "}
+                {t.hero.prefix}{" "}
                 <span
                   aria-hidden="true"
                   className="mobee-hero-rotating-word relative inline-block align-baseline leading-[1.1] transition-[width] duration-[350ms] ease-out"
@@ -308,18 +308,18 @@ export default function HeroSection() {
                     {rotatingWords[activeWordIndex]}
                   </span>
                 </span>{" "}
-                Way
+                {t.hero.wordSuffix}
               </span>
-              <span className="block">to Sell Your Car</span>
+              <span className="block">{t.hero.lineTwo}</span>
               <span className="mt-2 block text-[0.72em] font-semibold text-white">
-                in the Philippines.
+                {t.hero.lineThree}
               </span>
             </h1>
-            <p aria-label="Maximum value. Zero hassle." className="mt-5 max-w-md text-lg font-medium leading-relaxed text-white/90 sm:whitespace-nowrap">
+            <p aria-label={`${t.hero.supportingPrefix} ${typewriterWords[0]}`} className="mt-5 max-w-md text-lg font-medium leading-relaxed text-white/90 sm:whitespace-nowrap">
               <span aria-hidden="true">
-                Maximum value. Zero{" "}
+                {t.hero.supportingPrefix}{" "}
                 <span className="relative inline-block align-baseline text-[#D7A93F]">
-                  <span className="invisible">time wasted.</span>
+                  <span className="invisible">{typewriterWords.reduce((longestWord, word) => word.length > longestWord.length ? word : longestWord)}</span>
                   <span className="absolute left-0 top-0 inline-flex items-baseline whitespace-nowrap">
                     {typedWord}
                     {!isTypewriterReducedMotion && <span className="mobee-hero-typewriter-caret" />}
@@ -329,13 +329,13 @@ export default function HeroSection() {
             </p>
             <SellCarModal trigger={(openSellCarModal) => (
             <Button
-              aria-label="See My Car's Value"
+              aria-label={t.hero.cta}
               onClick={openSellCarModal}
               className="group relative mt-5 h-16 w-full max-w-[16.625rem] overflow-hidden border border-[rgba(181,132,31,0.62)] !bg-[linear-gradient(135deg,rgba(224,183,86,0.96),rgba(198,150,45,0.94),rgba(218,174,72,0.95))] !p-0 font-semibold !text-white shadow-[0_10px_24px_rgba(92,62,14,0.22),0_4px_10px_rgba(20,24,32,0.14),inset_0_1px_0_rgba(255,244,204,0.5)] backdrop-blur-sm transition-[transform,box-shadow,background,color,border-color] duration-[240ms] ease-out hover:-translate-y-px hover:border-[rgba(181,132,31,0.78)] hover:!bg-[linear-gradient(135deg,rgba(231,192,101,0.97),rgba(206,158,52,0.95),rgba(224,181,80,0.96))] hover:!text-white hover:shadow-[0_13px_28px_rgba(92,62,14,0.25),0_5px_12px_rgba(20,24,32,0.16),inset_0_1px_0_rgba(255,244,204,0.58)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(92,62,14,0.18)] focus-visible:-translate-y-px focus-visible:border-[rgba(181,132,31,0.78)] focus-visible:!bg-[linear-gradient(135deg,rgba(231,192,101,0.97),rgba(206,158,52,0.95),rgba(224,181,80,0.96))] focus-visible:!text-white focus-visible:shadow-[0_13px_28px_rgba(92,62,14,0.25),0_5px_12px_rgba(20,24,32,0.16),inset_0_1px_0_rgba(255,244,204,0.58)] focus-visible:ring-2 focus-visible:ring-[rgba(181,132,31,0.68)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 motion-reduce:active:translate-y-0"
               style={{ borderRadius: "2rem" }}
             >
               <span className="absolute inset-0 z-10 flex translate-x-2.5 items-center justify-center pr-16 whitespace-nowrap text-[0.84rem] font-bold uppercase tracking-[0.07em] text-white transition-colors duration-[240ms] sm:text-[0.95rem]">
-                See My Car&apos;s Value
+                {t.hero.cta}
               </span>
               <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full border border-white/25 bg-white/16 text-white transition-[background-color,border-color,transform] duration-[240ms] ease-out group-hover:translate-x-1 group-hover:border-white/34 group-hover:bg-white/20 group-focus-visible:border-white/34 group-focus-visible:bg-white/20 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
                 <svg fill="none" height="22" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="22">

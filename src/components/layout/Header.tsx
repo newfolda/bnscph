@@ -3,14 +3,15 @@
 import Image from "next/image"
 import Link from "next/link"
 import { type MouseEvent, useEffect, useRef, useState } from "react"
+import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 
 const navigationItems = [
-  { label: "Home", href: "/", sectionId: "home" },
-  { label: "How It Works", href: "/#how-it-works", sectionId: "how-it-works" },
-  { label: "Transactions", href: "/#latest-transactions", sectionId: "latest-transactions" },
-  { label: "Why Choose Us", href: "/#why-choose-us", sectionId: "why-choose-us" },
-  { label: "FAQ", href: "/#faq", sectionId: "faq" },
+  { href: "/", sectionId: "home" },
+  { href: "/#how-it-works", sectionId: "how-it-works" },
+  { href: "/#latest-transactions", sectionId: "latest-transactions" },
+  { href: "/#why-choose-us", sectionId: "why-choose-us" },
+  { href: "/#faq", sectionId: "faq" },
 ]
 
 const headerContactIconClass =
@@ -88,6 +89,8 @@ function MenuIcon({ isOpen }: { isOpen: boolean }) {
 }
 
 function PhoneContact({ compact = false }: { compact?: boolean }) {
+  const { t } = useLanguage()
+
   return (
     <a
       href="tel:09162536325"
@@ -103,7 +106,7 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
           0916-253-6325
         </span>
         <span className="mt-px text-[11px] leading-none text-[var(--text-secondary)]">
-          Call or Text Us
+          {t.header.callOrText}
         </span>
       </span>
     </a>
@@ -111,27 +114,37 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
 }
 
 function LanguageSelector() {
+  const { language, setLanguage } = useLanguage()
+
   return (
     <div className="flex items-center gap-2 text-sm text-gray-700" aria-label="Language selector">
-      <Link
-        href="/"
-        aria-current="page"
-        className="inline-block text-[var(--primary)] transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
+      <button
+        type="button"
+        aria-pressed={language === "en"}
+        onClick={() => setLanguage("en")}
+        className={`inline-block font-semibold transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
+          language === "en" ? "text-[var(--primary)]" : "text-gray-700"
+        }`}
       >
         EN
-      </Link>
+      </button>
       <span aria-hidden="true" className="text-gray-300">|</span>
-      <Link
-        href="/?locale=tgl"
-        className="inline-block transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
+      <button
+        type="button"
+        aria-pressed={language === "tgl"}
+        onClick={() => setLanguage("tgl")}
+        className={`inline-block font-semibold transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
+          language === "tgl" ? "text-[var(--primary)]" : "text-gray-700"
+        }`}
       >
         TGL
-      </Link>
+      </button>
     </div>
   )
 }
 
 export default function Header() {
+  const { t } = useLanguage()
   const [isCompact, setIsCompact] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -202,6 +215,8 @@ export default function Header() {
       isActive ? "navbar-nav-link--active text-[var(--primary)]" : ""
     }`
 
+  const navigationLabels = [t.header.home, t.header.howItWorks, t.header.transactions, t.header.whyChooseUs, t.header.faq]
+
   const handleNavigation = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     event.preventDefault()
     setActiveSection(sectionId)
@@ -255,16 +270,16 @@ export default function Header() {
             <ul className={`hidden h-full items-center justify-self-center text-sm font-medium text-gray-700 transition-[gap] duration-300 lg:flex ${
               isCompact ? "gap-5" : "gap-7"
             }`}>
-              {navigationItems.map((item) => (
+              {navigationItems.map((item, index) => (
                 <li key={item.sectionId}>
                   <Link
                     href={item.href}
                     aria-current={activeSection === item.sectionId ? "page" : undefined}
                     className={activeLinkClass(activeSection === item.sectionId)}
                     onClick={(event) => handleNavigation(event, item.sectionId)}
-                    data-label={item.label}
+                    data-label={navigationLabels[index]}
                   >
-                    {item.label}
+                    {navigationLabels[index]}
                   </Link>
                 </li>
               ))}
@@ -298,16 +313,16 @@ export default function Header() {
           >
             <div className="min-h-0">
               <div className="space-y-1 py-4">
-                {navigationItems.map((item) => (
+                {navigationItems.map((item, index) => (
                   <Link
                     key={item.sectionId}
                     href={item.href}
                     aria-current={activeSection === item.sectionId ? "page" : undefined}
                     onClick={(event) => handleNavigation(event, item.sectionId)}
                     className={`${activeLinkClass(activeSection === item.sectionId)} block rounded-xl px-3 py-2.5 text-sm font-semibold focus-visible:ring-inset`}
-                    data-label={item.label}
+                    data-label={navigationLabels[index]}
                   >
-                    {item.label}
+                    {navigationLabels[index]}
                   </Link>
                 ))}
               </div>

@@ -1,58 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
 
-const faqs = [
-  {
-    question: "How do I sell my car to Buy and Sell Cars Philippines?",
-    answer:
-      "Send us your vehicle details, including its make, model, year, mileage, condition, and recent photos. We’ll review the information and provide an initial valuation. If you’re interested in proceeding, we’ll arrange a free inspection at your preferred location. Once the final offer is accepted and the documents are verified, we’ll complete the sale and arrange payment.",
-  },
-  {
-    question: "What vehicles do you buy?",
-    answer:
-      "We buy most makes and models from year 2010 onward, including sedans, hatchbacks, crossovers, SUVs, vans, pickups, sports cars, and luxury vehicles. Acceptance remains subject to the vehicle’s condition, ownership documents, and our final evaluation.",
-  },
-  {
-    question: "How is my car’s value determined?",
-    answer:
-      "We consider its make, model, year, variant, mileage, overall condition, service history, ownership documents, and current market demand. The valuation is based on the information provided and is confirmed after the physical inspection.",
-  },
-  {
-    question: "Is the initial valuation the final offer?",
-    answer:
-      "Not always. The initial valuation is based on the details and photos you provide. The final offer is confirmed after we inspect the vehicle and verify its condition and documents. If we identify anything that was not included in the original information, we’ll explain how it affects the offer.",
-  },
-  {
-    question: "Do I need to bring my car to your office?",
-    answer:
-      "No. Our team can inspect the vehicle at your home, workplace, or another agreed location. The location must be safe, accessible, and suitable for a proper vehicle inspection.",
-  },
-  {
-    question: "What documents do I need?",
-    answer:
-      "You’ll typically need the Original Certificate of Registration (CR), latest Official Receipt (OR), a valid government-issued ID of the registered owner, a Deed of Sale or other proof of ownership if applicable, and any available service and maintenance records. Additional documents may be requested depending on the vehicle’s ownership or registration status.",
-  },
-  {
-    question: "Can I sell a car that is not registered in my name?",
-    answer:
-      "Possibly, but you must provide documents showing the legal transfer of ownership and your authority to sell the vehicle. We’ll review the documents before proceeding. Additional verification may be required.",
-  },
-  {
-    question: "How will I receive payment?",
-    answer:
-      "Payment can be made in cash or through bank transfer, depending on the transaction and the agreed payment method. Payment is released only after the sale is completed and all required documents have been verified and signed.",
-  },
-  {
-    question: "Which areas do you serve?",
-    answer:
-      "We accommodate vehicle sellers across the Philippines, subject to team availability and location. Send us your location so we can confirm whether an inspection can be arranged in your area.",
-  },
-]
-
 export default function FaqSection() {
+  const { t } = useLanguage()
+  const faqs = t.faq.items
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
@@ -61,14 +16,14 @@ export default function FaqSection() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <header className="lg:sticky lg:top-28 lg:self-start">
             <SectionPill>
-              FAQ
+              {t.faq.pill}
             </SectionPill>
-            <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">Frequently Asked Questions</h2>
+            <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">{t.faq.title}</h2>
             <p className="mt-3 max-w-xl leading-relaxed text-[var(--text-secondary)]">
-              Answers to the most common questions about selling your car with Buy and Sell Cars Philippines.
+              {t.faq.description}
             </p>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-[var(--text-secondary)]">
-              Still have questions? We&apos;re here to help every step of the way.
+              {t.faq.supporting}
             </p>
           </header>
 

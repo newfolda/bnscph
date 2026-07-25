@@ -1,26 +1,9 @@
 "use client"
 
 import { type PointerEvent } from "react"
+import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
-
-const processSteps = [
-  {
-    title: "Tell Us About Your Car",
-    description:
-      "Enter your car's model, year, mileage, and upload a few recent photos to receive an initial offer.",
-  },
-  {
-    title: "We Inspect It at Your Doorstep",
-    description:
-      "If you're happy with the initial offer, choose a convenient inspection time. Our team will come to your location.",
-  },
-  {
-    title: "Get Paid the Same Day",
-    description:
-      "Once everything checks out, complete the sale and receive payment by cash or bank transfer.",
-  },
-]
 
 const processVideoSizes = [
   "w-[225px] h-[141px]",
@@ -29,6 +12,8 @@ const processVideoSizes = [
 ]
 
 export default function ProcessSection() {
+  const { t } = useLanguage()
+  const processSteps = t.process.steps
   const resetCardPointerPhysics = (card: HTMLDivElement) => {
     card.style.setProperty("--tilt-x", "0deg")
     card.style.setProperty("--tilt-y", "0deg")
@@ -83,11 +68,11 @@ export default function ProcessSection() {
           <div className="relative z-10">
             <div className="mb-11 flex flex-col items-center text-center">
             <SectionPill className="mb-4">
-              Process
+              {t.process.pill}
             </SectionPill>
-            <h2 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">How It Works?</h2>
+            <h2 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">{t.process.title}</h2>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
-              3 SIMPLE STEPS.
+              {t.process.supporting}
             </p>
           </div>
             <div className="process-cards-grid group/process relative grid gap-6 md:gap-7 md:grid-cols-3 xl:gap-8">

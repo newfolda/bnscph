@@ -1,14 +1,11 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
+import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Latest Transactions", href: "/#latest-transactions" },
-  { label: "Why Choose Us", href: "/#why-choose-us" },
-  { label: "Frequently Asked Questions", href: "/#faq" },
-]
+const quickLinkHrefs = ["/", "/#how-it-works", "/#latest-transactions", "/#why-choose-us", "/#faq"]
 
 const footerLinkClass =
   "group inline-flex items-center text-sm text-white/65 transition-[color,transform] duration-200 ease-out hover:translate-x-1 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F1F1F]"
@@ -51,6 +48,9 @@ function ClockIcon() {
 }
 
 export default function Footer() {
+  const { t } = useLanguage()
+  const quickLinks = [t.footer.home, t.footer.howItWorks, t.footer.latestTransactions, t.footer.whyChooseUs, t.footer.frequentlyAskedQuestions]
+
   return (
     <footer className="relative overflow-hidden border-t border-[var(--primary)]/65 bg-[#1F1F1F] text-white">
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-8 left-1/2 hidden w-full -translate-x-1/2 select-none whitespace-nowrap text-center text-[7rem] font-bold leading-none tracking-[-0.08em] text-white/[0.02] xl:block">
@@ -68,17 +68,17 @@ export default function Footer() {
                 <Image src="/images/brand/logo.png" alt="Buy and Sell Cars Philippines" width={180} height={52} className="h-auto w-[180px]" />
               </Link>
               <p className="mt-5 text-sm leading-relaxed text-white/65">
-                We make selling your car simple, convenient, and secure with fair offers, doorstep inspection, and same-day payment.
+                {t.footer.description}
               </p>
             </div>
 
             <nav aria-label="Quick links">
-              <h2 className={footerHeadingClass}>Quick Links</h2>
+              <h2 className={footerHeadingClass}>{t.footer.quickLinks}</h2>
               <ul className="mt-5 space-y-3">
-                {quickLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link href={link.href} className={footerLinkClass}>
-                      {link.label}
+                {quickLinks.map((label, index) => (
+                  <li key={quickLinkHrefs[index]}>
+                    <Link href={quickLinkHrefs[index]} className={footerLinkClass}>
+                      {label}
                     </Link>
                   </li>
                 ))}
@@ -86,7 +86,7 @@ export default function Footer() {
             </nav>
 
             <section aria-labelledby="footer-contact-heading">
-              <h2 id="footer-contact-heading" className={footerHeadingClass}>Contact Us</h2>
+              <h2 id="footer-contact-heading" className={footerHeadingClass}>{t.footer.contactUs}</h2>
               <div className="mt-5 space-y-4">
                 <a
                   aria-label="Call or text Buy and Sell Cars Philippines at 0916-253-6325"
@@ -96,7 +96,7 @@ export default function Footer() {
                   <PhoneIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
                     <span className="text-white/85 transition-colors duration-200 group-hover:text-[var(--primary)]">0916-253-6325</span>
-                    <span className="mt-1 text-xs text-white/50">Call or Text Us</span>
+                    <span className="mt-1 text-xs text-white/50">{t.footer.callOrText}</span>
                   </span>
                 </a>
                 <a
@@ -107,25 +107,25 @@ export default function Footer() {
                   <MailIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
                     <span className="break-all text-white/85 transition-colors duration-200 group-hover:text-[var(--primary)]">buyandsellcarph@gmail.com</span>
-                    <span className="mt-1 text-xs text-white/50">Email Us</span>
+                    <span className="mt-1 text-xs text-white/50">{t.footer.emailUs}</span>
                   </span>
                 </a>
                 <div className="flex items-start gap-3 text-sm">
                   <LocationIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
                     <span className="text-white/85">San Juan City, Philippines 1116</span>
-                    <span className="mt-1 text-xs text-white/50">Our Location</span>
+                    <span className="mt-1 text-xs text-white/50">{t.footer.ourLocation}</span>
                   </span>
                 </div>
               </div>
             </section>
 
             <section aria-labelledby="footer-hours-heading">
-              <h2 id="footer-hours-heading" className={footerHeadingClass}>Business Hours</h2>
+              <h2 id="footer-hours-heading" className={footerHeadingClass}>{t.footer.businessHours}</h2>
               <div className="mt-5 flex items-start gap-3 text-sm leading-tight">
                 <ClockIcon />
                 <span className="-mt-0.5 flex flex-col">
-                  <span className="text-white/65">Monday – Saturday</span>
+                  <span className="text-white/65">{t.footer.mondaySaturday}</span>
                   <span className="mt-1 font-medium text-white/90">9:00 AM – 10:00 PM</span>
                 </span>
               </div>
@@ -133,7 +133,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-12 border-t border-white/10 pt-6 text-sm text-white/50">
-            <p>© 2026 Buy and Sell Cars Philippines. All rights reserved.</p>
+            <p>{t.footer.copyright}</p>
           </div>
         </div>
       </Container>
