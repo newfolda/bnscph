@@ -26,6 +26,51 @@ function PhoneIcon() {
   )
 }
 
+function HeaderSocialLinks({ mobile = false }: { mobile?: boolean }) {
+  const iconLinkClass = `inline-flex items-center justify-center text-gray-600 transition-[color,transform] duration-200 ease-out hover:-translate-y-px hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 motion-reduce:hover:translate-y-0 ${
+    mobile ? "size-9" : "size-6"
+  }`
+
+  return (
+    <div className={`flex items-center gap-3 ${mobile ? "gap-2" : ""}`} aria-label="Contact and social links">
+      <a
+        aria-label="Email Buy and Sell Cars Philippines"
+        className={iconLinkClass}
+        href="mailto:buyandsellcarph@gmail.com"
+      >
+        <svg aria-hidden="true" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+          <rect height="16" rx="2" width="20" x="2" y="4" />
+          <path d="m22 7-8.15 5.18a3.5 3.5 0 0 1-3.7 0L2 7" />
+        </svg>
+      </a>
+      <a
+        aria-label="Visit Buy and Sell Cars Philippines on Facebook"
+        className={iconLinkClass}
+        href="https://www.facebook.com/buyandsellcarsph2021"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <svg aria-hidden="true" className="size-[18px]" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.87.24-1.46 1.49-1.46H16.6V3.95c-.28-.04-1.24-.12-2.36-.12-2.34 0-3.94 1.43-3.94 4.06V10H7.65v3h2.65v8h3.2Z" />
+        </svg>
+      </a>
+      <a
+        aria-label="Visit Buy and Sell Cars Philippines on Instagram"
+        className={iconLinkClass}
+        href="https://www.instagram.com/buyandsellcarph"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <svg aria-hidden="true" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+          <rect height="17" rx="4.5" width="17" x="3.5" y="3.5" />
+          <circle cx="12" cy="12" r="3.5" />
+          <circle cx="17.3" cy="6.8" fill="currentColor" r="1" stroke="none" />
+        </svg>
+      </a>
+    </div>
+  )
+}
+
 function MenuIcon({ isOpen }: { isOpen: boolean }) {
   return (
     <svg
@@ -229,6 +274,7 @@ export default function Header() {
             <div className={`hidden h-full items-center justify-self-end lg:flex ${
               isCompact ? "gap-4" : "gap-5"
             }`}>
+              <HeaderSocialLinks />
               <PhoneContact />
               <LanguageSelector />
             </div>
@@ -266,7 +312,10 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <div className="flex items-center justify-between border-t border-[var(--border)] py-4">
+              <div className="flex items-center gap-2 border-t border-[var(--border)] pt-4">
+                <HeaderSocialLinks mobile />
+              </div>
+              <div className="flex items-center justify-between py-4">
                 <PhoneContact compact />
                 <LanguageSelector />
               </div>
