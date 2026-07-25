@@ -14,8 +14,8 @@ type ComparisonItem = {
 
 const comparisonItems: ComparisonItem[] = [
   { traditional: "Find and screen potential buyers", preferred: "Sell directly to us" },
-  { traditional: "Arrange multiple viewings", preferred: "Schedule one doorstep inspection" },
   { traditional: "Negotiate back and forth", preferred: "Receive a clear, fair offer" },
+  { traditional: "Arrange multiple viewings", preferred: "Schedule one doorstep inspection" },
   { traditional: "Manage paperwork and follow-ups", preferred: "Get professional paperwork assistance" },
   { traditional: "Wait weeks or even months to complete the sale", preferred: "Complete the sale in as soon as one day" },
 ]
@@ -90,12 +90,16 @@ export default function BenefitsSection() {
               <SellCarModal
                 trigger={(openSellCarModal) => (
                   <Button
-                    className="benefits-cta flex h-[70px] items-center justify-center rounded-full px-7 tracking-normal sm:px-8"
+                    className="benefits-cta relative flex h-[70px] items-center justify-center overflow-hidden rounded-full px-7 tracking-normal sm:px-8"
                     onClick={openSellCarModal}
                   >
-                    <span className="flex flex-col items-center justify-center gap-0.5 leading-tight text-white">
+                    <span className="benefits-cta-text flex flex-col items-center justify-center gap-0.5 leading-tight text-white">
                       <span className="text-[15px] font-semibold sm:text-base">Get My Free Car Valuation</span>
-                      <span className="text-[11px] font-medium text-white/85 sm:text-xs">No obligation. Free vehicle evaluation.</span>
+                      <span className="text-[11px] font-medium text-white/75 sm:text-xs">No obligation. Free vehicle evaluation.</span>
+                    </span>
+                    <span aria-hidden="true" className="benefits-cta-streak flex flex-col items-center justify-center gap-0.5 leading-tight">
+                      <span className="benefits-cta-streak-line text-[15px] font-semibold sm:text-base">Get My Free Car Valuation</span>
+                      <span className="benefits-cta-streak-line text-[11px] font-medium sm:text-xs">No obligation. Free vehicle evaluation.</span>
                     </span>
                   </Button>
                 )}
@@ -107,7 +111,7 @@ export default function BenefitsSection() {
             <header className="benefits-canvas-header">
               <span aria-hidden="true" />
               <span className="benefits-canvas-label benefits-canvas-label--traditional">PRIVATE SALE</span>
-              <span className="benefits-canvas-label benefits-canvas-label--preferred">BUY AND SELL CARS PH</span>
+              <span className="benefits-canvas-label benefits-canvas-label--preferred">BUY AND SELL CARS PHILIPPINES</span>
             </header>
 
             <div className="benefits-transformation-rows" role="list">
@@ -269,15 +273,46 @@ export default function BenefitsSection() {
         .benefits-mobile-side-label { display: none; }
 
         .benefits-cta {
-          background: var(--primary) !important;
-          box-shadow: 0 6px 15px rgba(143, 104, 25, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.08) !important;
+          background: #1f1f1f !important;
+          box-shadow: 0 8px 20px rgba(20, 20, 20, 0.16);
           transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
         }
 
         .benefits-cta:hover {
-          background: var(--primary-hover) !important;
-          box-shadow: 0 8px 18px rgba(143, 104, 25, 0.18);
+          background: #1f1f1f !important;
+          box-shadow: 0 10px 24px rgba(20, 20, 20, 0.2);
           transform: translateY(-1px);
+        }
+
+        .benefits-cta-text { position: relative; z-index: 1; }
+        .benefits-cta-streak {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .benefits-cta-streak-line {
+          color: transparent;
+          opacity: 0;
+          background: linear-gradient(105deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.14) 44%, rgba(255, 255, 255, 0.98) 50%, rgba(255, 255, 255, 0.3) 56%, transparent 62%, transparent 100%);
+          background-repeat: no-repeat;
+          background-size: 250% 100%;
+          background-position: 110% 0;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .benefits-cta:hover .benefits-cta-streak-line,
+        .benefits-cta:focus-visible .benefits-cta-streak-line {
+          animation: benefits-cta-text-streak 1500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes benefits-cta-text-streak {
+          0% { background-position: 110% 0; opacity: 0; }
+          14% { opacity: 1; }
+          86% { opacity: 1; }
+          100% { background-position: -10% 0; opacity: 0; }
         }
 
         .benefits-reveal {
@@ -406,6 +441,9 @@ export default function BenefitsSection() {
           .benefits-transformation-row,
           .benefits-cta { transition: none; }
           .benefits-cta:hover { transform: none; }
+          .benefits-cta-streak-line,
+          .benefits-cta:hover .benefits-cta-streak-line,
+          .benefits-cta:focus-visible .benefits-cta-streak-line { animation: none; opacity: 0; }
         }
       `}</style>
     </section>
