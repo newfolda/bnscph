@@ -48,7 +48,6 @@ export default function DailyTransactionsSection() {
         </div>
 
         <div className="relative mx-[-1rem] mt-14 pb-10 sm:mx-[-1.5rem] md:pb-12 lg:mx-[-2.5rem]">
-          <div aria-hidden="true" className="transactions-backdrop pointer-events-none absolute inset-x-0 bottom-5 top-5 rounded-[2rem]" />
           <div className="transactions-marquee relative z-10 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden">
             <div className="transactions-track flex w-max snap-x snap-mandatory gap-5 pr-5 md:snap-none">
               {[...latestTransactions, ...latestTransactions].map((transaction, index) => {
@@ -102,13 +101,6 @@ export default function DailyTransactionsSection() {
         </div>
       </Container>
       <style>{`
-        .transactions-backdrop {
-          background:
-            radial-gradient(circle at 18% 48%, rgba(200, 160, 68, 0.09), transparent 31%),
-            radial-gradient(circle at 84% 38%, rgba(200, 160, 68, 0.07), transparent 28%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(248, 248, 248, 0.12));
-        }
-
         @media (min-width: 768px) {
           .transactions-track {
             animation: transactions-marquee 36s linear infinite;
