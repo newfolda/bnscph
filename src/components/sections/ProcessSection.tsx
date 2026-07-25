@@ -11,7 +11,7 @@ const processSteps = [
       "Enter your car's model, year, mileage, and upload a few recent photos to receive an initial offer.",
   },
   {
-    title: "We Inspect It at Your Location",
+    title: "We Inspect It at Your Doorstep",
     description:
       "If you're happy with the initial offer, choose a convenient inspection time. Our team will come to your location.",
   },
