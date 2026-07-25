@@ -288,7 +288,7 @@ export default function BenefitsSection() {
         .benefits-cta-secondary { transition: color 180ms ease; }
         .benefits-cta:hover .benefits-cta-secondary,
         .benefits-cta:focus-visible .benefits-cta-secondary {
-          color: #2a2418;
+          color: #4a4a4a;
           transition-delay: 1500ms;
         }
         .benefits-cta:not(:hover) .benefits-cta-secondary { transition-delay: 0ms; }
