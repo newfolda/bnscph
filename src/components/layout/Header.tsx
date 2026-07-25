@@ -295,10 +295,10 @@ export default function Header() {
           background: linear-gradient(
             105deg,
             transparent 0%,
-            transparent 37%,
-            rgba(255, 255, 255, 0.25) 44%,
-            rgba(255, 248, 220, 0.96) 50%,
-            rgba(200, 160, 68, 0.5) 55%,
+            transparent 36%,
+            rgba(255, 255, 255, 0.2) 43%,
+            rgba(255, 255, 255, 0.96) 50%,
+            rgba(255, 241, 198, 0.6) 55%,
             transparent 63%,
             transparent 100%
           );
@@ -311,7 +311,7 @@ export default function Header() {
         }
 
         .navbar-nav-link:hover::after {
-          animation: navbar-text-light-streak 1050ms cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation: navbar-text-light-streak 1600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
         }
 
         @keyframes navbar-text-light-streak {
