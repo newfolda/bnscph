@@ -93,7 +93,7 @@ export default function ProcessSection() {
                 key={step.title}
                 onPointerMove={handleCardPointerMove}
                 onPointerLeave={(event) => resetCardPointerPhysics(event.currentTarget)}
-                className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[338px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-7 text-center md:min-h-[360px] group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
+                className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[388px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-7 text-center md:min-h-[410px] group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
               >
                 <span
                   className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
@@ -102,7 +102,7 @@ export default function ProcessSection() {
                     {index + 1}
                   </span>
                 </span>
-                <div className="mt-4 flex h-[130px] w-[190px] items-center justify-center">
+                <div className="mt-4 flex h-[180px] w-[260px] items-center justify-center">
                   {index === 0 && (
                     <video
                       autoPlay
