@@ -54,7 +54,7 @@ export default function ProcessSection() {
       id="how-it-works"
       className="relative z-20 bg-white pb-10 md:pb-12"
     >
-      <Container className="relative -mt-5 sm:-mt-7 md:-mt-8 lg:-mt-12">
+      <Container className="relative -mt-4 sm:-mt-5 md:-mt-6 lg:-mt-8">
         <div
           className="process-main-panel relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14"
         >
