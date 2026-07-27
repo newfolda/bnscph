@@ -49,9 +49,8 @@ export default function DailyTransactionsSection() {
 
         <div className="relative mx-[-1rem] mt-14 pb-10 sm:mx-[-1.5rem] md:pb-12 lg:mx-[-2.5rem]">
           <div className="transactions-marquee relative z-10 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden">
-            <div className="transactions-track flex w-max snap-x snap-mandatory gap-5 pr-5 md:snap-none">
+            <div className="transactions-track flex w-max snap-x snap-mandatory gap-7 pr-7 md:gap-8 md:pr-8 md:snap-none">
               {[...latestTransactions, ...latestTransactions].map((transaction, index) => {
-                const transactionIndex = index % latestTransactions.length
                 const isDuplicate = index >= latestTransactions.length
 
                 return (
@@ -59,33 +58,24 @@ export default function DailyTransactionsSection() {
                     key={`${transaction.year}-${transaction.brand}-${transaction.model}-${isDuplicate ? "duplicate" : "original"}`}
                     aria-hidden={isDuplicate || undefined}
                     tabIndex={isDuplicate ? -1 : 0}
-                    className={`group w-[86%] shrink-0 snap-start overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-white shadow-[0_10px_24px_rgba(31,31,31,0.07),0_2px_5px_rgba(31,31,31,0.04)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-[var(--primary)]/60 hover:shadow-[0_18px_34px_rgba(31,31,31,0.12),0_4px_10px_rgba(200,160,68,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:w-[250px] lg:w-[282px] ${
+                    className={`group flex h-[418px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-white shadow-[0_8px_20px_rgba(31,31,31,0.06),0_2px_5px_rgba(31,31,31,0.035)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-[var(--primary)]/60 hover:shadow-[0_14px_28px_rgba(31,31,31,0.09),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[430px] lg:w-[290px] ${
                       isDuplicate ? "hidden md:block" : ""
                     }`}
                   >
-                    <div className="relative h-[184px] overflow-hidden bg-[#F7F7F7]">
+                    <div className="relative h-[286px] shrink-0 overflow-hidden bg-[#F7F7F7] md:h-[270px] lg:h-[300px]">
                       <Image
                         src={transaction.imagePath}
                         alt={`${transaction.year} ${transaction.brand} ${transaction.model} recently purchased by Buy and Sell Cars Philippines`}
                         fill
                         draggable={false}
-                        sizes="(min-width: 1024px) 306px, (min-width: 768px) 250px, 86vw"
-                        className={`object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:transition-none ${
-                          transactionIndex === 0
-                            ? "object-[68%_center]"
-                            : transactionIndex === 1
-                              ? "object-[51%_center]"
-                              : transactionIndex === 2
-                                ? "object-[85%_center]"
-                                : "object-[38%_center]"
-                        }`}
+                        sizes="(min-width: 1024px) 290px, (min-width: 768px) 250px, 78vw"
+                        className="object-cover object-center transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
                       />
-                      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/15 to-transparent" />
                       <span className="absolute left-3 top-3 rounded-full border border-white/75 bg-white/80 px-3 py-1.5 text-[0.625rem] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_3px_10px_rgba(31,31,31,0.10)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/95 motion-reduce:transition-none">
                         {formatPurchasedAt(transaction.purchasedAt, t.transactions.recentlyPurchased, t.transactions.purchasedOn, t.transactions.dateLocale)}
                       </span>
                     </div>
-                    <div className="p-5 md:p-5">
+                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5">
                       <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--text-primary)]">
                         {transaction.year} {transaction.brand} {transaction.model}
                       </h3>
