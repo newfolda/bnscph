@@ -346,21 +346,23 @@ export default function HeroSection() {
             </Button>
             )} />
           </div>
+          <div className="hero-media-entrance relative hidden h-[650px] items-center justify-end lg:flex">
+            <div className="h-full w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.28),0_8px_20px_rgba(0,0,0,0.16)]">
+              <video
+                aria-hidden="true"
+                autoPlay
+                className="h-full w-full object-cover motion-reduce:hidden"
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              >
+                <source src="/videos/1080.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
         </div>
       </Container>
-      <div aria-hidden="true" className="hero-media-layer pointer-events-none absolute inset-y-0 right-0 z-[3] hidden w-[56%] lg:block">
-        <video
-          aria-hidden="true"
-          autoPlay
-          className="h-full w-full object-contain object-right motion-reduce:hidden"
-          loop
-          muted
-          playsInline
-          preload="metadata"
-        >
-          <source src="/videos/1080.webm" type="video/webm" />
-        </video>
-      </div>
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 w-full md:h-24"
@@ -407,13 +409,13 @@ export default function HeroSection() {
           }
         }
 
-        .hero-copy-entrance {
+        .hero-copy-entrance,
+        .hero-media-entrance {
           animation: hero-content-entrance 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
-        .hero-media-layer {
-          mask-image: linear-gradient(to right, transparent 0%, black 16%, black 100%);
-          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 16%, black 100%);
+        .hero-media-entrance {
+          animation-delay: 150ms;
         }
 
         @media (min-width: 768px) {
@@ -437,7 +439,8 @@ export default function HeroSection() {
             transition: none;
           }
 
-          .hero-copy-entrance {
+          .hero-copy-entrance,
+          .hero-media-entrance {
             animation: none;
           }
         }
