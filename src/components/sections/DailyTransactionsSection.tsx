@@ -58,11 +58,11 @@ export default function DailyTransactionsSection() {
                     key={`${transaction.year}-${transaction.brand}-${transaction.model}-${isDuplicate ? "duplicate" : "original"}`}
                     aria-hidden={isDuplicate || undefined}
                     tabIndex={isDuplicate ? -1 : 0}
-                    className={`group flex h-[418px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-white shadow-[0_8px_20px_rgba(31,31,31,0.06),0_2px_5px_rgba(31,31,31,0.035)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-[var(--primary)]/60 hover:shadow-[0_14px_28px_rgba(31,31,31,0.09),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[430px] lg:w-[290px] ${
+                    className={`group flex h-[418px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-white shadow-[0_8px_20px_rgba(31,31,31,0.06),0_2px_5px_rgba(31,31,31,0.035)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-[var(--primary)]/60 hover:shadow-[0_14px_28px_rgba(31,31,31,0.09),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px] ${
                       isDuplicate ? "hidden md:block" : ""
                     }`}
                   >
-                    <div className="relative h-[286px] shrink-0 overflow-hidden bg-[#F7F7F7] md:h-[270px] lg:h-[300px]">
+                    <div className="relative h-[286px] shrink-0 overflow-hidden bg-[#F7F7F7] md:h-[270px] lg:h-[320px]">
                       <Image
                         src={transaction.imagePath}
                         alt={`${transaction.year} ${transaction.brand} ${transaction.model} recently purchased by Buy and Sell Cars Philippines`}
@@ -75,7 +75,7 @@ export default function DailyTransactionsSection() {
                         {formatPurchasedAt(transaction.purchasedAt, t.transactions.recentlyPurchased, t.transactions.purchasedOn, t.transactions.dateLocale)}
                       </span>
                     </div>
-                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5">
+                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:h-[100px] lg:flex-none lg:px-5 lg:py-4">
                       <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--text-primary)]">
                         {transaction.year} {transaction.brand} {transaction.model}
                       </h3>
