@@ -352,7 +352,7 @@ export default function HeroSection() {
       </Container>
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 w-full md:h-24"
+        className="pointer-events-none absolute inset-x-0 -bottom-px z-10 h-[calc(4rem+1px)] w-full md:h-[calc(6rem+1px)]"
         preserveAspectRatio="none"
         viewBox="0 0 1440 96"
       >
