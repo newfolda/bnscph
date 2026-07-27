@@ -87,7 +87,7 @@ export default function DailyTransactionsSection() {
                     key={`${transaction.year}-${transaction.brand}-${transaction.model}-${isDuplicate ? "duplicate" : "original"}`}
                     aria-hidden={isDuplicate || undefined}
                     tabIndex={isDuplicate ? -1 : 0}
-                    className={`group flex h-[418px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-[var(--primary)]/60 hover:shadow-[0_14px_28px_rgba(31,31,31,0.09),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px] ${
+                    className={`group flex h-[418px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px] ${
                       isDuplicate ? "hidden md:block" : ""
                     }`}
                   >
@@ -98,14 +98,15 @@ export default function DailyTransactionsSection() {
                         fill
                         draggable={false}
                         sizes="(min-width: 1024px) 290px, (min-width: 768px) 250px, 78vw"
-                        className="object-cover object-center transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
+                        className="object-cover object-center transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.035] motion-reduce:transition-none"
                       />
-                      <span className="absolute left-3 top-3 rounded-full border border-white/75 bg-white/80 px-3 py-1.5 text-[0.625rem] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_3px_10px_rgba(31,31,31,0.10)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/95 motion-reduce:transition-none">
+                      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/[0.05] to-transparent" />
+                      <span className="absolute left-3 top-3 rounded-full border border-white/65 bg-white/80 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_2px_7px_rgba(31,31,31,0.08)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/90 motion-reduce:transition-none">
                         {formatPurchasedAt(transaction.purchasedAt, t.transactions.recentlyPurchased, t.transactions.purchasedOn, t.transactions.dateLocale)}
                       </span>
                     </div>
-                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:h-[100px] lg:flex-none lg:px-5 lg:py-4">
-                      <h3 className="text-[0.95rem] font-semibold uppercase tracking-[0.025em] text-[var(--text-primary)]">
+                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:h-[100px] lg:flex-none lg:px-5 lg:pb-3 lg:pt-5">
+                      <h3 className="text-[0.95rem] font-bold uppercase leading-snug tracking-[0.025em] text-[var(--text-primary)]">
                         {transaction.year} {transaction.brand} {transaction.model}
                       </h3>
                       <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">{t.transactions.sellerFrom} {transaction.location}</p>
