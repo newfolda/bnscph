@@ -133,10 +133,10 @@ export const translations: Record<Language, Translation> = {
       preferredHeading: "BUY AND SELL CARS PHILIPPINES",
       professionalBuyer: "Professional Car Buyer",
       comparisonItems: [
-        { traditional: "Find and screen potential buyers", preferred: "Sell directly to us" },
+        { traditional: "Respond to endless inquiries", preferred: "Deal with one professional buyer" },
         { traditional: "Negotiate back and forth", preferred: "Receive a clear, fair offer" },
-        { traditional: "Arrange multiple viewings", preferred: "Schedule one doorstep inspection" },
-        { traditional: "Manage paperwork and follow-ups", preferred: "Get professional paperwork assistance" },
+        { traditional: "Meet unfamiliar buyers", preferred: "Doorstep pickup at your location" },
+        { traditional: "Manage paperwork and follow-ups", preferred: "No paperwork stress" },
         { traditional: "Wait weeks or even months to complete the sale", preferred: "Complete the sale in as soon as one day" },
       ],
     },
