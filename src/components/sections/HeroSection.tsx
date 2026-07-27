@@ -246,6 +246,7 @@ export default function HeroSection() {
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
     >
+      {/* Temporarily disabled while evaluating /images/hero/herobg2.png as the hero background.
       <video
         aria-hidden="true"
         autoPlay
@@ -257,6 +258,7 @@ export default function HeroSection() {
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
+      */}
       <div aria-hidden="true" className="hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
         <div className="absolute bottom-12 right-[5%] h-64 w-64 rounded-full bg-[var(--primary)] opacity-[0.07] blur-3xl md:h-96 md:w-96" />
@@ -375,14 +377,14 @@ export default function HeroSection() {
         }
 
         .hero-showroom {
-          background-image: url("/images/hero/hero-showroom.png");
+          background-image: url("/images/hero/herobg2.png");
           background-position: 64% center;
           background-repeat: no-repeat;
           background-size: cover;
         }
 
         .hero-showroom-overlay {
-          background: linear-gradient(90deg, rgba(8, 8, 8, 0.88) 0%, rgba(8, 8, 8, 0.78) 28%, rgba(8, 8, 8, 0.42) 55%, rgba(8, 8, 8, 0) 78%);
+          background: linear-gradient(90deg, rgba(8, 8, 8, 0.82) 0%, rgba(8, 8, 8, 0.72) 28%, rgba(8, 8, 8, 0.36) 55%, rgba(8, 8, 8, 0) 78%);
         }
 
         @media (min-width: 768px) {
