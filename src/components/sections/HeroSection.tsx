@@ -1,6 +1,6 @@
 "use client"
 
-import { type PointerEvent, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { type CSSProperties, type PointerEvent, useEffect, useLayoutEffect, useRef, useState } from "react"
 import Container from "../ui/Container"
 import Button from "../ui/Button"
 import SellCarModal from "../sell-car/SellCarModal"
@@ -32,6 +32,33 @@ const particles = [
   { left: 98, top: 84, size: 4, duration: 28, delay: -7, opacity: 0.19, color: "var(--primary)", blur: true },
 ]
 
+const goldConfettiPieces = [
+  { side: "left", offset: 3, rise: 170, inward: 12, rotate: 146, delay: 0, width: 4, height: 13, color: "#D8B86D", opacity: 0.78 },
+  { side: "left", offset: 7, rise: 212, inward: 17, rotate: -128, delay: 55, width: 5, height: 15, color: "#B98235", opacity: 0.7 },
+  { side: "left", offset: 11, rise: 144, inward: 22, rotate: 104, delay: 115, width: 5, height: 12, color: "#F0D99A", opacity: 0.76 },
+  { side: "left", offset: 2, rise: 232, inward: 9, rotate: -168, delay: 165, width: 4, height: 14, color: "#8E642D", opacity: 0.62 },
+  { side: "left", offset: 14, rise: 186, inward: 19, rotate: 132, delay: 35, width: 6, height: 6, color: "#D4A654", opacity: 0.65, square: true },
+  { side: "left", offset: 6, rise: 260, inward: 25, rotate: -112, delay: 145, width: 4, height: 16, color: "#E7C97D", opacity: 0.7 },
+  { side: "left", offset: 17, rise: 156, inward: 15, rotate: 154, delay: 90, width: 4, height: 11, color: "#AA7838", opacity: 0.66 },
+  { side: "left", offset: 9, rise: 224, inward: 28, rotate: -144, delay: 180, width: 5, height: 14, color: "#F2DEAA", opacity: 0.7 },
+  { side: "left", offset: 19, rise: 198, inward: 20, rotate: 120, delay: 65, width: 4, height: 13, color: "#C19042", opacity: 0.72 },
+  { side: "left", offset: 4, rise: 132, inward: 14, rotate: -102, delay: 125, width: 5, height: 5, color: "#D7B66A", opacity: 0.62, square: true },
+  { side: "left", offset: 15, rise: 246, inward: 31, rotate: 166, delay: 20, width: 4, height: 15, color: "#9A6B32", opacity: 0.58 },
+  { side: "left", offset: 22, rise: 176, inward: 24, rotate: -136, delay: 155, width: 4, height: 12, color: "#E5C475", opacity: 0.74 },
+  { side: "right", offset: 3, rise: 174, inward: 12, rotate: -148, delay: 25, width: 4, height: 14, color: "#D8B86D", opacity: 0.78 },
+  { side: "right", offset: 8, rise: 218, inward: 18, rotate: 126, delay: 80, width: 5, height: 15, color: "#B98235", opacity: 0.7 },
+  { side: "right", offset: 12, rise: 150, inward: 22, rotate: -108, delay: 130, width: 5, height: 12, color: "#F0D99A", opacity: 0.76 },
+  { side: "right", offset: 2, rise: 236, inward: 10, rotate: 172, delay: 175, width: 4, height: 14, color: "#8E642D", opacity: 0.62 },
+  { side: "right", offset: 15, rise: 188, inward: 20, rotate: -134, delay: 45, width: 6, height: 6, color: "#D4A654", opacity: 0.65, square: true },
+  { side: "right", offset: 6, rise: 264, inward: 26, rotate: 116, delay: 150, width: 4, height: 16, color: "#E7C97D", opacity: 0.7 },
+  { side: "right", offset: 18, rise: 160, inward: 16, rotate: -156, delay: 100, width: 4, height: 11, color: "#AA7838", opacity: 0.66 },
+  { side: "right", offset: 10, rise: 228, inward: 29, rotate: 146, delay: 185, width: 5, height: 14, color: "#F2DEAA", opacity: 0.7 },
+  { side: "right", offset: 20, rise: 202, inward: 21, rotate: -124, delay: 70, width: 4, height: 13, color: "#C19042", opacity: 0.72 },
+  { side: "right", offset: 4, rise: 136, inward: 15, rotate: 104, delay: 135, width: 5, height: 5, color: "#D7B66A", opacity: 0.62, square: true },
+  { side: "right", offset: 16, rise: 250, inward: 32, rotate: -168, delay: 30, width: 4, height: 15, color: "#9A6B32", opacity: 0.58 },
+  { side: "right", offset: 23, rise: 180, inward: 25, rotate: 138, delay: 160, width: 4, height: 12, color: "#E5C475", opacity: 0.74 },
+] as const
+
 export default function HeroSection() {
   const { t } = useLanguage()
   const rotatingWords = t.hero.rotatingWords
@@ -47,6 +74,17 @@ export default function HeroSection() {
   const [rotatingWordWidth, setRotatingWordWidth] = useState<number>()
   const [typedWord, setTypedWord] = useState("")
   const [isTypewriterReducedMotion, setIsTypewriterReducedMotion] = useState(false)
+  const [showGoldConfetti, setShowGoldConfetti] = useState(false)
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    const confettiTimer = window.setTimeout(() => {
+      setShowGoldConfetti(true)
+    }, 300)
+
+    return () => window.clearTimeout(confettiTimer)
+  }, [])
   const animateParallax = () => {
     const particleLayer = particleLayerRef.current
     if (!particleLayer || prefersReducedMotionRef.current) { animationFrameRef.current = null; return }
@@ -263,6 +301,28 @@ export default function HeroSection() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
         <div className="absolute bottom-12 right-[5%] h-64 w-64 rounded-full bg-[var(--primary)] opacity-[0.07] blur-3xl md:h-96 md:w-96" />
       </div>
+      {showGoldConfetti && (
+        <div aria-hidden="true" className="hero-gold-confetti pointer-events-none absolute inset-0 z-[4] overflow-hidden">
+          {goldConfettiPieces.map((piece, index) => (
+            <span
+              key={`${piece.side}-${index}`}
+              className={`hero-gold-confetti-piece ${piece.square ? "hero-gold-confetti-piece--square" : ""}`}
+              style={{
+                [piece.side]: `${piece.offset}%`,
+                bottom: `${7 + index % 4 * 2}%`,
+                width: `${piece.width}px`,
+                height: `${piece.height}px`,
+                backgroundColor: piece.color,
+                "--confetti-x": `${piece.side === "left" ? piece.inward : -piece.inward}vw`,
+                "--confetti-y": `-${piece.rise}px`,
+                "--confetti-rotation": `${piece.rotate}deg`,
+                "--confetti-delay": `${piece.delay}ms`,
+                "--confetti-opacity": piece.opacity,
+              } as CSSProperties}
+            />
+          ))}
+        </div>
+      )}
       <div
         ref={particleLayerRef}
         aria-hidden="true"
