@@ -249,24 +249,13 @@ export default function HeroSection() {
       <video
         aria-hidden="true"
         autoPlay
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover [filter:brightness(0.9)_saturate(0.9)] motion-reduce:hidden lg:hidden"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover [filter:brightness(0.9)_saturate(0.9)] motion-reduce:hidden"
         loop
         muted
         playsInline
         preload="metadata"
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
-      <video
-        aria-hidden="true"
-        autoPlay
-        className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full object-cover object-left [filter:brightness(0.9)_saturate(0.9)] motion-reduce:hidden lg:block"
-        loop
-        muted
-        playsInline
-        preload="metadata"
-      >
-        <source src="/videos/1080.webm" type="video/webm" />
       </video>
       <div aria-hidden="true" className="hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
