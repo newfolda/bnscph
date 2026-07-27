@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
@@ -8,13 +8,93 @@ import SectionPill from "../ui/SectionPill"
 export default function FaqSection() {
   const { t } = useLanguage()
   const faqs = t.faq.items
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [isEntranceReady, setIsEntranceReady] = useState(false)
+  const [hasEntered, setHasEntered] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const autoOpenTimerRef = useRef<number | null>(null)
+  const entranceFrameRef = useRef<number | null>(null)
+  const sequenceStartedRef = useRef(false)
+  const hasManuallyInteractedRef = useRef(false)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section || sequenceStartedRef.current) return
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (reduceMotion) {
+      entranceFrameRef.current = window.requestAnimationFrame(() => {
+        setOpenIndex(0)
+      })
+      return () => {
+        if (entranceFrameRef.current !== null) {
+          window.cancelAnimationFrame(entranceFrameRef.current)
+        }
+      }
+    }
+
+    entranceFrameRef.current = window.requestAnimationFrame(() => {
+      setIsEntranceReady(true)
+    })
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || sequenceStartedRef.current) return
+
+        sequenceStartedRef.current = true
+        observer.disconnect()
+        entranceFrameRef.current = window.requestAnimationFrame(() => {
+          setHasEntered(true)
+
+          const itemDuration = 550
+          const itemStagger = 80
+          const finalItemDelay = Math.max(0, faqs.length - 1) * itemStagger
+          const autoOpenDelay = finalItemDelay + itemDuration + 250
+
+          autoOpenTimerRef.current = window.setTimeout(() => {
+            if (!hasManuallyInteractedRef.current) {
+              setOpenIndex(0)
+            }
+          }, autoOpenDelay)
+        })
+      },
+      { threshold: 0.18 },
+    )
+
+    observer.observe(section)
+
+    return () => {
+      observer.disconnect()
+      if (entranceFrameRef.current !== null) {
+        window.cancelAnimationFrame(entranceFrameRef.current)
+      }
+      if (autoOpenTimerRef.current !== null) {
+        window.clearTimeout(autoOpenTimerRef.current)
+      }
+    }
+  }, [faqs.length])
+
+  const handleQuestionClick = (index: number) => {
+    hasManuallyInteractedRef.current = true
+    if (autoOpenTimerRef.current !== null) {
+      window.clearTimeout(autoOpenTimerRef.current)
+      autoOpenTimerRef.current = null
+    }
+    setOpenIndex((currentIndex) => (currentIndex === index ? null : index))
+  }
 
   return (
-    <section id="faq" className="bg-[var(--background-alt)] py-16 md:py-20">
+    <section
+      ref={sectionRef}
+      id="faq"
+      className={`faq-section bg-[var(--background-alt)] py-16 md:py-20 ${
+        isEntranceReady ? "faq-section--ready" : ""
+      } ${hasEntered ? "faq-section--entered" : ""}`}
+    >
       <Container>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-          <header className="lg:sticky lg:top-28 lg:self-start">
+          <header className="faq-entrance-header lg:sticky lg:top-28 lg:self-start">
             <SectionPill>
               {t.faq.pill}
             </SectionPill>
@@ -36,7 +116,11 @@ export default function FaqSection() {
                 const buttonId = `faq-question-${index + 1}`
 
                 return (
-                  <li key={faq.question} className="relative">
+                  <li
+                    key={faq.question}
+                    className={`faq-entrance-item faq-entrance-item--${index % 2 === 0 ? "left" : "right"} relative`}
+                    style={{ transitionDelay: `${index * 80}ms` }}
+                  >
                     <span
                       aria-hidden="true"
                       className={`faq-timeline-dot absolute -left-[1.45rem] top-7 z-10 h-3 w-3 rounded-full border-2 border-[var(--background-alt)] sm:-left-[1.7rem] ${
@@ -54,7 +138,7 @@ export default function FaqSection() {
                           type="button"
                           aria-expanded={isOpen}
                           aria-controls={answerId}
-                          onClick={() => setOpenIndex(isOpen ? null : index)}
+                          onClick={() => handleQuestionClick(index)}
                           className="flex min-h-16 w-full items-center gap-3 px-5 py-4 text-left text-[var(--text-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-inset sm:px-6"
                         >
                           <span className="shrink-0 text-xs font-bold tracking-wide text-[var(--primary)]">{String(index + 1).padStart(2, "0")}</span>
@@ -98,6 +182,36 @@ export default function FaqSection() {
       </Container>
 
       <style>{`
+        .faq-entrance-header,
+        .faq-entrance-item {
+          transition:
+            opacity 550ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .faq-section--ready .faq-entrance-header {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+
+        .faq-section--ready .faq-entrance-item {
+          opacity: 0;
+        }
+
+        .faq-section--ready .faq-entrance-item--left {
+          transform: translate3d(-28px, 6px, 0);
+        }
+
+        .faq-section--ready .faq-entrance-item--right {
+          transform: translate3d(28px, 6px, 0);
+        }
+
+        .faq-section--entered .faq-entrance-header,
+        .faq-section--entered .faq-entrance-item {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+
         .faq-card {
           background: #ffffff;
           border-color: var(--border);
@@ -251,6 +365,17 @@ export default function FaqSection() {
         }
 
         @media (prefers-reduced-motion: reduce) {
+          .faq-entrance-header,
+          .faq-entrance-item,
+          .faq-section--ready .faq-entrance-header,
+          .faq-section--ready .faq-entrance-item,
+          .faq-section--ready .faq-entrance-item--left,
+          .faq-section--ready .faq-entrance-item--right {
+            opacity: 1;
+            transform: none;
+            transition: none !important;
+          }
+
           .faq-card,
           .faq-card--open,
           .faq-question-text,
