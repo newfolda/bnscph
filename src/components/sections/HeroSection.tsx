@@ -257,17 +257,6 @@ export default function HeroSection() {
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
-      <video
-        aria-hidden="true"
-        autoPlay
-        className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full object-cover object-left [filter:brightness(0.9)_saturate(0.9)] motion-reduce:hidden lg:block"
-        loop
-        muted
-        playsInline
-        preload="metadata"
-      >
-        <source src="/videos/1080.webm" type="video/webm" />
-      </video>
       <div aria-hidden="true" className="hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
         <div className="absolute bottom-12 right-[5%] h-64 w-64 rounded-full bg-[var(--primary)] opacity-[0.07] blur-3xl md:h-96 md:w-96" />
@@ -295,8 +284,8 @@ export default function HeroSection() {
         ))}
       </div>
       <Container className="relative z-20">
-        <div className="flex gap-8 pb-40 pt-20">
-          <div className="flex flex-1 flex-col justify-center">
+        <div className="flex gap-8 pb-40 pt-20 lg:grid lg:grid-cols-[minmax(0,0.44fr)_minmax(0,0.56fr)] lg:items-center lg:gap-12">
+          <div className="hero-copy-entrance flex flex-1 flex-col justify-center">
             <h1
               aria-label={t.hero.ariaLabel}
               className="max-w-xl text-5xl font-bold leading-[1.1] tracking-tight text-white"
@@ -357,7 +346,20 @@ export default function HeroSection() {
             </Button>
             )} />
           </div>
-          <div className="relative flex h-[440px] flex-1 items-center justify-end">
+          <div className="hero-media-entrance relative hidden h-[650px] items-center justify-end lg:flex">
+            <div className="h-full w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.28),0_8px_20px_rgba(0,0,0,0.16)]">
+              <video
+                aria-hidden="true"
+                autoPlay
+                className="h-full w-full object-cover motion-reduce:hidden"
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              >
+                <source src="/videos/1080.webm" type="video/webm" />
+              </video>
+            </div>
           </div>
         </div>
       </Container>
@@ -396,6 +398,26 @@ export default function HeroSection() {
           background: linear-gradient(90deg, rgba(8, 8, 8, 0.88) 0%, rgba(8, 8, 8, 0.78) 28%, rgba(8, 8, 8, 0.42) 55%, rgba(8, 8, 8, 0) 78%);
         }
 
+        @keyframes hero-content-entrance {
+          from {
+            opacity: 0;
+            transform: translateY(24px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .hero-copy-entrance,
+        .hero-media-entrance {
+          animation: hero-content-entrance 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .hero-media-entrance {
+          animation-delay: 150ms;
+        }
+
         @media (min-width: 768px) {
           .hero-showroom {
             background-position: 70% center;
@@ -406,11 +428,20 @@ export default function HeroSection() {
           .hero-showroom {
             background-position: center right;
           }
+
+          .hero-showroom-overlay {
+            background: none;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
           .hero-rotating-word {
             transition: none;
+          }
+
+          .hero-copy-entrance,
+          .hero-media-entrance {
+            animation: none;
           }
         }
 
