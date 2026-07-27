@@ -32,7 +32,21 @@ const particles = [
   { left: 98, top: 84, size: 4, duration: 28, delay: -7, opacity: 0.19, color: "var(--primary)", blur: true },
 ]
 
-const goldConfettiPieces = [
+type GoldConfettiPiece = {
+  side: "left" | "right"
+  offset: number
+  rise: number
+  inward: number
+  rotate: number
+  delay: number
+  width: number
+  height: number
+  color: string
+  opacity: number
+  square?: boolean
+}
+
+const goldConfettiPieces: GoldConfettiPiece[] = [
   { side: "left", offset: 3, rise: 170, inward: 12, rotate: 146, delay: 0, width: 4, height: 13, color: "#D8B86D", opacity: 0.78 },
   { side: "left", offset: 7, rise: 212, inward: 17, rotate: -128, delay: 55, width: 5, height: 15, color: "#B98235", opacity: 0.7 },
   { side: "left", offset: 11, rise: 144, inward: 22, rotate: 104, delay: 115, width: 5, height: 12, color: "#F0D99A", opacity: 0.76 },
@@ -57,7 +71,7 @@ const goldConfettiPieces = [
   { side: "right", offset: 4, rise: 136, inward: 15, rotate: 104, delay: 135, width: 5, height: 5, color: "#D7B66A", opacity: 0.62, square: true },
   { side: "right", offset: 16, rise: 250, inward: 32, rotate: -168, delay: 30, width: 4, height: 15, color: "#9A6B32", opacity: 0.58 },
   { side: "right", offset: 23, rise: 180, inward: 25, rotate: 138, delay: 160, width: 4, height: 12, color: "#E5C475", opacity: 0.74 },
-] as const
+]
 
 export default function HeroSection() {
   const { t } = useLanguage()
@@ -436,6 +450,38 @@ export default function HeroSection() {
           animation-timing-function: ease-in-out;
         }
 
+        .hero-gold-confetti-piece {
+          position: absolute;
+          display: block;
+          border-radius: 1px;
+          opacity: 0;
+          transform: translate3d(0, 0, 0) rotate(0deg);
+          transform-origin: center;
+          will-change: transform, opacity;
+          animation: hero-gold-foil-burst 1600ms cubic-bezier(0.22, 1, 0.36, 1) var(--confetti-delay) both;
+        }
+
+        .hero-gold-confetti-piece--square {
+          border-radius: 1.5px;
+        }
+
+        @keyframes hero-gold-foil-burst {
+          0% {
+            opacity: 0;
+            transform: translate3d(0, 0, 0) rotate(0deg);
+          }
+          12% {
+            opacity: var(--confetti-opacity);
+          }
+          72% {
+            opacity: calc(var(--confetti-opacity) * 0.52);
+          }
+          100% {
+            opacity: 0;
+            transform: translate3d(var(--confetti-x), var(--confetti-y), 0) rotate(var(--confetti-rotation));
+          }
+        }
+
         .hero-showroom {
           background-image: url("/images/hero/herobg2.png");
           background-position: 64% center;
@@ -490,9 +536,30 @@ export default function HeroSection() {
           }
         }
 
+        @media (max-width: 1023px) {
+          .hero-gold-confetti {
+            transform: scale(0.8);
+            transform-origin: bottom center;
+          }
+
+          .hero-gold-confetti-piece:nth-child(n + 19) {
+            display: none;
+          }
+        }
+
+        @media (max-width: 639px) {
+          .hero-gold-confetti {
+            display: none;
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .hero-particle {
             animation: none;
+          }
+
+          .hero-gold-confetti {
+            display: none;
           }
 
           .hero-typewriter-caret {
