@@ -65,7 +65,7 @@ export default function Footer() {
                 href="/"
                 className="inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F1F1F]"
               >
-                <Image src="/images/brand/logo.png" alt="Buy and Sell Cars Philippines" width={180} height={52} className="h-auto w-[180px]" />
+                <Image src="/images/brand/logofooter.webp" alt="Buy and Sell Cars Philippines" width={180} height={52} className="h-auto w-[180px]" />
               </Link>
               <p className="mt-5 text-sm leading-relaxed text-white/65">
                 {t.footer.description}
