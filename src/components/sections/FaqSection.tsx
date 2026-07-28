@@ -347,11 +347,11 @@ export default function FaqSection() {
             <Image
               src="/images/brand/thankyou.webp"
               alt=""
-              width={100}
-              height={100}
-              className="mx-auto h-auto w-[100px] object-contain"
+              width={140}
+              height={140}
+              className="mx-auto h-auto w-[140px] object-contain"
             />
-            <h2 id="faq-success-modal-title" className="mt-6 text-2xl font-bold tracking-tight text-[var(--text-primary)]">Thank you!</h2>
+            <h2 id="faq-success-modal-title" className="mt-4 text-2xl font-bold tracking-tight text-[var(--text-primary)]">Thank you!</h2>
             <p id="faq-success-modal-description" className="mx-auto mt-3 max-w-sm leading-relaxed text-[var(--text-secondary)]">
               Our team will be in touch with you soon.
             </p>
