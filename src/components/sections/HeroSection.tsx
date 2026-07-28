@@ -1,6 +1,6 @@
 "use client"
 
-import { type CSSProperties, type PointerEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { type CSSProperties, type PointerEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import Container from "../ui/Container"
 import Button from "../ui/Button"
 import SellCarModal from "../sell-car/SellCarModal"
@@ -80,6 +80,7 @@ export default function HeroSection() {
   const rotatingWords = useMemo(() => rotatingWordsKey.split("\u0000"), [rotatingWordsKey])
   const typewriterWords = useMemo(() => typewriterWordsKey.split("\u0000"), [typewriterWordsKey])
   const particleLayerRef = useRef<HTMLDivElement>(null)
+  const mobileVideoRef = useRef<HTMLVideoElement>(null)
   const rotatingWordMeasureRef = useRef<HTMLSpanElement>(null)
   const animationFrameRef = useRef<number | null>(null)
   const rotationIntervalRef = useRef<number | null>(null)
@@ -95,6 +96,24 @@ export default function HeroSection() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   const [showGoldConfetti, setShowGoldConfetti] = useState(false)
   const activeRotatingWord = rotatingWords[activeWordIndex] ?? rotatingWords[0] ?? ""
+
+  const playMobileHeroVideo = useCallback(() => {
+    const video = mobileVideoRef.current
+    if (!video) return
+
+    video.muted = true
+    video.defaultMuted = true
+    video.playsInline = true
+
+    const playPromise = video.play()
+    if (playPromise !== undefined) {
+      playPromise.catch(() => undefined)
+    }
+  }, [])
+
+  useEffect(() => {
+    playMobileHeroVideo()
+  }, [playMobileHeroVideo])
 
   useEffect(() => {
     if (prefersReducedMotion) return
@@ -299,12 +318,31 @@ export default function HeroSection() {
       <video
         aria-hidden="true"
         autoPlay
-        className="hero-mobile-video pointer-events-none absolute inset-0 z-0 h-full w-full object-cover sm:hidden motion-reduce:hidden"
+        className="hero-mobile-video pointer-events-none absolute inset-0 z-0 h-full w-full object-cover sm:hidden"
+        controls={false}
+        disablePictureInPicture
         loop
         muted
+        onCanPlay={playMobileHeroVideo}
+        onError={() => {
+          if (process.env.NODE_ENV === "development") {
+            console.error("[Mobile hero video] failed to load")
+          }
+        }}
+        onLoadedMetadata={() => {
+          if (process.env.NODE_ENV === "development") {
+            console.debug("[Mobile hero video] metadata loaded")
+          }
+        }}
+        onPlaying={() => {
+          if (process.env.NODE_ENV === "development") {
+            console.debug("[Mobile hero video] playing")
+          }
+        }}
         playsInline
         poster="/images/hero/herobg2.png"
         preload="metadata"
+        ref={mobileVideoRef}
         tabIndex={-1}
       >
         <source src="/videos/heromobile.webm" type="video/webm" />
@@ -594,14 +632,6 @@ export default function HeroSection() {
           }
         }
 
-        @media (max-width: 639px) and (prefers-reduced-motion: reduce) {
-          .hero-showroom {
-            background-image: url("/images/hero/herobg2.png");
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-          }
-        }
       `}</style>
       </section>
     </>
