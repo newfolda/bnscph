@@ -129,6 +129,30 @@ export default function Footer() {
                   <span className="mt-1 font-medium text-white">9:00 AM – 10:00 PM</span>
                 </span>
               </div>
+              <section aria-labelledby="footer-newsletter-heading" className="mt-12">
+                <h3 id="footer-newsletter-heading" className={footerHeadingClass}>Subscribe to Our Newsletter</h3>
+                <p className="mt-3 text-xs leading-relaxed text-white/70">
+                  Get the latest offers, new transactions and updates.
+                </p>
+                <form className="mt-4 flex flex-col gap-2 lg:flex-row" onSubmit={(event) => event.preventDefault()}>
+                  <label className="sr-only" htmlFor="footer-newsletter-email">Email address</label>
+                  <input
+                    id="footer-newsletter-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="Email address"
+                    required
+                    className="h-11 min-w-0 flex-1 rounded-xl border border-white/15 bg-white px-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35"
+                  />
+                  <button
+                    type="submit"
+                    className="h-11 cursor-pointer rounded-xl bg-[var(--primary)] px-4 text-sm font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] motion-reduce:transition-none"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </section>
             </section>
           </div>
 
