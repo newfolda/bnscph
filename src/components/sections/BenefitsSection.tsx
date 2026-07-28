@@ -17,6 +17,7 @@ export default function BenefitsSection() {
   const [activeRow, setActiveRow] = useState(0)
   const [isRowRotationActive, setIsRowRotationActive] = useState(false)
   const [isMobileRowActivationActive, setIsMobileRowActivationActive] = useState(false)
+  const [hasMobileActiveRow, setHasMobileActiveRow] = useState(false)
   const [benefitsActivationSequence, setBenefitsActivationSequence] = useState(0)
 
   useEffect(() => {
@@ -98,6 +99,7 @@ export default function BenefitsSection() {
       if (closestIndex !== null && closestIndex !== activeMobileRow) {
         activeMobileRow = closestIndex
         setActiveRow(closestIndex)
+        setHasMobileActiveRow(true)
         setBenefitsActivationSequence((sequence) => sequence + 1)
       }
     }
@@ -106,20 +108,15 @@ export default function BenefitsSection() {
       clearActivation()
       activeMobileRow = null
 
-      if (reducedMotionQuery.matches) {
-        stateTimeout = window.setTimeout(() => {
-          setActiveRow(0)
-          setIsRowRotationActive(true)
-          setIsMobileRowActivationActive(false)
-        }, 0)
-        return
-      }
-
       if (desktopQuery.matches) {
         stateTimeout = window.setTimeout(() => {
+          setHasMobileActiveRow(false)
           setIsMobileRowActivationActive(false)
-          setIsRowRotationActive(false)
+          setIsRowRotationActive(reducedMotionQuery.matches)
         }, 0)
+
+        if (reducedMotionQuery.matches) return
+
         startTimeout = window.setTimeout(() => {
           setIsRowRotationActive(true)
           interval = window.setInterval(() => {
@@ -132,6 +129,7 @@ export default function BenefitsSection() {
       stateTimeout = window.setTimeout(() => {
         setIsRowRotationActive(false)
         setIsMobileRowActivationActive(true)
+        setHasMobileActiveRow(false)
       }, 0)
 
       observer = new IntersectionObserver(
@@ -225,7 +223,7 @@ export default function BenefitsSection() {
                     comparisonRowRefs.current[index] = row
                   }}
                   data-benefits-row-index={index}
-                  className={`benefits-transformation-row benefits-reveal ${(isRowRotationActive || isMobileRowActivationActive) && activeRow === index ? "benefits-transformation-row--active" : ""}`}
+                  className={`benefits-transformation-row benefits-reveal ${((isRowRotationActive && activeRow === index) || (isMobileRowActivationActive && hasMobileActiveRow && activeRow === index)) ? "benefits-transformation-row--active" : ""}`}
                   role="listitem"
                   style={{ "--benefits-delay": `${220 + index * 130}ms` } as CSSProperties}
                 >

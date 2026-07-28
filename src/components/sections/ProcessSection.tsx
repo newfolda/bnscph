@@ -236,7 +236,7 @@ export default function ProcessSection() {
                   <h3 className="flex min-h-[3.5rem] items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none">
                     {step.title}
                   </h3>
-                  <p className="process-card-description relative isolate mt-2 min-h-10 max-w-[16rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
+                  <p className="relative isolate mt-2 min-h-10 max-w-[16rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
                     <span className="process-card-description-text">
                       {step.description}
                     </span>
@@ -662,18 +662,6 @@ export default function ProcessSection() {
             color: var(--text-primary);
           }
 
-          .process-card-description {
-            border-radius: 0.65rem;
-            transition: color 300ms ease, background 300ms ease, box-shadow 300ms ease, padding 300ms ease;
-          }
-
-          .process-glass-card--mobile-active .process-card-description {
-            color: var(--text-primary);
-            padding: 0.35rem 0.5rem;
-            background: rgba(215, 169, 63, 0.08);
-            box-shadow: inset 0 0 0 1px rgba(215, 169, 63, 0.08);
-          }
-
           .process-glass-card--mobile-active .process-card-description-streak {
             background: linear-gradient(105deg, transparent 0%, transparent 30%, rgba(189, 140, 33, 0.08) 38%, rgba(221, 174, 65, 0.88) 48%, rgba(255, 250, 225, 1) 53%, rgba(190, 139, 31, 0.7) 59%, transparent 70%, transparent 100%);
             background-size: 260% 100%;
@@ -727,10 +715,6 @@ export default function ProcessSection() {
 
           .process-card-description-streak {
             animation: none !important;
-          }
-
-          .process-card-description {
-            transition: none;
           }
 
           .process-main-panel:has(.process-glass-card:is(:hover, :focus-within)) .process-ambient-blob,
