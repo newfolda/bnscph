@@ -13,9 +13,13 @@ export default function FaqSection() {
   const [hasEntered, setHasEntered] = useState(false)
   const [inquiryName, setInquiryName] = useState("")
   const [inquiryMobile, setInquiryMobile] = useState("")
+  const [nameError, setNameError] = useState("")
+  const [mobileError, setMobileError] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const autoOpenTimerRef = useRef<number | null>(null)
   const entranceFrameRef = useRef<number | null>(null)
+  const submissionTimerRef = useRef<number | null>(null)
   const sequenceStartedRef = useRef(false)
   const hasManuallyInteractedRef = useRef(false)
 
@@ -77,6 +81,14 @@ export default function FaqSection() {
     }
   }, [faqs.length])
 
+  useEffect(() => {
+    return () => {
+      if (submissionTimerRef.current !== null) {
+        window.clearTimeout(submissionTimerRef.current)
+      }
+    }
+  }, [])
+
   const handleQuestionClick = (index: number) => {
     hasManuallyInteractedRef.current = true
     if (autoOpenTimerRef.current !== null) {
@@ -88,17 +100,26 @@ export default function FaqSection() {
 
   const handleInquirySubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (isSubmitting) return
 
     const name = inquiryName.trim()
     const mobile = inquiryMobile.trim()
+    const nextNameError = name ? "" : "Please enter your name"
+    const nextMobileError = mobile ? "" : "Please enter your mobile number"
 
-    if (!name || !mobile) return
+    setNameError(nextNameError)
+    setMobileError(nextMobileError)
+
+    if (nextNameError || nextMobileError) return
 
     // TODO: Connect this form to the real lead submission endpoint.
-    console.info({ name, mobile })
+    setIsSubmitting(true)
+    submissionTimerRef.current = window.setTimeout(() => {
+      console.info({ name, mobile })
+      setIsSubmitting(false)
+      submissionTimerRef.current = null
+    }, 1200)
   }
-
-  const isInquiryDisabled = !inquiryName.trim() || !inquiryMobile.trim()
 
   return (
     <section
@@ -133,11 +154,20 @@ export default function FaqSection() {
                   name="name"
                   autoComplete="name"
                   placeholder="Name"
-                  required
+                  aria-invalid={Boolean(nameError)}
+                  aria-describedby={nameError ? "faq-inquiry-name-error" : undefined}
                   value={inquiryName}
-                  onChange={(event) => setInquiryName(event.target.value)}
+                  onChange={(event) => {
+                    setInquiryName(event.target.value)
+                    if (nameError) setNameError("")
+                  }}
                   className="h-[52px] w-full rounded-[0.875rem] border border-[var(--border)] bg-white px-[18px] text-[15px] text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] transition-[border-color,box-shadow] duration-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20"
                 />
+                {nameError && (
+                  <p id="faq-inquiry-name-error" role="alert" className="mt-1.5 text-sm text-red-600">
+                    {nameError}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="sr-only" htmlFor="faq-inquiry-mobile">Mobile Number</label>
@@ -148,18 +178,36 @@ export default function FaqSection() {
                   autoComplete="tel"
                   inputMode="tel"
                   placeholder="Mobile No."
-                  required
+                  aria-invalid={Boolean(mobileError)}
+                  aria-describedby={mobileError ? "faq-inquiry-mobile-error" : undefined}
                   value={inquiryMobile}
-                  onChange={(event) => setInquiryMobile(event.target.value)}
+                  onChange={(event) => {
+                    setInquiryMobile(event.target.value)
+                    if (mobileError) setMobileError("")
+                  }}
                   className="h-[52px] w-full rounded-[0.875rem] border border-[var(--border)] bg-white px-[18px] text-[15px] text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] transition-[border-color,box-shadow] duration-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20"
                 />
+                {mobileError && (
+                  <p id="faq-inquiry-mobile-error" role="alert" className="mt-1.5 text-sm text-red-600">
+                    {mobileError}
+                  </p>
+                )}
               </div>
               <button
                 type="submit"
-                disabled={isInquiryDisabled}
-                className="h-[52px] w-full rounded-full bg-[var(--primary)] px-6 text-sm font-bold text-[var(--text-primary)] shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:shadow-none disabled:hover:translate-y-0 sm:w-[220px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                disabled={isSubmitting}
+                className="h-[52px] w-full rounded-full bg-[var(--primary)] px-6 text-[16px] font-bold text-white shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-65 disabled:shadow-none disabled:hover:translate-y-0 sm:w-[220px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
               >
-                Inquire Now
+                {isSubmitting ? (
+                  <span className="inline-flex items-center justify-center">
+                    <span>Submitting</span>
+                    <span className="faq-submit-dots" aria-hidden="true">
+                      <span>.</span>
+                      <span>.</span>
+                      <span>.</span>
+                    </span>
+                  </span>
+                ) : "Inquire Now"}
               </button>
             </form>
           </header>
@@ -413,6 +461,30 @@ export default function FaqSection() {
           100% { background-position: -10% 0; opacity: 0; }
         }
 
+        .faq-submit-dots {
+          display: inline-flex;
+          width: 1rem;
+          justify-content: flex-start;
+        }
+
+        .faq-submit-dots span {
+          display: inline-block;
+          animation: faq-submit-dot 900ms ease-in-out infinite;
+        }
+
+        .faq-submit-dots span:nth-child(2) {
+          animation-delay: 150ms;
+        }
+
+        .faq-submit-dots span:nth-child(3) {
+          animation-delay: 300ms;
+        }
+
+        @keyframes faq-submit-dot {
+          0%, 100% { opacity: 0.35; transform: translateY(0); }
+          50% { opacity: 1; transform: translateY(-1px); }
+        }
+
         @media (max-width: 639px) {
           .faq-card--open {
             transform: translateY(-2px);
@@ -450,6 +522,10 @@ export default function FaqSection() {
           .faq-card--open .faq-question-text-streak {
             animation: none !important;
             opacity: 0;
+          }
+
+          .faq-submit-dots span {
+            animation: none;
           }
 
           .faq-timeline-dot--open {
