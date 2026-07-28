@@ -12,9 +12,12 @@ export default function BenefitsSection() {
   const { t } = useLanguage()
   const comparisonItems = t.benefits.comparisonItems
   const sectionRef = useRef<HTMLElement>(null)
+  const comparisonRowRefs = useRef<Array<HTMLElement | null>>([])
   const [hasEntered, setHasEntered] = useState(false)
   const [activeRow, setActiveRow] = useState(0)
   const [isRowRotationActive, setIsRowRotationActive] = useState(false)
+  const [isMobileRowActivationActive, setIsMobileRowActivationActive] = useState(false)
+  const [benefitsActivationSequence, setBenefitsActivationSequence] = useState(0)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -48,19 +51,122 @@ export default function BenefitsSection() {
 
   useEffect(() => {
     if (!hasEntered) return
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
 
+    const desktopQuery = window.matchMedia("(min-width: 1024px)")
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const intersectingRows = new Set<number>()
     let interval: number | undefined
-    const startTimeout = window.setTimeout(() => {
-      setIsRowRotationActive(true)
-      interval = window.setInterval(() => {
-        setActiveRow((currentRow) => (currentRow + 1) % comparisonItems.length)
-      }, 2500)
-    }, 1000)
+    let startTimeout: number | undefined
+    let stateTimeout: number | undefined
+    let observer: IntersectionObserver | null = null
+    let activeMobileRow: number | null = null
+
+    const clearActivation = () => {
+      observer?.disconnect()
+      observer = null
+      intersectingRows.clear()
+
+      if (startTimeout !== undefined) window.clearTimeout(startTimeout)
+      if (interval !== undefined) window.clearInterval(interval)
+      if (stateTimeout !== undefined) window.clearTimeout(stateTimeout)
+
+      startTimeout = undefined
+      interval = undefined
+      stateTimeout = undefined
+    }
+
+    const updateMobileRow = () => {
+      if (intersectingRows.size === 0) return
+
+      const viewportCenter = window.innerHeight / 2
+      let closestIndex: number | null = null
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      intersectingRows.forEach((index) => {
+        const row = comparisonRowRefs.current[index]
+        if (!row) return
+
+        const bounds = row.getBoundingClientRect()
+        const distance = Math.abs(bounds.top + bounds.height / 2 - viewportCenter)
+
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = index
+        }
+      })
+
+      if (closestIndex !== null && closestIndex !== activeMobileRow) {
+        activeMobileRow = closestIndex
+        setActiveRow(closestIndex)
+        setBenefitsActivationSequence((sequence) => sequence + 1)
+      }
+    }
+
+    const configureActivation = () => {
+      clearActivation()
+      activeMobileRow = null
+
+      if (reducedMotionQuery.matches) {
+        stateTimeout = window.setTimeout(() => {
+          setActiveRow(0)
+          setIsRowRotationActive(true)
+          setIsMobileRowActivationActive(false)
+        }, 0)
+        return
+      }
+
+      if (desktopQuery.matches) {
+        stateTimeout = window.setTimeout(() => {
+          setIsMobileRowActivationActive(false)
+          setIsRowRotationActive(false)
+        }, 0)
+        startTimeout = window.setTimeout(() => {
+          setIsRowRotationActive(true)
+          interval = window.setInterval(() => {
+            setActiveRow((currentRow) => (currentRow + 1) % comparisonItems.length)
+          }, 2500)
+        }, 1000)
+        return
+      }
+
+      stateTimeout = window.setTimeout(() => {
+        setIsRowRotationActive(false)
+        setIsMobileRowActivationActive(true)
+      }, 0)
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const index = Number(entry.target.getAttribute("data-benefits-row-index"))
+            if (entry.isIntersecting) {
+              intersectingRows.add(index)
+            } else {
+              intersectingRows.delete(index)
+            }
+          })
+
+          updateMobileRow()
+        },
+        {
+          root: null,
+          rootMargin: "-40% 0px -40% 0px",
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+        },
+      )
+
+      comparisonRowRefs.current.forEach((row) => {
+        if (row) observer?.observe(row)
+      })
+    }
+
+    configureActivation()
+    desktopQuery.addEventListener("change", configureActivation)
+    reducedMotionQuery.addEventListener("change", configureActivation)
 
     return () => {
-      window.clearTimeout(startTimeout)
-      if (interval !== undefined) window.clearInterval(interval)
+      clearActivation()
+      desktopQuery.removeEventListener("change", configureActivation)
+      reducedMotionQuery.removeEventListener("change", configureActivation)
     }
   }, [hasEntered, comparisonItems.length])
 
@@ -115,7 +221,11 @@ export default function BenefitsSection() {
               {comparisonItems.map((item, index) => (
                 <article
                   key={item.traditional}
-                  className={`benefits-transformation-row benefits-reveal ${isRowRotationActive && activeRow === index ? "benefits-transformation-row--active" : ""}`}
+                  ref={(row) => {
+                    comparisonRowRefs.current[index] = row
+                  }}
+                  data-benefits-row-index={index}
+                  className={`benefits-transformation-row benefits-reveal ${(isRowRotationActive || isMobileRowActivationActive) && activeRow === index ? "benefits-transformation-row--active" : ""}`}
                   role="listitem"
                   style={{ "--benefits-delay": `${220 + index * 130}ms` } as CSSProperties}
                 >
@@ -127,7 +237,11 @@ export default function BenefitsSection() {
                     <p className="benefits-mobile-side-label">{t.benefits.preferredHeading}</p>
                     <div className="benefits-preferred-text-wrap">
                       <p className="benefits-preferred-text">{item.preferred}</p>
-                      <p aria-hidden="true" className="benefits-preferred-text-streak">
+                      <p
+                        key={`${item.preferred}-${activeRow === index && isMobileRowActivationActive ? benefitsActivationSequence : "idle"}`}
+                        aria-hidden="true"
+                        className="benefits-preferred-text-streak"
+                      >
                         {item.preferred}
                       </p>
                     </div>
@@ -404,12 +518,14 @@ export default function BenefitsSection() {
           .benefits-transformation-rows { padding: 0.1rem 1rem; }
           .benefits-cta { width: 100%; max-width: 22rem; }
           .benefits-preferred-text-streak {
-            background: linear-gradient(105deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.16) 44%, rgba(255, 255, 255, 0.78) 50%, rgba(255, 241, 198, 0.42) 55%, transparent 62%, transparent 100%);
+            background: linear-gradient(105deg, transparent 0%, transparent 34%, rgba(255, 255, 255, 0.18) 42%, rgba(255, 255, 255, 1) 50%, rgba(255, 240, 190, 0.62) 56%, transparent 66%, transparent 100%);
+            background-size: 240% 100%;
           }
           .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
-            transform: translateY(-2px);
-            filter: brightness(1.01) saturate(1.045);
-            box-shadow: 0 6px 16px rgba(31, 31, 31, 0.04);
+            transform: translateY(-4px) scale(1.01);
+            filter: brightness(1.015) saturate(1.08);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(252, 249, 240, 0.95) 48%, rgba(200, 160, 68, 0.12) 100%);
+            box-shadow: 0 12px 28px rgba(31, 31, 31, 0.08), 0 4px 12px rgba(200, 160, 68, 0.08);
           }
         }
 

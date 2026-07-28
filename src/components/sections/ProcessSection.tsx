@@ -15,7 +15,9 @@ export default function ProcessSection() {
   const { t } = useLanguage()
   const processSteps = t.process.steps
   const [activeMobileCard, setActiveMobileCard] = useState<number | null>(null)
+  const [processActivationSequence, setProcessActivationSequence] = useState(0)
   const processCardRefs = useRef<Array<HTMLDivElement | null>>([])
+  const activeMobileCardRef = useRef<number | null>(null)
 
   useEffect(() => {
     const mobileQuery = window.matchMedia("(max-width: 1023px)")
@@ -45,7 +47,11 @@ export default function ProcessSection() {
       })
 
       if (closestIndex !== null) {
-        setActiveMobileCard(closestIndex)
+        if (closestIndex !== activeMobileCardRef.current) {
+          activeMobileCardRef.current = closestIndex
+          setActiveMobileCard(closestIndex)
+          setProcessActivationSequence((sequence) => sequence + 1)
+        }
       }
     }
 
@@ -54,6 +60,7 @@ export default function ProcessSection() {
       activeCards.clear()
 
       if (!mobileQuery.matches) {
+        activeMobileCardRef.current = null
         setActiveMobileCard(null)
         return
       }
@@ -234,6 +241,7 @@ export default function ProcessSection() {
                       {step.description}
                     </span>
                     <span
+                      key={`${index}-${activeMobileCard === index ? processActivationSequence : "idle"}`}
                       aria-hidden="true"
                       className="process-card-description-streak"
                     >
@@ -655,7 +663,9 @@ export default function ProcessSection() {
           }
 
           .process-glass-card--mobile-active .process-card-description-streak {
-            animation: process-card-description-streak 1200ms cubic-bezier(0.22, 1, 0.36, 1) 130ms both;
+            background: linear-gradient(105deg, transparent 0%, transparent 34%, rgba(255, 255, 255, 0.18) 42%, rgba(255, 255, 255, 1) 50%, rgba(255, 240, 190, 0.7) 56%, transparent 66%, transparent 100%);
+            background-size: 240% 100%;
+            animation: process-card-description-streak 1400ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
           }
 
           .process-main-panel--active-1 .process-ambient-blob--mint { transform: translate3d(-16px, 4px, 0) scaleX(1.08) scaleY(0.97); }
