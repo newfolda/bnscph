@@ -1,100 +1,25 @@
 "use client"
 
-import { type CSSProperties, type PointerEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import Container from "../ui/Container"
 import Button from "../ui/Button"
 import SellCarModal from "../sell-car/SellCarModal"
 import { useLanguage } from "../language/LanguageProvider"
-const particles = [
-  { left: 5, top: 17, size: 3, duration: 19, delay: -5, opacity: 0.34, color: "var(--primary)", blur: false },
-  { left: 11, top: 68, size: 2, duration: 23, delay: -11, opacity: 0.28, color: "var(--primary-hover)", blur: false },
-  { left: 16, top: 35, size: 4, duration: 21, delay: -7, opacity: 0.2, color: "rgba(255, 255, 255, 0.7)", blur: true },
-  { left: 22, top: 82, size: 3, duration: 25, delay: -16, opacity: 0.3, color: "var(--primary)", blur: false },
-  { left: 29, top: 9, size: 2, duration: 18, delay: -8, opacity: 0.36, color: "var(--primary-hover)", blur: false },
-  { left: 34, top: 53, size: 5, duration: 27, delay: -20, opacity: 0.18, color: "var(--primary)", blur: true },
-  { left: 41, top: 27, size: 3, duration: 20, delay: -12, opacity: 0.3, color: "var(--primary)", blur: false },
-  { left: 47, top: 73, size: 2, duration: 24, delay: -4, opacity: 0.26, color: "rgba(255, 255, 255, 0.7)", blur: false },
-  { left: 52, top: 14, size: 4, duration: 22, delay: -15, opacity: 0.24, color: "var(--primary-hover)", blur: true },
-  { left: 58, top: 62, size: 3, duration: 26, delay: -9, opacity: 0.34, color: "var(--primary)", blur: false },
-  { left: 64, top: 38, size: 2, duration: 17, delay: -6, opacity: 0.32, color: "var(--primary-hover)", blur: false },
-  { left: 69, top: 88, size: 4, duration: 28, delay: -18, opacity: 0.18, color: "rgba(255, 255, 255, 0.7)", blur: true },
-  { left: 73, top: 20, size: 3, duration: 21, delay: -10, opacity: 0.33, color: "var(--primary)", blur: false },
-  { left: 77, top: 56, size: 5, duration: 24, delay: -14, opacity: 0.19, color: "var(--primary-hover)", blur: true },
-  { left: 81, top: 7, size: 2, duration: 19, delay: -3, opacity: 0.3, color: "var(--primary)", blur: false },
-  { left: 84, top: 76, size: 3, duration: 27, delay: -21, opacity: 0.27, color: "rgba(255, 255, 255, 0.7)", blur: false },
-  { left: 88, top: 43, size: 4, duration: 23, delay: -13, opacity: 0.24, color: "var(--primary)", blur: true },
-  { left: 92, top: 25, size: 2, duration: 20, delay: -2, opacity: 0.36, color: "var(--primary-hover)", blur: false },
-  { left: 95, top: 65, size: 3, duration: 25, delay: -17, opacity: 0.3, color: "var(--primary)", blur: false },
-  { left: 3, top: 48, size: 4, duration: 22, delay: -19, opacity: 0.2, color: "rgba(255, 255, 255, 0.7)", blur: true },
-  { left: 38, top: 92, size: 2, duration: 18, delay: -1, opacity: 0.3, color: "var(--primary-hover)", blur: false },
-  { left: 56, top: 45, size: 3, duration: 26, delay: -22, opacity: 0.26, color: "var(--primary)", blur: false },
-  { left: 70, top: 4, size: 2, duration: 21, delay: -11, opacity: 0.28, color: "rgba(255, 255, 255, 0.7)", blur: false },
-  { left: 98, top: 84, size: 4, duration: 28, delay: -7, opacity: 0.19, color: "var(--primary)", blur: true },
-]
-
-type GoldConfettiPiece = {
-  side: "left" | "right"
-  offset: number
-  rise: number
-  inward: number
-  rotate: number
-  delay: number
-  width: number
-  height: number
-  color: string
-  opacity: number
-  square?: boolean
-}
-
-const goldConfettiPieces: GoldConfettiPiece[] = [
-  { side: "left", offset: 3, rise: 170, inward: 12, rotate: 146, delay: 0, width: 4, height: 13, color: "#D8B86D", opacity: 0.78 },
-  { side: "left", offset: 7, rise: 212, inward: 17, rotate: -128, delay: 55, width: 5, height: 15, color: "#B98235", opacity: 0.7 },
-  { side: "left", offset: 11, rise: 144, inward: 22, rotate: 104, delay: 115, width: 5, height: 12, color: "#F0D99A", opacity: 0.76 },
-  { side: "left", offset: 2, rise: 232, inward: 9, rotate: -168, delay: 165, width: 4, height: 14, color: "#8E642D", opacity: 0.62 },
-  { side: "left", offset: 14, rise: 186, inward: 19, rotate: 132, delay: 35, width: 6, height: 6, color: "#D4A654", opacity: 0.65, square: true },
-  { side: "left", offset: 6, rise: 260, inward: 25, rotate: -112, delay: 145, width: 4, height: 16, color: "#E7C97D", opacity: 0.7 },
-  { side: "left", offset: 17, rise: 156, inward: 15, rotate: 154, delay: 90, width: 4, height: 11, color: "#AA7838", opacity: 0.66 },
-  { side: "left", offset: 9, rise: 224, inward: 28, rotate: -144, delay: 180, width: 5, height: 14, color: "#F2DEAA", opacity: 0.7 },
-  { side: "left", offset: 19, rise: 198, inward: 20, rotate: 120, delay: 65, width: 4, height: 13, color: "#C19042", opacity: 0.72 },
-  { side: "left", offset: 4, rise: 132, inward: 14, rotate: -102, delay: 125, width: 5, height: 5, color: "#D7B66A", opacity: 0.62, square: true },
-  { side: "left", offset: 15, rise: 246, inward: 31, rotate: 166, delay: 20, width: 4, height: 15, color: "#9A6B32", opacity: 0.58 },
-  { side: "left", offset: 22, rise: 176, inward: 24, rotate: -136, delay: 155, width: 4, height: 12, color: "#E5C475", opacity: 0.74 },
-  { side: "right", offset: 3, rise: 174, inward: 12, rotate: -148, delay: 25, width: 4, height: 14, color: "#D8B86D", opacity: 0.78 },
-  { side: "right", offset: 8, rise: 218, inward: 18, rotate: 126, delay: 80, width: 5, height: 15, color: "#B98235", opacity: 0.7 },
-  { side: "right", offset: 12, rise: 150, inward: 22, rotate: -108, delay: 130, width: 5, height: 12, color: "#F0D99A", opacity: 0.76 },
-  { side: "right", offset: 2, rise: 236, inward: 10, rotate: 172, delay: 175, width: 4, height: 14, color: "#8E642D", opacity: 0.62 },
-  { side: "right", offset: 15, rise: 188, inward: 20, rotate: -134, delay: 45, width: 6, height: 6, color: "#D4A654", opacity: 0.65, square: true },
-  { side: "right", offset: 6, rise: 264, inward: 26, rotate: 116, delay: 150, width: 4, height: 16, color: "#E7C97D", opacity: 0.7 },
-  { side: "right", offset: 18, rise: 160, inward: 16, rotate: -156, delay: 100, width: 4, height: 11, color: "#AA7838", opacity: 0.66 },
-  { side: "right", offset: 10, rise: 228, inward: 29, rotate: 146, delay: 185, width: 5, height: 14, color: "#F2DEAA", opacity: 0.7 },
-  { side: "right", offset: 20, rise: 202, inward: 21, rotate: -124, delay: 70, width: 4, height: 13, color: "#C19042", opacity: 0.72 },
-  { side: "right", offset: 4, rise: 136, inward: 15, rotate: 104, delay: 135, width: 5, height: 5, color: "#D7B66A", opacity: 0.62, square: true },
-  { side: "right", offset: 16, rise: 250, inward: 32, rotate: -168, delay: 30, width: 4, height: 15, color: "#9A6B32", opacity: 0.58 },
-  { side: "right", offset: 23, rise: 180, inward: 25, rotate: 138, delay: 160, width: 4, height: 12, color: "#E5C475", opacity: 0.74 },
-]
-
 export default function HeroSection() {
   const { t } = useLanguage()
   const rotatingWordsKey = t.hero.rotatingWords.join("\u0000")
   const typewriterWordsKey = t.hero.typewriterWords.join("\u0000")
   const rotatingWords = useMemo(() => rotatingWordsKey.split("\u0000"), [rotatingWordsKey])
   const typewriterWords = useMemo(() => typewriterWordsKey.split("\u0000"), [typewriterWordsKey])
-  const particleLayerRef = useRef<HTMLDivElement>(null)
   const mobileVideoRef = useRef<HTMLVideoElement>(null)
   const rotatingWordMeasureRef = useRef<HTMLSpanElement>(null)
-  const animationFrameRef = useRef<number | null>(null)
   const rotationIntervalRef = useRef<number | null>(null)
   const rotationTransitionTimerRef = useRef<number | null>(null)
   const typewriterTimerRef = useRef<number | null>(null)
-  const targetOffsetRef = useRef({ x: 0, y: 0 })
-  const currentOffsetRef = useRef({ x: 0, y: 0 })
-  const prefersReducedMotionRef = useRef(false)
   const [activeWordIndex, setActiveWordIndex] = useState(0)
   const [wordPhase, setWordPhase] = useState<"idle" | "enter" | "exit">("idle")
   const [rotatingWordWidth, setRotatingWordWidth] = useState<number>()
   const [typedWord, setTypedWord] = useState("")
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
-  const [showGoldConfetti, setShowGoldConfetti] = useState(false)
   const activeRotatingWord = rotatingWords[activeWordIndex] ?? rotatingWords[0] ?? ""
 
   const playMobileHeroVideo = useCallback(() => {
@@ -115,47 +40,6 @@ export default function HeroSection() {
     playMobileHeroVideo()
   }, [playMobileHeroVideo])
 
-  useEffect(() => {
-    if (prefersReducedMotion) return
-
-    const confettiTimer = window.setTimeout(() => {
-      setShowGoldConfetti(true)
-    }, 300)
-
-    return () => window.clearTimeout(confettiTimer)
-  }, [prefersReducedMotion])
-  const animateParallax = () => {
-    const particleLayer = particleLayerRef.current
-    if (!particleLayer || prefersReducedMotionRef.current) { animationFrameRef.current = null; return }
-    const target = targetOffsetRef.current
-    const current = currentOffsetRef.current
-    current.x += (target.x - current.x) * 0.08
-    current.y += (target.y - current.y) * 0.08
-    particleLayer.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`
-    animationFrameRef.current = Math.abs(target.x - current.x) > 0.1 || Math.abs(target.y - current.y) > 0.1 ? window.requestAnimationFrame(animateParallax) : null
-  }
-  const scheduleParallax = () => { if (animationFrameRef.current === null) animationFrameRef.current = window.requestAnimationFrame(animateParallax) }
-  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
-    if (prefersReducedMotionRef.current) {
-      return
-    }
-
-    const bounds = event.currentTarget.getBoundingClientRect()
-    const horizontalPosition = (event.clientX - bounds.left) / bounds.width - 0.5
-    const verticalPosition = (event.clientY - bounds.top) / bounds.height - 0.5
-
-    targetOffsetRef.current = {
-      x: horizontalPosition * 16,
-      y: verticalPosition * 12,
-    }
-    scheduleParallax()
-  }
-
-  const handlePointerLeave = () => {
-    targetOffsetRef.current = { x: 0, y: 0 }
-    scheduleParallax()
-  }
-
   useLayoutEffect(() => {
     const measuredWidth = rotatingWordMeasureRef.current?.getBoundingClientRect().width
 
@@ -163,40 +47,6 @@ export default function HeroSection() {
       setRotatingWordWidth(measuredWidth)
     }
   }, [activeWordIndex, rotatingWordsKey])
-
-  useEffect(() => {
-    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-
-    const updateMotionPreference = () => {
-      prefersReducedMotionRef.current = reducedMotionQuery.matches
-      setPrefersReducedMotion(reducedMotionQuery.matches)
-
-      if (reducedMotionQuery.matches) {
-        targetOffsetRef.current = { x: 0, y: 0 }
-        currentOffsetRef.current = { x: 0, y: 0 }
-
-        if (particleLayerRef.current) {
-          particleLayerRef.current.style.transform = "translate3d(0, 0, 0)"
-        }
-
-        if (animationFrameRef.current !== null) {
-          window.cancelAnimationFrame(animationFrameRef.current)
-          animationFrameRef.current = null
-        }
-      }
-    }
-
-    updateMotionPreference()
-    reducedMotionQuery.addEventListener("change", updateMotionPreference)
-
-    return () => {
-      reducedMotionQuery.removeEventListener("change", updateMotionPreference)
-
-      if (animationFrameRef.current !== null) {
-        window.cancelAnimationFrame(animationFrameRef.current)
-      }
-    }
-  }, [])
 
   useEffect(() => {
     const words = typewriterWordsKey ? typewriterWordsKey.split("\u0000") : []
@@ -312,8 +162,6 @@ export default function HeroSection() {
       <section
       className="hero-showroom relative isolate overflow-hidden bg-[var(--primary-light)]"
       data-hero-word-index={process.env.NODE_ENV === "development" ? activeWordIndex : undefined}
-      onPointerLeave={handlePointerLeave}
-      onPointerMove={handlePointerMove}
     >
       <video
         aria-hidden="true"
@@ -363,50 +211,6 @@ export default function HeroSection() {
       <div aria-hidden="true" className="hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] hidden overflow-hidden sm:block">
         <div className="absolute bottom-12 right-[5%] h-64 w-64 rounded-full bg-[var(--primary)] opacity-[0.07] blur-3xl md:h-96 md:w-96" />
-      </div>
-      {showGoldConfetti && (
-        <div aria-hidden="true" className="hero-gold-confetti pointer-events-none absolute inset-0 z-[4] hidden overflow-hidden sm:block">
-          {goldConfettiPieces.map((piece, index) => (
-            <span
-              key={`${piece.side}-${index}`}
-              className={`hero-gold-confetti-piece ${piece.square ? "hero-gold-confetti-piece--square" : ""}`}
-              style={{
-                [piece.side]: `${piece.offset}%`,
-                bottom: `${7 + index % 4 * 2}%`,
-                width: `${piece.width}px`,
-                height: `${piece.height}px`,
-                backgroundColor: piece.color,
-                "--confetti-x": `${piece.side === "left" ? piece.inward : -piece.inward}vw`,
-                "--confetti-y": `-${piece.rise}px`,
-                "--confetti-rotation": `${piece.rotate}deg`,
-                "--confetti-delay": `${piece.delay}ms`,
-                "--confetti-opacity": piece.opacity,
-              } as CSSProperties}
-            />
-          ))}
-        </div>
-      )}
-      <div
-        ref={particleLayerRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[5] hidden transform-gpu will-change-transform sm:block"
-      >
-        {particles.map((particle) => (
-          <span
-            key={`${particle.left}-${particle.top}`}
-            className={`hero-particle absolute rounded-full transform-gpu ${particle.blur ? "blur-[1px]" : ""}`}
-            style={{
-              left: `${particle.left}%`,
-              top: `${particle.top}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              backgroundColor: particle.color,
-              opacity: particle.opacity,
-              animationDuration: `${particle.duration}s`,
-              animationDelay: `${particle.delay}s`,
-            }}
-          />
-        ))}
       </div>
       <SellCarModal trigger={(openSellCarModal) => (
         <button
@@ -496,50 +300,6 @@ export default function HeroSection() {
         />
       </svg>
       <style>{`
-        @keyframes hero-dust-drift {
-          0%, 100% { transform: translate3d(0, 0, 0); }
-          50% { transform: translate3d(8px, -12px, 0); }
-        }
-
-        .hero-particle {
-          animation-name: hero-dust-drift;
-          animation-direction: alternate;
-          animation-iteration-count: infinite;
-          animation-timing-function: ease-in-out;
-        }
-
-        .hero-gold-confetti-piece {
-          position: absolute;
-          display: block;
-          border-radius: 1px;
-          opacity: 0;
-          transform: translate3d(0, 0, 0) rotate(0deg);
-          transform-origin: center;
-          will-change: transform, opacity;
-          animation: hero-gold-foil-burst 1600ms cubic-bezier(0.22, 1, 0.36, 1) var(--confetti-delay) both;
-        }
-
-        .hero-gold-confetti-piece--square {
-          border-radius: 1.5px;
-        }
-
-        @keyframes hero-gold-foil-burst {
-          0% {
-            opacity: 0;
-            transform: translate3d(0, 0, 0) rotate(0deg);
-          }
-          12% {
-            opacity: var(--confetti-opacity);
-          }
-          72% {
-            opacity: calc(var(--confetti-opacity) * 0.52);
-          }
-          100% {
-            opacity: 0;
-            transform: translate3d(var(--confetti-x), var(--confetti-y), 0) rotate(var(--confetti-rotation));
-          }
-        }
-
         .hero-showroom {
           background-color: var(--primary-light);
           background-image: none;
@@ -605,42 +365,7 @@ export default function HeroSection() {
           animation: hero-typewriter-caret 900ms steps(1, end) infinite;
         }
 
-        .hero-particle:nth-child(n + 13) {
-          display: none;
-        }
-
-        @media (min-width: 768px) {
-          .hero-particle:nth-child(n + 13) {
-            display: block;
-          }
-        }
-
-        @media (max-width: 1023px) {
-          .hero-gold-confetti {
-            transform: scale(0.8);
-            transform-origin: bottom center;
-          }
-
-          .hero-gold-confetti-piece:nth-child(n + 19) {
-            display: none;
-          }
-        }
-
-        @media (max-width: 639px) {
-          .hero-gold-confetti {
-            display: none;
-          }
-        }
-
         @media (prefers-reduced-motion: reduce) {
-          .hero-particle {
-            animation: none;
-          }
-
-          .hero-gold-confetti {
-            display: none;
-          }
-
           .hero-typewriter-caret {
             animation: none;
           }
