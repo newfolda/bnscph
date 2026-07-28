@@ -1,6 +1,6 @@
 "use client"
 
-import { type PointerEvent } from "react"
+import { type PointerEvent, useEffect, useRef, useState } from "react"
 import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
@@ -14,6 +14,84 @@ const processVideoSizes = [
 export default function ProcessSection() {
   const { t } = useLanguage()
   const processSteps = t.process.steps
+  const [activeMobileCard, setActiveMobileCard] = useState<number | null>(null)
+  const processCardRefs = useRef<Array<HTMLDivElement | null>>([])
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 1023px)")
+    let observer: IntersectionObserver | null = null
+    const activeCards = new Set<number>()
+
+    const updateActiveCard = () => {
+      if (!mobileQuery.matches || activeCards.size === 0) {
+        return
+      }
+
+      const viewportCenter = window.innerHeight / 2
+      let closestIndex: number | null = null
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      activeCards.forEach((index) => {
+        const card = processCardRefs.current[index]
+        if (!card) return
+
+        const bounds = card.getBoundingClientRect()
+        const distance = Math.abs(bounds.top + bounds.height / 2 - viewportCenter)
+
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = index
+        }
+      })
+
+      if (closestIndex !== null) {
+        setActiveMobileCard(closestIndex)
+      }
+    }
+
+    const observeCards = () => {
+      observer?.disconnect()
+      activeCards.clear()
+
+      if (!mobileQuery.matches) {
+        setActiveMobileCard(null)
+        return
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const index = Number(entry.target.getAttribute("data-process-card-index"))
+            if (entry.isIntersecting) {
+              activeCards.add(index)
+            } else {
+              activeCards.delete(index)
+            }
+          })
+
+          updateActiveCard()
+        },
+        {
+          root: null,
+          rootMargin: "-40% 0px -40% 0px",
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+        },
+      )
+
+      processCardRefs.current.forEach((card) => {
+        if (card) observer?.observe(card)
+      })
+    }
+
+    observeCards()
+    mobileQuery.addEventListener("change", observeCards)
+
+    return () => {
+      observer?.disconnect()
+      mobileQuery.removeEventListener("change", observeCards)
+    }
+  }, [processSteps.length])
+
   const resetCardPointerPhysics = (card: HTMLDivElement) => {
     card.style.setProperty("--tilt-x", "0deg")
     card.style.setProperty("--tilt-y", "0deg")
@@ -56,7 +134,7 @@ export default function ProcessSection() {
     >
       <Container className="relative -mt-4 sm:-mt-5 md:-mt-6 lg:-mt-8">
         <div
-          className="process-main-panel relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14"
+          className={`process-main-panel relative mx-auto max-w-[75rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-white px-7 py-7 shadow-[0_34px_78px_rgba(0,0,0,0.46),0_12px_28px_rgba(200,160,68,0.12)] ring-1 ring-white/30 transition-[transform,box-shadow] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_40px_88px_rgba(0,0,0,0.5),0_16px_34px_rgba(200,160,68,0.14)] motion-reduce:transform-none motion-reduce:transition-none sm:px-8 md:px-14 md:py-12 lg:px-16 lg:py-14${activeMobileCard !== null ? ` process-main-panel--active-${activeMobileCard + 1}` : ""}`}
         >
           <div aria-hidden="true" className="process-panel-ambient pointer-events-none absolute inset-0 z-0">
             <span className="process-ambient-blob process-ambient-blob--mint" />
@@ -79,12 +157,16 @@ export default function ProcessSection() {
             {processSteps.map((step, index) => (
               <div
                 key={step.title}
+                ref={(card) => {
+                  processCardRefs.current[index] = card
+                }}
+                data-process-card-index={index}
                 onPointerMove={handleCardPointerMove}
                 onPointerLeave={(event) => resetCardPointerPhysics(event.currentTarget)}
-                className={`process-glass-card process-glass-card--${index + 1} group/card relative z-10 flex min-h-[360px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-7 text-center md:min-h-[382px] group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
+                className={`process-glass-card process-glass-card--${index + 1}${activeMobileCard === index ? " process-glass-card--mobile-active" : ""} group/card relative z-10 flex min-h-[360px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-7 text-center md:min-h-[382px] group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
               >
                 <span
-                  className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
+                  className="process-step-number relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
                 >
                   <span className="inline-block transition-transform duration-300 ease-out group-hover/card:scale-125 motion-reduce:transform-none">
                     {index + 1}
@@ -525,6 +607,70 @@ export default function ProcessSection() {
           to { transform: translate3d(10px, 12px, 0) scale(1.06); opacity: 0.84; }
         }
 
+        @media (max-width: 1023px) {
+          .process-glass-card--mobile-active {
+            z-index: 20;
+            border-color: rgba(255, 255, 255, 0.94);
+            outline-color: rgba(95, 115, 130, 0.16);
+            background: linear-gradient(
+              135deg,
+              rgba(255, 255, 255, 0.56) 0%,
+              rgba(255, 255, 255, 0.25) 48%,
+              rgba(255, 255, 255, 0.4) 100%
+            );
+            box-shadow:
+              0 24px 48px rgba(20, 24, 32, 0.11),
+              0 10px 20px rgba(20, 24, 32, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 1),
+              inset 0 -1px 0 rgba(120, 135, 150, 0.16);
+            filter: brightness(1.01) saturate(1.08);
+            transform: translateY(-5px) scale(1.01);
+          }
+
+          .process-glass-card--mobile-active::before {
+            transform: translate3d(8px, 8px, 0);
+            opacity: 0.84;
+          }
+
+          .process-glass-card--mobile-active::after {
+            transform: translate3d(6px, 6px, 0) scale(1.02);
+            opacity: 0.8;
+          }
+
+          .process-glass-card--mobile-active .process-step-number {
+            transform: scale(1.1);
+            box-shadow: 0 8px 18px rgba(31, 31, 31, 0.14);
+          }
+
+          .process-glass-card--mobile-active .process-video {
+            transform: translateY(-0.25rem);
+          }
+
+          .process-glass-card--mobile-active h3 {
+            color: var(--primary);
+          }
+
+          .process-glass-card--mobile-active .process-card-description-text {
+            color: var(--text-primary);
+          }
+
+          .process-glass-card--mobile-active .process-card-description-streak {
+            animation: process-card-description-streak 1200ms cubic-bezier(0.22, 1, 0.36, 1) 130ms both;
+          }
+
+          .process-main-panel--active-1 .process-ambient-blob--mint { transform: translate3d(-16px, 4px, 0) scaleX(1.08) scaleY(0.97); }
+          .process-main-panel--active-1 .process-ambient-blob--yellow { transform: translate3d(14px, -14px, 0) scaleX(1.06) scaleY(0.98); }
+          .process-main-panel--active-1 .process-ambient-blob--blue { transform: translate3d(-6px, 18px, 0) scaleX(0.97) scaleY(1.08); }
+          .process-main-panel--active-2 .process-ambient-blob--yellow { transform: translate3d(0, -18px, 0) scaleX(0.97) scaleY(1.08); }
+          .process-main-panel--active-2 .process-ambient-blob--mint { transform: translate3d(-14px, 4px, 0) scaleX(1.08) scaleY(0.97); }
+          .process-main-panel--active-2 .process-ambient-blob--pink { transform: translate3d(16px, 4px, 0) scaleX(1.08) scaleY(0.97); }
+          .process-main-panel--active-2 .process-ambient-blob--lavender { transform: translate3d(4px, 18px, 0) scaleX(0.97) scaleY(1.08); }
+          .process-main-panel--active-2 .process-ambient-blob--blue { transform: translate3d(4px, 16px, 0) scaleX(0.98) scaleY(1.07); }
+          .process-main-panel--active-3 .process-ambient-blob--pink { transform: translate3d(18px, 4px, 0) scaleX(1.08) scaleY(0.97); }
+          .process-main-panel--active-3 .process-ambient-blob--lavender { transform: translate3d(16px, 18px, 0) scaleX(1.08) scaleY(0.97); }
+          .process-main-panel--active-3 .process-ambient-blob--yellow { transform: translate3d(-16px, -4px, 0) scaleX(1.08) scaleY(0.97); }
+        }
+
         @media (max-width: 767px) {
           .process-main-panel:has(.process-glass-card--1:is(:hover, :focus-within)) .process-ambient-blob--mint { transform: translate3d(-16px, 4px, 0) scaleX(1.08) scaleY(0.97); }
           .process-main-panel:has(.process-glass-card--1:is(:hover, :focus-within)) .process-ambient-blob--yellow { transform: translate3d(14px, -14px, 0) scaleX(1.06) scaleY(0.98); }
@@ -544,12 +690,16 @@ export default function ProcessSection() {
             animation: none;
           }
 
-          .process-glass-card:is(:hover, :focus-within) {
+          .process-glass-card:is(:hover, :focus-within),
+          .process-glass-card--mobile-active {
             transform: none;
+            filter: none;
           }
 
           .process-glass-card:is(:hover, :focus-within)::before,
-          .process-glass-card:is(:hover, :focus-within)::after {
+          .process-glass-card:is(:hover, :focus-within)::after,
+          .process-glass-card--mobile-active::before,
+          .process-glass-card--mobile-active::after {
             transform: none;
           }
 
@@ -557,7 +707,8 @@ export default function ProcessSection() {
             animation: none !important;
           }
 
-          .process-main-panel:has(.process-glass-card:is(:hover, :focus-within)) .process-ambient-blob {
+          .process-main-panel:has(.process-glass-card:is(:hover, :focus-within)) .process-ambient-blob,
+          .process-main-panel[class*="process-main-panel--active-"] .process-ambient-blob {
             transform: none;
           }
         }

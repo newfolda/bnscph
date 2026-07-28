@@ -409,7 +409,8 @@ export default function HeroSection() {
               style={{ borderRadius: "2rem" }}
             >
               <span className="absolute inset-0 z-10 flex translate-x-2.5 items-center justify-center pr-16 whitespace-nowrap text-[0.84rem] font-bold uppercase tracking-[0.07em] text-white transition-colors duration-[240ms] sm:text-[0.95rem]">
-                {t.hero.cta}
+                <span className="sm:hidden">SELL MY CAR</span>
+                <span className="hidden sm:inline">{t.hero.cta}</span>
               </span>
               <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full border border-white/25 bg-white/16 text-white transition-[background-color,border-color,transform] duration-[240ms] ease-out group-hover:translate-x-1 group-hover:border-white/34 group-hover:bg-white/20 group-focus-visible:border-white/34 group-focus-visible:bg-white/20 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
                 <svg fill="none" height="22" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="22">
