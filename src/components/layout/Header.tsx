@@ -253,7 +253,7 @@ export default function Header() {
               href="/"
               onClick={(event) => handleNavigation(event, "home")}
               className={`flex h-full items-center transition-[width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
-                isCompact ? "w-[135px] sm:w-[155px]" : "w-[135px] sm:w-[190px]"
+                isCompact ? "w-[135px] max-w-full sm:w-[155px] sm:max-w-none" : "w-[135px] max-w-full sm:w-[190px] sm:max-w-none"
               }`}
             >
               <Image
@@ -262,7 +262,7 @@ export default function Header() {
                 width={190}
                 height={54}
                 className={`h-auto transition-[width] duration-300 ${
-                  isCompact ? "w-[135px] sm:w-[155px]" : "w-[135px] sm:w-[190px]"
+                  isCompact ? "w-[135px] max-w-full sm:w-[155px] sm:max-w-none" : "w-[135px] max-w-full sm:w-[190px] sm:max-w-none"
                 }`}
                 priority
               />
@@ -299,9 +299,9 @@ export default function Header() {
                 type="button"
                 aria-label="Sell my car"
                 onClick={openSellCarModal}
-                className="cursor-pointer whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.1em] text-[#D7A93F] transition-opacity duration-200 hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 sm:hidden"
+                className="cursor-pointer whitespace-nowrap text-sm font-extrabold uppercase tracking-[0.08em] text-[#D7A93F] transition-opacity duration-200 hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 sm:hidden"
               >
-                SELL MY CAR
+                GET A FREE QUOTE
               </button>
             )} />
 
