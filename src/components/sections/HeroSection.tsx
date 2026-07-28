@@ -82,9 +82,9 @@ export default function HeroSection() {
   const particleLayerRef = useRef<HTMLDivElement>(null)
   const rotatingWordMeasureRef = useRef<HTMLSpanElement>(null)
   const animationFrameRef = useRef<number | null>(null)
-  const rotationTimerRef = useRef<number | null>(null)
+  const rotationIntervalRef = useRef<number | null>(null)
+  const rotationTransitionTimerRef = useRef<number | null>(null)
   const typewriterTimerRef = useRef<number | null>(null)
-  const entranceFrameRef = useRef<number | null>(null)
   const targetOffsetRef = useRef({ x: 0, y: 0 })
   const currentOffsetRef = useRef({ x: 0, y: 0 })
   const prefersReducedMotionRef = useRef(false)
@@ -229,68 +229,70 @@ export default function HeroSection() {
       return clearTypewriter
     }
 
-    if (prefersReducedMotion) {
-      setTypedWord(words[0])
-      return clearTypewriter
-    }
-
     setTypedWord("")
     typewriterTimerRef.current = window.setTimeout(typeNextCharacter, 250)
 
     return clearTypewriter
-  }, [typewriterWordsKey, prefersReducedMotion])
+  }, [typewriterWordsKey])
 
   useEffect(() => {
     const words = rotatingWordsKey ? rotatingWordsKey.split("\u0000") : []
 
     const clearRotation = () => {
-      if (rotationTimerRef.current !== null) {
-        window.clearTimeout(rotationTimerRef.current)
-        rotationTimerRef.current = null
+      if (rotationIntervalRef.current !== null) {
+        window.clearInterval(rotationIntervalRef.current)
+        rotationIntervalRef.current = null
       }
 
-      if (entranceFrameRef.current !== null) {
-        window.cancelAnimationFrame(entranceFrameRef.current)
-        entranceFrameRef.current = null
+      if (rotationTransitionTimerRef.current !== null) {
+        window.clearTimeout(rotationTransitionTimerRef.current)
+        rotationTransitionTimerRef.current = null
       }
     }
 
-    const scheduleRotation = () => {
-      rotationTimerRef.current = window.setTimeout(() => {
-        setWordPhase("exit")
+    const rotateWord = () => {
+      setWordPhase("exit")
 
-        rotationTimerRef.current = window.setTimeout(() => {
-          setActiveWordIndex((currentIndex) => (currentIndex + 1) % words.length)
-          setWordPhase("enter")
-          entranceFrameRef.current = window.requestAnimationFrame(() => setWordPhase("idle"))
-          scheduleRotation()
-        }, 400)
-      }, 2800)
+      rotationTransitionTimerRef.current = window.setTimeout(() => {
+        setActiveWordIndex((currentIndex) => (currentIndex + 1) % words.length)
+        setWordPhase("enter")
+
+        rotationTransitionTimerRef.current = window.setTimeout(() => {
+          setWordPhase("idle")
+          rotationTransitionTimerRef.current = null
+        }, 30)
+      }, 350)
     }
 
     clearRotation()
-    entranceFrameRef.current = window.requestAnimationFrame(() => {
+    rotationTransitionTimerRef.current = window.setTimeout(() => {
       setActiveWordIndex(0)
       setWordPhase("idle")
 
-      if (words.length > 0 && !prefersReducedMotion) {
-        scheduleRotation()
+      if (words.length >= 2) {
+        rotationIntervalRef.current = window.setInterval(rotateWord, 2800)
       }
-    })
+
+      rotationTransitionTimerRef.current = null
+    }, 0)
 
     return clearRotation
-  }, [rotatingWordsKey, prefersReducedMotion])
+  }, [rotatingWordsKey])
 
   useEffect(() => {
     if (process.env.NODE_ENV === "development") {
-      console.debug("[Hero motion]", { prefersReducedMotion, rotatingWords, typewriterWords })
+      console.debug("[Hero rotating word]", {
+        activeWordIndex,
+        word: activeRotatingWord,
+      })
     }
-  }, [prefersReducedMotion, rotatingWords, typewriterWords])
+  }, [activeRotatingWord, activeWordIndex])
 
   return (
     <>
       <section
       className="hero-showroom relative isolate overflow-hidden bg-[var(--primary-light)]"
+      data-hero-word-index={process.env.NODE_ENV === "development" ? activeWordIndex : undefined}
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
     >
@@ -394,7 +396,7 @@ export default function HeroSection() {
                   <span className="invisible">{typewriterWords.reduce((longestWord, word) => word.length > longestWord.length ? word : longestWord, "")}</span>
                   <span className="absolute left-0 top-0 inline-flex items-baseline whitespace-nowrap">
                     {typedWord}
-                    {!prefersReducedMotion && <span className="hero-typewriter-caret" />}
+                    <span className="hero-typewriter-caret" />
                   </span>
                 </span>
               </span>
