@@ -236,7 +236,7 @@ export default function ProcessSection() {
                   <h3 className="flex min-h-[3.5rem] items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none">
                     {step.title}
                   </h3>
-                  <p className="relative isolate mt-2 min-h-10 max-w-[16rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
+                  <p className="process-card-description relative isolate mt-2 min-h-10 max-w-[16rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
                     <span className="process-card-description-text">
                       {step.description}
                     </span>
@@ -662,10 +662,22 @@ export default function ProcessSection() {
             color: var(--text-primary);
           }
 
+          .process-card-description {
+            border-radius: 0.65rem;
+            transition: color 300ms ease, background 300ms ease, box-shadow 300ms ease, padding 300ms ease;
+          }
+
+          .process-glass-card--mobile-active .process-card-description {
+            color: var(--text-primary);
+            padding: 0.35rem 0.5rem;
+            background: rgba(215, 169, 63, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(215, 169, 63, 0.08);
+          }
+
           .process-glass-card--mobile-active .process-card-description-streak {
-            background: linear-gradient(105deg, transparent 0%, transparent 34%, rgba(255, 255, 255, 0.18) 42%, rgba(255, 255, 255, 1) 50%, rgba(255, 240, 190, 0.7) 56%, transparent 66%, transparent 100%);
-            background-size: 240% 100%;
-            animation: process-card-description-streak 1400ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+            background: linear-gradient(105deg, transparent 0%, transparent 30%, rgba(189, 140, 33, 0.08) 38%, rgba(221, 174, 65, 0.88) 48%, rgba(255, 250, 225, 1) 53%, rgba(190, 139, 31, 0.7) 59%, transparent 70%, transparent 100%);
+            background-size: 260% 100%;
+            animation: process-card-description-streak 1500ms cubic-bezier(0.22, 1, 0.36, 1) both;
           }
 
           .process-main-panel--active-1 .process-ambient-blob--mint { transform: translate3d(-16px, 4px, 0) scaleX(1.08) scaleY(0.97); }
@@ -715,6 +727,10 @@ export default function ProcessSection() {
 
           .process-card-description-streak {
             animation: none !important;
+          }
+
+          .process-card-description {
+            transition: none;
           }
 
           .process-main-panel:has(.process-glass-card:is(:hover, :focus-within)) .process-ambient-blob,

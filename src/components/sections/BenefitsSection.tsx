@@ -234,6 +234,11 @@ export default function BenefitsSection() {
                     <p>{item.traditional}</p>
                   </div>
                   <div className="benefits-preferred-outcome">
+                    <span
+                      key={`benefits-panel-sweep-${index}-${activeRow === index && isMobileRowActivationActive ? benefitsActivationSequence : "idle"}`}
+                      aria-hidden="true"
+                      className="benefits-preferred-panel-sweep"
+                    />
                     <p className="benefits-mobile-side-label">{t.benefits.preferredHeading}</p>
                     <div className="benefits-preferred-text-wrap">
                       <p className="benefits-preferred-text">{item.preferred}</p>
@@ -503,14 +508,84 @@ export default function BenefitsSection() {
 
           .benefits-traditional-outcome .benefits-mobile-side-label { color: #858a91; }
           .benefits-preferred-outcome {
+            position: relative;
+            overflow: hidden;
             margin-top: 0.75rem;
             padding: 0.85rem 0.9rem 0.85rem 1rem;
             border-left: 2px solid rgba(200, 160, 68, 0.6);
             border-radius: 0.75rem;
             background: rgba(200, 160, 68, 0.045);
+            transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), background 420ms ease, border-color 420ms ease, box-shadow 420ms ease, color 420ms ease;
           }
 
           .benefits-preferred-outcome .benefits-mobile-side-label { color: #97732b; }
+
+          .benefits-preferred-outcome > :not(.benefits-preferred-panel-sweep) {
+            position: relative;
+            z-index: 1;
+          }
+
+          .benefits-traditional-outcome {
+            transition: opacity 420ms ease, color 420ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+          }
+
+          .benefits-preferred-panel-sweep {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateX(-120%);
+            background: linear-gradient(110deg, transparent 0%, transparent 35%, rgba(255, 236, 167, 0.08) 42%, rgba(255, 255, 255, 0.78) 50%, rgba(220, 174, 66, 0.38) 57%, transparent 66%, transparent 100%);
+          }
+
+          .benefits-transformation-row--active .benefits-preferred-outcome {
+            z-index: 4;
+            transform: translateY(-6px) scale(1.025);
+            border-left-color: rgba(200, 160, 68, 1);
+            background: linear-gradient(135deg, rgba(255, 252, 241, 1) 0%, rgba(248, 234, 193, 0.96) 100%);
+            box-shadow: 0 18px 38px rgba(31, 31, 31, 0.14), 0 7px 18px rgba(200, 160, 68, 0.2);
+            color: #11100d;
+          }
+
+          .benefits-transformation-row--active .benefits-traditional-outcome {
+            opacity: 0.58;
+            color: #777d83;
+            transform: scale(0.985);
+          }
+
+          .benefits-transformation-row--active .benefits-preferred-outcome .benefits-mobile-side-label {
+            color: #8a6418;
+          }
+
+          .benefits-transformation-row--active .benefits-preferred-text {
+            color: #11100d;
+            font-weight: 750;
+            transform: scale(1.015);
+            transform-origin: left center;
+          }
+
+          .benefits-transformation-row--active .benefits-preferred-panel-sweep {
+            animation: benefits-preferred-panel-sweep 1250ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+          }
+
+          .benefits-transformation-row--active .benefits-preferred-text-streak {
+            animation-duration: 1300ms;
+            animation-delay: 80ms;
+          }
+
+          .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
+            transform: translateY(-2px);
+            background: rgba(200, 160, 68, 0.035);
+            box-shadow: 0 5px 14px rgba(31, 31, 31, 0.035);
+          }
+        }
+
+        @keyframes benefits-preferred-panel-sweep {
+          0% { transform: translateX(-120%); opacity: 0; }
+          15% { opacity: 1; }
+          100% { transform: translateX(120%); opacity: 0; }
         }
 
         @media (max-width: 639px) {
@@ -522,10 +597,10 @@ export default function BenefitsSection() {
             background-size: 240% 100%;
           }
           .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
-            transform: translateY(-4px) scale(1.01);
-            filter: brightness(1.015) saturate(1.08);
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(252, 249, 240, 0.95) 48%, rgba(200, 160, 68, 0.12) 100%);
-            box-shadow: 0 12px 28px rgba(31, 31, 31, 0.08), 0 4px 12px rgba(200, 160, 68, 0.08);
+            transform: translateY(-2px);
+            filter: brightness(1.01) saturate(1.04);
+            background: rgba(200, 160, 68, 0.035);
+            box-shadow: 0 5px 14px rgba(31, 31, 31, 0.035);
           }
         }
 
@@ -547,6 +622,19 @@ export default function BenefitsSection() {
 
           .benefits-preferred-text-streak,
           .benefits-transformation-row--active .benefits-preferred-text-streak {
+            animation: none !important;
+            opacity: 0;
+          }
+
+          .benefits-transformation-row--active .benefits-preferred-outcome,
+          .benefits-transformation-row--active .benefits-traditional-outcome,
+          .benefits-transformation-row--active .benefits-preferred-text {
+            transform: none;
+            transition: none;
+          }
+
+          .benefits-preferred-panel-sweep,
+          .benefits-transformation-row--active .benefits-preferred-panel-sweep {
             animation: none !important;
             opacity: 0;
           }
