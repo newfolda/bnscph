@@ -296,6 +296,19 @@ export default function HeroSection() {
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
     >
+      <video
+        aria-hidden="true"
+        autoPlay
+        className="hero-mobile-video pointer-events-none absolute inset-0 z-0 h-full w-full object-cover sm:hidden motion-reduce:hidden"
+        loop
+        muted
+        playsInline
+        poster="/images/hero/herobg2.png"
+        preload="metadata"
+        tabIndex={-1}
+      >
+        <source src="/videos/heromobile.webm" type="video/webm" />
+      </video>
       {/* Temporarily disabled while evaluating /images/hero/herobg2.png as the hero background.
       <video
         aria-hidden="true"
@@ -482,14 +495,29 @@ export default function HeroSection() {
         }
 
         .hero-showroom {
-          background-image: url("/images/hero/herobg2.png");
-          background-position: 64% center;
-          background-repeat: no-repeat;
-          background-size: cover;
+          background-color: var(--primary-light);
+          background-image: none;
         }
 
         .hero-showroom-overlay {
-          background: linear-gradient(90deg, rgba(8, 8, 8, 0.82) 0%, rgba(8, 8, 8, 0.72) 28%, rgba(8, 8, 8, 0.36) 55%, rgba(8, 8, 8, 0) 78%);
+          background: linear-gradient(90deg, rgba(8, 8, 8, 0.78) 0%, rgba(8, 8, 8, 0.62) 58%, rgba(8, 8, 8, 0.34) 100%);
+        }
+
+        .hero-mobile-video {
+          object-position: center center;
+        }
+
+        @media (min-width: 640px) {
+          .hero-showroom {
+            background-image: url("/images/hero/herobg2.png");
+            background-position: 70% center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+
+          .hero-showroom-overlay {
+            background: linear-gradient(90deg, rgba(8, 8, 8, 0.82) 0%, rgba(8, 8, 8, 0.72) 28%, rgba(8, 8, 8, 0.36) 55%, rgba(8, 8, 8, 0) 78%);
+          }
         }
 
         @media (min-width: 768px) {
@@ -563,6 +591,15 @@ export default function HeroSection() {
 
           .hero-typewriter-caret {
             animation: none;
+          }
+        }
+
+        @media (max-width: 639px) and (prefers-reduced-motion: reduce) {
+          .hero-showroom {
+            background-image: url("/images/hero/herobg2.png");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
           }
         }
       `}</style>
