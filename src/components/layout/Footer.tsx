@@ -59,7 +59,7 @@ export default function Footer() {
 
       <Container className="relative z-10">
         <div className="py-14 md:py-16">
-          <div className="grid gap-10 sm:grid-cols-2 sm:gap-x-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)_minmax(0,1.1fr)_minmax(0,0.8fr)] lg:gap-x-10 xl:gap-x-14">
+          <div className="grid gap-10 sm:grid-cols-2 sm:gap-x-12 md:grid-cols-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.75fr)_minmax(0,1.05fr)_minmax(0,0.8fr)_minmax(16rem,1.55fr)] lg:gap-x-7 xl:gap-x-10">
             <div className="max-w-sm">
               <Link
                 href="/"
@@ -129,31 +129,32 @@ export default function Footer() {
                   <span className="mt-1 font-medium text-white">9:00 AM – 10:00 PM</span>
                 </span>
               </div>
-              <section aria-labelledby="footer-newsletter-heading" className="mt-12">
-                <h3 id="footer-newsletter-heading" className={footerHeadingClass}>Subscribe to Our Newsletter</h3>
-                <p className="mt-3 text-xs leading-relaxed text-white/[0.75]">
-                  Get the latest offers, new transactions and updates.
-                </p>
-                {/* TODO: Connect this form to the newsletter subscription service. */}
-                <form className="mt-4 flex flex-col gap-2 lg:flex-row lg:gap-0" onSubmit={(event) => event.preventDefault()}>
-                  <label className="sr-only" htmlFor="footer-newsletter-email">Email address</label>
-                  <input
-                    id="footer-newsletter-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="Email address"
-                    required
-                    className="h-11 min-w-0 flex-1 rounded-xl border border-white/15 bg-white px-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 lg:rounded-r-none"
-                  />
-                  <button
-                    type="submit"
-                    className="h-11 cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-sm font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:rounded-l-none motion-reduce:transition-none"
-                  >
-                    Submit
-                  </button>
-                </form>
-              </section>
+            </section>
+
+            <section aria-labelledby="footer-newsletter-heading" className="sm:col-span-2 md:col-span-2 lg:col-auto">
+              <h2 id="footer-newsletter-heading" className={footerHeadingClass}>Subscribe to Our Newsletter</h2>
+              <p className="mt-3 max-w-[19rem] text-sm leading-relaxed text-white/80">
+                Get the latest offers, new transactions and updates.
+              </p>
+              {/* TODO: Connect this form to the newsletter subscription service. */}
+              <form className="mt-4 flex flex-col gap-2 lg:flex-row lg:gap-0" onSubmit={(event) => event.preventDefault()}>
+                <label className="sr-only" htmlFor="footer-newsletter-email">Email address</label>
+                <input
+                  id="footer-newsletter-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Email address"
+                  required
+                  className="h-12 min-w-0 w-full flex-1 rounded-xl border border-white/15 bg-white px-4 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 lg:rounded-r-none"
+                />
+                <button
+                  type="submit"
+                  className="h-12 w-full cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-[15px] font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:w-[100px] lg:rounded-l-none motion-reduce:transition-none"
+                >
+                  Submit
+                </button>
+              </form>
             </section>
           </div>
 
