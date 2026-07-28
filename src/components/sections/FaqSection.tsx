@@ -231,7 +231,7 @@ export default function FaqSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="h-[52px] w-full rounded-full bg-[var(--primary)] px-6 text-[16px] font-bold text-white shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-65 disabled:shadow-none disabled:hover:translate-y-0 sm:w-[220px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                className="h-[52px] w-full rounded-full bg-[var(--primary)] px-6 text-[20px] font-bold text-white shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-65 disabled:shadow-none disabled:hover:translate-y-0 sm:w-[220px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
               >
                 {isSubmitting ? (
                   <span className="inline-flex items-center justify-center">
