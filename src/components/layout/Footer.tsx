@@ -3,7 +3,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useLanguage } from "../language/LanguageProvider"
-import Container from "../ui/Container"
 
 const quickLinkHrefs = ["/", "/#how-it-works", "/#latest-transactions", "/#why-choose-us", "/#faq"]
 
@@ -57,9 +56,9 @@ export default function Footer() {
         BUY AND SELL CARS PHILIPPINES
       </div>
 
-      <Container className="relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1680px] px-6 sm:px-8 lg:px-10 xl:px-14 2xl:px-16">
         <div className="py-14 md:py-16">
-          <div className="grid gap-10 sm:grid-cols-2 sm:gap-x-12 md:grid-cols-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.75fr)_minmax(0,1.05fr)_minmax(0,0.8fr)_minmax(16rem,1.55fr)] lg:gap-x-7 xl:gap-x-10">
+          <div className="grid gap-10 md:grid-cols-2 md:gap-x-12 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-[minmax(15rem,1.35fr)_minmax(9rem,0.75fr)_minmax(14rem,1.1fr)_minmax(11rem,0.85fr)_minmax(20rem,1.55fr)] xl:gap-x-12 2xl:gap-x-16">
             <div className="max-w-sm">
               <Link
                 href="/"
@@ -95,7 +94,7 @@ export default function Footer() {
                 >
                   <PhoneIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
-                    <span className="text-white transition-colors duration-200 group-hover:text-[var(--primary)]">0916-253-6325</span>
+                    <span className="whitespace-nowrap text-white transition-colors duration-200 group-hover:text-[var(--primary)]">0916-253-6325</span>
                     <span className="mt-1 text-xs text-white/70">{t.footer.callOrText}</span>
                   </span>
                 </a>
@@ -106,7 +105,7 @@ export default function Footer() {
                 >
                   <MailIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
-                    <span className="break-all text-white transition-colors duration-200 group-hover:text-[var(--primary)]">buyandsellcarph@gmail.com</span>
+                    <span className="break-words text-white transition-colors duration-200 group-hover:text-[var(--primary)]">buyandsellcarph@gmail.com</span>
                     <span className="mt-1 text-xs text-white/70">{t.footer.emailUs}</span>
                   </span>
                 </a>
@@ -126,18 +125,18 @@ export default function Footer() {
                 <ClockIcon />
                 <span className="-mt-0.5 flex flex-col">
                   <span className="text-white/70">{t.footer.mondaySaturday}</span>
-                  <span className="mt-1 font-medium text-white">9:00 AM – 10:00 PM</span>
+                  <span className="mt-1 whitespace-nowrap font-medium text-white">9:00 AM – 10:00 PM</span>
                 </span>
               </div>
             </section>
 
-            <section aria-labelledby="footer-newsletter-heading" className="sm:col-span-2 md:col-span-2 lg:col-auto">
+            <section aria-labelledby="footer-newsletter-heading" className="md:col-span-2 xl:col-auto">
               <h2 id="footer-newsletter-heading" className={footerHeadingClass}>Subscribe to Our Newsletter</h2>
               <p className="mt-3 max-w-[19rem] text-sm leading-relaxed text-white/80">
                 Get the latest offers, new transactions and updates.
               </p>
               {/* TODO: Connect this form to the newsletter subscription service. */}
-              <form className="mt-4 flex flex-col gap-2 lg:flex-row lg:gap-0" onSubmit={(event) => event.preventDefault()}>
+              <form className="mt-4 flex flex-col gap-2 xl:flex-row xl:gap-0" onSubmit={(event) => event.preventDefault()}>
                 <label className="sr-only" htmlFor="footer-newsletter-email">Email address</label>
                 <input
                   id="footer-newsletter-email"
@@ -146,11 +145,11 @@ export default function Footer() {
                   autoComplete="email"
                   placeholder="Email address"
                   required
-                  className="h-12 min-w-0 w-full flex-1 rounded-xl border border-white/15 bg-white px-4 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 lg:rounded-r-none"
+                  className="h-[52px] min-w-0 w-full flex-1 rounded-xl border border-white/15 bg-white px-4 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 xl:rounded-r-none"
                 />
                 <button
                   type="submit"
-                  className="h-12 w-full cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-[15px] font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:w-[100px] lg:rounded-l-none motion-reduce:transition-none"
+                  className="h-[52px] w-full cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-[15px] font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] xl:w-[116px] xl:rounded-l-none motion-reduce:transition-none"
                 >
                   Submit
                 </button>
@@ -162,7 +161,7 @@ export default function Footer() {
             <p>{t.footer.copyright}</p>
           </div>
         </div>
-      </Container>
+      </div>
     </footer>
   )
 }
