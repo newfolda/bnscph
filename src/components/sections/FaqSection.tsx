@@ -123,47 +123,41 @@ export default function FaqSection() {
             </p>
             <form
               onSubmit={handleInquirySubmit}
-              className="mt-7 max-w-md rounded-[1.625rem] border border-[var(--border)] bg-[#fffdf8] p-5 shadow-[0_8px_22px_rgba(31,31,31,0.06)] sm:p-6"
+              className="mt-6 max-w-md space-y-4"
             >
-              <h3 className="text-base font-semibold text-[var(--text-primary)]">Have a question?</h3>
-              <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
-                Leave your details and our team will contact you.
-              </p>
-              <div className="mt-4 space-y-3">
-                <div>
-                  <label className="sr-only" htmlFor="faq-inquiry-name">Name</label>
-                  <input
-                    id="faq-inquiry-name"
-                    type="text"
-                    name="name"
-                    autoComplete="name"
-                    placeholder="Name"
-                    required
-                    value={inquiryName}
-                    onChange={(event) => setInquiryName(event.target.value)}
-                    className="h-12 w-full rounded-[0.875rem] border border-[var(--border)] bg-white px-4 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)]/75 transition-[border-color,box-shadow] duration-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20"
-                  />
-                </div>
-                <div>
-                  <label className="sr-only" htmlFor="faq-inquiry-mobile">Mobile Number</label>
-                  <input
-                    id="faq-inquiry-mobile"
-                    type="tel"
-                    name="mobile"
-                    autoComplete="tel"
-                    inputMode="tel"
-                    placeholder="Mobile Number"
-                    required
-                    value={inquiryMobile}
-                    onChange={(event) => setInquiryMobile(event.target.value)}
-                    className="h-12 w-full rounded-[0.875rem] border border-[var(--border)] bg-white px-4 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)]/75 transition-[border-color,box-shadow] duration-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20"
-                  />
-                </div>
+              <div>
+                <label className="sr-only" htmlFor="faq-inquiry-name">Name</label>
+                <input
+                  id="faq-inquiry-name"
+                  type="text"
+                  name="name"
+                  autoComplete="name"
+                  placeholder="Name"
+                  required
+                  value={inquiryName}
+                  onChange={(event) => setInquiryName(event.target.value)}
+                  className="h-[52px] w-full rounded-[0.875rem] border border-[var(--border)] bg-white px-[18px] text-[15px] text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] transition-[border-color,box-shadow] duration-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                />
+              </div>
+              <div>
+                <label className="sr-only" htmlFor="faq-inquiry-mobile">Mobile Number</label>
+                <input
+                  id="faq-inquiry-mobile"
+                  type="tel"
+                  name="mobile"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  placeholder="Mobile No."
+                  required
+                  value={inquiryMobile}
+                  onChange={(event) => setInquiryMobile(event.target.value)}
+                  className="h-[52px] w-full rounded-[0.875rem] border border-[var(--border)] bg-white px-[18px] text-[15px] text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] transition-[border-color,box-shadow] duration-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                />
               </div>
               <button
                 type="submit"
                 disabled={isInquiryDisabled}
-                className="mt-4 h-12 w-full rounded-xl bg-[var(--primary)] px-5 text-sm font-semibold text-[var(--text-primary)] shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[var(--border)] disabled:text-[var(--text-secondary)] disabled:shadow-none disabled:hover:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                className="h-[52px] w-full rounded-full bg-[var(--primary)] px-6 text-sm font-bold text-[var(--text-primary)] shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:shadow-none disabled:hover:translate-y-0 sm:w-[220px] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
               >
                 Inquire Now
               </button>
