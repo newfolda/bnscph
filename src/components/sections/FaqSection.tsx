@@ -1,6 +1,7 @@
 "use client"
 
 import { type FormEvent, useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
 import SectionPill from "../ui/SectionPill"
@@ -343,13 +344,13 @@ export default function FaqSection() {
             >
               ×
             </button>
-            <div aria-hidden="true" className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--primary)]/14 text-[var(--primary)]">
-              <svg fill="none" height="34" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24" width="34">
-                <rect height="14" rx="2" width="18" x="3" y="5" />
-                <path d="m4 7 8 6 8-6" />
-              </svg>
-              <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-[var(--primary)] text-sm font-bold text-[var(--text-primary)]">✓</span>
-            </div>
+            <Image
+              src="/images/brand/thankyou.webp"
+              alt=""
+              width={100}
+              height={100}
+              className="mx-auto h-auto w-[100px] object-contain"
+            />
             <h2 id="faq-success-modal-title" className="mt-6 text-2xl font-bold tracking-tight text-[var(--text-primary)]">Thank you!</h2>
             <p id="faq-success-modal-description" className="mx-auto mt-3 max-w-sm leading-relaxed text-[var(--text-secondary)]">
               Our team will be in touch with you soon.
