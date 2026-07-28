@@ -361,11 +361,11 @@ export default function HeroSection() {
       </video>
       */}
       <div aria-hidden="true" className="hero-showroom-overlay pointer-events-none absolute inset-0 z-[1]" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] hidden overflow-hidden sm:block">
         <div className="absolute bottom-12 right-[5%] h-64 w-64 rounded-full bg-[var(--primary)] opacity-[0.07] blur-3xl md:h-96 md:w-96" />
       </div>
       {showGoldConfetti && (
-        <div aria-hidden="true" className="hero-gold-confetti pointer-events-none absolute inset-0 z-[4] overflow-hidden">
+        <div aria-hidden="true" className="hero-gold-confetti pointer-events-none absolute inset-0 z-[4] hidden overflow-hidden sm:block">
           {goldConfettiPieces.map((piece, index) => (
             <span
               key={`${piece.side}-${index}`}
@@ -389,7 +389,7 @@ export default function HeroSection() {
       <div
         ref={particleLayerRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[5] transform-gpu will-change-transform"
+        className="pointer-events-none absolute inset-0 z-[5] hidden transform-gpu will-change-transform sm:block"
       >
         {particles.map((particle) => (
           <span
@@ -408,7 +408,15 @@ export default function HeroSection() {
           />
         ))}
       </div>
-      <Container className="relative z-20 h-full !px-0 sm:h-auto sm:!px-5 md:!px-8 lg:!px-10">
+      <SellCarModal trigger={(openSellCarModal) => (
+        <button
+          type="button"
+          aria-label="Sell my car"
+          className="absolute inset-0 z-[3] cursor-pointer sm:hidden"
+          onClick={openSellCarModal}
+        />
+      )} />
+      <Container className="relative z-20 hidden h-full !px-0 sm:block sm:h-auto sm:!px-5 md:!px-8 lg:!px-10">
         <div className="absolute inset-0 flex gap-8 px-6 pb-20 pt-7 sm:static sm:px-0 sm:pb-48 sm:pt-20 md:pb-52 lg:pb-60">
           <div className="flex flex-1 flex-col justify-center">
             <h1
@@ -540,7 +548,10 @@ export default function HeroSection() {
         @media (max-width: 639px) {
           .hero-showroom {
             aspect-ratio: 4 / 5;
-            min-height: 460px;
+          }
+
+          .hero-showroom-overlay {
+            background: rgba(0, 0, 0, 0.08);
           }
         }
 
