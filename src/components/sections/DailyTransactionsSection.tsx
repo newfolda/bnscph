@@ -114,7 +114,7 @@ export default function DailyTransactionsSection() {
                         {formatPurchasedAt(transaction.purchasedAt, t.transactions.recentlyPurchased, t.transactions.purchasedOn, t.transactions.dateLocale)}
                       </span>
                     </div>
-                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:h-[100px] lg:flex-none lg:px-5 lg:pb-3 lg:pt-5">
+                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:px-5 lg:py-3">
                       <h3 className="text-[0.95rem] font-bold uppercase leading-snug tracking-[0.025em] text-[var(--text-primary)]">
                         {transaction.year} {transaction.brand} {transaction.model}
                       </h3>
