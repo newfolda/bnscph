@@ -64,7 +64,7 @@ export default function DailyTransactionsSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="latest-transactions" className={`transactions-section overflow-hidden border-t border-[var(--border)] bg-[var(--background-alt)] py-14 md:py-16 ${hasEntered ? "transactions-section--entered" : ""}`}>
+    <section ref={sectionRef} id="latest-transactions" className={`transactions-section overflow-hidden border-t border-[var(--border)] bg-[var(--background-alt)] py-14 md:py-16 lg:pb-16 lg:pt-10 ${hasEntered ? "transactions-section--entered" : ""}`}>
       <Container>
         <div className="flex flex-col items-center text-center">
           <div className="transactions-reveal transactions-reveal--pill">
