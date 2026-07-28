@@ -136,7 +136,7 @@ export default function Footer() {
                 Get the latest offers, new transactions and updates.
               </p>
               {/* TODO: Connect this form to the newsletter subscription service. */}
-              <form className="mt-4 flex flex-col gap-2 xl:flex-row xl:gap-0" onSubmit={(event) => event.preventDefault()}>
+              <form className="mt-4 flex flex-col gap-3 xl:flex-row xl:gap-0" onSubmit={(event) => event.preventDefault()}>
                 <label className="sr-only" htmlFor="footer-newsletter-email">Email address</label>
                 <input
                   id="footer-newsletter-email"
@@ -145,11 +145,11 @@ export default function Footer() {
                   autoComplete="email"
                   placeholder="Email address"
                   required
-                  className="h-[62px] min-w-0 w-full flex-1 rounded-xl border border-white/15 bg-white px-6 text-base text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 lg:h-[52px] lg:px-4 lg:text-sm xl:rounded-r-none"
+                  className="h-[68px] min-w-0 w-full flex-1 rounded-[18px] border border-white/15 bg-white px-6 text-lg font-medium text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 lg:h-[52px] lg:rounded-xl lg:px-4 lg:text-sm lg:font-normal xl:rounded-r-none"
                 />
                 <button
                   type="submit"
-                  className="h-[62px] w-full cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-base font-bold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:h-[52px] lg:text-[15px] lg:font-semibold xl:w-[116px] xl:rounded-l-none motion-reduce:transition-none"
+                  className="h-[68px] w-full cursor-pointer rounded-[18px] bg-[var(--primary)] px-5 text-xl font-extrabold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:h-[52px] lg:rounded-xl lg:text-[15px] lg:font-semibold xl:w-[116px] xl:rounded-l-none motion-reduce:transition-none"
                 >
                   Submit
                 </button>
