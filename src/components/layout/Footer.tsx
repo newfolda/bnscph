@@ -7,9 +7,9 @@ import { useLanguage } from "../language/LanguageProvider"
 const quickLinkHrefs = ["/", "/#how-it-works", "/#latest-transactions", "/#why-choose-us", "/#faq"]
 
 const footerLinkClass =
-  "group inline-flex items-center text-sm text-white/90 transition-[color,transform] duration-200 ease-out hover:translate-x-1 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838]"
+  "group inline-flex items-center text-base text-white/90 transition-[color,transform] duration-200 ease-out hover:translate-x-1 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:text-sm"
 
-const footerHeadingClass = "text-xs font-semibold uppercase tracking-[0.16em] text-[var(--primary)]"
+const footerHeadingClass = "text-sm font-bold uppercase tracking-[0.16em] text-[var(--primary)] lg:text-xs lg:font-semibold"
 
 function PhoneIcon() {
   return (
@@ -89,31 +89,31 @@ export default function Footer() {
               <div className="mt-5 space-y-4">
                 <a
                   aria-label="Call or text Buy and Sell Cars Philippines at 0916-253-6325"
-                  className="group flex items-start gap-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838]"
+                  className="group flex items-start gap-3 text-lg font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:text-sm lg:font-normal"
                   href="tel:09162536325"
                 >
                   <PhoneIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
                     <span className="whitespace-nowrap text-white transition-colors duration-200 group-hover:text-[var(--primary)]">0916-253-6325</span>
-                    <span className="mt-1 text-xs text-white/70">{t.footer.callOrText}</span>
+                    <span className="mt-1 text-sm text-white/70 lg:text-xs">{t.footer.callOrText}</span>
                   </span>
                 </a>
                 <a
                   aria-label="Email Buy and Sell Cars Philippines at buyandsellcarph@gmail.com"
-                  className="group flex items-start gap-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838]"
+                  className="group flex items-start gap-3 text-lg font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:text-sm lg:font-normal"
                   href="mailto:buyandsellcarph@gmail.com"
                 >
                   <MailIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
                     <span className="break-words text-white transition-colors duration-200 group-hover:text-[var(--primary)]">buyandsellcarph@gmail.com</span>
-                    <span className="mt-1 text-xs text-white/70">{t.footer.emailUs}</span>
+                    <span className="mt-1 text-sm text-white/70 lg:text-xs">{t.footer.emailUs}</span>
                   </span>
                 </a>
-                <div className="flex items-start gap-3 text-sm">
+                <div className="flex items-start gap-3 text-lg font-medium lg:text-sm lg:font-normal">
                   <LocationIcon />
                   <span className="-mt-0.5 flex flex-col leading-tight">
                     <span className="text-white">San Juan City, Philippines 1116</span>
-                    <span className="mt-1 text-xs text-white/70">{t.footer.ourLocation}</span>
+                    <span className="mt-1 text-sm text-white/70 lg:text-xs">{t.footer.ourLocation}</span>
                   </span>
                 </div>
               </div>
@@ -124,15 +124,15 @@ export default function Footer() {
               <div className="mt-5 flex items-start gap-3 text-sm leading-tight">
                 <ClockIcon />
                 <span className="-mt-0.5 flex flex-col">
-                  <span className="text-white/70">{t.footer.mondaySaturday}</span>
-                  <span className="mt-1 whitespace-nowrap font-medium text-white">9:00 AM – 10:00 PM</span>
+                  <span className="text-sm text-white/70 lg:text-sm">{t.footer.mondaySaturday}</span>
+                  <span className="mt-1 whitespace-nowrap text-lg font-semibold text-white lg:text-sm lg:font-medium">9:00 AM – 10:00 PM</span>
                 </span>
               </div>
             </section>
 
             <section aria-labelledby="footer-newsletter-heading" className="md:col-span-2 xl:col-auto">
               <h2 id="footer-newsletter-heading" className={footerHeadingClass}>Subscribe to Our Newsletter</h2>
-              <p className="mt-3 max-w-[19rem] text-sm leading-relaxed text-white/80">
+              <p className="mt-3 max-w-[19rem] text-base leading-relaxed text-white/80 lg:text-sm">
                 Get the latest offers, new transactions and updates.
               </p>
               {/* TODO: Connect this form to the newsletter subscription service. */}
@@ -145,11 +145,11 @@ export default function Footer() {
                   autoComplete="email"
                   placeholder="Email address"
                   required
-                  className="h-[52px] min-w-0 w-full flex-1 rounded-xl border border-white/15 bg-white px-4 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 xl:rounded-r-none"
+                  className="h-[62px] min-w-0 w-full flex-1 rounded-xl border border-white/15 bg-white px-6 text-base text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 lg:h-[52px] lg:px-4 lg:text-sm xl:rounded-r-none"
                 />
                 <button
                   type="submit"
-                  className="h-[52px] w-full cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-[15px] font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] xl:w-[116px] xl:rounded-l-none motion-reduce:transition-none"
+                  className="h-[62px] w-full cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-base font-bold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:h-[52px] lg:text-[15px] lg:font-semibold xl:w-[116px] xl:rounded-l-none motion-reduce:transition-none"
                 >
                   Submit
                 </button>

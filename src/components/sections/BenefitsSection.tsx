@@ -195,7 +195,7 @@ export default function BenefitsSection() {
                     onClick={openSellCarModal}
                     >
                     <span className="benefits-cta-text flex flex-col items-center justify-center gap-0.5 leading-tight text-white">
-                      <span className="text-[15px] font-semibold sm:text-base">{t.benefits.cta}</span>
+                      <span className="benefits-cta-primary text-[15px] font-semibold sm:text-base">{t.benefits.cta}</span>
                       <span
                         className="benefits-cta-secondary text-[11px] font-medium sm:text-xs"
                         data-text={t.benefits.ctaSupporting}
@@ -479,6 +479,26 @@ export default function BenefitsSection() {
         }
 
         @media (max-width: 1023px) {
+          .benefits-cta {
+            height: 84px !important;
+          }
+
+          .benefits-cta-text {
+            gap: 0.45rem;
+          }
+
+          .benefits-cta-primary {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+          }
+
+          .benefits-cta-secondary {
+            color: #424242;
+            font-size: 14px;
+            line-height: 1.35;
+          }
+
           .benefits-layout { max-width: 46rem; margin: 0 auto; }
           .benefits-introduction { max-width: 36rem; margin: 0 auto; text-align: center; }
           .benefits-introduction h2,
