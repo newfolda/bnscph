@@ -25,6 +25,13 @@ export default function BenefitsSection() {
       return () => window.cancelAnimationFrame(frame)
     }
 
+    if (typeof IntersectionObserver === "undefined") {
+      const frame = window.requestAnimationFrame(() => setHasEntered(true))
+      return () => window.cancelAnimationFrame(frame)
+    }
+
+    const threshold = window.matchMedia("(max-width: 1023px)").matches ? 0.1 : 0.18
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -32,7 +39,7 @@ export default function BenefitsSection() {
           observer.disconnect()
         }
       },
-      { threshold: 0.18 },
+      { threshold },
     )
 
     observer.observe(section)
@@ -117,7 +124,7 @@ export default function BenefitsSection() {
                     <p>{item.traditional}</p>
                   </div>
                   <div className="benefits-preferred-outcome">
-                    <p className="benefits-mobile-side-label">{t.benefits.professionalBuyer}</p>
+                    <p className="benefits-mobile-side-label">{t.benefits.preferredHeading}</p>
                     <div className="benefits-preferred-text-wrap">
                       <p className="benefits-preferred-text">{item.preferred}</p>
                       <p aria-hidden="true" className="benefits-preferred-text-streak">

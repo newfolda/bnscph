@@ -1,6 +1,6 @@
 "use client"
 
-import { type CSSProperties, type PointerEvent, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { type CSSProperties, type PointerEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import Container from "../ui/Container"
 import Button from "../ui/Button"
 import SellCarModal from "../sell-car/SellCarModal"
@@ -75,8 +75,10 @@ const goldConfettiPieces: GoldConfettiPiece[] = [
 
 export default function HeroSection() {
   const { t } = useLanguage()
-  const rotatingWords = t.hero.rotatingWords
-  const typewriterWords = t.hero.typewriterWords
+  const rotatingWordsKey = t.hero.rotatingWords.join("\u0000")
+  const typewriterWordsKey = t.hero.typewriterWords.join("\u0000")
+  const rotatingWords = useMemo(() => rotatingWordsKey.split("\u0000"), [rotatingWordsKey])
+  const typewriterWords = useMemo(() => typewriterWordsKey.split("\u0000"), [typewriterWordsKey])
   const particleLayerRef = useRef<HTMLDivElement>(null)
   const rotatingWordMeasureRef = useRef<HTMLSpanElement>(null)
   const animationFrameRef = useRef<number | null>(null)
@@ -137,7 +139,7 @@ export default function HeroSection() {
     if (measuredWidth) {
       setRotatingWordWidth(measuredWidth)
     }
-  }, [activeWordIndex, rotatingWords])
+  }, [activeWordIndex, rotatingWordsKey])
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")

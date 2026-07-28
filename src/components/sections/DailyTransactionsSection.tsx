@@ -34,15 +34,19 @@ export default function DailyTransactionsSection() {
   const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
   const [hasEntered, setHasEntered] = useState(false)
+  const [isMarqueePaused, setIsMarqueePaused] = useState(false)
 
   useEffect(() => {
+    const reveal = () => window.requestAnimationFrame(() => setHasEntered(true))
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return
+      const frame = reveal()
+      return () => window.cancelAnimationFrame(frame)
     }
 
     const section = sectionRef.current
     if (!section || typeof IntersectionObserver === "undefined") {
-      const frame = window.requestAnimationFrame(() => setHasEntered(true))
+      const frame = reveal()
       return () => window.cancelAnimationFrame(frame)
     }
 
@@ -77,7 +81,14 @@ export default function DailyTransactionsSection() {
         </div>
 
         <div className="transactions-reveal transactions-reveal--cards relative mx-[-1rem] mt-10 pb-4 sm:mx-[-1.5rem] md:mt-12 md:pb-6 lg:mx-[-2.5rem]">
-          <div className="transactions-marquee relative z-10 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden">
+          <div
+            className={`transactions-marquee relative z-10 overflow-hidden pb-2 ${isMarqueePaused ? "transactions-marquee--paused" : ""}`}
+            onPointerDown={(event) => {
+              if (event.pointerType !== "mouse") setIsMarqueePaused(true)
+            }}
+            onPointerUp={() => setIsMarqueePaused(false)}
+            onPointerCancel={() => setIsMarqueePaused(false)}
+          >
             <div className="transactions-track flex w-max snap-x snap-mandatory gap-7 pr-7 md:gap-8 md:pr-8 md:snap-none">
               {[...latestTransactions, ...latestTransactions].map((transaction, index) => {
                 const isDuplicate = index >= latestTransactions.length
@@ -87,9 +98,7 @@ export default function DailyTransactionsSection() {
                     key={`${transaction.year}-${transaction.brand}-${transaction.model}-${isDuplicate ? "duplicate" : "original"}`}
                     aria-hidden={isDuplicate || undefined}
                     tabIndex={isDuplicate ? -1 : 0}
-                    className={`group flex h-[418px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px] ${
-                      isDuplicate ? "hidden md:block" : ""
-                    }`}
+                    className="group flex h-[418px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px]"
                   >
                     <div className="relative h-[286px] shrink-0 overflow-hidden bg-[#F7F7F7] md:h-[270px] lg:h-[320px]">
                       <Image
@@ -144,9 +153,17 @@ export default function DailyTransactionsSection() {
           transition-delay: 280ms;
         }
 
+        .transactions-section--entered .transactions-track {
+          animation: transactions-marquee 30s linear 800ms infinite;
+        }
+
+        .transactions-marquee--paused .transactions-track {
+          animation-play-state: paused;
+        }
+
         @media (min-width: 768px) {
           .transactions-section--entered .transactions-track {
-            animation: transactions-marquee 36s linear 800ms infinite;
+            animation-duration: 34s;
           }
 
           .transactions-marquee:hover .transactions-track,
@@ -161,6 +178,12 @@ export default function DailyTransactionsSection() {
 
           .transactions-fade-right {
             background: linear-gradient(270deg, var(--background-alt), rgba(248, 248, 248, 0));
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .transactions-section--entered .transactions-track {
+            animation-duration: 36s;
           }
         }
 
