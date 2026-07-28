@@ -549,14 +549,10 @@ export default function HeroSection() {
           .hero-showroom {
             aspect-ratio: 4 / 5;
           }
-
-          .hero-showroom-overlay {
-            background: rgba(0, 0, 0, 0.08);
-          }
         }
 
         .hero-showroom-overlay {
-          background: linear-gradient(90deg, rgba(8, 8, 8, 0.78) 0%, rgba(8, 8, 8, 0.62) 58%, rgba(8, 8, 8, 0.34) 100%);
+          background: transparent;
         }
 
         .hero-mobile-video {

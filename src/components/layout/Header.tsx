@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { type MouseEvent, useEffect, useRef, useState } from "react"
 import { useLanguage } from "../language/LanguageProvider"
+import SellCarModal from "../sell-car/SellCarModal"
 import Container from "../ui/Container"
 
 const navigationItems = [
@@ -244,7 +245,7 @@ export default function Header() {
       <Container>
         <nav aria-label="Primary navigation">
           <div
-            className={`flex items-center justify-between transition-[height] duration-300 lg:grid lg:grid-cols-[auto_1fr_auto] ${
+            className={`grid w-full grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-3 transition-[height] duration-300 lg:grid-cols-[auto_1fr_auto] lg:gap-0 ${
               isCompact ? "h-12" : "h-16"
             }`}
           >
@@ -252,7 +253,7 @@ export default function Header() {
               href="/"
               onClick={(event) => handleNavigation(event, "home")}
               className={`flex h-full items-center transition-[width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
-                isCompact ? "w-[155px]" : "w-[190px]"
+                isCompact ? "w-[135px] sm:w-[155px]" : "w-[135px] sm:w-[190px]"
               }`}
             >
               <Image
@@ -261,7 +262,7 @@ export default function Header() {
                 width={190}
                 height={54}
                 className={`h-auto transition-[width] duration-300 ${
-                  isCompact ? "w-[155px]" : "w-[190px]"
+                  isCompact ? "w-[135px] sm:w-[155px]" : "w-[135px] sm:w-[190px]"
                 }`}
                 priority
               />
@@ -292,6 +293,17 @@ export default function Header() {
               <PhoneContact />
               <LanguageSelector />
             </div>
+
+            <SellCarModal trigger={(openSellCarModal) => (
+              <button
+                type="button"
+                aria-label="Sell my car"
+                onClick={openSellCarModal}
+                className="cursor-pointer whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.1em] text-[#D7A93F] transition-opacity duration-200 hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 sm:hidden"
+              >
+                SELL MY CAR
+              </button>
+            )} />
 
             <button
               type="button"
