@@ -131,10 +131,11 @@ export default function Footer() {
               </div>
               <section aria-labelledby="footer-newsletter-heading" className="mt-12">
                 <h3 id="footer-newsletter-heading" className={footerHeadingClass}>Subscribe to Our Newsletter</h3>
-                <p className="mt-3 text-xs leading-relaxed text-white/70">
+                <p className="mt-3 text-xs leading-relaxed text-white/[0.75]">
                   Get the latest offers, new transactions and updates.
                 </p>
-                <form className="mt-4 flex flex-col gap-2 lg:flex-row" onSubmit={(event) => event.preventDefault()}>
+                {/* TODO: Connect this form to the newsletter subscription service. */}
+                <form className="mt-4 flex flex-col gap-2 lg:flex-row lg:gap-0" onSubmit={(event) => event.preventDefault()}>
                   <label className="sr-only" htmlFor="footer-newsletter-email">Email address</label>
                   <input
                     id="footer-newsletter-email"
@@ -143,11 +144,11 @@ export default function Footer() {
                     autoComplete="email"
                     placeholder="Email address"
                     required
-                    className="h-11 min-w-0 flex-1 rounded-xl border border-white/15 bg-white px-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35"
+                    className="h-11 min-w-0 flex-1 rounded-xl border border-white/15 bg-white px-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/35 lg:rounded-r-none"
                   />
                   <button
                     type="submit"
-                    className="h-11 cursor-pointer rounded-xl bg-[var(--primary)] px-4 text-sm font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] motion-reduce:transition-none"
+                    className="h-11 cursor-pointer rounded-xl bg-[var(--primary)] px-5 text-sm font-semibold text-[var(--text-primary)] transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:rounded-l-none motion-reduce:transition-none"
                   >
                     Submit
                   </button>
