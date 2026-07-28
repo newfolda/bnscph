@@ -409,11 +409,11 @@ export default function HeroSection() {
         ))}
       </div>
       <Container className="relative z-20">
-        <div className="flex gap-8 pb-48 pt-20 md:pb-52 lg:pb-60">
+        <div className="flex gap-8 pb-28 pt-16 sm:pb-48 sm:pt-20 md:pb-52 lg:pb-60">
           <div className="flex flex-1 flex-col justify-center">
             <h1
               aria-label={t.hero.ariaLabel}
-              className="max-w-xl text-5xl font-bold leading-[1.1] tracking-tight text-white"
+              className="max-w-xl text-[3.25rem] font-bold leading-[1.1] tracking-tight text-white sm:text-5xl"
             >
               <span className="block lg:whitespace-nowrap">
                 {t.hero.prefix}{" "}
