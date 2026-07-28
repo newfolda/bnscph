@@ -408,12 +408,12 @@ export default function HeroSection() {
           />
         ))}
       </div>
-      <Container className="relative z-20">
-        <div className="flex gap-8 pb-28 pt-16 sm:pb-48 sm:pt-20 md:pb-52 lg:pb-60">
+      <Container className="relative z-20 h-full !px-0 sm:h-auto sm:!px-5 md:!px-8 lg:!px-10">
+        <div className="absolute inset-0 flex gap-8 px-6 pb-20 pt-7 sm:static sm:px-0 sm:pb-48 sm:pt-20 md:pb-52 lg:pb-60">
           <div className="flex flex-1 flex-col justify-center">
             <h1
               aria-label={t.hero.ariaLabel}
-              className="max-w-xl text-[3.25rem] font-bold leading-[1.1] tracking-tight text-white sm:text-5xl"
+              className="max-w-xl text-[clamp(2.35rem,11vw,3rem)] font-bold leading-[1.04] tracking-[-0.025em] text-white sm:text-5xl sm:leading-[1.1] sm:tracking-tight"
             >
               <span className="block lg:whitespace-nowrap">
                 {t.hero.prefix}{" "}
@@ -440,7 +440,7 @@ export default function HeroSection() {
                 {t.hero.lineThree}
               </span>
             </h1>
-            <p aria-label={`${t.hero.supportingPrefix} ${typewriterWords[0] ?? ""}`} className="mt-5 max-w-md text-lg font-medium leading-relaxed text-white/90 sm:whitespace-nowrap">
+            <p aria-label={`${t.hero.supportingPrefix} ${typewriterWords[0] ?? ""}`} className="mt-4 max-w-md overflow-hidden text-base font-medium leading-relaxed text-white/90 sm:mt-5 sm:overflow-visible sm:text-lg sm:whitespace-nowrap">
               <span aria-hidden="true">
                 {t.hero.supportingPrefix}{" "}
                 <span className="relative inline-block align-baseline text-[#D7A93F]">
@@ -472,7 +472,7 @@ export default function HeroSection() {
             </Button>
             )} />
           </div>
-          <div className="relative flex h-[440px] flex-1 items-center justify-end">
+          <div className="relative hidden h-[440px] flex-1 items-center justify-end sm:flex">
           </div>
         </div>
       </Container>
@@ -535,6 +535,13 @@ export default function HeroSection() {
         .hero-showroom {
           background-color: var(--primary-light);
           background-image: none;
+        }
+
+        @media (max-width: 639px) {
+          .hero-showroom {
+            aspect-ratio: 4 / 5;
+            min-height: 460px;
+          }
         }
 
         .hero-showroom-overlay {
