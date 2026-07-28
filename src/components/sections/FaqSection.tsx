@@ -16,12 +16,22 @@ export default function FaqSection() {
   const [nameError, setNameError] = useState("")
   const [mobileError, setMobileError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const autoOpenTimerRef = useRef<number | null>(null)
   const entranceFrameRef = useRef<number | null>(null)
   const submissionTimerRef = useRef<number | null>(null)
+  const successCloseButtonRef = useRef<HTMLButtonElement>(null)
   const sequenceStartedRef = useRef(false)
   const hasManuallyInteractedRef = useRef(false)
+
+  const handleCloseSuccessModal = () => {
+    setInquiryName("")
+    setInquiryMobile("")
+    setNameError("")
+    setMobileError("")
+    setShowSuccessModal(false)
+  }
 
   useEffect(() => {
     const section = sectionRef.current
@@ -89,6 +99,29 @@ export default function FaqSection() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!showSuccessModal) return
+
+    const previousOverflow = document.body.style.overflow
+    const focusFrame = window.requestAnimationFrame(() => {
+      successCloseButtonRef.current?.focus()
+    })
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleCloseSuccessModal()
+      }
+    }
+
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", handleEscape)
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame)
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener("keydown", handleEscape)
+    }
+  }, [showSuccessModal])
+
   const handleQuestionClick = (index: number) => {
     hasManuallyInteractedRef.current = true
     if (autoOpenTimerRef.current !== null) {
@@ -117,6 +150,7 @@ export default function FaqSection() {
     submissionTimerRef.current = window.setTimeout(() => {
       console.info({ name, mobile })
       setIsSubmitting(false)
+      setShowSuccessModal(true)
       submissionTimerRef.current = null
     }, 1200)
   }
@@ -285,6 +319,52 @@ export default function FaqSection() {
           </div>
         </div>
       </Container>
+
+      {showSuccessModal && (
+        <div
+          className="faq-success-modal-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-5 backdrop-blur-sm"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) handleCloseSuccessModal()
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="faq-success-modal-title"
+            aria-describedby="faq-success-modal-description"
+            className="faq-success-modal-dialog relative w-full max-w-[460px] rounded-[24px] bg-white px-7 pb-8 pt-10 text-center shadow-[0_24px_64px_rgba(0,0,0,0.28)] sm:px-10 sm:pb-10 sm:pt-12"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={handleCloseSuccessModal}
+              aria-label="Close success message"
+              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-2xl leading-none text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] motion-reduce:transition-none"
+            >
+              ×
+            </button>
+            <div aria-hidden="true" className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--primary)]/14 text-[var(--primary)]">
+              <svg fill="none" height="34" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24" width="34">
+                <rect height="14" rx="2" width="18" x="3" y="5" />
+                <path d="m4 7 8 6 8-6" />
+              </svg>
+              <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-[var(--primary)] text-sm font-bold text-[var(--text-primary)]">✓</span>
+            </div>
+            <h2 id="faq-success-modal-title" className="mt-6 text-2xl font-bold tracking-tight text-[var(--text-primary)]">Thank you!</h2>
+            <p id="faq-success-modal-description" className="mx-auto mt-3 max-w-sm leading-relaxed text-[var(--text-secondary)]">
+              Our team will be in touch with you soon.
+            </p>
+            <button
+              ref={successCloseButtonRef}
+              type="button"
+              onClick={handleCloseSuccessModal}
+              className="mt-7 h-12 min-w-32 rounded-full bg-[var(--primary)] px-7 text-sm font-bold text-[var(--text-primary)] shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       <style>{`
         .faq-entrance-header,
@@ -485,6 +565,24 @@ export default function FaqSection() {
           50% { opacity: 1; transform: translateY(-1px); }
         }
 
+        .faq-success-modal-backdrop {
+          animation: faq-success-backdrop-in 240ms ease-out both;
+        }
+
+        .faq-success-modal-dialog {
+          animation: faq-success-dialog-in 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes faq-success-backdrop-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes faq-success-dialog-in {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
         @media (max-width: 639px) {
           .faq-card--open {
             transform: translateY(-2px);
@@ -525,6 +623,11 @@ export default function FaqSection() {
           }
 
           .faq-submit-dots span {
+            animation: none;
+          }
+
+          .faq-success-modal-backdrop,
+          .faq-success-modal-dialog {
             animation: none;
           }
 
