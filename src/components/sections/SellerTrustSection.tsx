@@ -98,12 +98,12 @@ export default function SellerTrustSection() {
   const yearsSuffix = t.sellerTrust.items[0]?.value.replace(/^5\+\s*/, "") ?? ""
 
   return (
-    <section ref={sectionRef} id="seller-trust" aria-labelledby="seller-trust-title" className="border-y border-[rgba(143,106,31,0.10)] bg-[#F4F2EC] py-14 sm:py-16 lg:py-20">
+    <section ref={sectionRef} id="seller-trust" aria-labelledby="seller-trust-title" className="border-y border-[rgba(143,106,31,0.10)] bg-[#F4F2EC] py-14 sm:py-16 lg:py-16">
       <Container>
         <div className="mx-auto max-w-[77rem]">
-          <header className="mx-auto max-w-[47.5rem] text-center">
+          <header className="mx-auto max-w-[52rem] text-center">
             <SectionPill className="mb-4">{t.sellerTrust.pill}</SectionPill>
-            <h2 id="seller-trust-title" className="text-3xl font-bold leading-[1.08] tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[2.75rem]">
+            <h2 id="seller-trust-title" className="text-3xl font-bold leading-[1.08] tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[2.4rem]">
               {t.sellerTrust.title}
             </h2>
             <p className="mx-auto mt-3 max-w-[38.75rem] text-[15px] leading-relaxed text-[var(--text-secondary)] sm:text-base">
@@ -128,10 +128,10 @@ export default function SellerTrustSection() {
                 <article
                   key={item.title}
                   aria-label={`${item.value}. ${item.title}. ${item.description}`}
-                  className="seller-trust-card relative flex min-h-[180px] flex-col overflow-hidden rounded-[1.5rem] border border-[rgba(143,106,31,0.13)] bg-white p-6 shadow-[0_14px_34px_rgba(31,31,31,0.065),0_3px_10px_rgba(143,106,31,0.04)]"
+                  className="seller-trust-card relative flex min-h-[195px] flex-col overflow-hidden rounded-[1.5rem] border border-[rgba(143,106,31,0.13)] bg-white p-6 shadow-[0_14px_34px_rgba(31,31,31,0.065),0_3px_10px_rgba(143,106,31,0.04)]"
                   style={{ transitionDelay: `${index * 70}ms` }}
                 >
-                  <span className={`relative z-10 font-extrabold leading-none tracking-tight text-[#A87918] ${index < 2 ? "tabular-nums" : ""} ${valueClassName}`}>
+                  <span className={`relative z-10 font-extrabold leading-none tracking-tight text-[#B88922] ${index < 2 ? "tabular-nums" : ""} ${valueClassName}`}>
                     {value}
                   </span>
                   <h3 className="relative z-10 mt-5 text-[17px] font-bold leading-tight text-[var(--text-primary)]">
@@ -140,7 +140,7 @@ export default function SellerTrustSection() {
                   <p className="relative z-10 mt-2 max-w-[15rem] text-sm leading-relaxed text-[var(--text-secondary)]">
                     {item.description}
                   </p>
-                  <span aria-hidden="true" className="pointer-events-none absolute -bottom-3 -right-3 size-[6.25rem] text-[#A87918] opacity-[0.09]">
+                  <span aria-hidden="true" className="pointer-events-none absolute -bottom-3 -right-3 size-[6.25rem] text-[#B88922] opacity-[0.09]">
                     <TrackRecordIcon index={index} />
                   </span>
                 </article>

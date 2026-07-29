@@ -136,7 +136,7 @@ export const translations: Record<Language, Translation> = {
         { value: "5+ Years", title: "Car-Buying Experience", description: "Serving Filipino car owners since 2021." },
         { value: "1,000+", title: "Cars Purchased", description: "Completed transactions across the Philippines." },
         { value: "Nationwide", title: "Doorstep Inspection", description: "We inspect vehicles at the seller’s preferred location." },
-        { value: "All Makes & Models", title: "2010 and Newer", description: "We consider a wide range of vehicle brands and types." },
+        { value: "All Makes & Models", title: "Vehicles from 2010 Onward", description: "We consider a wide range of vehicle brands and types." },
       ],
     },
     benefits: {
@@ -238,7 +238,7 @@ export const translations: Record<Language, Translation> = {
         { value: "5+ Taon", title: "Karanasan sa Pagbili ng Sasakyan", description: "Tumutulong sa mga Filipino car owner mula 2021." },
         { value: "1,000+", title: "Sasakyang Nabili", description: "Mga transaksyong nakumpleto sa buong Pilipinas." },
         { value: "Nationwide", title: "Doorstep Inspection", description: "Ini-inspect namin ang sasakyan sa napili mong lokasyon." },
-        { value: "All Makes & Models", title: "2010 at Mas Bago", description: "Tumatanggap kami ng iba’t ibang brand at uri ng sasakyan." },
+        { value: "All Makes & Models", title: "Mga Sasakyang 2010 at Mas Bago", description: "Tumatanggap kami ng iba’t ibang brand at uri ng sasakyan." },
       ],
     },
     benefits: {
