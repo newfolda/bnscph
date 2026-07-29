@@ -268,10 +268,10 @@ export default function HeroSection() {
               <Button
                 aria-label={t.hero.cta}
                 onClick={openSellCarModal}
-                className="group mt-5 inline-flex h-[52px] w-fit min-w-[280px] items-center justify-center rounded-full !bg-[var(--primary)] !px-6 !text-white shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                className="group mt-5 inline-flex h-[52px] w-fit items-center justify-center rounded-full !bg-[var(--primary)] !px-5 !text-white shadow-[0_7px_16px_rgba(143,104,25,0.16)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_10px_20px_rgba(143,104,25,0.22)] active:translate-y-0 active:shadow-[0_4px_10px_rgba(143,104,25,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 style={{ borderRadius: "9999px" }}
               >
-                <span className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap text-[20px] font-bold text-white">
+                <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-[20px] font-bold text-white">
                   <span className="sm:hidden">SELL MY CAR</span>
                   <span className="hidden sm:inline">{t.hero.cta}</span>
                   <svg aria-hidden="true" className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" fill="none" height="20" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3.5" viewBox="0 0 24 24" width="20">
