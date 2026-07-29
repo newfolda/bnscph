@@ -110,7 +110,7 @@ export const translations: Record<Language, Translation> = {
       steps: [
         { title: "Tell Us About Your Car", description: "Send your car’s details and a few recent photos. We’ll review them and provide an initial offer." },
         { title: "We Inspect It at Your Doorstep", description: "If you’re happy with the initial offer, choose a convenient time. Our team will inspect the car at your location." },
-        { title: "Get Paid the Same Day", description: "Once the inspection is complete and you accept the final offer, we’ll complete the sale. Receive payment the same day by cash or bank transfer." },
+        { title: "Get Paid the Same Day", description: "Once the inspection is complete, we’ll proceed with the sale. Receive payment by cash or bank transfer." },
       ],
     },
     transactions: {
