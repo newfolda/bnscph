@@ -155,8 +155,8 @@ export default function ProcessSection() {
             <SectionPill className="mb-4">
               {t.process.pill}
             </SectionPill>
-            <h2 className="text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">{t.process.title}</h2>
-            <p className="mt-3 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
+            <h2 className="text-3xl font-bold leading-tight tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[2.75rem]">{t.process.title}</h2>
+            <p className="mt-3 max-w-[42rem] text-[15px] leading-relaxed text-[var(--text-secondary)] sm:text-base lg:text-[17px]">
               {t.process.supporting}
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function ProcessSection() {
                 data-process-card-index={index}
                 onPointerMove={handleCardPointerMove}
                 onPointerLeave={(event) => resetCardPointerPhysics(event.currentTarget)}
-                className={`process-glass-card process-glass-card--${index + 1}${activeMobileCard === index ? " process-glass-card--mobile-active" : ""} group/card relative z-10 flex min-h-[360px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-7 text-center md:min-h-[382px] group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
+                className={`process-glass-card process-glass-card--${index + 1}${activeMobileCard === index ? " process-glass-card--mobile-active" : ""} group/card relative z-10 flex min-h-[370px] flex-col items-center rounded-[1.625rem] px-6 pb-7 pt-7 text-center md:min-h-[405px] lg:min-h-[410px] group-hover/process:brightness-[0.98] group-hover/process:saturate-[0.96] hover:z-20 focus-within:z-20 motion-reduce:transform-none motion-reduce:transition-none`}
               >
                 <span
                   className="process-step-number relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-[var(--primary)] shadow-[0_4px_12px_rgba(31,31,31,0.10)] transition-[transform,box-shadow] duration-300 ease-out group-hover/card:scale-110 group-hover/card:shadow-[0_8px_18px_rgba(31,31,31,0.14)] motion-reduce:transform-none"
@@ -233,10 +233,10 @@ export default function ProcessSection() {
                   )}
                 </div>
                 <div className="mt-1 flex w-full flex-col items-center text-center">
-                  <h3 className="flex min-h-[3.5rem] items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none">
+                  <h3 className="flex min-h-[3.5rem] items-center text-xl font-bold leading-[1.2] text-[var(--text-primary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--primary)] motion-reduce:transition-none lg:text-[21px]">
                     {step.title}
                   </h3>
-                  <p className="relative isolate mt-2 min-h-10 max-w-[16rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none">
+                  <p className="relative isolate mt-2 min-h-[3.25rem] max-w-[16rem] overflow-hidden text-[15px] leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 ease-out group-hover/card:text-[var(--text-primary)] motion-reduce:transition-none md:text-base">
                     <span className="process-card-description-text">
                       {step.description}
                     </span>

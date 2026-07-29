@@ -72,10 +72,10 @@ export default function DailyTransactionsSection() {
               {t.transactions.pill}
             </SectionPill>
           </div>
-          <h2 className="transactions-reveal transactions-reveal--heading mx-auto mt-3 max-w-[760px] text-4xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">
+          <h2 className="transactions-reveal transactions-reveal--heading mx-auto mt-3 max-w-[760px] text-3xl font-bold leading-tight tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[2.75rem]">
             {t.transactions.title}
           </h2>
-          <p className="transactions-reveal transactions-reveal--description mt-2 max-w-lg text-sm leading-relaxed text-[var(--text-secondary)]">
+          <p className="transactions-reveal transactions-reveal--description mt-2 max-w-[40rem] text-[15px] leading-relaxed text-[var(--text-secondary)] sm:text-base lg:text-[17px]">
             {t.transactions.description}
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function DailyTransactionsSection() {
                     key={`${transaction.year}-${transaction.brand}-${transaction.model}-${isDuplicate ? "duplicate" : "original"}`}
                     aria-hidden={isDuplicate || undefined}
                     tabIndex={isDuplicate ? -1 : 0}
-                    className="group flex h-[380px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[400px] md:w-[250px] md:max-w-none lg:h-[400px] lg:w-[290px]"
+                    className="group flex h-[390px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[410px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px]"
                   >
                     <div className="relative h-[286px] shrink-0 overflow-hidden bg-[#F7F7F7] md:h-[270px] lg:h-[320px]">
                       <Image
@@ -110,15 +110,15 @@ export default function DailyTransactionsSection() {
                         className="object-cover object-center transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.035] motion-reduce:transition-none"
                       />
                       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/[0.05] to-transparent" />
-                      <span className="absolute left-3 top-3 rounded-full border border-white/65 bg-white/80 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_2px_7px_rgba(31,31,31,0.08)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/90 motion-reduce:transition-none">
+                      <span className="absolute left-3 top-3 rounded-full border border-white/65 bg-white/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_2px_7px_rgba(31,31,31,0.08)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/90 motion-reduce:transition-none md:text-xs lg:text-[13px]">
                         {formatPurchasedAt(transaction.purchasedAt, t.transactions.recentlyPurchased, t.transactions.purchasedOn, t.transactions.dateLocale)}
                       </span>
                     </div>
                     <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:px-5 lg:py-3">
-                      <h3 className="text-[0.95rem] font-bold uppercase leading-snug tracking-[0.025em] text-[var(--text-primary)]">
+                      <h3 className="text-base font-bold uppercase leading-snug tracking-[0.025em] text-[var(--text-primary)] lg:text-[17px]">
                         {transaction.year} {transaction.brand} {transaction.model}
                       </h3>
-                      <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">{t.transactions.sellerFrom} {transaction.location}</p>
+                      <p className="mt-1 text-[13px] leading-relaxed text-[var(--text-secondary)] lg:text-sm">{t.transactions.sellerFrom} {transaction.location}</p>
                     </div>
                   </article>
                 )

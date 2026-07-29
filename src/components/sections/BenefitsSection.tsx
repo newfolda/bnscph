@@ -183,7 +183,7 @@ export default function BenefitsSection() {
               <br />
               {t.benefits.titleLineTwo}
             </h2>
-            <p className="mt-[1.4rem] max-w-[26rem] text-base leading-[1.7] text-[var(--text-secondary)]">
+            <p className="mt-[1.4rem] max-w-[26rem] text-base leading-[1.7] text-[var(--text-secondary)] lg:text-[17px]">
               {t.benefits.description}
             </p>
 
@@ -338,6 +338,12 @@ export default function BenefitsSection() {
           font-size: 0.99rem;
           font-weight: 600;
           line-height: 1.5;
+        }
+
+        @media (min-width: 1024px) {
+          .benefits-transformation-row { min-height: 5.5rem; }
+          .benefits-traditional-outcome { font-size: 1rem; line-height: 1.5; }
+          .benefits-preferred-outcome { font-size: 1.0625rem; line-height: 1.5; }
         }
 
         .benefits-preferred-text-wrap {
