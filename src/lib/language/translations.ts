@@ -108,9 +108,9 @@ export const translations: Record<Language, Translation> = {
       title: "How It Works?",
       supporting: "3 SIMPLE STEPS.",
       steps: [
-        { title: "Tell Us About Your Car", description: "Enter your car's model, year, mileage, and upload a few recent photos to receive an initial offer." },
-        { title: "We Inspect It at Your Doorstep", description: "If you're happy with the initial offer, choose a convenient inspection time. Our team will come to your location." },
-        { title: "Get Paid the Same Day", description: "Once everything checks out, complete the sale and receive payment by cash or bank transfer." },
+        { title: "Tell Us About Your Car", description: "Send your car’s details and a few recent photos. We’ll review them and provide an initial offer." },
+        { title: "We Inspect It at Your Doorstep", description: "If you’re happy with the initial offer, choose a convenient time. Our team will inspect the car at your location." },
+        { title: "Get Paid the Same Day", description: "Once the inspection is complete and you accept the final offer, we’ll complete the sale. Receive payment the same day by cash or bank transfer." },
       ],
     },
     transactions: {
