@@ -131,12 +131,12 @@ export const translations: Record<Language, Translation> = {
     sellerTrust: {
       pill: "OUR TRACK RECORD",
       title: "Trusted by Car Sellers Across the Philippines",
-      description: "Five years of experience, more than 1,000 completed purchases, and nationwide doorstep service.",
+      description: "Five years of experience, more than 1,000 completed purchases, and a safe, hassle-free process for vehicles from 2010 onward.",
       items: [
         { value: "5+ Years", title: "Car-Buying Experience", description: "Serving Filipino car owners since 2021." },
         { value: "1,000+", title: "Cars Purchased", description: "Completed transactions across the Philippines." },
-        { value: "Nationwide", title: "Doorstep Inspection", description: "We inspect vehicles at the seller’s preferred location." },
-        { value: "All Makes & Models", title: "Vehicles from 2010 Onward", description: "We consider a wide range of vehicle brands and types." },
+        { value: "2010+", title: "Model Years Accepted", description: "All makes and models from 2010 onward." },
+        { value: "100%", title: "Safe & Hassle-Free Selling", description: "A secure and straightforward process from valuation to payment." },
       ],
     },
     benefits: {
@@ -233,12 +233,12 @@ export const translations: Record<Language, Translation> = {
     sellerTrust: {
       pill: "AMING TRACK RECORD",
       title: "Pinagkakatiwalaan ng mga Car Seller sa Buong Pilipinas",
-      description: "Mahigit limang taon ng karanasan, higit 1,000 sasakyang nabili, at nationwide doorstep inspection.",
+      description: "Mahigit limang taon ng karanasan, higit 1,000 sasakyang nabili, at ligtas at hassle-free na proseso para sa mga modelong 2010 pataas.",
       items: [
         { value: "5+ Taon", title: "Karanasan sa Pagbili ng Sasakyan", description: "Tumutulong sa mga Filipino car owner mula 2021." },
         { value: "1,000+", title: "Sasakyang Nabili", description: "Mga transaksyong nakumpleto sa buong Pilipinas." },
-        { value: "Nationwide", title: "Doorstep Inspection", description: "Ini-inspect namin ang sasakyan sa napili mong lokasyon." },
-        { value: "All Makes & Models", title: "Mga Sasakyang 2010 at Mas Bago", description: "Tumatanggap kami ng iba’t ibang brand at uri ng sasakyan." },
+        { value: "2010+", title: "Mga Model Year na Tinatanggap", description: "Lahat ng brand at modelo mula 2010 pataas." },
+        { value: "100%", title: "Ligtas at Hassle-Free na Pagbebenta", description: "Ligtas at diretsong proseso mula valuation hanggang payment." },
       ],
     },
     benefits: {

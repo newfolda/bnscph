@@ -27,10 +27,10 @@ function TrackRecordIcon({ index }: { index: number }) {
   }
 
   if (index === 2) {
-    return <svg {...commonProps}><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z" /><circle cx="12" cy="10" r="2" /><path d="M18 18h3M19.5 16.5v3" /></svg>
+    return <svg {...commonProps}><rect height="16" rx="2.5" width="17" x="3.5" y="4.5" /><path d="M7.5 2.5v4M16.5 2.5v4M7.5 10h9M8 14h3M13 14h3M8 17h3" /></svg>
   }
 
-  return <svg {...commonProps}><rect height="6" rx="1" width="6" x="4" y="4" /><rect height="6" rx="1" width="6" x="14" y="4" /><rect height="6" rx="1" width="6" x="4" y="14" /><rect height="6" rx="1" width="6" x="14" y="14" /></svg>
+  return <svg {...commonProps}><path d="M12 3.5 19 6v5.2c0 4.3-2.9 7.7-7 9.3-4.1-1.6-7-5-7-9.3V6l7-2.5Z" /><path d="m8.5 12 2.2 2.2 4.8-4.8" /></svg>
 }
 
 export default function SellerTrustSection() {
@@ -38,8 +38,12 @@ export default function SellerTrustSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const hasAnimatedRef = useRef(false)
   const animationFrameRef = useRef<number | null>(null)
-  const [years, setYears] = useState(0)
-  const [carsPurchased, setCarsPurchased] = useState(0)
+  const [metricValues, setMetricValues] = useState({
+    years: 0,
+    cars: 0,
+    minimumYear: 0,
+    safetyPercentage: 0,
+  })
   const [isRevealed, setIsRevealed] = useState(false)
 
   useEffect(() => {
@@ -47,8 +51,7 @@ export default function SellerTrustSection() {
     if (!section) return
 
     const showFinalValues = () => {
-      setYears(5)
-      setCarsPurchased(1000)
+      setMetricValues({ years: 5, cars: 1000, minimumYear: 2010, safetyPercentage: 100 })
       setIsRevealed(true)
     }
 
@@ -70,8 +73,12 @@ export default function SellerTrustSection() {
         const animateCounters = (currentTime: number) => {
           const progress = Math.min((currentTime - startTime) / COUNTER_DURATION_MS, 1)
           const easedProgress = 1 - (1 - progress) ** 4
-          setYears(Math.round(5 * easedProgress))
-          setCarsPurchased(Math.round(1000 * easedProgress))
+          setMetricValues({
+            years: Math.round(5 * easedProgress),
+            cars: Math.round(1000 * easedProgress),
+            minimumYear: Math.round(2010 * easedProgress),
+            safetyPercentage: Math.round(100 * easedProgress),
+          })
 
           if (progress < 1) {
             animationFrameRef.current = window.requestAnimationFrame(animateCounters)
@@ -114,15 +121,12 @@ export default function SellerTrustSection() {
           <div className={`mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:mt-12 lg:grid-cols-4 lg:gap-6 ${isRevealed ? "seller-trust-grid--revealed" : ""}`}>
             {t.sellerTrust.items.map((item, index) => {
               const value = index === 0
-                ? <>{years}+ {yearsSuffix}</>
+                ? <>{metricValues.years}+ {yearsSuffix}</>
                 : index === 1
-                  ? <>{numberFormatter.format(carsPurchased)}+</>
-                  : item.value
-              const valueClassName = index < 2
-                ? "text-[2.3rem] sm:text-[2.5rem] lg:text-[2.65rem]"
-                : index === 2
-                  ? "text-[2rem] sm:text-[2.2rem] lg:text-[2.3rem]"
-                  : "text-[1.65rem] leading-[1.05] sm:text-[1.75rem] lg:text-[1.8rem]"
+                  ? <>{numberFormatter.format(metricValues.cars)}+</>
+                  : index === 2
+                    ? <>{numberFormatter.format(metricValues.minimumYear)}+</>
+                    : <>{metricValues.safetyPercentage}%</>
 
               return (
                 <article
@@ -131,7 +135,7 @@ export default function SellerTrustSection() {
                   className="seller-trust-card relative flex min-h-[195px] flex-col overflow-hidden rounded-[1.5rem] border border-[rgba(143,106,31,0.13)] bg-white p-6 shadow-[0_14px_34px_rgba(31,31,31,0.065),0_3px_10px_rgba(143,106,31,0.04)]"
                   style={{ transitionDelay: `${index * 70}ms` }}
                 >
-                  <span className={`relative z-10 font-extrabold leading-none tracking-tight text-[#B88922] ${index < 2 ? "tabular-nums" : ""} ${valueClassName}`}>
+                  <span aria-hidden="true" className="relative z-10 whitespace-nowrap text-[2.3rem] font-extrabold leading-none tracking-tight text-[#B88922] tabular-nums sm:text-[2.5rem] lg:text-[2.65rem]">
                     {value}
                   </span>
                   <h3 className="relative z-10 mt-5 text-[17px] font-bold leading-tight text-[var(--text-primary)]">
