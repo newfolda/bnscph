@@ -116,30 +116,98 @@ function PhoneContact({ compact = false }: { compact?: boolean }) {
 
 function LanguageSelector() {
   const { language, setLanguage } = useLanguage()
+  const [isOpen, setIsOpen] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const languages = [
+    { value: "en", label: "English", flag: "/images/flags/english.png" },
+    { value: "tgl", label: "Tagalog", flag: "/images/flags/philippines.png" },
+  ] as const
+  const selectedLanguage = languages.find((item) => item.value === language) ?? languages[0]
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!wrapperRef.current?.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false)
+        triggerRef.current?.focus()
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown)
+    document.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown)
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [isOpen])
 
   return (
-    <div className="flex items-center gap-2 text-sm text-gray-700" aria-label="Language selector">
+    <div ref={wrapperRef} className="relative inline-flex" aria-label="Language selector">
       <button
+        ref={triggerRef}
         type="button"
-        aria-pressed={language === "en"}
-        onClick={() => setLanguage("en")}
-        className={`inline-block font-semibold transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
-          language === "en" ? "text-[var(--primary)]" : "text-gray-700"
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label={`Select language. Current language: ${selectedLanguage.label}`}
+        onClick={() => setIsOpen((open) => !open)}
+        className="inline-flex h-9 items-center gap-1.5 rounded-lg px-2 text-gray-700 transition-colors duration-200 ease-out hover:bg-black/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4"
+      >
+        <Image
+          src={selectedLanguage.flag}
+          alt=""
+          width={22}
+          height={22}
+          className="h-[22px] w-[22px] object-contain"
+        />
+        <svg aria-hidden="true" className={`size-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+      <div
+        role="menu"
+        aria-label="Select language"
+        className={`absolute right-0 top-full z-[100] mt-2 w-[165px] origin-top-right overflow-hidden rounded-xl border border-black/10 bg-white py-1.5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] transition-[opacity,transform] duration-200 ease-out ${
+          isOpen ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none -translate-y-1 scale-95 opacity-0"
         }`}
       >
-        EN
-      </button>
-      <span aria-hidden="true" className="text-gray-300">|</span>
-      <button
-        type="button"
-        aria-pressed={language === "tgl"}
-        onClick={() => setLanguage("tgl")}
-        className={`inline-block font-semibold transition-colors duration-200 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-4 ${
-          language === "tgl" ? "text-[var(--primary)]" : "text-gray-700"
-        }`}
-      >
-        TGL
-      </button>
+        {languages.map((item) => {
+          const isSelected = item.value === language
+
+          return (
+            <button
+              key={item.value}
+              type="button"
+              role="menuitemradio"
+              aria-checked={isSelected}
+              aria-label={`Select ${item.label}`}
+              onClick={() => {
+                setLanguage(item.value)
+                setIsOpen(false)
+              }}
+              className={`flex h-11 w-full items-center gap-3 px-4 text-left text-sm font-medium transition-colors duration-200 hover:bg-black/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--primary)] ${
+                isSelected ? "bg-[var(--primary)]/10 text-[var(--primary)]" : "text-[var(--text-primary)]"
+              }`}
+            >
+              <Image src={item.flag} alt="" width={22} height={22} className="h-[22px] w-[22px] object-contain" />
+              <span>{item.label}</span>
+              {isSelected ? (
+                <svg aria-hidden="true" className="ml-auto size-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path d="m5 12 4.5 4.5L19 7" />
+                </svg>
+              ) : null}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -319,8 +387,8 @@ export default function Header() {
 
           <div
             id="mobile-primary-navigation"
-            className={`overflow-hidden border-t border-[var(--border)] transition-[grid-template-rows,opacity] duration-300 ease-out lg:hidden ${
-              isMobileMenuOpen ? "grid grid-rows-[1fr] opacity-100" : "grid grid-rows-[0fr] border-t-transparent opacity-0"
+            className={`border-t border-[var(--border)] transition-[grid-template-rows,opacity] duration-300 ease-out lg:hidden ${
+              isMobileMenuOpen ? "grid grid-rows-[1fr] overflow-visible opacity-100" : "grid grid-rows-[0fr] overflow-hidden border-t-transparent opacity-0"
             }`}
           >
             <div className="min-h-0">
