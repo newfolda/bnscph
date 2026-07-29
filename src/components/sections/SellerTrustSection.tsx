@@ -103,6 +103,7 @@ export default function SellerTrustSection() {
   }, [])
 
   const yearsSuffix = t.sellerTrust.items[0]?.value.replace(/^5\+\s*/, "") ?? ""
+  const minimumYearSuffix = t.sellerTrust.items[2]?.value.replace(/^2010\s*/, "") ?? ""
 
   return (
     <section ref={sectionRef} id="seller-trust" aria-labelledby="seller-trust-title" className="border-y border-[rgba(143,106,31,0.10)] bg-[#F4F2EC] py-14 sm:py-16 lg:py-16">
@@ -125,8 +126,11 @@ export default function SellerTrustSection() {
                 : index === 1
                   ? <>{numberFormatter.format(metricValues.cars)}+</>
                   : index === 2
-                    ? <>{numberFormatter.format(metricValues.minimumYear)}+</>
+                    ? <>{metricValues.minimumYear}<span> {minimumYearSuffix}</span></>
                     : <>{metricValues.safetyPercentage}%</>
+              const valueClassName = index === 2
+                ? "text-[2rem] sm:text-[2.2rem] lg:text-[2.25rem]"
+                : "text-[2.3rem] sm:text-[2.5rem] lg:text-[2.65rem]"
 
               return (
                 <article
@@ -135,7 +139,7 @@ export default function SellerTrustSection() {
                   className="seller-trust-card relative flex min-h-[195px] flex-col overflow-hidden rounded-[1.5rem] border border-[rgba(143,106,31,0.13)] bg-white p-6 shadow-[0_14px_34px_rgba(31,31,31,0.065),0_3px_10px_rgba(143,106,31,0.04)]"
                   style={{ transitionDelay: `${index * 70}ms` }}
                 >
-                  <span aria-hidden="true" className="relative z-10 whitespace-nowrap text-[2.3rem] font-extrabold leading-none tracking-tight text-[#B88922] tabular-nums sm:text-[2.5rem] lg:text-[2.65rem]">
+                  <span aria-hidden="true" className={`relative z-10 whitespace-nowrap font-extrabold leading-none tracking-tight text-[#B88922] tabular-nums ${valueClassName}`}>
                     {value}
                   </span>
                   <h3 className="relative z-10 mt-5 text-[17px] font-bold leading-tight text-[var(--text-primary)]">
