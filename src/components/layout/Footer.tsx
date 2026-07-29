@@ -131,8 +131,8 @@ export default function Footer() {
             </section>
 
             <section aria-labelledby="footer-newsletter-heading" className="md:col-span-2 xl:col-auto">
-              <h2 id="footer-newsletter-heading" className={`${footerHeadingClass} text-[1.125rem] font-extrabold lg:text-[0.95rem] lg:font-bold`}>GET THE LATEST FROM US</h2>
-              <p className="mt-4 max-w-[19rem] text-xl leading-relaxed text-white/80 lg:text-lg">
+              <h2 id="footer-newsletter-heading" className={footerHeadingClass}>GET THE LATEST FROM US</h2>
+              <p className="mt-4 max-w-[19rem] text-base leading-relaxed text-white/80 lg:text-sm">
                 Be the first to receive special offers, car market updates, and selling tips.
               </p>
               {/* TODO: Connect this form to the newsletter subscription service. */}
@@ -149,7 +149,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="h-[68px] w-full cursor-pointer rounded-[18px] bg-[var(--primary)] px-5 text-[26px] font-extrabold text-white transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:h-[52px] lg:rounded-xl lg:text-[20px] lg:font-bold xl:w-[116px] xl:rounded-l-none motion-reduce:transition-none"
+                  className="h-[68px] w-full cursor-pointer rounded-[18px] bg-[var(--primary)] px-5 text-xl font-extrabold text-white transition-[filter,transform] duration-200 ease-out hover:brightness-[1.06] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#383838] lg:h-[52px] lg:rounded-xl lg:text-[15px] lg:font-semibold xl:w-[116px] xl:rounded-l-none motion-reduce:transition-none"
                 >
                   Subscribe
                 </button>
