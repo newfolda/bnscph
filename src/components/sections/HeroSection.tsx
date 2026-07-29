@@ -268,15 +268,15 @@ export default function HeroSection() {
               <Button
                 aria-label={t.hero.cta}
                 onClick={openSellCarModal}
-                className="group relative mt-5 inline-flex h-[52px] w-fit min-w-[232px] items-center justify-center rounded-full border border-[#a97d1d]/80 !bg-[#D1A234] px-5 !text-white shadow-[0_6px_18px_rgba(0,0,0,0.16)] transition-[transform,box-shadow,background-color,border-color] duration-[240ms] ease-out hover:-translate-y-px hover:border-[#946d18] hover:!bg-[#C4962D] hover:shadow-[0_8px_22px_rgba(0,0,0,0.2)] active:translate-y-0 active:shadow-[0_5px_14px_rgba(0,0,0,0.14)] focus-visible:-translate-y-px focus-visible:border-[#946d18] focus-visible:!bg-[#C4962D] focus-visible:shadow-[0_8px_22px_rgba(0,0,0,0.2)] focus-visible:ring-2 focus-visible:ring-[#D1A234]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 motion-reduce:active:translate-y-0"
+                className="group relative mt-5 inline-flex h-[52px] w-fit min-w-[244px] items-center justify-center rounded-full border border-[#a97d1d]/80 !bg-[#D1A234] px-5 !text-white shadow-[0_6px_18px_rgba(0,0,0,0.16)] transition-[transform,box-shadow,background-color,border-color] duration-[240ms] ease-out hover:-translate-y-px hover:border-[#946d18] hover:!bg-[#C4962D] hover:shadow-[0_8px_22px_rgba(0,0,0,0.2)] active:translate-y-0 active:shadow-[0_5px_14px_rgba(0,0,0,0.14)] focus-visible:-translate-y-px focus-visible:border-[#946d18] focus-visible:!bg-[#C4962D] focus-visible:shadow-[0_8px_22px_rgba(0,0,0,0.2)] focus-visible:ring-2 focus-visible:ring-[#D1A234]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 motion-reduce:active:translate-y-0"
                 style={{ borderRadius: "9999px" }}
               >
                 <span className="whitespace-nowrap text-[13px] font-bold uppercase tracking-[0.045em] text-white sm:text-[14px]">
                 <span className="sm:hidden">SELL MY CAR</span>
                 <span className="hidden sm:inline">{t.hero.cta}</span>
                 </span>
-                <span aria-hidden="true" className="absolute right-4 text-white transition-transform duration-[240ms] ease-out group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0">
-                  <svg fill="none" height="18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="18">
+                <span aria-hidden="true" className="absolute right-[18px] text-white transition-transform duration-[240ms] ease-out group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0">
+                  <svg fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.25" viewBox="0 0 24 24" width="16">
                     <path d="M4 12h15M13 6l6 6-6 6" />
                   </svg>
                 </span>
