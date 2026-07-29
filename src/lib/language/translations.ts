@@ -134,7 +134,7 @@ export const translations: Record<Language, Translation> = {
         { value: "5+ Years", title: "Car-Buying Experience", description: "Serving Filipino car owners since 2021." },
         { value: "1,000+", title: "Cars Purchased", description: "Completed transactions across the Philippines." },
         { value: "2010 &", title: "Newer Models Accepted", description: "All makes and models from 2010 onward." },
-        { value: "100%", title: "Safe & Hassle-Free Selling", description: "A secure and straightforward process from valuation to payment." },
+        { value: "100%", title: "Safe & Hassle-Free", description: "A secure and straightforward process from valuation to payment." },
       ],
     },
     benefits: {
@@ -235,7 +235,7 @@ export const translations: Record<Language, Translation> = {
         { value: "5+ Taon", title: "Karanasan sa Pagbili ng Sasakyan", description: "Tumutulong sa mga Filipino car owner mula 2021." },
         { value: "1,000+", title: "Sasakyang Nabili", description: "Mga transaksyong nakumpleto sa buong Pilipinas." },
         { value: "2010 &", title: "Mas Bagong Modelo ang Tinatanggap", description: "Lahat ng brand at modelo mula 2010 pataas." },
-        { value: "100%", title: "Ligtas at Hassle-Free na Pagbebenta", description: "Ligtas at diretsong proseso mula valuation hanggang payment." },
+        { value: "100%", title: "Ligtas at Hassle-Free", description: "Ligtas at diretsong proseso mula valuation hanggang payment." },
       ],
     },
     benefits: {
