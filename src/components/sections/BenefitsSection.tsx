@@ -172,7 +172,7 @@ export default function BenefitsSection() {
     <section
       ref={sectionRef}
       id="why-choose-us"
-      className={`benefits-section bg-[#fffefd] py-16 sm:py-20 lg:py-24 ${hasEntered ? "benefits-section--entered" : ""}`}
+      className={`benefits-section border-y border-[#E5CE8E]/55 bg-[#F7EAC4] py-16 sm:py-20 lg:py-24 ${hasEntered ? "benefits-section--entered" : ""}`}
     >
       <Container>
         <div className="benefits-layout">
@@ -270,10 +270,10 @@ export default function BenefitsSection() {
         .benefits-canvas {
           overflow: hidden;
           max-width: 49rem;
-          border: 1px solid rgba(31, 31, 31, 0.07);
+          border: 1px solid rgba(143, 106, 31, 0.14);
           border-radius: 1.75rem;
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 255, 255, 0.99) 42%, rgba(253, 251, 245, 0.985) 48%, rgba(250, 246, 234, 0.97) 56%, rgba(250, 246, 234, 0.97) 100%);
-          box-shadow: 0 24px 60px rgba(23, 23, 23, 0.07), 0 8px 22px rgba(23, 23, 23, 0.035), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+          background: #ffffff;
+          box-shadow: 0 20px 50px rgba(31, 31, 31, 0.075), 0 4px 14px rgba(143, 106, 31, 0.055), inset 0 1px 0 rgba(255, 255, 255, 0.95);
         }
 
         .benefits-canvas-header,
