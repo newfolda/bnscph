@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { useLanguage } from "../language/LanguageProvider"
 import Container from "../ui/Container"
@@ -7,31 +8,12 @@ import SectionPill from "../ui/SectionPill"
 
 const numberFormatter = new Intl.NumberFormat("en-PH")
 const COUNTER_DURATION_MS = 1250
-
-function TrackRecordIcon({ index }: { index: number }) {
-  const commonProps = {
-    fill: "none",
-    stroke: "currentColor",
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    strokeWidth: 1.4,
-    viewBox: "0 0 24 24",
-  }
-
-  if (index === 0) {
-    return <svg {...commonProps}><rect height="16" rx="2.5" width="17" x="3.5" y="4.5" /><path d="M7.5 2.5v4M16.5 2.5v4M7.5 12l2.5 2.5 5-5" /></svg>
-  }
-
-  if (index === 1) {
-    return <svg {...commonProps}><path d="M4 15.5V11l2.5-4h11l2.5 4v4.5M5.5 15.5h13M7.5 18.5a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM16.5 18.5a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Z" /></svg>
-  }
-
-  if (index === 2) {
-    return <svg {...commonProps}><rect height="16" rx="2.5" width="17" x="3.5" y="4.5" /><path d="M7.5 2.5v4M16.5 2.5v4M7.5 10h9M8 14h3M13 14h3M8 17h3" /></svg>
-  }
-
-  return <svg {...commonProps}><path d="M12 3.5 19 6v5.2c0 4.3-2.9 7.7-7 9.3-4.1-1.6-7-5-7-9.3V6l7-2.5Z" /><path d="m8.5 12 2.2 2.2 4.8-4.8" /></svg>
-}
+const trackRecordImages = [
+  "/images/track-record/experience-years.png",
+  "/images/track-record/cars-purchased.png",
+  "/images/track-record/models-accepted.png",
+  "/images/track-record/safe-hassle-free.png",
+]
 
 export default function SellerTrustSection() {
   const { t } = useLanguage()
@@ -142,8 +124,15 @@ export default function SellerTrustSection() {
                   <p className="relative z-10 mt-2 max-w-[15rem] text-sm leading-relaxed text-[var(--text-secondary)]">
                     {item.description}
                   </p>
-                  <span aria-hidden="true" className="pointer-events-none absolute -bottom-3 -right-3 size-[6.25rem] text-[#B88922] opacity-[0.09]">
-                    <TrackRecordIcon index={index} />
+                  <span aria-hidden="true" className="pointer-events-none absolute -bottom-4 -right-4 z-0 size-[7rem] overflow-visible sm:size-[7.25rem] lg:size-[7.75rem]">
+                    <Image
+                      src={trackRecordImages[index]}
+                      alt=""
+                      aria-hidden="true"
+                      fill
+                      sizes="124px"
+                      className="seller-trust-card-illustration object-contain"
+                    />
                   </span>
                 </article>
               )
@@ -164,11 +153,23 @@ export default function SellerTrustSection() {
           transform: translateY(0);
         }
 
+        .seller-trust-card-illustration {
+          opacity: 0.14;
+          filter: grayscale(0.75) saturate(0.6) contrast(0.96);
+          transition: opacity 360ms cubic-bezier(0.22, 1, 0.36, 1), filter 360ms cubic-bezier(0.22, 1, 0.36, 1), transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
         @media (hover: hover) and (pointer: fine) {
           .seller-trust-card:hover {
             transform: translateY(-2px);
             border-color: rgba(143, 106, 31, 0.24);
             box-shadow: 0 18px 40px rgba(31, 31, 31, 0.085), 0 5px 14px rgba(143, 106, 31, 0.06);
+          }
+
+          .seller-trust-card:hover .seller-trust-card-illustration {
+            opacity: 0.85;
+            filter: grayscale(0) saturate(1);
+            transform: translate3d(-3px, -2px, 0) scale(1.03);
           }
         }
 
@@ -177,6 +178,14 @@ export default function SellerTrustSection() {
             opacity: 1;
             transform: none;
             transition: none;
+          }
+
+          .seller-trust-card-illustration {
+            transition: opacity 180ms ease, filter 180ms ease;
+          }
+
+          .seller-trust-card:hover .seller-trust-card-illustration {
+            transform: none;
           }
         }
       `}</style>
