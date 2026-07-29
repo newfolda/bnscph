@@ -30,6 +30,7 @@ export default function SellerTrustSection() {
   })
   const [isRevealed, setIsRevealed] = useState(false)
   const [activeMobileCard, setActiveMobileCard] = useState<number | null>(null)
+  const [mobileActivationSequence, setMobileActivationSequence] = useState(0)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -125,6 +126,7 @@ export default function SellerTrustSection() {
       if (closestIndex !== null && closestIndex !== activeMobileCardRef.current) {
         activeMobileCardRef.current = closestIndex
         setActiveMobileCard(closestIndex)
+        setMobileActivationSequence((sequence) => sequence + 1)
       }
     }
 
@@ -214,7 +216,13 @@ export default function SellerTrustSection() {
                   </h3>
                   <p className="seller-trust-card-description relative z-10 mt-2 max-w-[15rem] overflow-hidden text-sm leading-relaxed text-[var(--text-secondary)]">
                     <span className="seller-trust-card-description-text">{item.description}</span>
-                    <span aria-hidden="true" className="seller-trust-card-description-streak">{item.description}</span>
+                    <span
+                      key={`${index}-${activeMobileCard === index ? mobileActivationSequence : "idle"}`}
+                      aria-hidden="true"
+                      className="seller-trust-card-description-streak"
+                    >
+                      {item.description}
+                    </span>
                   </p>
                   <span aria-hidden="true" className="pointer-events-none absolute -bottom-4 -right-4 z-0 size-[7rem] overflow-visible sm:size-[7.25rem] lg:size-[7.75rem]">
                     <Image
@@ -314,14 +322,25 @@ export default function SellerTrustSection() {
         }
 
         @media (max-width: 639px) {
+          .seller-trust-card--mobile-active {
+            transform: translateY(-2px);
+            border-color: rgba(143, 106, 31, 0.24);
+            box-shadow: 0 18px 40px rgba(31, 31, 31, 0.085), 0 5px 14px rgba(143, 106, 31, 0.06);
+          }
+
+          .seller-trust-card--mobile-active .seller-trust-card-illustration {
+            opacity: 0.85;
+            filter: grayscale(0) saturate(1);
+            transform: translate3d(-3px, -2px, 0) scale(1.03);
+          }
+
           .seller-trust-card--mobile-active .seller-trust-card-description-text {
             color: #111111;
             transition-duration: 320ms;
           }
 
           .seller-trust-card--mobile-active .seller-trust-card-description-streak {
-            animation: none !important;
-            opacity: 0;
+            animation: seller-trust-description-streak 1200ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
           }
         }
 
@@ -338,6 +357,16 @@ export default function SellerTrustSection() {
 
           .seller-trust-card:hover .seller-trust-card-illustration {
             transform: none;
+          }
+
+          .seller-trust-card--mobile-active {
+            transform: none;
+          }
+
+          .seller-trust-card--mobile-active .seller-trust-card-illustration {
+            transform: none;
+            opacity: 0.85;
+            filter: grayscale(0) saturate(1);
           }
 
           .seller-trust-card-description-streak {
