@@ -131,9 +131,9 @@ export const translations: Record<Language, Translation> = {
       pill: "OUR TRACK RECORD",
       title: "Trusted by Car Sellers Across the Philippines",
       items: [
-        { value: "5+ Years", title: "Car-Buying Experience", description: "Providing a seamless car-buying service for Filipino owners since 2021." },
+        { value: "5+ Years", title: "Car-Buying Experience", description: "Providing a seamless car-buying service for Filipino since 2021." },
         { value: "1,000+", title: "Cars Purchased", description: "Completed transactions with vehicle owners across the Philippines." },
-        { value: "2010 &", title: "Newer Models Accepted", description: "Vehicles from model year 2010 onward are considered, subject to inspection." },
+        { value: "2010 &", title: "Newer Models Accepted", description: "Vehicles from 2010 onward are considered, subject to inspection." },
         { value: "100%", title: "Safe & Hassle-Free", description: "A secure and straightforward process from valuation to payment." },
       ],
     },
