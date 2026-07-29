@@ -114,12 +114,9 @@ export default function SellerTrustSection() {
             <h2 id="seller-trust-title" className="text-3xl font-bold leading-[1.08] tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-[2.4rem]">
               {t.sellerTrust.title}
             </h2>
-            <p className="mx-auto mt-3 max-w-[38.75rem] text-[15px] leading-relaxed text-[var(--text-secondary)] sm:text-base">
-              {t.sellerTrust.description}
-            </p>
           </header>
 
-          <div className={`mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:mt-12 lg:grid-cols-4 lg:gap-6 ${isRevealed ? "seller-trust-grid--revealed" : ""}`}>
+          <div className={`mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:mt-10 lg:grid-cols-4 lg:gap-6 ${isRevealed ? "seller-trust-grid--revealed" : ""}`}>
             {t.sellerTrust.items.map((item, index) => {
               const value = index === 0
                 ? <>{metricValues.years}+ {yearsSuffix}</>
@@ -128,9 +125,6 @@ export default function SellerTrustSection() {
                   : index === 2
                     ? <>{metricValues.minimumYear}<span> {minimumYearSuffix}</span></>
                     : <>{metricValues.safetyPercentage}%</>
-              const valueClassName = index === 2
-                ? "text-[2rem] sm:text-[2.2rem] lg:text-[2.25rem]"
-                : "text-[2.3rem] sm:text-[2.5rem] lg:text-[2.65rem]"
 
               return (
                 <article
@@ -139,7 +133,7 @@ export default function SellerTrustSection() {
                   className="seller-trust-card relative flex min-h-[195px] flex-col overflow-hidden rounded-[1.5rem] border border-[rgba(143,106,31,0.13)] bg-white p-6 shadow-[0_14px_34px_rgba(31,31,31,0.065),0_3px_10px_rgba(143,106,31,0.04)]"
                   style={{ transitionDelay: `${index * 70}ms` }}
                 >
-                  <span aria-hidden="true" className={`relative z-10 whitespace-nowrap font-extrabold leading-none tracking-tight text-[#B88922] tabular-nums ${valueClassName}`}>
+                  <span aria-hidden="true" className="relative z-10 whitespace-nowrap text-[2.3rem] font-extrabold leading-none tracking-tight text-[#B88922] tabular-nums sm:text-[2.5rem] lg:text-[2.65rem]">
                     {value}
                   </span>
                   <h3 className="relative z-10 mt-5 text-[17px] font-bold leading-tight text-[var(--text-primary)]">

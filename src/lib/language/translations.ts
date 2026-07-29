@@ -48,7 +48,6 @@ export type Translation = {
   sellerTrust: {
     pill: string
     title: string
-    description: string
     items: Array<{ value: string; title: string; description: string }>
   }
   benefits: {
@@ -131,11 +130,10 @@ export const translations: Record<Language, Translation> = {
     sellerTrust: {
       pill: "OUR TRACK RECORD",
       title: "Trusted by Car Sellers Across the Philippines",
-      description: "Five years of experience, more than 1,000 completed purchases, and a safe, hassle-free process for vehicles from 2010 onward.",
       items: [
         { value: "5+ Years", title: "Car-Buying Experience", description: "Serving Filipino car owners since 2021." },
         { value: "1,000+", title: "Cars Purchased", description: "Completed transactions across the Philippines." },
-        { value: "2010 & Newer", title: "Models Accepted", description: "All makes and models from 2010 onward." },
+        { value: "2010 &", title: "Newer Models Accepted", description: "All makes and models from 2010 onward." },
         { value: "100%", title: "Safe & Hassle-Free Selling", description: "A secure and straightforward process from valuation to payment." },
       ],
     },
@@ -233,11 +231,10 @@ export const translations: Record<Language, Translation> = {
     sellerTrust: {
       pill: "AMING TRACK RECORD",
       title: "Pinagkakatiwalaan ng mga Car Seller sa Buong Pilipinas",
-      description: "Mahigit limang taon ng karanasan, higit 1,000 sasakyang nabili, at ligtas at hassle-free na proseso para sa mga modelong 2010 pataas.",
       items: [
         { value: "5+ Taon", title: "Karanasan sa Pagbili ng Sasakyan", description: "Tumutulong sa mga Filipino car owner mula 2021." },
         { value: "1,000+", title: "Sasakyang Nabili", description: "Mga transaksyong nakumpleto sa buong Pilipinas." },
-        { value: "2010 & Mas Bago", title: "Mga Modelong Tinatanggap", description: "Lahat ng brand at modelo mula 2010 pataas." },
+        { value: "2010 &", title: "Mas Bagong Modelo ang Tinatanggap", description: "Lahat ng brand at modelo mula 2010 pataas." },
         { value: "100%", title: "Ligtas at Hassle-Free na Pagbebenta", description: "Ligtas at diretsong proseso mula valuation hanggang payment." },
       ],
     },
