@@ -268,19 +268,17 @@ export default function HeroSection() {
             <Button
               aria-label={t.hero.cta}
               onClick={openSellCarModal}
-              className="group relative mt-5 h-16 w-full max-w-[16.625rem] overflow-hidden border border-[rgba(181,132,31,0.62)] !bg-[linear-gradient(135deg,rgba(224,183,86,0.96),rgba(198,150,45,0.94),rgba(218,174,72,0.95))] !p-0 font-semibold !text-white shadow-[0_10px_24px_rgba(92,62,14,0.22),0_4px_10px_rgba(20,24,32,0.14),inset_0_1px_0_rgba(255,244,204,0.5)] backdrop-blur-sm transition-[transform,box-shadow,background,color,border-color] duration-[240ms] ease-out hover:-translate-y-px hover:border-[rgba(181,132,31,0.78)] hover:!bg-[linear-gradient(135deg,rgba(231,192,101,0.97),rgba(206,158,52,0.95),rgba(224,181,80,0.96))] hover:!text-white hover:shadow-[0_13px_28px_rgba(92,62,14,0.25),0_5px_12px_rgba(20,24,32,0.16),inset_0_1px_0_rgba(255,244,204,0.58)] active:translate-y-0 active:shadow-[0_9px_20px_rgba(92,62,14,0.18)] focus-visible:-translate-y-px focus-visible:border-[rgba(181,132,31,0.78)] focus-visible:!bg-[linear-gradient(135deg,rgba(231,192,101,0.97),rgba(206,158,52,0.95),rgba(224,181,80,0.96))] focus-visible:!text-white focus-visible:shadow-[0_13px_28px_rgba(92,62,14,0.25),0_5px_12px_rgba(20,24,32,0.16),inset_0_1px_0_rgba(255,244,204,0.58)] focus-visible:ring-2 focus-visible:ring-[rgba(181,132,31,0.68)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 motion-reduce:active:translate-y-0"
-              style={{ borderRadius: "2rem" }}
+              className="group mt-5 inline-flex h-[50px] w-full max-w-[16.625rem] items-center justify-between gap-4 rounded-full border border-[#a97d1d]/80 !bg-[#D1A234] !pl-5 !pr-2 !text-white shadow-[0_6px_18px_rgba(0,0,0,0.16)] transition-[transform,box-shadow,background-color,border-color] duration-[240ms] ease-out hover:-translate-y-px hover:border-[#946d18] hover:!bg-[#C4962D] hover:shadow-[0_8px_22px_rgba(0,0,0,0.2)] active:translate-y-0 active:shadow-[0_5px_14px_rgba(0,0,0,0.14)] focus-visible:-translate-y-px focus-visible:border-[#946d18] focus-visible:!bg-[#C4962D] focus-visible:shadow-[0_8px_22px_rgba(0,0,0,0.2)] focus-visible:ring-2 focus-visible:ring-[#D1A234]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--primary-light)] motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 motion-reduce:active:translate-y-0"
             >
-              <span className="absolute inset-0 z-10 flex translate-x-2.5 items-center justify-center pr-16 whitespace-nowrap text-[0.84rem] font-bold uppercase tracking-[0.07em] text-white transition-colors duration-[240ms] sm:text-[0.95rem]">
+              <span className="flex min-w-0 flex-1 items-center whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.05em] text-white">
                 <span className="sm:hidden">SELL MY CAR</span>
                 <span className="hidden sm:inline">{t.hero.cta}</span>
               </span>
-              <span aria-hidden="true" className="absolute right-3 z-10 flex size-10 items-center justify-center rounded-full border border-white/25 bg-white/16 text-white transition-[background-color,border-color,transform] duration-[240ms] ease-out group-hover:translate-x-1 group-hover:border-white/34 group-hover:bg-white/20 group-focus-visible:border-white/34 group-focus-visible:bg-white/20 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:right-4">
-                <svg fill="none" height="22" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="22">
+              <span aria-hidden="true" className="flex size-[34px] shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-[transform,background-color] duration-[240ms] ease-out group-hover:translate-x-0.5 group-hover:bg-white/20 group-focus-visible:translate-x-0.5 group-focus-visible:bg-white/20 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0">
+                <svg fill="none" height="18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="18">
                   <path d="M4 12h15M13 6l6 6-6 6" />
                 </svg>
               </span>
-              <span aria-hidden="true" className="pointer-events-none absolute inset-x-3 top-1 z-0 h-8 rounded-full bg-[radial-gradient(ellipse_at_25%_0%,rgba(255,255,255,0.38),rgba(255,245,204,0.14)_34%,transparent_72%)]" />
             </Button>
             )} />
           </div>
