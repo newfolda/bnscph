@@ -668,6 +668,11 @@ export default function ProcessSection() {
             animation: process-card-description-streak 1500ms cubic-bezier(0.22, 1, 0.36, 1) both;
           }
 
+          .process-glass-card--mobile-active .process-card-description-streak {
+            animation: none !important;
+            opacity: 0;
+          }
+
           .process-main-panel--active-1 .process-ambient-blob--mint { transform: translate3d(-16px, 4px, 0) scaleX(1.08) scaleY(0.97); }
           .process-main-panel--active-1 .process-ambient-blob--yellow { transform: translate3d(14px, -14px, 0) scaleX(1.06) scaleY(0.98); }
           .process-main-panel--active-1 .process-ambient-blob--blue { transform: translate3d(-6px, 18px, 0) scaleX(0.97) scaleY(1.08); }

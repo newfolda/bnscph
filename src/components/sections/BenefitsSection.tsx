@@ -593,6 +593,12 @@ export default function BenefitsSection() {
             animation-delay: 80ms;
           }
 
+          .benefits-transformation-row--active .benefits-preferred-text-streak,
+          .benefits-transformation-row--active .benefits-preferred-panel-sweep {
+            animation: none !important;
+            opacity: 0;
+          }
+
           .benefits-section--entered .benefits-transformation-row.benefits-reveal.benefits-transformation-row--active {
             transform: translateY(-2px);
             background: rgba(200, 160, 68, 0.035);
