@@ -33,34 +33,72 @@ function formatPurchasedAt(purchasedAt: string | undefined, recentlyPurchased: s
 export default function DailyTransactionsSection() {
   const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
+  const hasTriggeredEntranceRef = useRef(false)
+  const entranceTimerRef = useRef<number | null>(null)
+  const settleTimerRef = useRef<number | null>(null)
   const [hasEntered, setHasEntered] = useState(false)
+  const [animationPhase, setAnimationPhase] = useState<"idle" | "burst" | "settle" | "marquee" | "static">("idle")
   const [isMarqueePaused, setIsMarqueePaused] = useState(false)
 
   useEffect(() => {
-    const reveal = () => window.requestAnimationFrame(() => setHasEntered(true))
+    const clearEntranceTimers = () => {
+      if (entranceTimerRef.current !== null) window.clearTimeout(entranceTimerRef.current)
+      if (settleTimerRef.current !== null) window.clearTimeout(settleTimerRef.current)
+    }
+
+    const startEntrance = () => {
+      if (hasTriggeredEntranceRef.current) return
+      hasTriggeredEntranceRef.current = true
+
+      setHasEntered(true)
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setAnimationPhase("static")
+        return
+      }
+
+      const isDesktop = window.matchMedia("(min-width: 768px)").matches
+      const burstDuration = isDesktop ? 920 : 620
+      const settleDuration = isDesktop ? 200 : 150
+
+      setAnimationPhase("burst")
+      entranceTimerRef.current = window.setTimeout(() => {
+        setAnimationPhase("settle")
+        settleTimerRef.current = window.setTimeout(() => setAnimationPhase("marquee"), settleDuration)
+      }, burstDuration)
+    }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const frame = reveal()
-      return () => window.cancelAnimationFrame(frame)
+      const frame = window.requestAnimationFrame(() => {
+        setHasEntered(true)
+        setAnimationPhase("static")
+      })
+      return () => {
+        window.cancelAnimationFrame(frame)
+        clearEntranceTimers()
+      }
     }
 
     const section = sectionRef.current
     if (!section || typeof IntersectionObserver === "undefined") {
-      const frame = reveal()
-      return () => window.cancelAnimationFrame(frame)
+      startEntrance()
+      return clearEntranceTimers
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return
-        setHasEntered(true)
+        startEntrance()
         observer.disconnect()
       },
-      { threshold: 0.2 },
+      { threshold: 0.25 },
     )
 
     observer.observe(section)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      clearEntranceTimers()
+    }
   }, [])
 
   return (
@@ -82,7 +120,7 @@ export default function DailyTransactionsSection() {
 
         <div className="transactions-reveal transactions-reveal--cards relative mx-[-1rem] mt-10 pb-4 sm:mx-[-1.5rem] md:mt-12 md:pb-6 lg:mx-[-2.5rem]">
           <div
-            className={`transactions-marquee relative z-10 overflow-hidden pb-2 ${isMarqueePaused ? "transactions-marquee--paused" : ""}`}
+            className={`transactions-marquee transactions-marquee--${animationPhase} relative z-10 overflow-hidden pb-2 ${isMarqueePaused ? "transactions-marquee--paused" : ""}`}
             onPointerDown={(event) => {
               if (event.pointerType !== "mouse") setIsMarqueePaused(true)
             }}
@@ -90,12 +128,12 @@ export default function DailyTransactionsSection() {
             onPointerCancel={() => setIsMarqueePaused(false)}
           >
             <div className="transactions-track flex w-max snap-x snap-mandatory gap-7 pr-7 md:gap-8 md:pr-8 md:snap-none">
-              {[...latestTransactions, ...latestTransactions].map((transaction, index) => {
-                const isDuplicate = index >= latestTransactions.length
+              {Array.from({ length: 4 }, (_, groupIndex) => latestTransactions.map((transaction) => ({ transaction, groupIndex }))).flat().map(({ transaction, groupIndex }) => {
+                const isDuplicate = groupIndex > 0
 
                 return (
                   <article
-                    key={`${transaction.year}-${transaction.brand}-${transaction.model}-${isDuplicate ? "duplicate" : "original"}`}
+                    key={`${transaction.year}-${transaction.brand}-${transaction.model}-${groupIndex}`}
                     aria-hidden={isDuplicate || undefined}
                     tabIndex={isDuplicate ? -1 : 0}
                     className="group flex h-[390px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[410px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px]"
@@ -153,22 +191,43 @@ export default function DailyTransactionsSection() {
           transition-delay: 280ms;
         }
 
-        .transactions-section--entered .transactions-track {
-          animation: transactions-marquee 30s linear 800ms infinite;
+        .transactions-marquee--burst .transactions-track {
+          animation: transactions-entrance-burst 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+          will-change: transform, filter, opacity;
         }
 
-        .transactions-marquee--paused .transactions-track {
+        .transactions-marquee--settle .transactions-track {
+          transform: translate3d(0, 0, 0);
+          opacity: 1;
+          filter: none;
+          transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1), filter 150ms ease-out, opacity 150ms ease-out;
+        }
+
+        .transactions-marquee--marquee .transactions-track {
+          animation: transactions-marquee 30s linear infinite;
+          will-change: transform;
+        }
+
+        .transactions-marquee--marquee.transactions-marquee--paused .transactions-track {
           animation-play-state: paused;
         }
 
         @media (min-width: 768px) {
-          .transactions-section--entered .transactions-track {
+          .transactions-marquee--burst .transactions-track {
+            animation-duration: 920ms;
+          }
+
+          .transactions-marquee--settle .transactions-track {
+            transition-duration: 200ms;
+          }
+
+          .transactions-marquee--marquee .transactions-track {
             animation-duration: 34s;
           }
 
-          .transactions-marquee:hover .transactions-track,
-          .transactions-marquee:focus-within .transactions-track,
-          .transactions-marquee:active .transactions-track {
+          .transactions-marquee--marquee:hover .transactions-track,
+          .transactions-marquee--marquee:focus-within .transactions-track,
+          .transactions-marquee--marquee:active .transactions-track {
             animation-play-state: paused;
           }
 
@@ -182,14 +241,34 @@ export default function DailyTransactionsSection() {
         }
 
         @media (min-width: 1024px) {
-          .transactions-section--entered .transactions-track {
+          .transactions-marquee--marquee .transactions-track {
             animation-duration: 36s;
+          }
+        }
+
+        @keyframes transactions-entrance-burst {
+          0% {
+            transform: translate3d(-25%, 0, 0);
+            filter: blur(1.1px);
+            opacity: 0.88;
+          }
+
+          72% {
+            transform: translate3d(-3%, 0, 0);
+            filter: blur(0.3px);
+            opacity: 0.98;
+          }
+
+          100% {
+            transform: translate3d(0, 0, 0);
+            filter: none;
+            opacity: 1;
           }
         }
 
         @keyframes transactions-marquee {
           to {
-            transform: translateX(-50%);
+            transform: translate3d(-25%, 0, 0);
           }
         }
 
@@ -201,8 +280,14 @@ export default function DailyTransactionsSection() {
             transition: none;
           }
 
-          .transactions-track {
+          .transactions-track,
+          .transactions-marquee--burst .transactions-track,
+          .transactions-marquee--marquee .transactions-track {
             animation: none;
+            filter: none;
+            opacity: 1;
+            transform: none;
+            will-change: auto;
           }
         }
       `}</style>
