@@ -33,17 +33,71 @@ function formatPurchasedAt(purchasedAt: string | undefined, recentlyPurchased: s
 export default function DailyTransactionsSection() {
   const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
   const hasTriggeredEntranceRef = useRef(false)
-  const entranceTimerRef = useRef<number | null>(null)
-  const settleTimerRef = useRef<number | null>(null)
+  const entranceAnimationRef = useRef<Animation | null>(null)
+  const entranceStartTimerRef = useRef<number | null>(null)
+  const marqueeFrameRef = useRef<number | null>(null)
+  const marqueeStartFrameRef = useRef<number | null>(null)
   const [hasEntered, setHasEntered] = useState(false)
-  const [animationPhase, setAnimationPhase] = useState<"idle" | "burst" | "settle" | "marquee" | "static">("idle")
+  const [animationPhase, setAnimationPhase] = useState<"idle" | "entrance" | "marquee" | "static">("idle")
   const [isMarqueePaused, setIsMarqueePaused] = useState(false)
 
   useEffect(() => {
-    const clearEntranceTimers = () => {
-      if (entranceTimerRef.current !== null) window.clearTimeout(entranceTimerRef.current)
-      if (settleTimerRef.current !== null) window.clearTimeout(settleTimerRef.current)
+    let isDisposed = false
+
+    const clearEntranceAnimation = () => {
+      if (entranceStartTimerRef.current !== null) window.clearTimeout(entranceStartTimerRef.current)
+      if (marqueeFrameRef.current !== null) window.cancelAnimationFrame(marqueeFrameRef.current)
+      if (marqueeStartFrameRef.current !== null) window.cancelAnimationFrame(marqueeStartFrameRef.current)
+      entranceAnimationRef.current?.cancel()
+    }
+
+    const enableMarquee = () => {
+      marqueeFrameRef.current = window.requestAnimationFrame(() => {
+        marqueeStartFrameRef.current = window.requestAnimationFrame(() => {
+          if (!isDisposed) setAnimationPhase("marquee")
+        })
+      })
+    }
+
+    const runEntrance = () => {
+      const track = trackRef.current
+
+      if (!track) {
+        enableMarquee()
+        return
+      }
+
+      const isDesktop = window.matchMedia("(min-width: 768px)").matches
+      const startOffset = isDesktop ? "-14%" : "-10%"
+      const duration = isDesktop ? 850 : 600
+
+      track.style.transform = `translate3d(${startOffset}, 0, 0)`
+      setAnimationPhase("entrance")
+
+      const animation = track.animate(
+        [
+          { transform: `translate3d(${startOffset}, 0, 0)`, opacity: 0.9 },
+          { transform: "translate3d(0, 0, 0)", opacity: 1 },
+        ],
+        {
+          duration,
+          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+          fill: "forwards",
+        },
+      )
+
+      entranceAnimationRef.current = animation
+      void animation.finished.then(() => {
+        if (isDisposed || entranceAnimationRef.current !== animation) return
+
+        animation.commitStyles()
+        animation.cancel()
+        track.style.transform = "translate3d(0, 0, 0)"
+        track.style.opacity = "1"
+        enableMarquee()
+      }).catch(() => undefined)
     }
 
     const startEntrance = () => {
@@ -57,15 +111,7 @@ export default function DailyTransactionsSection() {
         return
       }
 
-      const isDesktop = window.matchMedia("(min-width: 768px)").matches
-      const burstDuration = isDesktop ? 920 : 620
-      const settleDuration = isDesktop ? 200 : 150
-
-      setAnimationPhase("burst")
-      entranceTimerRef.current = window.setTimeout(() => {
-        setAnimationPhase("settle")
-        settleTimerRef.current = window.setTimeout(() => setAnimationPhase("marquee"), settleDuration)
-      }, burstDuration)
+      entranceStartTimerRef.current = window.setTimeout(runEntrance, 160)
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -75,14 +121,14 @@ export default function DailyTransactionsSection() {
       })
       return () => {
         window.cancelAnimationFrame(frame)
-        clearEntranceTimers()
+        clearEntranceAnimation()
       }
     }
 
     const section = sectionRef.current
     if (!section || typeof IntersectionObserver === "undefined") {
       startEntrance()
-      return clearEntranceTimers
+      return clearEntranceAnimation
     }
 
     const observer = new IntersectionObserver(
@@ -97,7 +143,8 @@ export default function DailyTransactionsSection() {
     observer.observe(section)
     return () => {
       observer.disconnect()
-      clearEntranceTimers()
+      isDisposed = true
+      clearEntranceAnimation()
     }
   }, [])
 
@@ -127,7 +174,7 @@ export default function DailyTransactionsSection() {
             onPointerUp={() => setIsMarqueePaused(false)}
             onPointerCancel={() => setIsMarqueePaused(false)}
           >
-            <div className="transactions-track flex w-max snap-x snap-mandatory gap-7 pr-7 md:gap-8 md:pr-8 md:snap-none">
+            <div ref={trackRef} className="transactions-track flex w-max snap-x snap-mandatory gap-7 pr-7 md:gap-8 md:pr-8 md:snap-none">
               {Array.from({ length: 4 }, (_, groupIndex) => latestTransactions.map((transaction) => ({ transaction, groupIndex }))).flat().map(({ transaction, groupIndex }) => {
                 const isDuplicate = groupIndex > 0
 
@@ -188,19 +235,12 @@ export default function DailyTransactionsSection() {
         }
 
         .transactions-reveal--cards {
-          transition-delay: 280ms;
+          transition-duration: 140ms;
+          transition-delay: 0ms;
         }
 
-        .transactions-marquee--burst .transactions-track {
-          animation: transactions-entrance-burst 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-          will-change: transform, filter, opacity;
-        }
-
-        .transactions-marquee--settle .transactions-track {
-          transform: translate3d(0, 0, 0);
-          opacity: 1;
-          filter: none;
-          transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1), filter 150ms ease-out, opacity 150ms ease-out;
+        .transactions-marquee--entrance .transactions-track {
+          will-change: transform, opacity;
         }
 
         .transactions-marquee--marquee .transactions-track {
@@ -213,14 +253,6 @@ export default function DailyTransactionsSection() {
         }
 
         @media (min-width: 768px) {
-          .transactions-marquee--burst .transactions-track {
-            animation-duration: 920ms;
-          }
-
-          .transactions-marquee--settle .transactions-track {
-            transition-duration: 200ms;
-          }
-
           .transactions-marquee--marquee .transactions-track {
             animation-duration: 34s;
           }
@@ -246,27 +278,11 @@ export default function DailyTransactionsSection() {
           }
         }
 
-        @keyframes transactions-entrance-burst {
-          0% {
-            transform: translate3d(-25%, 0, 0);
-            filter: blur(1.1px);
-            opacity: 0.88;
-          }
-
-          72% {
-            transform: translate3d(-3%, 0, 0);
-            filter: blur(0.3px);
-            opacity: 0.98;
-          }
-
-          100% {
-            transform: translate3d(0, 0, 0);
-            filter: none;
-            opacity: 1;
-          }
-        }
-
         @keyframes transactions-marquee {
+          from {
+            transform: translate3d(0, 0, 0);
+          }
+
           to {
             transform: translate3d(-25%, 0, 0);
           }
@@ -281,10 +297,9 @@ export default function DailyTransactionsSection() {
           }
 
           .transactions-track,
-          .transactions-marquee--burst .transactions-track,
+          .transactions-marquee--entrance .transactions-track,
           .transactions-marquee--marquee .transactions-track {
             animation: none;
-            filter: none;
             opacity: 1;
             transform: none;
             will-change: auto;
