@@ -16,11 +16,25 @@ Deno.serve(async (request) => {
 
   if (!supabaseUrl || !serviceRoleKey || (!serviceRoleRequest && (!cronSecret || suppliedSecret !== cronSecret))) return json({ success: false }, 401)
 
+  const supabase = createClient(supabaseUrl, serviceRoleKey, { auth: { autoRefreshToken: false, persistSession: false } })
+
   const body = request.method === "POST" ? await request.json().catch(() => ({})) : {}
   const requestedLeadId = typeof body?.leadId === "string" ? body.leadId : null
+  const dryRun = body?.dryRun === true
+  const setup = body?.setup === true
+  const verify = body?.verify === true
   if (requestedLeadId && !serviceRoleRequest) return json({ success: false }, 403)
+  if (setup) {
+    if (!serviceRoleRequest || typeof body?.url !== "string" || typeof body?.secret !== "string") return json({ success: false }, 403)
+    const { error } = await supabase.rpc("configure_cleanup_cron", { p_url: body.url, p_secret: body.secret })
+    return error ? json({ success: false, code: "cleanup_configuration_failed" }, 500) : json({ success: true, configured: true })
+  }
+  if (verify) {
+    if (!serviceRoleRequest) return json({ success: false }, 403)
+    const { data, error } = await supabase.rpc("verify_cleanup_activation")
+    return error ? json({ success: false, code: "cleanup_verification_failed" }, 500) : json({ success: true, verification: data })
+  }
 
-  const supabase = createClient(supabaseUrl, serviceRoleKey, { auth: { autoRefreshToken: false, persistSession: false } })
   let query = supabase
     .from("sell_car_leads")
     .select("id, status, retention_status")
@@ -32,6 +46,8 @@ Deno.serve(async (request) => {
   if (requestedLeadId) query = query.eq("id", requestedLeadId)
   const { data: candidates, error: candidateError } = await query
   if (candidateError) return json({ success: false, code: "candidate_query_failed" }, 500)
+
+  if (dryRun) return json({ success: true, dryRun: true, examined: candidates?.length ?? 0, eligible: candidates?.length ?? 0 })
 
   const runId = crypto.randomUUID()
   let deleted = 0; let skipped = 0; let failed = 0; let storageObjectsDeleted = 0
