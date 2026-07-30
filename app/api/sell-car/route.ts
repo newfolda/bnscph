@@ -3,13 +3,16 @@ import { NextResponse } from "next/server"
 import { deleteSellCarLead, saveSellCarLead } from "@/src/server/sellCar/repository"
 import { uploadLeadPhotos } from "@/src/server/sellCar/uploadLeadPhotos"
 import { sendSellCarNotifications } from "@/src/server/email/sendSellCarNotifications"
+import { enforceRateLimit, getClientAddress } from "@/src/server/security/rateLimit"
 import type { SellCarSubmissionPayload, VehicleFieldMode } from "@/src/types/sellCar"
 
 const maximumRequestBytes = 8 * 5 * 1024 * 1024 + 32 * 1024
 const vehicleFieldModes: VehicleFieldMode[] = ["catalog", "manual", "unsure"]
 
 const jsonResponse = (message: string, status: number) =>
-  NextResponse.json({ success: false, message }, { status })
+  NextResponse.json({ success: false, message }, { status, headers: { "Cache-Control": "no-store" } })
+
+export const dynamic = "force-dynamic"
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value)
@@ -134,7 +137,22 @@ const normalizeSubmission = (payload: SellCarSubmissionPayload): SellCarSubmissi
 const isUploadedFile = (value: FormDataEntryValue): value is File =>
   typeof value !== "string" && value instanceof File
 
+const isSameSiteRequest = (request: Request) => {
+  const origin = request.headers.get("origin")
+  if (!origin) return false
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host")
+  try { return new URL(origin).host === host } catch { return false }
+}
+
 export async function POST(request: Request) {
+  if (!isSameSiteRequest(request)) return jsonResponse("Invalid submission.", 403)
+
+  try {
+    await enforceRateLimit({ endpoint: "sell-car-ip", identifier: getClientAddress(request.headers), limit: 8, windowSeconds: 900 })
+  } catch {
+    return jsonResponse("Please wait before submitting again.", 429)
+  }
+
   const contentType = request.headers.get("content-type") ?? ""
   const contentLength = Number(request.headers.get("content-length"))
 
@@ -187,6 +205,12 @@ export async function POST(request: Request) {
   }
 
   const normalizedPayload = normalizeSubmission(payload)
+
+  try {
+    await enforceRateLimit({ endpoint: "sell-car-mobile", identifier: normalizedPayload.contact.mobileNumber, limit: 3, windowSeconds: 900 })
+  } catch {
+    return jsonResponse("Please wait before submitting again.", 429)
+  }
   const referenceId = createReferenceId()
   const submittedAt = new Date().toISOString()
   let leadId: string | null = null
@@ -237,6 +261,6 @@ export async function POST(request: Request) {
       referenceId,
       submittedAt,
     },
-    { status: 202 },
+    { status: 202, headers: { "Cache-Control": "no-store" } },
   )
 }

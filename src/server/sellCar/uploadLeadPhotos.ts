@@ -74,7 +74,7 @@ export async function uploadLeadPhotos(leadId: string, files: File[]): Promise<v
       photoMetadata.push({
         lead_id: leadId,
         storage_path: storagePath,
-        file_name: photo.file.name,
+        file_name: `photo-${displayOrder + 1}.${photo.extension}`,
         content_type: photo.file.type,
         file_size: photo.file.size,
         display_order: displayOrder,

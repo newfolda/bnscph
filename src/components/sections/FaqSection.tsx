@@ -149,7 +149,6 @@ export default function FaqSection() {
     // TODO: Connect this form to the real lead submission endpoint.
     setIsSubmitting(true)
     submissionTimerRef.current = window.setTimeout(() => {
-      console.info({ name, mobile })
       setIsSubmitting(false)
       setShowSuccessModal(true)
       submissionTimerRef.current = null

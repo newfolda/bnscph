@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 type GoogleAnalyticsPageViewProps = {
   measurementId: string
@@ -15,7 +15,6 @@ declare global {
 
 export default function GoogleAnalyticsPageView({ measurementId }: GoogleAnalyticsPageViewProps) {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
   const isInitialPageView = useRef(true)
 
   useEffect(() => {
@@ -26,11 +25,8 @@ export default function GoogleAnalyticsPageView({ measurementId }: GoogleAnalyti
 
     if (typeof window.gtag !== "function") return
 
-    const queryString = searchParams.toString()
-    const pagePath = queryString ? `${pathname}?${queryString}` : pathname
-
-    window.gtag("config", measurementId, { page_path: pagePath })
-  }, [measurementId, pathname, searchParams])
+    window.gtag("config", measurementId, { page_path: pathname })
+  }, [measurementId, pathname])
 
   return null
 }
