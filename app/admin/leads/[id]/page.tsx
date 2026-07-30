@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import LeadActivity from "@/src/components/admin/LeadActivity"
 import LeadPhotoGallery from "@/src/components/admin/LeadPhotoGallery"
 import InspectionCard from "@/src/components/admin/InspectionCard"
+import LeadRetentionControls from "@/src/components/admin/LeadRetentionControls"
 import { getLeadById } from "@/src/server/sellCar/getLeadById"
 import { getInspection } from "@/src/server/sellCar/getInspection"
 import { getLeadNotes } from "@/src/server/sellCar/getLeadNotes"
@@ -173,6 +174,8 @@ export default async function AdminLeadDetailsPage({ params }: LeadDetailsPagePr
             ])}
           </div>
         </article>
+
+        <LeadRetentionControls leadId={lead.id} initialLegalHold={lead.legal_hold} deletionDate={lead.retention_delete_after} isEligible={(lead.status === "rejected" || lead.status === "archived") && Boolean(lead.retention_delete_after)} />
 
         <InspectionCard leadId={lead.id} initialInspection={inspection} />
       </div>

@@ -23,6 +23,10 @@ export type SellCarLeadDetails = {
   photo_count: number
   privacy_consent: boolean
   source: string
+  closed_at: string | null
+  retention_delete_after: string | null
+  legal_hold: boolean
+  retention_status: string | null
 }
 
 export async function getLeadById(id: string): Promise<SellCarLeadDetails | null> {
@@ -30,7 +34,7 @@ export async function getLeadById(id: string): Promise<SellCarLeadDetails | null
   const { data, error } = await supabase
     .from("sell_car_leads")
     .select(
-      "id, reference_id, submitted_at, created_at, updated_at, status, full_name, mobile_number, city, vehicle_year, make, model, variant, mileage, transmission, fuel_type, condition, vehicle_field_modes, photo_count, privacy_consent, source"
+      "id, reference_id, submitted_at, created_at, updated_at, status, full_name, mobile_number, city, vehicle_year, make, model, variant, mileage, transmission, fuel_type, condition, vehicle_field_modes, photo_count, privacy_consent, source, closed_at, retention_delete_after, legal_hold, retention_status"
     )
     .eq("id", id)
     .maybeSingle()

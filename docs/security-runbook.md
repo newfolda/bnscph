@@ -12,7 +12,9 @@ This internal runbook supplements—not replaces—legal, regulatory, or inciden
 
 ## Retention workflow
 
-The application does not yet automate retention deletion. At least monthly, an authorized administrator should identify abandoned submissions and unsuccessful inquiries closed more than approximately 30 days ago; delete their photo objects first, then their related photo metadata and lead records; and record only the date, record count, and operator in a non-personal operational log. Do not include completed purchase records in this workflow. The process should be safe to repeat and should not log personal data.
+The automated retention job applies only to the application’s closed statuses: `rejected` and `archived`. It schedules eligible records for deletion 30 days after `closed_at`; `purchased`, active, inspection-scheduled, completed/purchased-car, and legal-hold records are excluded. The cron job runs at `0 19 * * *` UTC, approximately 3:00 a.m. Philippine time the following day.
+
+Before enabling the job, deploy `supabase/retention_cleanup.sql`, create the documented Vault secrets, and deploy the `cleanup-expired-leads` Edge Function with `CLEANUP_CRON_SECRET`. Preview candidates with the service-role-only `preview_expired_sell_car_leads()` function. To pause the job, unschedule `cleanup-expired-unsuccessful-leads` in `cron.job`; review execution history through Supabase Cron/Edge Function logs. The function removes exact private storage objects first, then cascades related photo rows, notes, inspections, and the lead record. A storage failure retains the database record for retry. Monthly, review non-personal run counts and confirm that purchased and legal-hold records were excluded.
 
 ## Incident response
 
