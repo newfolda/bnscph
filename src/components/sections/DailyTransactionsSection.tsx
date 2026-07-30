@@ -77,84 +77,129 @@ function TransactionCard({
   )
 }
 
-function TransactionCards({
-  groups,
-  interactive,
+function TransactionGroup({
+  groupIndex,
   recentlyPurchased,
   purchasedOn,
   locale,
   sellerFrom,
 }: {
-  groups: number
-  interactive: boolean
+  groupIndex: number
   recentlyPurchased: string
   purchasedOn: string
   locale: string
   sellerFrom: string
 }) {
-  return Array.from({ length: groups }, (_, groupIndex) => latestTransactions.map((transaction) => ({ transaction, groupIndex }))).flat().map(({ transaction, groupIndex }) => (
-    <TransactionCard
-      key={`${transaction.year}-${transaction.brand}-${transaction.model}-${groupIndex}`}
-      transaction={transaction}
-      isDuplicate={!interactive || groupIndex > 0}
-      recentlyPurchased={recentlyPurchased}
-      purchasedOn={purchasedOn}
-      locale={locale}
-      sellerFrom={sellerFrom}
-    />
-  ))
+  return (
+    <div className="transactions-group flex shrink-0 gap-7 pr-7 md:gap-8 md:pr-8">
+      {latestTransactions.map((transaction) => (
+        <TransactionCard
+          key={`${transaction.year}-${transaction.brand}-${transaction.model}-${groupIndex}`}
+          transaction={transaction}
+          isDuplicate={groupIndex > 0}
+          recentlyPurchased={recentlyPurchased}
+          purchasedOn={purchasedOn}
+          locale={locale}
+          sellerFrom={sellerFrom}
+        />
+      ))}
+    </div>
+  )
 }
 
 export default function DailyTransactionsSection() {
   const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
-  const entranceTrackRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
   const hasTriggeredEntranceRef = useRef(false)
   const entranceAnimationRef = useRef<Animation | null>(null)
+  const marqueeAnimationRef = useRef<Animation | null>(null)
   const entranceFallbackTimerRef = useRef<number | null>(null)
-  const entranceRemovalTimerRef = useRef<number | null>(null)
   const entranceFrameRef = useRef<number | null>(null)
+  const currentOffsetRef = useRef(0)
+  const groupWidthRef = useRef(0)
   const [hasEntered, setHasEntered] = useState(false)
   const [animationPhase, setAnimationPhase] = useState<"idle" | "entrance" | "marquee" | "static">("idle")
-  const [isEntranceTrackVisible, setIsEntranceTrackVisible] = useState(false)
 
   useEffect(() => {
     let isDisposed = false
-    let hasFinishedEntrance = false
+    let hasStartedMarquee = false
 
-    const clearEntranceAnimation = () => {
+    const clearAnimations = () => {
       if (entranceFallbackTimerRef.current !== null) window.clearTimeout(entranceFallbackTimerRef.current)
-      if (entranceRemovalTimerRef.current !== null) window.clearTimeout(entranceRemovalTimerRef.current)
       if (entranceFrameRef.current !== null) window.cancelAnimationFrame(entranceFrameRef.current)
       entranceAnimationRef.current?.cancel()
+      marqueeAnimationRef.current?.cancel()
     }
 
-    const finishEntranceAndStartMarquee = () => {
-      if (isDisposed || hasFinishedEntrance) return
-      hasFinishedEntrance = true
+    const getCurrentTranslateX = (track: HTMLDivElement) => {
+      const transform = window.getComputedStyle(track).transform
+      if (!transform || transform === "none") return currentOffsetRef.current
 
+      const matrixValues = transform.match(/^matrix\((.+)\)$/)?.[1]?.split(",")
+      return matrixValues ? Number.parseFloat(matrixValues[4]) || currentOffsetRef.current : currentOffsetRef.current
+    }
+
+    const startContinuousMarqueeFromCurrentPosition = () => {
+      if (isDisposed || hasStartedMarquee) return
+
+      const track = trackRef.current
+      const groupWidth = groupWidthRef.current
+      if (!track || groupWidth <= 0) return
+
+      hasStartedMarquee = true
       if (entranceFallbackTimerRef.current !== null) window.clearTimeout(entranceFallbackTimerRef.current)
+      currentOffsetRef.current = getCurrentTranslateX(track)
+      const duration = window.matchMedia("(min-width: 1024px)").matches
+        ? 36_000
+        : window.matchMedia("(min-width: 768px)").matches
+          ? 34_000
+          : 30_000
+
+      entranceAnimationRef.current?.commitStyles()
       entranceAnimationRef.current?.cancel()
+      track.style.transform = `translate3d(${currentOffsetRef.current}px, 0, 0)`
+
+      const marqueeAnimation = track.animate(
+        [
+          { transform: `translate3d(${currentOffsetRef.current}px, 0, 0)` },
+          { transform: `translate3d(${currentOffsetRef.current - groupWidth}px, 0, 0)` },
+        ],
+        { duration, easing: "linear", iterations: Infinity },
+      )
+
+      marqueeAnimationRef.current = marqueeAnimation
       setAnimationPhase("marquee")
-      entranceRemovalTimerRef.current = window.setTimeout(() => {
-        if (!isDisposed) setIsEntranceTrackVisible(false)
-      }, 90)
     }
 
-    const runEntrance = () => {
-      const track = entranceTrackRef.current
+    const runEntrance = (attempt = 0) => {
+      const track = trackRef.current
       const marquee = marqueeRef.current
 
       if (!track || !marquee) {
-        finishEntranceAndStartMarquee()
+        if (attempt < 10) {
+          entranceFrameRef.current = window.requestAnimationFrame(() => runEntrance(attempt + 1))
+        }
         return
       }
 
       const viewportWidth = marquee.clientWidth
-      const cardWidth = track.firstElementChild?.getBoundingClientRect().width ?? viewportWidth
-      const gap = Number.parseFloat(window.getComputedStyle(track).gap) || 0
+      const group = track.firstElementChild as HTMLDivElement | null
+      const card = group?.firstElementChild as HTMLElement | null
+      const groupWidth = group?.getBoundingClientRect().width ?? 0
+      const gap = group ? Number.parseFloat(window.getComputedStyle(group).gap) || 0 : 0
+      const cardWidth = card?.getBoundingClientRect().width ?? 0
       const cardPitch = cardWidth + gap
+
+      if (viewportWidth <= 0 || groupWidth <= 0 || cardPitch <= 0) {
+        if (attempt < 10) {
+          entranceFrameRef.current = window.requestAnimationFrame(() => runEntrance(attempt + 1))
+        }
+        return
+      }
+
+      groupWidthRef.current = groupWidth
       const isDesktop = window.matchMedia("(min-width: 1024px)").matches
       const isTablet = window.matchMedia("(min-width: 640px)").matches
       const cardCount = isDesktop ? 8 : isTablet ? 7 : 5
@@ -163,7 +208,9 @@ export default function DailyTransactionsSection() {
       const steadyOffset = startOffset * 0.2
 
       track.style.transform = `translate3d(${startOffset}px, 0, 0)`
-      track.style.opacity = "1"
+      track.style.visibility = "visible"
+      currentOffsetRef.current = startOffset
+      setAnimationPhase("entrance")
 
       const animation = track.animate(
         [
@@ -178,8 +225,15 @@ export default function DailyTransactionsSection() {
       )
 
       entranceAnimationRef.current = animation
-      animation.onfinish = finishEntranceAndStartMarquee
-      entranceFallbackTimerRef.current = window.setTimeout(finishEntranceAndStartMarquee, duration + 200)
+      animation.onfinish = () => {
+        animation.commitStyles()
+        currentOffsetRef.current = getCurrentTranslateX(track)
+        startContinuousMarqueeFromCurrentPosition()
+      }
+      entranceFallbackTimerRef.current = window.setTimeout(() => {
+        currentOffsetRef.current = getCurrentTranslateX(track)
+        startContinuousMarqueeFromCurrentPosition()
+      }, duration + 200)
     }
 
     const startEntrance = () => {
@@ -193,8 +247,6 @@ export default function DailyTransactionsSection() {
         return
       }
 
-      setAnimationPhase("entrance")
-      setIsEntranceTrackVisible(true)
       entranceFrameRef.current = window.requestAnimationFrame(() => {
         entranceFrameRef.current = window.requestAnimationFrame(runEntrance)
       })
@@ -207,14 +259,14 @@ export default function DailyTransactionsSection() {
       })
       return () => {
         window.cancelAnimationFrame(frame)
-        clearEntranceAnimation()
+        clearAnimations()
       }
     }
 
     const section = sectionRef.current
     if (!section || typeof IntersectionObserver === "undefined") {
       startEntrance()
-      return clearEntranceAnimation
+      return clearAnimations
     }
 
     const observer = new IntersectionObserver(
@@ -230,9 +282,11 @@ export default function DailyTransactionsSection() {
     return () => {
       observer.disconnect()
       isDisposed = true
-      clearEntranceAnimation()
+      clearAnimations()
     }
   }, [])
+
+  const canPauseMarquee = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches
 
   return (
     <section ref={sectionRef} id="latest-transactions" className={`transactions-section overflow-hidden border-t border-[var(--border)] bg-[var(--background-alt)] py-14 md:py-16 lg:pb-16 lg:pt-10 ${hasEntered ? "transactions-section--entered" : ""}`}>
@@ -255,31 +309,33 @@ export default function DailyTransactionsSection() {
           <div
             ref={marqueeRef}
             className={`transactions-marquee transactions-marquee--${animationPhase} relative z-10 overflow-hidden pb-2`}
+            onMouseEnter={() => {
+              if (canPauseMarquee()) marqueeAnimationRef.current?.pause()
+            }}
+            onMouseLeave={() => {
+              if (canPauseMarquee()) marqueeAnimationRef.current?.play()
+            }}
+            onFocusCapture={() => {
+              if (canPauseMarquee()) marqueeAnimationRef.current?.pause()
+            }}
+            onBlurCapture={(event) => {
+              if (canPauseMarquee() && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                marqueeAnimationRef.current?.play()
+              }
+            }}
           >
-            <div className="transactions-normal-track flex w-max gap-7 pr-7 md:gap-8 md:pr-8">
-              <TransactionCards
-                groups={4}
-                interactive
-                recentlyPurchased={t.transactions.recentlyPurchased}
-                purchasedOn={t.transactions.purchasedOn}
-                locale={t.transactions.dateLocale}
-                sellerFrom={t.transactions.sellerFrom}
-              />
+            <div ref={trackRef} className="transactions-track flex w-max">
+              {Array.from({ length: 4 }, (_, groupIndex) => (
+                <TransactionGroup
+                  key={groupIndex}
+                  groupIndex={groupIndex}
+                  recentlyPurchased={t.transactions.recentlyPurchased}
+                  purchasedOn={t.transactions.purchasedOn}
+                  locale={t.transactions.dateLocale}
+                  sellerFrom={t.transactions.sellerFrom}
+                />
+              ))}
             </div>
-            {isEntranceTrackVisible && (
-              <div aria-hidden="true" className="transactions-entrance-layer pointer-events-none absolute inset-0 z-10 overflow-hidden">
-                <div ref={entranceTrackRef} className="transactions-entrance-track flex w-max gap-7 pr-7 md:gap-8 md:pr-8">
-                  <TransactionCards
-                    groups={12}
-                    interactive={false}
-                    recentlyPurchased={t.transactions.recentlyPurchased}
-                    purchasedOn={t.transactions.purchasedOn}
-                    locale={t.transactions.dateLocale}
-                    sellerFrom={t.transactions.sellerFrom}
-                  />
-                </div>
-              </div>
-            )}
           </div>
           <div aria-hidden="true" className="transactions-fade-left pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-14 md:block lg:w-[72px]" />
           <div aria-hidden="true" className="transactions-fade-right pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-14 md:block lg:w-[72px]" />
@@ -309,64 +365,23 @@ export default function DailyTransactionsSection() {
           transition: none;
         }
 
-        .transactions-normal-track {
-          opacity: 1;
-          transition: opacity 80ms ease-out;
+        .transactions-marquee--idle .transactions-track {
+          visibility: hidden;
         }
 
-        .transactions-marquee--entrance .transactions-normal-track {
-          opacity: 0;
-          pointer-events: none;
-        }
-
-        .transactions-entrance-track {
-          opacity: 0;
+        .transactions-marquee--entrance .transactions-track,
+        .transactions-marquee--marquee .transactions-track {
+          visibility: visible;
           will-change: transform;
-        }
-
-        .transactions-marquee--marquee .transactions-normal-track {
-          animation: transactions-marquee 30s linear infinite;
-          will-change: transform;
-        }
-
-        .transactions-marquee--marquee .transactions-entrance-layer {
-          opacity: 0;
-          transition: opacity 80ms ease-out;
         }
 
         @media (min-width: 768px) {
-          .transactions-marquee--marquee .transactions-normal-track {
-            animation-duration: 34s;
-          }
-
-          .transactions-marquee--marquee:hover .transactions-normal-track,
-          .transactions-marquee--marquee:focus-within .transactions-normal-track,
-          .transactions-marquee--marquee:active .transactions-normal-track {
-            animation-play-state: paused;
-          }
-
           .transactions-fade-left {
             background: linear-gradient(90deg, var(--background-alt), rgba(248, 248, 248, 0));
           }
 
           .transactions-fade-right {
             background: linear-gradient(270deg, var(--background-alt), rgba(248, 248, 248, 0));
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .transactions-marquee--marquee .transactions-normal-track {
-            animation-duration: 36s;
-          }
-        }
-
-        @keyframes transactions-marquee {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-
-          to {
-            transform: translate3d(-25%, 0, 0);
           }
         }
 
@@ -378,17 +393,12 @@ export default function DailyTransactionsSection() {
             transition: none;
           }
 
-          .transactions-normal-track,
-          .transactions-entrance-track,
-          .transactions-marquee--marquee .transactions-normal-track {
-            animation: none;
-            opacity: 1;
+          .transactions-track,
+          .transactions-marquee--entrance .transactions-track,
+          .transactions-marquee--marquee .transactions-track {
             transform: none;
+            visibility: visible;
             will-change: auto;
-          }
-
-          .transactions-entrance-layer {
-            display: none;
           }
         }
       `}</style>
