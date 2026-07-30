@@ -30,74 +30,156 @@ function formatPurchasedAt(purchasedAt: string | undefined, recentlyPurchased: s
   return `${purchasedOn} ${formatter.format(date)}`
 }
 
+type Transaction = (typeof latestTransactions)[number]
+
+function TransactionCard({
+  transaction,
+  isDuplicate,
+  recentlyPurchased,
+  purchasedOn,
+  locale,
+  sellerFrom,
+}: {
+  transaction: Transaction
+  isDuplicate: boolean
+  recentlyPurchased: string
+  purchasedOn: string
+  locale: string
+  sellerFrom: string
+}) {
+  return (
+    <article
+      aria-hidden={isDuplicate || undefined}
+      tabIndex={isDuplicate ? -1 : 0}
+      className="group flex h-[390px] w-[78vw] max-w-[290px] shrink-0 flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[410px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px]"
+    >
+      <div className="relative h-[286px] shrink-0 overflow-hidden bg-[#F7F7F7] md:h-[270px] lg:h-[320px]">
+        <Image
+          src={transaction.imagePath}
+          alt={`${transaction.year} ${transaction.brand} ${transaction.model} recently purchased by Buy and Sell Cars Philippines`}
+          fill
+          draggable={false}
+          sizes="(min-width: 1024px) 290px, (min-width: 768px) 250px, 78vw"
+          className="object-cover object-center transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.035] motion-reduce:transition-none"
+        />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/[0.05] to-transparent" />
+        <span className="absolute left-3 top-3 rounded-full border border-white/65 bg-white/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_2px_7px_rgba(31,31,31,0.08)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/90 motion-reduce:transition-none md:text-xs lg:text-[13px]">
+          {formatPurchasedAt(transaction.purchasedAt, recentlyPurchased, purchasedOn, locale)}
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:px-5 lg:py-3">
+        <h3 className="text-base font-bold uppercase leading-snug tracking-[0.025em] text-[var(--text-primary)] lg:text-[17px]">
+          {transaction.year} {transaction.brand} {transaction.model}
+        </h3>
+        <p className="mt-1 text-[13px] leading-relaxed text-[var(--text-secondary)] lg:text-sm">{sellerFrom} {transaction.location}</p>
+      </div>
+    </article>
+  )
+}
+
+function TransactionCards({
+  groups,
+  interactive,
+  recentlyPurchased,
+  purchasedOn,
+  locale,
+  sellerFrom,
+}: {
+  groups: number
+  interactive: boolean
+  recentlyPurchased: string
+  purchasedOn: string
+  locale: string
+  sellerFrom: string
+}) {
+  return Array.from({ length: groups }, (_, groupIndex) => latestTransactions.map((transaction) => ({ transaction, groupIndex }))).flat().map(({ transaction, groupIndex }) => (
+    <TransactionCard
+      key={`${transaction.year}-${transaction.brand}-${transaction.model}-${groupIndex}`}
+      transaction={transaction}
+      isDuplicate={!interactive || groupIndex > 0}
+      recentlyPurchased={recentlyPurchased}
+      purchasedOn={purchasedOn}
+      locale={locale}
+      sellerFrom={sellerFrom}
+    />
+  ))
+}
+
 export default function DailyTransactionsSection() {
   const { t } = useLanguage()
   const sectionRef = useRef<HTMLElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
+  const marqueeRef = useRef<HTMLDivElement>(null)
+  const entranceTrackRef = useRef<HTMLDivElement>(null)
   const hasTriggeredEntranceRef = useRef(false)
   const entranceAnimationRef = useRef<Animation | null>(null)
-  const entranceStartTimerRef = useRef<number | null>(null)
-  const marqueeFrameRef = useRef<number | null>(null)
-  const marqueeStartFrameRef = useRef<number | null>(null)
+  const entranceFallbackTimerRef = useRef<number | null>(null)
+  const entranceRemovalTimerRef = useRef<number | null>(null)
+  const entranceFrameRef = useRef<number | null>(null)
   const [hasEntered, setHasEntered] = useState(false)
   const [animationPhase, setAnimationPhase] = useState<"idle" | "entrance" | "marquee" | "static">("idle")
-  const [isMarqueePaused, setIsMarqueePaused] = useState(false)
+  const [isEntranceTrackVisible, setIsEntranceTrackVisible] = useState(false)
 
   useEffect(() => {
     let isDisposed = false
+    let hasFinishedEntrance = false
 
     const clearEntranceAnimation = () => {
-      if (entranceStartTimerRef.current !== null) window.clearTimeout(entranceStartTimerRef.current)
-      if (marqueeFrameRef.current !== null) window.cancelAnimationFrame(marqueeFrameRef.current)
-      if (marqueeStartFrameRef.current !== null) window.cancelAnimationFrame(marqueeStartFrameRef.current)
+      if (entranceFallbackTimerRef.current !== null) window.clearTimeout(entranceFallbackTimerRef.current)
+      if (entranceRemovalTimerRef.current !== null) window.clearTimeout(entranceRemovalTimerRef.current)
+      if (entranceFrameRef.current !== null) window.cancelAnimationFrame(entranceFrameRef.current)
       entranceAnimationRef.current?.cancel()
     }
 
-    const enableMarquee = () => {
-      marqueeFrameRef.current = window.requestAnimationFrame(() => {
-        marqueeStartFrameRef.current = window.requestAnimationFrame(() => {
-          if (!isDisposed) setAnimationPhase("marquee")
-        })
-      })
+    const finishEntranceAndStartMarquee = () => {
+      if (isDisposed || hasFinishedEntrance) return
+      hasFinishedEntrance = true
+
+      if (entranceFallbackTimerRef.current !== null) window.clearTimeout(entranceFallbackTimerRef.current)
+      entranceAnimationRef.current?.cancel()
+      setAnimationPhase("marquee")
+      entranceRemovalTimerRef.current = window.setTimeout(() => {
+        if (!isDisposed) setIsEntranceTrackVisible(false)
+      }, 90)
     }
 
     const runEntrance = () => {
-      const track = trackRef.current
+      const track = entranceTrackRef.current
+      const marquee = marqueeRef.current
 
-      if (!track) {
-        enableMarquee()
+      if (!track || !marquee) {
+        finishEntranceAndStartMarquee()
         return
       }
 
-      const isDesktop = window.matchMedia("(min-width: 768px)").matches
-      const startOffset = isDesktop ? "-14%" : "-10%"
-      const duration = isDesktop ? 850 : 600
+      const viewportWidth = marquee.clientWidth
+      const cardWidth = track.firstElementChild?.getBoundingClientRect().width ?? viewportWidth
+      const gap = Number.parseFloat(window.getComputedStyle(track).gap) || 0
+      const cardPitch = cardWidth + gap
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches
+      const isTablet = window.matchMedia("(min-width: 640px)").matches
+      const cardCount = isDesktop ? 8 : isTablet ? 7 : 5
+      const duration = isDesktop ? 1250 : isTablet ? 1050 : 900
+      const startOffset = -(cardPitch * cardCount)
+      const steadyOffset = startOffset * 0.2
 
-      track.style.transform = `translate3d(${startOffset}, 0, 0)`
-      setAnimationPhase("entrance")
+      track.style.transform = `translate3d(${startOffset}px, 0, 0)`
+      track.style.opacity = "1"
 
       const animation = track.animate(
         [
-          { transform: `translate3d(${startOffset}, 0, 0)`, opacity: 0.9 },
-          { transform: "translate3d(0, 0, 0)", opacity: 1 },
+          { transform: `translate3d(${startOffset}px, 0, 0)`, offset: 0 },
+          { transform: `translate3d(${steadyOffset}px, 0, 0)`, offset: 0.8, easing: "linear" },
+          { transform: "translate3d(0, 0, 0)", offset: 1, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
         ],
         {
           duration,
-          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
           fill: "forwards",
         },
       )
 
       entranceAnimationRef.current = animation
-      void animation.finished.then(() => {
-        if (isDisposed || entranceAnimationRef.current !== animation) return
-
-        animation.commitStyles()
-        animation.cancel()
-        track.style.transform = "translate3d(0, 0, 0)"
-        track.style.opacity = "1"
-        enableMarquee()
-      }).catch(() => undefined)
+      animation.onfinish = finishEntranceAndStartMarquee
+      entranceFallbackTimerRef.current = window.setTimeout(finishEntranceAndStartMarquee, duration + 200)
     }
 
     const startEntrance = () => {
@@ -111,7 +193,11 @@ export default function DailyTransactionsSection() {
         return
       }
 
-      entranceStartTimerRef.current = window.setTimeout(runEntrance, 160)
+      setAnimationPhase("entrance")
+      setIsEntranceTrackVisible(true)
+      entranceFrameRef.current = window.requestAnimationFrame(() => {
+        entranceFrameRef.current = window.requestAnimationFrame(runEntrance)
+      })
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -167,48 +253,33 @@ export default function DailyTransactionsSection() {
 
         <div className="transactions-reveal transactions-reveal--cards relative mx-[-1rem] mt-10 pb-4 sm:mx-[-1.5rem] md:mt-12 md:pb-6 lg:mx-[-2.5rem]">
           <div
-            className={`transactions-marquee transactions-marquee--${animationPhase} relative z-10 overflow-hidden pb-2 ${isMarqueePaused ? "transactions-marquee--paused" : ""}`}
-            onPointerDown={(event) => {
-              if (event.pointerType !== "mouse") setIsMarqueePaused(true)
-            }}
-            onPointerUp={() => setIsMarqueePaused(false)}
-            onPointerCancel={() => setIsMarqueePaused(false)}
+            ref={marqueeRef}
+            className={`transactions-marquee transactions-marquee--${animationPhase} relative z-10 overflow-hidden pb-2`}
           >
-            <div ref={trackRef} className="transactions-track flex w-max snap-x snap-mandatory gap-7 pr-7 md:gap-8 md:pr-8 md:snap-none">
-              {Array.from({ length: 4 }, (_, groupIndex) => latestTransactions.map((transaction) => ({ transaction, groupIndex }))).flat().map(({ transaction, groupIndex }) => {
-                const isDuplicate = groupIndex > 0
-
-                return (
-                  <article
-                    key={`${transaction.year}-${transaction.brand}-${transaction.model}-${groupIndex}`}
-                    aria-hidden={isDuplicate || undefined}
-                    tabIndex={isDuplicate ? -1 : 0}
-                    className="group flex h-[390px] w-[78vw] max-w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_6px_18px_rgba(31,31,31,0.055),0_1px_3px_rgba(31,31,31,0.03)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-[2px] hover:border-[var(--primary)]/60 hover:shadow-[0_16px_30px_rgba(31,31,31,0.095),0_3px_8px_rgba(31,31,31,0.04)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transform-none motion-reduce:transition-none md:h-[410px] md:w-[250px] md:max-w-none lg:h-[420px] lg:w-[290px]"
-                  >
-                    <div className="relative h-[286px] shrink-0 overflow-hidden bg-[#F7F7F7] md:h-[270px] lg:h-[320px]">
-                      <Image
-                        src={transaction.imagePath}
-                        alt={`${transaction.year} ${transaction.brand} ${transaction.model} recently purchased by Buy and Sell Cars Philippines`}
-                        fill
-                        draggable={false}
-                        sizes="(min-width: 1024px) 290px, (min-width: 768px) 250px, 78vw"
-                        className="object-cover object-center transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.035] motion-reduce:transition-none"
-                      />
-                      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/[0.05] to-transparent" />
-                      <span className="absolute left-3 top-3 rounded-full border border-white/65 bg-white/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-primary)] shadow-[0_2px_7px_rgba(31,31,31,0.08)] backdrop-blur-md transition-colors duration-300 group-hover:bg-white/90 motion-reduce:transition-none md:text-xs lg:text-[13px]">
-                        {formatPurchasedAt(transaction.purchasedAt, t.transactions.recentlyPurchased, t.transactions.purchasedOn, t.transactions.dateLocale)}
-                      </span>
-                    </div>
-                    <div className="flex flex-1 flex-col justify-center p-5 md:p-5 lg:px-5 lg:py-3">
-                      <h3 className="text-base font-bold uppercase leading-snug tracking-[0.025em] text-[var(--text-primary)] lg:text-[17px]">
-                        {transaction.year} {transaction.brand} {transaction.model}
-                      </h3>
-                      <p className="mt-1 text-[13px] leading-relaxed text-[var(--text-secondary)] lg:text-sm">{t.transactions.sellerFrom} {transaction.location}</p>
-                    </div>
-                  </article>
-                )
-              })}
+            <div className="transactions-normal-track flex w-max gap-7 pr-7 md:gap-8 md:pr-8">
+              <TransactionCards
+                groups={4}
+                interactive
+                recentlyPurchased={t.transactions.recentlyPurchased}
+                purchasedOn={t.transactions.purchasedOn}
+                locale={t.transactions.dateLocale}
+                sellerFrom={t.transactions.sellerFrom}
+              />
             </div>
+            {isEntranceTrackVisible && (
+              <div aria-hidden="true" className="transactions-entrance-layer pointer-events-none absolute inset-0 z-10 overflow-hidden">
+                <div ref={entranceTrackRef} className="transactions-entrance-track flex w-max gap-7 pr-7 md:gap-8 md:pr-8">
+                  <TransactionCards
+                    groups={12}
+                    interactive={false}
+                    recentlyPurchased={t.transactions.recentlyPurchased}
+                    purchasedOn={t.transactions.purchasedOn}
+                    locale={t.transactions.dateLocale}
+                    sellerFrom={t.transactions.sellerFrom}
+                  />
+                </div>
+              </div>
+            )}
           </div>
           <div aria-hidden="true" className="transactions-fade-left pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-14 md:block lg:w-[72px]" />
           <div aria-hidden="true" className="transactions-fade-right pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-14 md:block lg:w-[72px]" />
@@ -235,31 +306,42 @@ export default function DailyTransactionsSection() {
         }
 
         .transactions-reveal--cards {
-          transition-duration: 140ms;
-          transition-delay: 0ms;
+          transition: none;
         }
 
-        .transactions-marquee--entrance .transactions-track {
-          will-change: transform, opacity;
+        .transactions-normal-track {
+          opacity: 1;
+          transition: opacity 80ms ease-out;
         }
 
-        .transactions-marquee--marquee .transactions-track {
+        .transactions-marquee--entrance .transactions-normal-track {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .transactions-entrance-track {
+          opacity: 0;
+          will-change: transform;
+        }
+
+        .transactions-marquee--marquee .transactions-normal-track {
           animation: transactions-marquee 30s linear infinite;
           will-change: transform;
         }
 
-        .transactions-marquee--marquee.transactions-marquee--paused .transactions-track {
-          animation-play-state: paused;
+        .transactions-marquee--marquee .transactions-entrance-layer {
+          opacity: 0;
+          transition: opacity 80ms ease-out;
         }
 
         @media (min-width: 768px) {
-          .transactions-marquee--marquee .transactions-track {
+          .transactions-marquee--marquee .transactions-normal-track {
             animation-duration: 34s;
           }
 
-          .transactions-marquee--marquee:hover .transactions-track,
-          .transactions-marquee--marquee:focus-within .transactions-track,
-          .transactions-marquee--marquee:active .transactions-track {
+          .transactions-marquee--marquee:hover .transactions-normal-track,
+          .transactions-marquee--marquee:focus-within .transactions-normal-track,
+          .transactions-marquee--marquee:active .transactions-normal-track {
             animation-play-state: paused;
           }
 
@@ -273,7 +355,7 @@ export default function DailyTransactionsSection() {
         }
 
         @media (min-width: 1024px) {
-          .transactions-marquee--marquee .transactions-track {
+          .transactions-marquee--marquee .transactions-normal-track {
             animation-duration: 36s;
           }
         }
@@ -296,13 +378,17 @@ export default function DailyTransactionsSection() {
             transition: none;
           }
 
-          .transactions-track,
-          .transactions-marquee--entrance .transactions-track,
-          .transactions-marquee--marquee .transactions-track {
+          .transactions-normal-track,
+          .transactions-entrance-track,
+          .transactions-marquee--marquee .transactions-normal-track {
             animation: none;
             opacity: 1;
             transform: none;
             will-change: auto;
+          }
+
+          .transactions-entrance-layer {
+            display: none;
           }
         }
       `}</style>
