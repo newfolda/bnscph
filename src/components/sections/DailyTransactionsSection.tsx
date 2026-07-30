@@ -113,143 +113,205 @@ export default function DailyTransactionsSection() {
   const marqueeRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const hasTriggeredEntranceRef = useRef(false)
-  const entranceAnimationRef = useRef<Animation | null>(null)
-  const marqueeAnimationRef = useRef<Animation | null>(null)
-  const entranceFallbackTimerRef = useRef<number | null>(null)
-  const entranceFrameRef = useRef<number | null>(null)
+  const animationFrameRef = useRef<number | null>(null)
+  const phaseRef = useRef<"idle" | "entrance" | "reversing" | "marquee" | "paused" | "static">("idle")
+  const phaseBeforePauseRef = useRef<"entrance" | "reversing" | "marquee">("marquee")
+  const previousTimestampRef = useRef<number | null>(null)
+  const phaseElapsedRef = useRef(0)
   const currentOffsetRef = useRef(0)
   const groupWidthRef = useRef(0)
+  const cardPitchRef = useRef(0)
+  const entranceStartRef = useRef(0)
+  const entranceEndRef = useRef(0)
+  const reversalEndRef = useRef(0)
+  const pauseAnimationRef = useRef<(() => void) | null>(null)
+  const resumeAnimationRef = useRef<(() => void) | null>(null)
   const [hasEntered, setHasEntered] = useState(false)
   const [animationPhase, setAnimationPhase] = useState<"idle" | "entrance" | "marquee" | "static">("idle")
 
   useEffect(() => {
     let isDisposed = false
-    let hasStartedMarquee = false
+    let resizeObserver: ResizeObserver | null = null
 
-    const clearAnimations = () => {
-      if (entranceFallbackTimerRef.current !== null) window.clearTimeout(entranceFallbackTimerRef.current)
-      if (entranceFrameRef.current !== null) window.cancelAnimationFrame(entranceFrameRef.current)
-      entranceAnimationRef.current?.cancel()
-      marqueeAnimationRef.current?.cancel()
+    const stopFrame = () => {
+      if (animationFrameRef.current !== null) window.cancelAnimationFrame(animationFrameRef.current)
+      animationFrameRef.current = null
     }
 
-    const getCurrentTranslateX = (track: HTMLDivElement) => {
-      const transform = window.getComputedStyle(track).transform
-      if (!transform || transform === "none") return currentOffsetRef.current
-
-      const matrixValues = transform.match(/^matrix\((.+)\)$/)?.[1]?.split(",")
-      return matrixValues ? Number.parseFloat(matrixValues[4]) || currentOffsetRef.current : currentOffsetRef.current
-    }
-
-    const startContinuousMarqueeFromCurrentPosition = () => {
-      if (isDisposed || hasStartedMarquee) return
-
+    const applyTransform = () => {
       const track = trackRef.current
-      const groupWidth = groupWidthRef.current
-      if (!track || groupWidth <= 0) return
-
-      hasStartedMarquee = true
-      if (entranceFallbackTimerRef.current !== null) window.clearTimeout(entranceFallbackTimerRef.current)
-      currentOffsetRef.current = getCurrentTranslateX(track)
-      const duration = window.matchMedia("(min-width: 1024px)").matches
-        ? 36_000
-        : window.matchMedia("(min-width: 768px)").matches
-          ? 34_000
-          : 30_000
-
-      entranceAnimationRef.current?.commitStyles()
-      entranceAnimationRef.current?.cancel()
-      track.style.transform = `translate3d(${currentOffsetRef.current}px, 0, 0)`
-
-      const marqueeAnimation = track.animate(
-        [
-          { transform: `translate3d(${currentOffsetRef.current}px, 0, 0)` },
-          { transform: `translate3d(${currentOffsetRef.current - groupWidth}px, 0, 0)` },
-        ],
-        { duration, easing: "linear", iterations: Infinity },
-      )
-
-      marqueeAnimationRef.current = marqueeAnimation
-      setAnimationPhase("marquee")
+      if (track) track.style.transform = `translate3d(${currentOffsetRef.current}px, 0, 0)`
     }
 
-    const runEntrance = (attempt = 0) => {
-      const track = trackRef.current
+    const remeasure = () => {
       const marquee = marqueeRef.current
-
-      if (!track || !marquee) {
-        if (attempt < 10) {
-          entranceFrameRef.current = window.requestAnimationFrame(() => runEntrance(attempt + 1))
-        }
-        return
-      }
-
-      const viewportWidth = marquee.clientWidth
-      const group = track.firstElementChild as HTMLDivElement | null
+      const track = trackRef.current
+      const group = track?.firstElementChild as HTMLDivElement | null
       const card = group?.firstElementChild as HTMLElement | null
+      const viewportWidth = marquee?.clientWidth ?? 0
       const groupWidth = group?.getBoundingClientRect().width ?? 0
       const gap = group ? Number.parseFloat(window.getComputedStyle(group).gap) || 0 : 0
       const cardWidth = card?.getBoundingClientRect().width ?? 0
       const cardPitch = cardWidth + gap
 
-      if (viewportWidth <= 0 || groupWidth <= 0 || cardPitch <= 0) {
-        if (attempt < 10) {
-          entranceFrameRef.current = window.requestAnimationFrame(() => runEntrance(attempt + 1))
-        }
-        return
+      if (viewportWidth <= 0 || groupWidth <= 0 || cardPitch <= 0) return false
+
+      const previousGroupWidth = groupWidthRef.current
+      if (previousGroupWidth > 0 && previousGroupWidth !== groupWidth) {
+        const groupProgress = ((-currentOffsetRef.current % previousGroupWidth) + previousGroupWidth) % previousGroupWidth
+        currentOffsetRef.current = -3 * groupWidth - groupProgress
       }
 
       groupWidthRef.current = groupWidth
+      cardPitchRef.current = cardPitch
+      return true
+    }
+
+    const scheduleFrame = () => {
+      if (isDisposed || animationFrameRef.current !== null || phaseRef.current === "static" || phaseRef.current === "paused") return
+      animationFrameRef.current = window.requestAnimationFrame(tick)
+    }
+
+    const tick = (timestamp: number) => {
+      animationFrameRef.current = null
+      if (isDisposed || phaseRef.current === "static" || phaseRef.current === "paused") return
+
+      const previousTimestamp = previousTimestampRef.current ?? timestamp
+      const deltaMs = Math.min(Math.max(timestamp - previousTimestamp, 0), 50)
+      previousTimestampRef.current = timestamp
+      phaseElapsedRef.current += deltaMs
+
       const isDesktop = window.matchMedia("(min-width: 1024px)").matches
       const isTablet = window.matchMedia("(min-width: 640px)").matches
-      const cardCount = isDesktop ? 8 : isTablet ? 7 : 5
-      const duration = isDesktop ? 1250 : isTablet ? 1050 : 900
-      const startOffset = -(cardPitch * cardCount)
-      const steadyOffset = startOffset * 0.2
 
-      track.style.transform = `translate3d(${startOffset}px, 0, 0)`
-      track.style.visibility = "visible"
-      currentOffsetRef.current = startOffset
-      setAnimationPhase("entrance")
+      if (phaseRef.current === "entrance") {
+        const duration = isDesktop ? 1250 : isTablet ? 1050 : 900
+        const progress = Math.min(phaseElapsedRef.current / duration, 1)
+        const easedProgress = progress <= 0.8
+          ? progress * 1.05
+          : 0.84 + (1 - Math.pow(1 - (progress - 0.8) / 0.2, 2)) * 0.16
+        currentOffsetRef.current = entranceStartRef.current + (entranceEndRef.current - entranceStartRef.current) * easedProgress
 
-      const animation = track.animate(
-        [
-          { transform: `translate3d(${startOffset}px, 0, 0)`, offset: 0 },
-          { transform: `translate3d(${steadyOffset}px, 0, 0)`, offset: 0.8, easing: "linear" },
-          { transform: "translate3d(0, 0, 0)", offset: 1, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
-        ],
-        {
-          duration,
-          fill: "forwards",
-        },
-      )
+        if (progress >= 1) {
+          currentOffsetRef.current = entranceEndRef.current
+          reversalEndRef.current = entranceEndRef.current - Math.min(cardPitchRef.current * 0.08, 28)
+          phaseRef.current = "reversing"
+          phaseElapsedRef.current = 0
+        }
+      } else if (phaseRef.current === "reversing") {
+        const duration = isDesktop ? 160 : 120
+        const progress = Math.min(phaseElapsedRef.current / duration, 1)
+        currentOffsetRef.current = entranceEndRef.current + (reversalEndRef.current - entranceEndRef.current) * Math.pow(progress, 3)
 
-      entranceAnimationRef.current = animation
-      animation.onfinish = () => {
-        animation.commitStyles()
-        currentOffsetRef.current = getCurrentTranslateX(track)
-        startContinuousMarqueeFromCurrentPosition()
+        if (progress >= 1) {
+          currentOffsetRef.current = reversalEndRef.current
+          phaseRef.current = "marquee"
+          phaseElapsedRef.current = 0
+          setAnimationPhase("marquee")
+        }
+      } else if (phaseRef.current === "marquee") {
+        const duration = isDesktop ? 36_000 : isTablet ? 34_000 : 30_000
+        currentOffsetRef.current -= (groupWidthRef.current / duration) * deltaMs
+
+        while (currentOffsetRef.current <= -4 * groupWidthRef.current) currentOffsetRef.current += groupWidthRef.current
+        while (currentOffsetRef.current >= -2 * groupWidthRef.current) currentOffsetRef.current -= groupWidthRef.current
       }
-      entranceFallbackTimerRef.current = window.setTimeout(() => {
-        currentOffsetRef.current = getCurrentTranslateX(track)
-        startContinuousMarqueeFromCurrentPosition()
-      }, duration + 200)
+
+      applyTransform()
+      scheduleFrame()
+    }
+
+    const beginAfterMeasurement = (attempt = 0) => {
+      if (isDisposed) return
+      if (!remeasure()) {
+        if (attempt < 60) {
+          animationFrameRef.current = window.requestAnimationFrame(() => beginAfterMeasurement(attempt + 1))
+          return
+        }
+
+        phaseRef.current = "static"
+        setAnimationPhase("static")
+        return
+      }
+
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches
+      const isTablet = window.matchMedia("(min-width: 640px)").matches
+      const cardCount = isDesktop ? 9 : isTablet ? 7 : 5
+      const entranceDistance = cardPitchRef.current * cardCount
+      entranceStartRef.current = -2 * groupWidthRef.current - entranceDistance
+      entranceEndRef.current = -2 * groupWidthRef.current
+      currentOffsetRef.current = entranceStartRef.current
+      phaseRef.current = "entrance"
+      phaseElapsedRef.current = 0
+      previousTimestampRef.current = performance.now()
+
+      const track = trackRef.current
+      if (track) track.style.visibility = "visible"
+      applyTransform()
+      setAnimationPhase("entrance")
+      scheduleFrame()
     }
 
     const startEntrance = () => {
       if (hasTriggeredEntranceRef.current) return
       hasTriggeredEntranceRef.current = true
-
       setHasEntered(true)
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        phaseRef.current = "static"
         setAnimationPhase("static")
         return
       }
 
-      entranceFrameRef.current = window.requestAnimationFrame(() => {
-        entranceFrameRef.current = window.requestAnimationFrame(runEntrance)
+      animationFrameRef.current = window.requestAnimationFrame(() => beginAfterMeasurement())
+    }
+
+    const pauseAnimation = () => {
+      if (phaseRef.current === "static" || phaseRef.current === "paused") return
+      if (phaseRef.current === "entrance" || phaseRef.current === "reversing" || phaseRef.current === "marquee") {
+        phaseBeforePauseRef.current = phaseRef.current
+      }
+      phaseRef.current = "paused"
+      previousTimestampRef.current = null
+      stopFrame()
+    }
+
+    const resumeAnimation = () => {
+      if (phaseRef.current !== "paused") return
+      phaseRef.current = phaseBeforePauseRef.current
+      previousTimestampRef.current = performance.now()
+      phaseElapsedRef.current = 0
+      scheduleFrame()
+    }
+
+    pauseAnimationRef.current = pauseAnimation
+    resumeAnimationRef.current = resumeAnimation
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        stopFrame()
+        previousTimestampRef.current = null
+        return
+      }
+
+      if (phaseRef.current === "idle" && hasTriggeredEntranceRef.current) {
+        animationFrameRef.current = window.requestAnimationFrame(() => beginAfterMeasurement())
+        return
+      }
+
+      if (phaseRef.current !== "static" && phaseRef.current !== "paused") {
+        previousTimestampRef.current = performance.now()
+        scheduleFrame()
+      }
+    }
+
+    const observeResize = () => {
+      if (typeof ResizeObserver === "undefined" || !marqueeRef.current) return
+
+      resizeObserver = new ResizeObserver(() => {
+        if (remeasure()) applyTransform()
       })
+      resizeObserver.observe(marqueeRef.current)
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -259,14 +321,22 @@ export default function DailyTransactionsSection() {
       })
       return () => {
         window.cancelAnimationFrame(frame)
-        clearAnimations()
+        isDisposed = true
+        stopFrame()
       }
     }
 
     const section = sectionRef.current
     if (!section || typeof IntersectionObserver === "undefined") {
       startEntrance()
-      return clearAnimations
+      observeResize()
+      document.addEventListener("visibilitychange", handleVisibilityChange)
+      return () => {
+        isDisposed = true
+        stopFrame()
+        resizeObserver?.disconnect()
+        document.removeEventListener("visibilitychange", handleVisibilityChange)
+      }
     }
 
     const observer = new IntersectionObserver(
@@ -279,10 +349,16 @@ export default function DailyTransactionsSection() {
     )
 
     observer.observe(section)
+    observeResize()
+    document.addEventListener("visibilitychange", handleVisibilityChange)
     return () => {
       observer.disconnect()
+      resizeObserver?.disconnect()
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
       isDisposed = true
-      clearAnimations()
+      stopFrame()
+      pauseAnimationRef.current = null
+      resumeAnimationRef.current = null
     }
   }, [])
 
@@ -310,22 +386,22 @@ export default function DailyTransactionsSection() {
             ref={marqueeRef}
             className={`transactions-marquee transactions-marquee--${animationPhase} relative z-10 overflow-hidden pb-2`}
             onMouseEnter={() => {
-              if (canPauseMarquee()) marqueeAnimationRef.current?.pause()
+              if (canPauseMarquee()) pauseAnimationRef.current?.()
             }}
             onMouseLeave={() => {
-              if (canPauseMarquee()) marqueeAnimationRef.current?.play()
+              if (canPauseMarquee()) resumeAnimationRef.current?.()
             }}
             onFocusCapture={() => {
-              if (canPauseMarquee()) marqueeAnimationRef.current?.pause()
+              if (canPauseMarquee()) pauseAnimationRef.current?.()
             }}
             onBlurCapture={(event) => {
               if (canPauseMarquee() && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                marqueeAnimationRef.current?.play()
+                resumeAnimationRef.current?.()
               }
             }}
           >
             <div ref={trackRef} className="transactions-track flex w-max">
-              {Array.from({ length: 4 }, (_, groupIndex) => (
+              {Array.from({ length: 6 }, (_, groupIndex) => (
                 <TransactionGroup
                   key={groupIndex}
                   groupIndex={groupIndex}
