@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/immutability */
 import Image from "next/image"
+import Link from "next/link"
 import type { ChangeEvent, FormEvent, MutableRefObject, ReactNode, RefObject } from "react"
 import { getBrands, getModels, getVariants, OLDER_THAN_2010_VALUE } from "../../data/vehicleCatalog"
 import type { VehicleFieldModes } from "../../types/sellCar"
 import Button from "../ui/Button"
 import ReusableSearchableCombobox, { type ComboboxSelection } from "../ui/SearchableCombobox"
 import { formatFileSize } from "./helpers"
+import { useLanguage } from "../language/LanguageProvider"
 import { formFieldClass, type CarDetails, type CarDetailsField, type ContactDetails, type ContactDetailsField, type SellCarFormStep, type SubmitStatus, type VehiclePhoto } from "./types"
 
 export type SellCarFormProps = {
@@ -19,6 +21,7 @@ export type SellCarFormProps = {
   photoUploadErrors: string[]
   privacyConsent: boolean
   privacyConsentError: string
+  marketingConsent: boolean
   submitStatus: SubmitStatus
   submissionError: string
   yearOptions: number[]
@@ -51,6 +54,7 @@ export type SellCarFormProps = {
   onPhotoSelection: (event: ChangeEvent<HTMLInputElement>) => void
   onRemovePhoto: (photoId: string) => void
   onPrivacyConsentChange: (checked: boolean) => void
+  onMarketingConsentChange: (checked: boolean) => void
   onManualMakeChange: (value: string) => void
   onManualModelChange: (value: string) => void
 }
@@ -86,14 +90,15 @@ function ReviewItem({ label, value }: { label: string; value: string }) {
 }
 
 export default function SellCarForm(props: SellCarFormProps) {
+  const { t } = useLanguage()
   const {
     carDetails, carDetailsErrors, contactDetails, contactDetailsErrors, vehicleFieldModes, catalogLoading,
-    vehiclePhotos, photoUploadErrors, privacyConsent, privacyConsentError, submitStatus, submissionError,
+    vehiclePhotos, photoUploadErrors, privacyConsent, privacyConsentError, marketingConsent, submitStatus, submissionError,
     yearOptions, currentStep, usesManualYear, stepHeadingRef, carFieldRefs, contactFieldRefs, photoInputRef,
     privacyConsentRef, manualMakeRef, manualModelRef, manualVariantRef, submissionErrorRef, onClose, onSubmit,
     onNext, onBack, onEditStep, onYearChange, onManualYearChange, onCarDetailsChange, onContactDetailsChange,
     onMakeSelection, onMakeManual, onModelSelection, onModelManual, onVariantSelection, onVariantManual,
-    onPhotoSelection, onRemovePhoto, onPrivacyConsentChange, onManualMakeChange, onManualModelChange,
+    onPhotoSelection, onRemovePhoto, onPrivacyConsentChange, onMarketingConsentChange, onManualMakeChange, onManualModelChange,
   } = props
   const carFields = carFieldRefs.current
   const contactFields = contactFieldRefs.current
@@ -204,7 +209,7 @@ export default function SellCarForm(props: SellCarFormProps) {
           <section aria-label="Vehicle photos" className="mt-5">
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--background-alt)]/45 p-4 sm:p-5">
               <div className="flex flex-wrap items-start justify-between gap-3"><div><h4 className="font-semibold text-[var(--text-primary)]">Vehicle Photos <span className="font-normal text-[var(--text-secondary)]">(Optional)</span></h4><p className="mt-1 text-sm text-[var(--text-secondary)]">Front · Rear · Side · Interior · Odometer</p></div><span className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-semibold text-[var(--text-primary)]">{vehiclePhotos.length} of 8 photos</span></div>
-              <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">Please do not upload IDs, OR/CR documents, or other sensitive personal information.</p>
+              <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">{t.legal.photoWarning}</p>
               <label htmlFor="vehicle-photos" className="mt-4 flex min-h-32 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[var(--border)] bg-white px-4 text-center transition-colors hover:border-[var(--primary)] focus-within:border-[var(--primary)] focus-within:ring-2 focus-within:ring-[var(--primary)]/20">
                 <input ref={photoInputRef} id="vehicle-photos" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={onPhotoSelection} className="sr-only" />
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-7 text-[var(--primary)]" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 16V4m0 0L8 8m4-4 4 4M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" /></svg>
@@ -237,8 +242,11 @@ export default function SellCarForm(props: SellCarFormProps) {
             <ReviewGroup title="Photos" onEdit={() => onEditStep(2)}><ReviewItem label="Uploaded" value={`${vehiclePhotos.length} photo${vehiclePhotos.length === 1 ? "" : "s"}`} /></ReviewGroup>
             <ReviewGroup title="Contact" onEdit={() => onEditStep(3)}><ReviewItem label="Full Name" value={contactDetails.fullName} /><ReviewItem label="Mobile Number" value={contactDetails.mobileNumber} /><ReviewItem label="City / Municipality" value={contactDetails.city} /></ReviewGroup>
             <div className="rounded-2xl border border-[var(--border)] p-4">
-              <label className="flex items-start gap-3 text-sm leading-relaxed text-[var(--text-primary)]"><input ref={privacyConsentRef} type="checkbox" checked={privacyConsent} onChange={(event) => onPrivacyConsentChange(event.target.checked)} aria-invalid={Boolean(privacyConsentError)} aria-describedby={privacyConsentError ? "privacy-consent-error" : undefined} className="mt-0.5 size-5 shrink-0 rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary)]" /><span>I agree to the <span className="font-medium text-[var(--primary)] underline underline-offset-2">Privacy Policy</span> and consent to being contacted about my vehicle inquiry.</span></label>
+              <p className="text-xs leading-relaxed text-[var(--text-secondary)]">{t.legal.valuationNotice}</p>
+              <label className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-[var(--text-primary)]"><input ref={privacyConsentRef} type="checkbox" checked={privacyConsent} onChange={(event) => onPrivacyConsentChange(event.target.checked)} aria-invalid={Boolean(privacyConsentError)} aria-describedby={privacyConsentError ? "privacy-consent-error" : undefined} className="mt-0.5 size-5 shrink-0 rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary)]" /><span>{t.legal.termsConfirmationBefore} <Link href="/terms" target="_blank" rel="noreferrer" className="font-medium text-[var(--primary)] underline underline-offset-2">Terms of Use</Link>{t.legal.termsConfirmationAfter}</span></label>
               <FieldError id="privacy-consent-error" error={privacyConsentError} />
+              <p className="mt-4 text-xs leading-relaxed text-[var(--text-secondary)]">{t.legal.privacyNoticeBefore} <Link href="/privacy" target="_blank" rel="noreferrer" className="font-medium text-[var(--primary)] underline underline-offset-2">{t.legal.privacyNoticeLink}</Link>.</p>
+              <label className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-[var(--text-primary)]"><input type="checkbox" checked={marketingConsent} onChange={(event) => onMarketingConsentChange(event.target.checked)} className="mt-0.5 size-5 shrink-0 rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary)]" /><span>{t.legal.marketingConsent}</span></label>
             </div>
           </section>
         )}

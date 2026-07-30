@@ -69,6 +69,15 @@ export type Translation = {
     supporting: string
     items: FaqItem[]
   }
+  legal: {
+    valuationNotice: string
+    termsConfirmationBefore: string
+    termsConfirmationAfter: string
+    privacyNoticeBefore: string
+    privacyNoticeLink: string
+    marketingConsent: string
+    photoWarning: string
+  }
   footer: {
     description: string
     quickLinks: string
@@ -172,6 +181,15 @@ export const translations: Record<Language, Translation> = {
         { question: "Which areas do you serve?", answer: "We accommodate vehicle sellers across the Philippines, subject to team availability and location. Send us your location so we can confirm whether an inspection can be arranged in your area." },
       ],
     },
+    legal: {
+      valuationNotice: "This request is for an initial vehicle valuation only. It is not a purchase contract or guaranteed offer. Any purchase remains subject to inspection, verification of vehicle condition, ownership and documents, financing or encumbrances, final agreement, and completion of the required transaction documents.",
+      termsConfirmationBefore: "I confirm that I am at least 18 years old, that I own the vehicle or am authorized to act for its owner, that the submitted information is accurate, and that I agree to the",
+      termsConfirmationAfter: ".",
+      privacyNoticeBefore: "We will use your information to assess your vehicle, contact you, arrange an inspection, prevent fraud, and complete the transaction where applicable. Read our",
+      privacyNoticeLink: "Privacy Notice",
+      marketingConsent: "I would like to receive occasional promotions and vehicle-related updates.",
+      photoWarning: "Upload vehicle photos only. Do not upload government IDs, OR/CR documents, banking information, signatures, or other sensitive documents at this stage.",
+    },
     footer: {
       description: "We make selling your car simple, convenient, and secure with fair offers, doorstep inspection, and same-day payment.",
       quickLinks: "Quick Links",
@@ -272,6 +290,15 @@ export const translations: Record<Language, Translation> = {
         { question: "Paano ko matatanggap ang bayad?", answer: "Maaaring bayaran sa cash o bank transfer, depende sa transaksyon at napagkasunduang paraan ng pagbabayad. Ibibigay lamang ang bayad matapos makumpleto ang bentahan at maberipika at malagdaan ang lahat ng kinakailangang dokumento." },
         { question: "Aling mga lugar ang inyong nasasakupan?", answer: "Tumatanggap kami ng mga nagbebenta ng sasakyan sa buong Pilipinas, depende sa availability ng aming team at sa lokasyon. Ipadala ang iyong lokasyon para makumpirma namin kung maaaring mag-ayos ng inspeksyon sa inyong lugar." },
       ],
+    },
+    legal: {
+      valuationNotice: "Ang request na ito ay para lamang sa paunang pagtataya ng sasakyan. Hindi ito kontrata ng pagbili o garantisadong alok. Ang anumang pagbili ay sasailalim sa inspeksyon, beripikasyon ng kondisyon, pagmamay-ari at mga dokumento ng sasakyan, financing o encumbrances, huling kasunduan, at pagkumpleto ng mga kinakailangang dokumento sa transaksyon.",
+      termsConfirmationBefore: "Kinukumpirma ko na ako ay hindi bababa sa 18 taong gulang, na ako ang may-ari ng sasakyan o may pahintulot ng may-ari nito, na tama ang impormasyong isinumite, at sumasang-ayon ako sa",
+      termsConfirmationAfter: ".",
+      privacyNoticeBefore: "Gagamitin namin ang iyong impormasyon upang tasahin ang iyong sasakyan, makipag-ugnayan sa iyo, mag-ayos ng inspeksyon, maiwasan ang panlilinlang, at kumpletuhin ang transaksyon kung naaangkop. Basahin ang aming",
+      privacyNoticeLink: "Abiso sa Privacy",
+      marketingConsent: "Nais kong makatanggap ng paminsan-minsang promosyon at mga update tungkol sa sasakyan.",
+      photoWarning: "Mga larawan lamang ng sasakyan ang i-upload. Huwag mag-upload ng government ID, OR/CR documents, impormasyon sa bangko, lagda, o iba pang sensitibong dokumento sa yugtong ito.",
     },
     footer: {
       description: "Ginagawa naming simple, maginhawa, at ligtas ang pagbebenta ng iyong sasakyan sa pamamagitan ng patas na alok, inspeksyon sa iyong lugar, at bayad sa araw ring iyon.",

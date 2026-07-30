@@ -6,13 +6,17 @@ type FormValues = {
 
 type ContactValues = { fullName: string; mobileNumber: string; city: string }
 
-export function buildSellCarPayload(carDetails: FormValues, contactDetails: ContactValues, vehicleFieldModes: VehicleFieldModes, photoCount: number): SellCarSubmissionPayload {
+export function buildSellCarPayload(carDetails: FormValues, contactDetails: ContactValues, vehicleFieldModes: VehicleFieldModes, photoCount: number, marketingConsent: boolean): SellCarSubmissionPayload {
   const variant = carDetails.variant.trim()
   return {
     vehicle: { year: Number(carDetails.year), make: carDetails.make.trim(), model: carDetails.model.trim(), ...(variant ? { variant } : {}), mileage: Number(carDetails.mileage), transmission: carDetails.transmission.trim(), fuelType: carDetails.fuelType.trim(), condition: carDetails.condition.trim() },
     vehicleFieldModes,
     contact: { fullName: contactDetails.fullName.trim(), mobileNumber: contactDetails.mobileNumber.replace(/[\s-]/g, ""), city: contactDetails.city.trim() },
     privacyConsent: true,
+    termsConsent: true,
+    termsVersion: "1.0",
+    privacyNoticeVersion: "1.0",
+    marketingConsent,
     photoCount,
     submittedAt: new Date().toISOString(),
     source: "homepage-sell-car-modal",

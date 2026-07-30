@@ -33,6 +33,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
   const [photoUploadErrors, setPhotoUploadErrors] = useState<string[]>([])
   const [privacyConsent, setPrivacyConsent] = useState(false)
   const [privacyConsentError, setPrivacyConsentError] = useState("")
+  const [marketingConsent, setMarketingConsent] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle")
   const [submissionReferenceId, setSubmissionReferenceId] = useState("")
   const [submissionError, setSubmissionError] = useState("")
@@ -173,6 +174,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     setPhotoUploadErrors([])
     setPrivacyConsent(false)
     setPrivacyConsentError("")
+    setMarketingConsent(false)
     setSubmitStatus("idle")
     setSubmissionReferenceId("")
     setSubmissionError("")
@@ -182,7 +184,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
   }
 
   const hasSellCarFormData =
-    Object.values(carDetails).some(Boolean) || Object.values(contactDetails).some(Boolean) || Object.values(vehicleFieldModes).some((mode) => mode !== "catalog") || vehiclePhotos.length > 0 || privacyConsent
+    Object.values(carDetails).some(Boolean) || Object.values(contactDetails).some(Boolean) || Object.values(vehicleFieldModes).some((mode) => mode !== "catalog") || vehiclePhotos.length > 0 || privacyConsent || marketingConsent
 
   const requestSellCarModalClose = () => {
     if (submitStatus === "submitting") return
@@ -204,6 +206,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
     setPhotoUploadErrors([])
     setPrivacyConsent(false)
     setPrivacyConsentError("")
+    setMarketingConsent(false)
     setSubmitStatus("idle")
     setSubmissionReferenceId("")
     setSubmissionError("")
@@ -311,7 +314,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
 
   const handleSinglePageSubmit = async () => {
     if (submitStatus === "submitting") return
-    const consentError = privacyConsent ? "" : "Please agree to the Privacy Policy to continue."
+    const consentError = privacyConsent ? "" : "Please confirm the Terms of Use to continue."
     setPrivacyConsentError(consentError)
     setSubmitStatus("idle")
     setSubmissionError("")
@@ -326,7 +329,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
       setSubmitStatus("submitting")
       try {
         const result = await submitSellCarLead(
-          buildSellCarPayload(carDetails, contactDetails, vehicleFieldModes, vehiclePhotos.length),
+          buildSellCarPayload(carDetails, contactDetails, vehicleFieldModes, vehiclePhotos.length, marketingConsent),
           vehiclePhotos.map((photo) => photo.file),
         )
         clearSellCarDraft(sellCarDraftKey)
@@ -409,6 +412,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
             photoUploadErrors={photoUploadErrors}
             privacyConsent={privacyConsent}
             privacyConsentError={privacyConsentError}
+            marketingConsent={marketingConsent}
             submitStatus={submitStatus}
             submissionError={submissionError}
             yearOptions={yearOptions}
@@ -441,6 +445,7 @@ export default function SellCarModal({ trigger }: SellCarModalProps) {
             onPhotoSelection={handlePhotoSelection}
             onRemovePhoto={removeVehiclePhoto}
             onPrivacyConsentChange={(checked) => { setPrivacyConsent(checked); setPrivacyConsentError(""); setSubmitStatus("idle"); setSubmissionError("") }}
+            onMarketingConsentChange={(checked) => { setMarketingConsent(checked); setSubmitStatus("idle"); setSubmissionError("") }}
             onManualMakeChange={(value) => { if (value !== carDetails.make) { handleCarDetailsChange("make", value); clearModelAndVariant(); setVehicleFieldModes({ make: "manual", model: "manual", variant: "manual" }) } }}
             onManualModelChange={(value) => { if (value !== carDetails.model) { handleCarDetailsChange("model", value); setCarDetails((details) => ({ ...details, variant: "" })); setVehicleFieldModes((modes) => ({ ...modes, model: "manual", variant: "manual" })) } }}
           />}

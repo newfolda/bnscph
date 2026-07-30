@@ -5,7 +5,7 @@ import { uploadLeadPhotos } from "@/src/server/sellCar/uploadLeadPhotos"
 import { sendSellCarNotifications } from "@/src/server/email/sendSellCarNotifications"
 import type { SellCarSubmissionPayload, VehicleFieldMode } from "@/src/types/sellCar"
 
-const maximumRequestBytes = 8 * 10 * 1024 * 1024 + 32 * 1024
+const maximumRequestBytes = 8 * 5 * 1024 * 1024 + 32 * 1024
 const vehicleFieldModes: VehicleFieldMode[] = ["catalog", "manual", "unsure"]
 
 const jsonResponse = (message: string, status: number) =>
@@ -31,6 +31,10 @@ const isValidSubmission = (value: unknown): value is SellCarSubmissionPayload =>
     "vehicleFieldModes",
     "contact",
     "privacyConsent",
+    "termsConsent",
+    "termsVersion",
+    "privacyNoticeVersion",
+    "marketingConsent",
     "photoCount",
     "submittedAt",
     "source",
@@ -88,6 +92,10 @@ const isValidSubmission = (value: unknown): value is SellCarSubmissionPayload =>
     isValidMobileNumber(contact.mobileNumber) &&
     isNonEmptyString(contact.city) &&
     value.privacyConsent === true &&
+    value.termsConsent === true &&
+    value.termsVersion === "1.0" &&
+    value.privacyNoticeVersion === "1.0" &&
+    typeof value.marketingConsent === "boolean" &&
     typeof value.photoCount === "number" &&
     Number.isInteger(value.photoCount) &&
     value.photoCount >= 0 &&

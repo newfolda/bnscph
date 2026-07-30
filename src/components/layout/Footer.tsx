@@ -133,7 +133,7 @@ export default function Footer() {
             <section aria-labelledby="footer-newsletter-heading" className="md:col-span-2 xl:col-auto">
               <h2 id="footer-newsletter-heading" className={footerHeadingClass}>GET THE LATEST FROM US</h2>
               <p className="mt-4 max-w-[19rem] text-base leading-relaxed text-white/80 lg:text-sm">
-                Be the first to receive special offers, car market updates, and selling tips.
+                Receive occasional vehicle-related updates and service announcements. You can unsubscribe at any time.
               </p>
               {/* TODO: Connect this form to the newsletter subscription service. */}
               <form className="mt-4 flex flex-col gap-3 xl:flex-row xl:gap-0" onSubmit={(event) => event.preventDefault()}>
@@ -157,8 +157,9 @@ export default function Footer() {
             </section>
           </div>
 
-          <div className="mt-12 border-t border-white/15 pt-6 text-sm text-white/70">
+          <div className="mt-12 flex flex-col gap-4 border-t border-white/15 pt-6 text-sm text-white/70 sm:flex-row sm:items-center sm:justify-between">
             <p>{t.footer.copyright}</p>
+            <nav aria-label="Legal links" className="flex flex-wrap gap-x-5 gap-y-2 text-sm"><Link href="/privacy" className="hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">Privacy Notice</Link><Link href="/terms" className="hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">Terms of Use</Link><button type="button" onClick={() => window.dispatchEvent(new Event("open-cookie-settings"))} className="hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">Cookie Settings</button><a href="mailto:buyandsellcarph@gmail.com" className="hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">Contact</a></nav>
           </div>
         </div>
       </div>
